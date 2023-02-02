@@ -1,18 +1,31 @@
-import './globals.css'
+import Navbar from "../components/nav bar/Navbar";
+import "../app/globals.css";
+
+import { Forum, Raleway } from "@next/font/google";
+
+const raleway = Forum({
+  variable: "--display-font",
+  weight: "400",
+});
+
+const merriweather = Raleway({
+  variable: "--body-font",
+});
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html
+      className={`${raleway.variable} ${merriweather.variable} bg-background`}
+    >
       <head />
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children}
+      </body>
     </html>
-  )
+  );
 }
