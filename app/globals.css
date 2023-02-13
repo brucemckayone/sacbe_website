@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  /* html,
+  body {
+    @apply fixed top-0 bottom-0 left-0 right-0;
+  } */
   h1 {
     @apply text-5xl font-display;
   }
@@ -15,8 +19,18 @@
   h4 {
     @apply text-2xl font-display;
   }
-  p {
-    @apply font-body;
+  h5 {
+    @apply text-xl font-display;
+  }
+  p,
+  li {
+    @apply font-body text-onBackground;
+  }
+  a {
+    @apply underline  hover:text-sacbeBrandColor text-onBackground;
+  }
+  blockquote {
+    @apply border-l-2 pl-3 ml-5 italic font-display border-sacbeBrandColor;
   }
   .btn-primary {
     @apply font-display p-10 bg-primary;

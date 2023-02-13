@@ -5,10 +5,10 @@ function NavMenuBottom() {
   return (
     <div>
       <menu>
-        <div className="flex justify-around border-onSecondaryContainer border-b-4 border-t-4 my-2">
+        <div className="flex justify-around border-onSecondaryContainer border-b-4 border-t-4 py-2">
           {menuItems.map((item) => (
-            <Link className="my-3" href={item.link}>
-              <h1>{item.text}</h1>
+            <Link key={item.link + "link"} className="my-3" href={item.link}>
+              <h4 className="text-lg md:text-xl">{item.text.toUpperCase()}</h4>
             </Link>
           ))}
         </div>

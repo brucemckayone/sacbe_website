@@ -5,8 +5,8 @@ function SideBar() {
   return (
     <menu className="sticky bg-sacbeBrandColor w-[30%] p-10 ">
       {menuItems.map((item) => (
-        <Link href={item.link}>
-          <li className="p-3">
+        <Link key={`${item.text}link`} href={item.link}>
+          <li key={`${item.text}menubar`} className="p-3">
             <h1>{item.text}</h1>
           </li>
         </Link>

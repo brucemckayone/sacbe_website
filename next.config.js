@@ -9,6 +9,10 @@ const nextConfig = {
   images: {
     domains: ["www.thirdeyetribe.co.uk"],
   },
+  env: {
+    STRIPE_SECRET: process.env.STRIPE_SECRET,
+    STRIPE_PUBLIC: process.env.STRIPE_PUBLIC,
+  },
 };
 
 module.exports = nextConfig;

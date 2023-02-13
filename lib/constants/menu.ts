@@ -17,7 +17,7 @@ const menuItems = [
   },
   {
     text: "Affiliates",
-    link: "/affiliates",
+    link: "/Affiliates",
   },
 ];
 export default menuItems;
