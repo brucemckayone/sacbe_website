@@ -23,4 +23,7 @@ export const envConfig = {
   ),
   FIREBASE_MEASUREMENT_ID: getEnvironmentVariable("FIREBASE_MEASUREMENT_ID"),
   FIREBASE_APP_ID: getEnvironmentVariable("FIREBASE_APP_ID"),
+  STRIPE_WEBHOOK_CHECKOUT_SECRET: getEnvironmentVariable(
+    "STRIPE_WEBHOOK_CHECKOUT_SECRET"
+  ),
 };

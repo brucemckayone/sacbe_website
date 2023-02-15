@@ -3,6 +3,7 @@ import { buffer } from "micro";
 import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
+import { error } from "console";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -23,11 +24,12 @@ export default async function handler(
       event = stripe.webhooks.constructEvent(
         reqBuffer,
         sig,
-        envConfig.STRIPE_WEBHOOK_ENDPOINT
+        envConfig.STRIPE_WEBHOOK_CHECKOUT_SECRET
       );
     } catch (err) {
       console.log("webhook error failed");
-      return res.status(401).send(`web hook error: ${err}`);
+      const error = err as any;
+      return res.status(401).send(`web hook error: ${error.message}`);
     }
     switch (event.type) {
       case "invoice.payment_succeeded":
