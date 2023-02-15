@@ -4,8 +4,7 @@ import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_comp
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
-const endpointSecret =
-  "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704";
+
 export const config = { api: { bodyParser: false } };
 export default async function handler(
   req: NextApiRequest,
@@ -19,7 +18,11 @@ export default async function handler(
   let event;
   if (req.method === "POST") {
     try {
-      event = stripe.webhooks.constructEvent(reqBuffer, sig, endpointSecret);
+      event = stripe.webhooks.constructEvent(
+        reqBuffer,
+        sig,
+        envConfig.STRIPE_WEBHOOK_ENDPOINT
+      );
     } catch (err) {
       return res.status(401).send(`web hook error: ${err}`);
     }

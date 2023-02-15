@@ -1,5 +1,5 @@
 import React from "react";
-
+import { envConfig } from "@/lib/webhooks/envConfig";
 import { getServerSession } from "next-auth/next";
 
 export default async function AffiliatePage() {
@@ -8,8 +8,8 @@ export default async function AffiliatePage() {
     <div>
       {/* <p>{session?.user?.name}</p> */}
       <div>
-        <p>process.env</p>
-        <p>{process.env.STRIPE_SECRET}</p>
+        <p>envConfig</p>
+        <p>{envConfig.STRIPE_SECRET}</p>
       </div>
     </div>
   );

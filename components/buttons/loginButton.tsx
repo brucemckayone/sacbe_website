@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default function LoginButton() {
   const { data } = useSession();
+
   const isLoggedIn = data != null; //data?.user?.email != null;
   return (
     <div className="m-1">
