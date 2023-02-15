@@ -59,9 +59,9 @@ module.exports = {
           "100%": { transform: "translateX(0em);", opacity: 1 },
         },
         slide_in_up: {
-          "0%": { transform: "translateY(20em);", opacity: 0 },
+          "0%": { transform: "scale(0.5);", opacity: 0 },
 
-          "100%": { transform: "translateY(0em);", opacity: 1 },
+          "100%": { transform: "scale(1);", opacity: 1 },
         },
         float: {
           "0%": {

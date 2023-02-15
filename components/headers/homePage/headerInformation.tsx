@@ -31,8 +31,8 @@ export default function HeaderInformation() {
           </div>
         </li>
         <li key={2} className="border-onSecondaryContainer border-b-2 my-5">
-          <div className="flex flex-row align-bottom">
-            <h5>Tasting Notes:</h5>
+          <div className=" flex flex-row align-bottom">
+            <h5>Taste Notes:</h5>
             <p className="self-end">
               &nbsp; Plum, Pineapple, Fudge, Caramel, Raison
             </p>

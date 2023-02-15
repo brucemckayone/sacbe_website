@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# configs
+sacbe-cacao-firebase-adminsdk-xts9p-48691da7b5.json

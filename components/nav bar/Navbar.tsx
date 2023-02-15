@@ -5,6 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import PrimaryButton from "../buttons/primaryButton";
 import { useState } from "react";
+import { getServerSession } from "next-auth";
+import LoginButton from "../buttons/loginButton";
+
 export default function Navbar(props: any) {
   const [isDrawerOpen, setDrawerOpenState] = useState(false);
   function toggleDrawer() {
@@ -24,12 +27,7 @@ export default function Navbar(props: any) {
       <Link className="flex" href="/">
         <Image src="/logo.svg" alt="logo" width={300} height={80}></Image>
       </Link>
-      <div className="m-1">
-        <PrimaryButton
-          text="LOGIN"
-          url="https://billing.stripe.com/p/login/test_dR629SgVlcYOdri000"
-        ></PrimaryButton>
-      </div>
+      <LoginButton></LoginButton>
       {
         <div
           className={`absolute top-0 bottom-0 right-0 left-0 ${

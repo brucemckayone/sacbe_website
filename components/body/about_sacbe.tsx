@@ -69,11 +69,11 @@ const AboutSacbe: React.FC = () => {
               hasColor={false}
             >
               <div className="self-center">
-                <h3 className="flex w-1/2">OUR HUMBLE ORIGINS</h3>
-                <h4 className="flex w-3/4">
+                <h3 className="flex md:w-1/2">OUR HUMBLE ORIGINS</h3>
+                <h4 className="flex md:w-3/4">
                   small-scale, family owned farmers cooperatives
                 </h4>
-                <p className="flex w-3/4">
+                <p className="flex md:w-3/4">
                   Sacbe Cacao is sourced from Arriba Nacional beans. Organically
                   and sustainably grown in Esmeraldas, placed in the north west
                   Andean Mountain range and situated at 2000 meters altitude,

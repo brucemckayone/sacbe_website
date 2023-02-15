@@ -1,6 +1,7 @@
 import initStripe from "stripe";
 import { buffer } from "micro";
 import { env } from "next.config";
+import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret =
   "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704";
@@ -19,15 +20,15 @@ export default async function handler(req, res) {
     switch (event.type) {
       case "invoice.payment_succeeded":
         const invoicePaymentSucceeded = event.data.object;
-        console.log(invoicePaymentSucceeded);
-        break;
-      case "payment_intent.created":
-        const paymentIntentCreated = event.data.object;
-        console.log(paymentIntentCreated);
+
         break;
       // ... handle other event types
+      case "checkout.session.completed":
+        checkoutSessionCompleteHandler(event.data.object);
+        break;
       default:
-        console.log(`Unhandled event type ${event.type}`);
+      // console.log(event.data);
+      // console.log(`Unhandled event type ${event.type}`);
     }
   } else {
     // Handle any other HTTP method

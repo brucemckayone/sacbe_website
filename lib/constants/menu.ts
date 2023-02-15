@@ -5,11 +5,11 @@ const menuItems = [
   },
   {
     text: "Events",
-    link: "/events",
+    link: "",
   },
   {
     text: "About",
-    link: "/about",
+    link: "#about_sacbe_cacao",
   },
   {
     text: "Recipes",
@@ -17,7 +17,7 @@ const menuItems = [
   },
   {
     text: "Affiliates",
-    link: "/Affiliates",
+    link: "/affiliates",
   },
 ];
 export default menuItems;
