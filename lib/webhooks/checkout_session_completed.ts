@@ -4,29 +4,35 @@ import { authFireStore } from "../firebase";
 import Stripe from "stripe";
 import { env } from "next.config";
 
-interface params {
-  id: string;
-  shipping: object;
-}
-
-const checkoutSessionCompleteHandler = async (params: params) => {
+const checkoutSessionCompleteHandler = async (params: Stripe.Event) => {
   const stripe = new Stripe(env!.STRIPE_SECRET, {
     apiVersion: "2022-11-15",
   });
-  const lineItems = await stripe.checkout.sessions.listLineItems(params.id);
-  const ids = lineItems.data.map((item) => item.price!.product);
-  const productIDs = await stripe.products.list({ ids: ids as string[] });
+  let data = params.data as any;
+  data = data.object as object;
+  console.log(data.id);
 
-  console.log(productIDs);
-  //purchases
-  // authFireStore.collection("purchases").add({
-  //   lineItems: {
-  //     a: lineItems.data,
-  //   },
-  //   purchaseDate: firestore.Timestamp,
-  //   status: "processing",
-  //   shipping: params.shipping,
-  // });
+  const lineItems = await stripe.checkout.sessions.listLineItems(data.id);
+  const ids = lineItems.data.map((item) => item.price!.product);
+  let products = await stripe.products.list({ ids: ids as string[] });
+  // products = products.data as any;
+  let dbProducts: any = [];
+  if (products.object == "list") {
+    dbProducts = products.data.map((p) => ({
+      id: p.id,
+      defaultPrice: p.default_price,
+      name: p.name,
+    }));
+  }
+
+  console.log(dbProducts);
+  // purchases
+  authFireStore.collection("purchases").add({
+    lineItems: dbProducts,
+    // purchaseDate: firestore.Timestamp,
+    status: "processing",
+    // shipping: params.shipping,
+  });
 };
 
 export default checkoutSessionCompleteHandler;

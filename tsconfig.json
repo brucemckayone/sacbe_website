@@ -31,7 +31,7 @@
     ".next/types/**/*.ts",
     "components/slider.js",
     "hooks/isOnScreen.js",
-    "pages/api/purchase_confirmation.js",
+    "pages/api/purchase_confirmation.ts",
     "pages/api/auth/[...nextauth].js",
     "pages/api/auth/[...nextauth].js",
     "pages/api/auth/[...nextauth].js"
