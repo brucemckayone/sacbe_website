@@ -31,7 +31,9 @@ export default async function handler(
         break;
       // ... handle other event types
       case "checkout.session.completed":
-        checkoutSessionCompleteHandler(event);
+        const data = checkoutSessionCompleteHandler(event);
+        console.log(data);
+
         break;
       default:
       // console.log(event.data);
