@@ -1,11 +1,10 @@
 import { firestore } from "firebase-admin";
 import { authFireStore } from "../firebase";
-
 import Stripe from "stripe";
-import { env } from "next.config";
+import { envConfig } from "./envConfig";
 
 const checkoutSessionCompleteHandler = async (params: Stripe.Event) => {
-  const stripe = new Stripe(env!.STRIPE_SECRET, {
+  const stripe = new Stripe(envConfig.STRIPE_SECRET, {
     apiVersion: "2022-11-15",
   });
   let data = params.data as any;

@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
 import { env } from "@/next.config";
+import { envConfig } from "@/lib/webhooks/envConfig";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -14,7 +15,7 @@ export default async function handler(
 }
 
 async function createPaymentLink(accountId: string, itemId: string) {
-  const stripe = new Stripe(env!.STRIPE_SECRET, {
+  const stripe = new Stripe(envConfig!.STRIPE_SECRET, {
     apiVersion: "2022-11-15",
   });
   const params: Stripe.PaymentLinkCreateParams = {

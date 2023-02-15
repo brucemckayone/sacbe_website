@@ -1,9 +1,8 @@
 import Stripe from "stripe";
 import { buffer } from "micro";
-import { env } from "next.config";
-
 import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
 import { NextApiRequest, NextApiResponse } from "next";
+import { envConfig } from "@/lib/webhooks/envConfig";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 const endpointSecret =
   "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704";
@@ -12,7 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const stripe = new Stripe(env!.STRIPE_SECRET, {
+  const stripe = new Stripe(envConfig.STRIPE_SECRET, {
     apiVersion: "2022-11-15",
   });
   const sig: string = req.headers["stripe-signature"] as string;

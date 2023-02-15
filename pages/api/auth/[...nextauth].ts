@@ -1,12 +1,11 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-
-import { env } from "@/next.config";
+import { envConfig } from "@/lib/webhooks/envConfig";
 import { authFireStore } from "@/lib/firebase";
 
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 export default NextAuth({
-  secret: process.env.NEXTAUTH_SECRET as string,
+  secret: envConfig.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
