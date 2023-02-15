@@ -41,5 +41,7 @@ export default async function handler(
     // Handle any other HTTP method
   }
 
-  res.status(200);
+  res.status(200).json({
+    message: "everything went swimmingly",
+  });
 }
