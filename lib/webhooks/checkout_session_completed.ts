@@ -33,6 +33,7 @@ const checkoutSessionCompleteHandler = async (params: Stripe.Event) => {
     status: "processing",
     // shipping: params.shipping,
   });
+  return dbProducts;
 };
 
 export default checkoutSessionCompleteHandler;

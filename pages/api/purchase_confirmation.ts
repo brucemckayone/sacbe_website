@@ -33,11 +33,12 @@ export default async function handler(
       case "checkout.session.completed":
         const data = checkoutSessionCompleteHandler(event);
         console.log(data);
+        console.log("testing");
 
         break;
       default:
-      // console.log(event.data);
-      // console.log(`Unhandled event type ${event.type}`);
+        console.log(event.data);
+        console.log(`Unhandled event type ${event.type}`);
     }
   } else {
     // Handle any other HTTP method
