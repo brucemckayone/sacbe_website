@@ -6,7 +6,7 @@ import SimpleSlider from "@/components/carousels/testimonial_slider";
 import reviews from "@/lib/constants/reviews";
 import BenifitsOfCacao from "@/components/body/benifits_of_cacao";
 import Card from "@/components/cards/card";
-import SectionHeader from "@/components/titleHeader";
+
 import AboutSacbe from "@/components/body/about_sacbe";
 
 export default function Home() {

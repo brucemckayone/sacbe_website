@@ -13,6 +13,8 @@ export default async function handler(
   const stripe = new Stripe(envConfig.STRIPE_SECRET, {
     apiVersion: "2022-11-15",
   });
+
+  console.log(envConfig.STRIPE_SECRET);
   const sig: string = req.headers["stripe-signature"] as string;
   const reqBuffer = await buffer(req);
   let event;
@@ -24,6 +26,7 @@ export default async function handler(
         envConfig.STRIPE_WEBHOOK_ENDPOINT
       );
     } catch (err) {
+      console.log("webhook error failed");
       return res.status(401).send(`web hook error: ${err}`);
     }
     switch (event.type) {
