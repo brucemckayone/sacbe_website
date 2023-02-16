@@ -1,4 +1,4 @@
-import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import * as dotenv from "dotenv";
 dotenv.config();
 import HomePageHeader from "@/components/headers/homePage/homePageHeader";
 import NavMenuBottom from "@/components/menu/NavMenuBottom";

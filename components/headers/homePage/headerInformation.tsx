@@ -64,6 +64,7 @@ export default function HeaderInformation() {
           buttonText="Buy"
           url="https://buy.stripe.com/test_3cs8zF8VPcfobe0002"
           bgColor="bg-[black]"
+          prices={["price_1Mb8slG859ZdyFmp0ttYsJAh"]}
         ></PurchaseOptionCard>
         <PurchaseOptionCard
           key={2}
@@ -74,6 +75,7 @@ export default function HeaderInformation() {
           priceString="£25.00/month"
           url="https://buy.stripe.com/test_cN2g271tn0wGdm8cMP"
           bgColor="bg-[black]"
+          prices={["price_1Mb8slG859ZdyFmp0ttYsJAh"]}
         ></PurchaseOptionCard>
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "../../lib/firebase";
+import { auth, provider } from "../../lib/firebase/firebase";
 import Image from "next/image";
 import "../../app/globals.css";
 function SignInWithGoogleButton() {
