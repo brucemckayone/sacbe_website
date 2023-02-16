@@ -24,7 +24,7 @@ export default async function handler(
       event = stripe.webhooks.constructEvent(
         reqBuffer,
         sig,
-        envConfig.STRIPE_WEBHOOK_ENDPOINT
+        envConfig.STRIPE_WEBHOOK_CHECKOUT_SECRET
       );
     } catch (err) {
       console.log("webhook error failed");
@@ -35,6 +35,7 @@ export default async function handler(
       case "invoice.paid":
         const invoice: Stripe.Invoice = event.data.object as Stripe.Invoice;
         // console.log(invoicePaymentSucceeded);
+        console.log(invoice);
 
         authFireStore.collection("purchases").add({
           customerDetails: await stripe.customers.retrieve(
@@ -47,7 +48,7 @@ export default async function handler(
         break;
       // ... handle other event types
       case "checkout.session.completed":
-        const data = await checkoutSessionCompleteHandler(event);
+        // const data = await checkoutSessionCompleteHandler(event);
         // console.log(data);
 
         break;
