@@ -3,7 +3,7 @@ import { buffer } from "micro";
 import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
-import { error } from "console";
+import { authFireStore } from "@/lib/firebase";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -15,7 +15,7 @@ export default async function handler(
     apiVersion: "2022-11-15",
   });
 
-  console.log(envConfig.STRIPE_SECRET);
+  // console.log(envConfig.STRIPE_SECRET);
   const sig: string = req.headers["stripe-signature"] as string;
   const reqBuffer = await buffer(req);
   let event;
@@ -24,7 +24,7 @@ export default async function handler(
       event = stripe.webhooks.constructEvent(
         reqBuffer,
         sig,
-        envConfig.STRIPE_WEBHOOK_CHECKOUT_SECRET
+        envConfig.STRIPE_WEBHOOK_ENDPOINT
       );
     } catch (err) {
       console.log("webhook error failed");
@@ -32,20 +32,28 @@ export default async function handler(
       return res.status(401).send(`web hook error: ${error.message}`);
     }
     switch (event.type) {
-      case "invoice.payment_succeeded":
-        const invoicePaymentSucceeded = event.data.object;
+      case "invoice.paid":
+        const invoice: Stripe.Invoice = event.data.object as Stripe.Invoice;
+        // console.log(invoicePaymentSucceeded);
+
+        authFireStore.collection("purchases").add({
+          customerDetails: await stripe.customers.retrieve(
+            invoice.customer as any
+          ),
+          lineItems: invoice.lines.data,
+          shippingDetails: invoice.shipping_details,
+        });
 
         break;
       // ... handle other event types
       case "checkout.session.completed":
-        const data = checkoutSessionCompleteHandler(event);
-        console.log(data);
-        console.log("testing");
+        const data = await checkoutSessionCompleteHandler(event);
+        // console.log(data);
 
         break;
       default:
-        console.log(event.data);
-        console.log(`Unhandled event type ${event.type}`);
+      // console.log(event.data);
+      // console.log(`Unhandled event type ${event.type}`);
     }
   } else {
     // Handle any other HTTP method

@@ -4,6 +4,7 @@ import Stripe from "stripe";
 import { envConfig } from "./envConfig";
 
 const checkoutSessionCompleteHandler = async (params: Stripe.Event) => {
+  console.log("handling checkout session web hook");
   const stripe = new Stripe(envConfig.STRIPE_SECRET, {
     apiVersion: "2022-11-15",
   });
