@@ -5,8 +5,6 @@ import { envConfig } from "../webhooks/envConfig";
 import { cert } from "firebase-admin/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-var serviceAccount = require("/Users/brucemckay/Development/third_eye/sacbe_cacao/sacbe_website/sacbe-cacao-firebase-adminsdk-xts9p-07cfc8c646.json");
-
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {

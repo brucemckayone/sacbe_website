@@ -6,6 +6,7 @@ interface params {
   stripe: Stripe;
 }
 const eventHandler = async ({ event, stripe }: params) => {
+  console.log("----------");
   console.log(event.type);
   switch (event.type) {
     case "account.updated":
