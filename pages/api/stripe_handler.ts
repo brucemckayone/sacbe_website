@@ -4,6 +4,7 @@ import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_comp
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 import { firestore } from "@/lib/firebase/firebase";
+import eventHandler from "@/lib/stripe/eventHandler";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -24,38 +25,15 @@ export default async function handler(
       event = stripe.webhooks.constructEvent(
         reqBuffer,
         sig,
-        envConfig.STRIPE_WEBHOOK_ENDPOINT
+        "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704" // envConfig.STRIPE_WEBHOOK_ENDPOINT
       );
     } catch (err) {
       console.log("webhook error failed");
       const error = err as any;
       return res.status(401).send(`web hook error: ${error.message}`);
     }
-    switch (event.type) {
-      case "invoice.paid":
-        const invoice: Stripe.Invoice = event.data.object as Stripe.Invoice;
-        // console.log(invoicePaymentSucceeded);
-        console.log(invoice);
 
-        firestore.collection("purchases").add({
-          customerDetails: await stripe.customers.retrieve(
-            invoice.customer as any
-          ),
-          lineItems: invoice.lines.data,
-          shippingDetails: invoice.shipping_details,
-        });
-
-        break;
-      // ... handle other event types
-      case "checkout.session.completed":
-        // const data = await checkoutSessionCompleteHandler(event);
-        // console.log(data);
-
-        break;
-      default:
-      // console.log(event.data);
-      // console.log(`Unhandled event type ${event.type}`);
-    }
+    eventHandler({ event: event as Stripe.Event, stripe: stripe });
   } else {
     // Handle any other HTTP method
   }
