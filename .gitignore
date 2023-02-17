@@ -27,7 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
-.env*
+
 
 # vercel
 .vercel
@@ -39,3 +39,4 @@ next-env.d.ts
 # configs
 sacbe-cacao-firebase-adminsdk-xts9p-48691da7b5.json
 sacbe-cacao-firebase-adminsdk-xts9p-07cfc8c646.json
+.env
