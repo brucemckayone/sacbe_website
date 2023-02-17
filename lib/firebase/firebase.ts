@@ -4,11 +4,8 @@ import { initializeApp } from "firebase/app";
 import { envConfig } from "../webhooks/envConfig";
 import { cert } from "firebase-admin/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getMessaging } from "firebase/messaging";
-import admin from "firebase-admin";
+
 var serviceAccount = require("/Users/brucemckay/Development/third_eye/sacbe_cacao/sacbe_website/sacbe-cacao-firebase-adminsdk-xts9p-07cfc8c646.json");
-console.log(serviceAccount);
 
 import { getStorage } from "firebase/storage";
 

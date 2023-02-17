@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { envConfig } from "@/lib/webhooks/envConfig";
-import { authFireStore } from "@/lib/firebase";
+import { firestore } from "@/lib/firebase/firebase";
 
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 export default NextAuth({
@@ -32,12 +32,11 @@ export default NextAuth({
     //   }),
 
     GoogleProvider({
-      clientId:
-        "461975289008-efl3tj1ejaavtjo4cd6ud35qvmf8evht.apps.googleusercontent.com",
-      clientSecret: "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",
+      clientId: envConfig.GOOGLE_OAUTH_CLIENT_ID,
+      clientSecret: envConfig.GOOGLE_CLIENT_SECRET,
     }),
   ],
 
-  adapter: FirestoreAdapter(authFireStore),
-  debug: true,
+  adapter: FirestoreAdapter(firestore),
+  debug: false,
 });

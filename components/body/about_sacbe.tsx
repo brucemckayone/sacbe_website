@@ -82,7 +82,10 @@ const AboutSacbe: React.FC = () => {
                 </p>
                 <Link href="/about">Learn More</Link>
                 <div className="flex elf-end">
-                  <PrimaryButton url="" text="Buy Now"></PrimaryButton>
+                  {/* <PrimaryButton
+                    onClicked={() => {}}
+                    text="Buy Now"
+                  ></PrimaryButton> */}
                 </div>
               </div>
             </Card>

@@ -3,7 +3,7 @@ import { buffer } from "micro";
 import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
-import { authFireStore } from "@/lib/firebase";
+import { firestore } from "@/lib/firebase/firebase";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -24,7 +24,7 @@ export default async function handler(
       event = stripe.webhooks.constructEvent(
         reqBuffer,
         sig,
-        envConfig.STRIPE_WEBHOOK_CHECKOUT_SECRET
+        envConfig.STRIPE_WEBHOOK_ENDPOINT
       );
     } catch (err) {
       console.log("webhook error failed");
@@ -37,7 +37,7 @@ export default async function handler(
         // console.log(invoicePaymentSucceeded);
         console.log(invoice);
 
-        authFireStore.collection("purchases").add({
+        firestore.collection("purchases").add({
           customerDetails: await stripe.customers.retrieve(
             invoice.customer as any
           ),

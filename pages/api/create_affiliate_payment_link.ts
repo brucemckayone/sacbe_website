@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import Stripe from "stripe";
-import { env } from "@/next.config";
+
 import { envConfig } from "@/lib/webhooks/envConfig";
 export default async function handler(
   req: NextApiRequest,

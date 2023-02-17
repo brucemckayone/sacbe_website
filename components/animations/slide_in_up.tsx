@@ -7,13 +7,17 @@ interface Props {
 }
 const SlideInUp: React.FC<Props> = ({ children }) => {
   const ref = useRef<HTMLDivElement>(null);
+  let hasEntered: Boolean = false;
 
   const isVisible = useOnScreen(ref);
+  if (isVisible) {
+    hasEntered = true;
+  }
 
   return (
     <div
       ref={ref}
-      className={`${isVisible ? "animate-slide_in_up_fade" : "h-96"}`}
+      className={`${hasEntered ? "animate-slide_in_up_fade" : "h-96"}`}
     >
       {isVisible && children}
     </div>
