@@ -25,7 +25,8 @@ export default async function handler(
       event = stripe.webhooks.constructEvent(
         reqBuffer,
         sig,
-        "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704" // envConfig.STRIPE_WEBHOOK_ENDPOINT
+        //"whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704"
+        envConfig.STRIPE_WEBHOOK_ENDPOINT
       );
     } catch (err) {
       console.log("webhook error failed");

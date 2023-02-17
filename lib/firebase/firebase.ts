@@ -3,7 +3,7 @@ import { initFirestore } from "@next-auth/firebase-adapter";
 import { initializeApp } from "firebase/app";
 import { envConfig } from "../webhooks/envConfig";
 import { cert } from "firebase-admin/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 import { getStorage } from "firebase/storage";
 
