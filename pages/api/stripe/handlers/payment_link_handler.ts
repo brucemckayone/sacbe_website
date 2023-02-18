@@ -40,7 +40,7 @@ export default async function handler(
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
-    res.status(200).json({ status: 200, message: "success" });
+    res.status(200).send(`${event.type}: processeed`);
   } catch (err) {
     console.log("webhook error failed");
     const error = err as any;

@@ -105,5 +105,5 @@ export default async function handler(
     return res.status(401).send(`web hook error: ${error.message}`);
   }
 
-  res.status(200).json({ status: 200, message: "customer webhooks handled" });
+  res.status(200).json({ status: 200, message: "success" });
 }
