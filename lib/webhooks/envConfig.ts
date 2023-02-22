@@ -44,7 +44,10 @@ export const envConfig = {
   NEXTAUTH_SECRET: getEnvironmentVariable({
     environmentVariable: "NEXTAUTH_SECRET",
   }),
-  NEXTAUTH_URL: getEnvironmentVariable({ environmentVariable: "NEXTAUTH_URL" }),
+  NEXTAUTH_URL: getEnvironmentVariable({
+    environmentVariable: "NEXTAUTH_URL",
+    testKey: "http://localhost:3000",
+  }),
   //
   STRIPE_SECRET: getEnvironmentVariable({
     environmentVariable: "STRIPE_SECRET",
