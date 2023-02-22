@@ -58,7 +58,6 @@ const PurchaseOptionCard: React.FC<Props> = ({
               await createCheckoutSession({
                 mode: paymentMode,
                 prices: priceIds,
-                customerEmail: session?.user?.email ?? "",
               });
               setIsLoading(false);
             } catch (e) {

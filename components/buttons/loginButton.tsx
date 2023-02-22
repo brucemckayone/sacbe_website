@@ -2,6 +2,8 @@
 import { useSession } from "next-auth/react";
 import PrimaryButton from "./primaryButton";
 import Link from "next/link";
+import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import { getStripeCustomerIdByEmail } from "@/lib/firebase/getStripeCustomerId";
 
 export default function LoginButton() {
   const { data } = useSession();
@@ -11,10 +13,25 @@ export default function LoginButton() {
     <div className="m-1">
       {isLoggedIn ? (
         <button
-          onClick={() => {
-            window.open(
-              "https://billing.stripe.com/p/login/test_dR629SgVlcYOdri000"
+          onClick={async () => {
+            console.log(data.user?.email);
+
+            const customerId = await fetchPostJSON(
+              "api/users/get_user_id_by_email",
+              {
+                email: data.user?.email,
+              }
             );
+            console.log(customerId);
+
+            const billingPortal = await fetchPostJSON(
+              "api/stripe/billing/create_customer_portal",
+              {
+                customerId: customerId,
+              }
+            );
+
+            window.open(billingPortal.url);
           }}
           className="duration-500 bg-sacbeBrandColor py-1 px-8  my-3 rounded-md hover:bg-onPrimaryContainer hover:text-onPrimary border-2"
         >

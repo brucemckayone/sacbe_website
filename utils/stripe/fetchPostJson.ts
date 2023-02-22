@@ -11,6 +11,8 @@ export async function fetchGetJSON(url: string) {
 }
 
 export async function fetchPostJSON(url: string, data?: {}) {
+  console.log(url);
+
   try {
     // Default options are marked with *
     const response = await fetch(url, {

@@ -106,4 +106,13 @@ export const envConfig = {
   GOOGLE_CLIENT_SECRET: getEnvironmentVariable({
     environmentVariable: "GOOGLE_CLIENT_SECRET",
   }),
+  APPLE_TEAM_ID: getEnvironmentVariable({
+    environmentVariable: "APPLE_TEAM_ID",
+  }),
+  APPLE_CLIENT_ID: getEnvironmentVariable({
+    environmentVariable: "APPLE_CLIENT_ID",
+  }),
+  APPLE_CLIENT_SECRET: getEnvironmentVariable({
+    environmentVariable: "APPLE_CLIENT_SECRET",
+  }),
 };

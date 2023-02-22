@@ -8,6 +8,7 @@ import { useState } from "react";
 
 import LoginButton from "../buttons/loginButton";
 import { signOut } from "next-auth/react";
+import createCustomerClient from "@/lib/stripe/createCustomerClient";
 
 export default function Navbar(props: any) {
   const [isDrawerOpen, setDrawerOpenState] = useState(false);
@@ -68,6 +69,7 @@ export default function Navbar(props: any) {
                   AFFILIATES
                 </h1>
               </Link>
+
               <PrimaryButton
                 text="log Out"
                 onClicked={() => {

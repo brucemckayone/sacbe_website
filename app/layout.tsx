@@ -7,7 +7,7 @@ import {
   Marcellus as displayFont,
   Marcellus as bodyFont,
 } from "@next/font/google";
-import Nextauth from "@/pages/api/auth/[...nextauth]";
+
 import { Session } from "next-auth/core/types";
 
 const raleway = displayFont({

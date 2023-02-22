@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 import Stripe from "stripe";
-import { emit } from "process";
 
 // that creates a customer
 // if an email is provided it searches database for customer with that email and returns customer object
@@ -15,6 +14,7 @@ export default async function handler(
   const stripe = new Stripe(envConfig.STRIPE_SECRET, {
     apiVersion: "2022-11-15",
   });
+
   const email: string | undefined = req.body.email;
   const name: string | undefined | null = req.body.name;
   if (req.body.name == null) {
