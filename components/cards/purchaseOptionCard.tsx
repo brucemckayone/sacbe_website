@@ -83,10 +83,7 @@ const PurchaseOptionCard: React.FC<Props> = ({
               onClicked={async () => {
                 setIsLoading(true);
                 try {
-                  if (
-                    paymentMode != "subscription" &&
-                    status == "authenticated"
-                  ) {
+                  if ((paymentMode != "subscription" && session) || session) {
                     await createCheckoutSession({
                       mode: paymentMode,
                       prices: priceIds,
