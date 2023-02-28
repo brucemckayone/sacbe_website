@@ -1,6 +1,8 @@
 // middleware.ts
 import { getServerSession } from "next-auth";
-
+import { getSession } from "next-auth/react";
+import { NextURL } from "next/dist/server/web/next-url";
+import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 // Limit the middleware to paths starting with `/api/`
@@ -10,10 +12,14 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   // Call our authentication function to check the request
-  // const session = await getServerSession();
-  // if (!session) {
+  const token = await getToken({
+    req: request,
+    secret: process.env.SECRET,
+  });
+
+  // if (!token) {
   //   if (request.nextUrl.pathname.startsWith("/affiliates")) {
-  //     return NextResponse.rewrite(new URL("/api/auth/signin", request.url));
+  //     return NextResponse.rewrite(new NextURL("/api/auth/signin", request.url));
   //   }
   // }
 }
