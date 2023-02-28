@@ -8,8 +8,6 @@ import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 import getOrSaveCustomerIdFromFirebase from "@/lib/stripe/getOrSaveStripeCustomerIdFromFirebase";
 import bcrypt from "bcrypt";
 
-const saltRounds = 10;
-
 export default NextAuth({
   secret: envConfig.NEXTAUTH_SECRET,
   session: {
@@ -93,13 +91,6 @@ export default NextAuth({
         }
       }
       return true;
-    },
-    async redirect({ baseUrl, url }) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
     },
   },
   adapter: FirestoreAdapter(firestore),

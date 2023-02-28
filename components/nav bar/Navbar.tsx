@@ -5,31 +5,35 @@ import Image from "next/image";
 import Link from "next/link";
 import PrimaryButton from "../buttons/primaryButton";
 import { useState } from "react";
-
 import LoginButton from "../buttons/loginButton";
 import { signOut } from "next-auth/react";
-import createCustomerClient from "@/lib/stripe/createCustomerClient";
+import menuItems from "@/lib/constants/menu";
 
 export default function Navbar(props: any) {
-  const [isDrawerOpen, setDrawerOpenState] = useState(false);
-  function toggleDrawer() {
-    setDrawerOpenState(!isDrawerOpen);
-  }
-
   return (
     <header className="sticky top-0 z-50 flex flex-row justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-onPrimary">
-      <div className="flex mt-3">
-        <Hamburger
-          toggled={isDrawerOpen}
-          onToggle={() => {
-            toggleDrawer();
-          }}
-        ></Hamburger>
-      </div>
+      <Menu />
       <Link className="flex" href="/">
         <Image src="/logo.svg" alt="logo" width={300} height={80}></Image>
       </Link>
       <LoginButton></LoginButton>
+    </header>
+  );
+}
+
+function Menu() {
+  const [isDrawerOpen, setDrawerOpenState] = useState(false);
+  function toggleDrawer() {
+    setDrawerOpenState(!isDrawerOpen);
+  }
+  return (
+    <div className="flex mt-3">
+      <Hamburger
+        toggled={isDrawerOpen}
+        onToggle={() => {
+          toggleDrawer();
+        }}
+      ></Hamburger>
       {
         <div
           className={`absolute top-0 bottom-0 right-0 left-0 ${
@@ -38,38 +42,31 @@ export default function Navbar(props: any) {
               : "animate-slide_out_left_fade hidden"
           } `}
         >
-          <div className=" w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
-            <div
-              className="relative text-end"
-              onClick={() => {
-                toggleDrawer();
-              }}
-            >
-              <p>close</p>
+          <div className="w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
+            <div className="flex justify-end px-6 py-2">
+              <Hamburger
+                toggled={isDrawerOpen}
+                onToggle={() => {
+                  toggleDrawer();
+                }}
+              ></Hamburger>
             </div>
-            <div className="ml-10  ">
-              <Link href={""}>
-                <h1 className="my-10 hover:text-[white] duration-300">HOME</h1>
-              </Link>
-              <Link href={""}>
-                <h1 className="my-10 hover:text-[white] duration-300">
-                  EVENTS
-                </h1>
-              </Link>
-              <Link href={""}>
-                <h1 className="my-10 hover:text-[white] duration-300">ABOUT</h1>
-              </Link>
-              <Link href={""}>
-                <h1 className="my-10 hover:text-[white] duration-300">
-                  RECIPES
-                </h1>
-              </Link>
-              <Link href={""}>
-                <h1 className="my-10 hover:text-[white] duration-300">
-                  AFFILIATES
-                </h1>
-              </Link>
-
+            <div className="ml-10 ">
+              {menuItems.map((item) => {
+                return (
+                  <Link
+                    onClick={() => {
+                      toggleDrawer();
+                    }}
+                    key={`drawerMenu ${item.link}`}
+                    href={item.link}
+                  >
+                    <h1 className="my-10 hover:text-[white] duration-300">
+                      {item.text}
+                    </h1>
+                  </Link>
+                );
+              })}
               <PrimaryButton
                 text="log Out"
                 onClicked={() => {
@@ -84,6 +81,6 @@ export default function Navbar(props: any) {
           ></div>
         </div>
       }
-    </header>
+    </div>
   );
 }

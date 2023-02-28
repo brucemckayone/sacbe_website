@@ -3,7 +3,7 @@ import PurchaseOptionCard from "@/components/cards/purchaseOptionCard";
 
 export default function HeaderInformation() {
   return (
-    <div className=" basis-5/12 py-5 px-5 md:px-0 lg:w-1/3 ">
+    <div className=" basis-5/12 py-5 px-5 md:px-0 lg:w-1/3 animate-slide_in_right_fade">
       <div className="relative w-auto pb-2">
         <Image
           src="/mayan_ceremonial_cacao_text.svg"
@@ -20,7 +20,6 @@ export default function HeaderInformation() {
         medicine from the indigenous cultures that harvest the beans can be
         deeply felt.&quot;
       </p>
-
       <ol key={0}>
         <li key={1} className="border-onSecondaryContainer border-b-2 my-5">
           <div className="flex flex-row align-bottom">
@@ -54,7 +53,7 @@ export default function HeaderInformation() {
         </li>
       </ol>
 
-      <div className="flex flex-col-reverse md:flex-row justify-between ">
+      <div className="flex flex-col-reverse md:flex-row justify-between">
         <PurchaseOptionCard
           key={1}
           headerText="One-Off-Purchase"

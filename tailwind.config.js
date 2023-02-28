@@ -54,14 +54,46 @@ module.exports = {
       },
       keyframes: {
         slide_in_left: {
-          "0%": { transform: "translateX(-20em);", opacity: 0 },
-
-          "100%": { transform: "translateX(0em);", opacity: 1 },
+          "0%": {
+            transform: "translateX(-20em);",
+            opacity: 0,
+          },
+          "100%": {
+            transform: "translateX(0em);",
+            opacity: 1,
+          },
         },
-        slide_in_up: {
-          "0%": { transform: "scale(0.5);", opacity: 0 },
-
-          "100%": { transform: "scale(1);", opacity: 1 },
+        slide_in_left_blur: {
+          "0%": {
+            transform: "translateX(-5em);",
+            opacity: 0,
+            filter: "blur(1px)",
+          },
+          "100%": {
+            transform: "translateX(0em);",
+            opacity: 1,
+            filter: "blur(0px)",
+          },
+        },
+        slide_in_right_fade: {
+          "0%": {
+            transform: "translateX(10em);",
+            opacity: 0,
+            filter: "blur(1px)",
+          },
+          "100%": {
+            transform: "translateX(0em);",
+            opacity: 1,
+            filter: "blur(0px)",
+          },
+        },
+        zoom_in_fade: {
+          "0%": { transform: "scale(0.5)", opacity: 0 },
+          "100%": { transform: "scale(1)", opacity: 1 },
+        },
+        zoom_in: {
+          "0%": { transform: "scale(0.5)" },
+          "100%": { transform: "scale(1)" },
         },
         float: {
           "0%": {
@@ -113,17 +145,43 @@ module.exports = {
           },
         },
       },
+      pulse_scale: {
+        "0%": {
+          transform: " scale(1);",
+        },
+
+        "25%": {
+          transform: "scale(0.3);",
+        },
+
+        "40%": {
+          transform: "scale(1);",
+        },
+
+        "50%": {
+          transform: "scale(0.2);",
+        },
+
+        "100%": {
+          transform: "scale(1);",
+        },
+      },
       animation: {
         slide_in_left_fade: "slide_in_left 1s ease-in-out",
+        slide_in_left_blur: " slide_in_left_blur 500ms ease-in-out",
+        slide_in_right_fade: "slide_in_right_fade 1s ease-in-out",
         slide_out_left_fade: "slide_in_left 1s ease-in-out reverse",
-        slide_in_up_fade: "slide_in_up 1s ease-in-out",
+        zoom_in_fade: "zoom_in_fade 1s ease-in-out",
+        zoom_in: "zoom_in 1s ease-in-out",
         float: "float 3s ease-in-out infinite",
         scale_shadow: "scale_shadow 3s ease-in-out infinite",
+        kindPulse: "pulse_scale 3s ease-in-out infinite",
       },
       scale: {
         "-100": "-1",
       },
     },
   },
+
   plugins: [],
 };

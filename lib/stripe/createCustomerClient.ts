@@ -8,7 +8,7 @@ interface params {
 
 export default async function createCustomerClient({ email, name }: params) {
   const customer: Stripe.Customer = await fetchPostJSON(
-    "/api/stripe/client/create_customer",
+    "/api/stripe/client/create_customer/create_customer",
     {
       email: email,
       name: name,

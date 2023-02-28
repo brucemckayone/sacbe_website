@@ -1,7 +1,6 @@
-"use client";
 import Navbar from "../components/nav bar/Navbar";
 import "../app/globals.css";
-import { SessionProvider } from "next-auth/react";
+import AuthProvider from "@/components/providers/SessionProvider";
 
 import {
   Marcellus as displayFont,
@@ -9,6 +8,7 @@ import {
 } from "@next/font/google";
 
 import { Session } from "next-auth/core/types";
+import ToastContainerClient from "@/components/toast/toast_container";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <SessionProvider>
+    <AuthProvider>
       <html
         className={`${raleway.variable} ${merriweather.variable} bg-surface`}
       >
@@ -49,8 +49,9 @@ export default function RootLayout({
           <Navbar />
 
           {children}
+          <ToastContainerClient />
         </body>
       </html>
-    </SessionProvider>
+    </AuthProvider>
   );
 }

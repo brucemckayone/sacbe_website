@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 export default function useOnScreen(ref) {
   const [isIntersecting, setIntersecting] = useState(false);

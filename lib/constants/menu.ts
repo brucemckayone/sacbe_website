@@ -4,16 +4,16 @@ const menuItems = [
     link: "/",
   },
   {
-    text: "Events",
-    link: "",
+    text: "Learn",
+    link: "/learn",
   },
   {
     text: "About",
     link: "#about_sacbe_cacao",
   },
   {
-    text: "Recipes",
-    link: "/recipes",
+    text: "Resources",
+    link: "/resources",
   },
   {
     text: "Affiliates",

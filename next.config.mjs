@@ -9,7 +9,7 @@ const nextConfig = {
   },
 
   images: {
-    domains: ["www.thirdeyetribe.co.uk"],
+    domains: ["www.thirdeyetribe.co.uk", "picsum.photos"],
   },
   env: {
     // STRIPE_SECRET: envConfig.STRIPE_SECRET,
