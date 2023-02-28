@@ -83,18 +83,25 @@ const PurchaseOptionCard: React.FC<Props> = ({
               onClicked={async () => {
                 setIsLoading(true);
                 try {
-                  if ((paymentMode != "subscription" && session) || session) {
+                  if (paymentMode == "payment") {
                     await createCheckoutSession({
                       mode: paymentMode,
                       prices: priceIds,
                     });
                     setIsLoading(false);
                   } else {
-                    console.log("not signed in for subscription");
-
-                    notify();
-                    setIsLoading(false);
-                    window.location.href = "/api/auth/signin";
+                    if (session) {
+                      await createCheckoutSession({
+                        mode: paymentMode,
+                        prices: priceIds,
+                      });
+                      setIsLoading(false);
+                    } else {
+                      console.log("not signed in for subscription");
+                      notify();
+                      setIsLoading(false);
+                      window.location.href = "/api/auth/signin";
+                    }
                   }
                 } catch (e) {
                   console.log("there was an error connecting to stripe");
