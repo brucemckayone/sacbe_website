@@ -34,10 +34,10 @@ function WeLoveOurMotherCard() {
 
 const AboutSacbe: React.FC = () => {
   return (
-    <div className=" bg-secondaryContainer">
+    <div className="bg-secondaryContainer pb-28">
+      <h1 className="text-center p-20 text-4xl">OUR JOURNEY</h1>
       <SlideInUp animiation="animate-zoom_in_fade">
         <div className="flex flex-col justify-center align-middle">
-          <h1 className="self-center m-10">OUR JOURNEY</h1>
           <div className="flex flex-col md:flex-row">
             <Card className="flex basis-1/2" hasColor={false}>
               <div className="absolute w-11/12 md:w-1/3 p-40 bg-primaryContainer rounded-full h-[500px] blur-md"></div>
@@ -63,28 +63,33 @@ const AboutSacbe: React.FC = () => {
               </div>
             </Card>
             <Card
-              className="basis-1/3 flex flex-col justify-center items-center align-middle"
+              className="basis-2/5 flex flex-col justify-center items-center align-middle"
               hasColor={false}
             >
-              <div className="self-center">
-                <h5 className="flex md:w-1/2 underline">Our Humble Origins</h5>
-                <h3 className="flex md:w-3/4">
-                  Small-scale, Family Owned Farmers Cooperatives
-                </h3>
-                <p className="flex md:w-3/4">
-                  Sacbe Cacao is sourced from Arriba Nacional beans. Organically
-                  and sustainably grown in Esmeraldas, placed in the north west
-                  Andean Mountain range and situated at 2000 meters altitude,
-                  where the bio-diversity of this land contributes to its rich
-                  flavour profile + strong spirit.
-                </p>
-                <LinkButton url="/about" isPrimary={false}></LinkButton>
-                <div className="flex elf-end">
-                  {/* <PrimaryButton
-                    onClicked={() => {}}
-                    text="Buy Now"
-                  ></PrimaryButton> */}
-                </div>
+              <div className="basis-1/2">
+                <SlideInUp animiation="animate-slide_in_left_blur">
+                  <h5 className="flex md:w-1/2 underline">
+                    Our Humble Origins
+                  </h5>
+                </SlideInUp>
+                <SlideInUp animiation="animate-slide_in_left_blur">
+                  <h3 className="flex md:w-3/4">
+                    {" "}
+                    Small-scale, Family Owned Farmers Cooperatives
+                  </h3>
+                </SlideInUp>
+                <SlideInUp animiation="animate-slide_in_left_blur">
+                  <p className="flex md:w-2/4">
+                    Sacbe Cacao is sourced from Arriba Nacional beans.
+                    Organically and sustainably grown in Esmeraldas, placed in
+                    the north west Andean Mountain range and situated at 2000
+                    meters altitude, where the bio-diversity of this land
+                    contributes to its rich flavour profile + strong spirit.
+                  </p>
+                </SlideInUp>
+                <SlideInUp animiation="animate-slide_in_left_blur">
+                  <LinkButton url="/about" isPrimary={false}></LinkButton>
+                </SlideInUp>
               </div>
             </Card>
           </div>

@@ -24,21 +24,21 @@ export default function Home() {
 
       <div className=" bg-gradient-to-b from-surfaceVarient to-secondaryContainer py-10">
         <div className="flex flex-col justify-center align-middle">
-          <h1 className="self-center flex pt-20">TRAINING</h1>
+          <h1 className="self-center flex pt-20 sm:text-4xl">TRAINING</h1>
           <div className="flex flex-col md:flex-row ">
             <div></div>
 
             <Card className="flex basis-1/2" hasColor={false}>
               <SlideInUp animiation="animate-zoom_in">
-                <div className="absolute w-[400px] bg-primaryContainer rounded-full h-[400px] blur-md"></div>
-                <div className="relative w-[400px] h-[400px]">
+                <div className="absolute w-[400px] md:w-[500px] bg-primaryContainer rounded-full h-[500px] blur-md"></div>
+                <div className="relative w-[400px]  md:w-[500px] h-[500px]">
                   <div className="absolute top-0 right-0 left-0 w-full h-[500px]">
                     <Image
                       src={"/pouring_cacao_cup.png"}
                       fill
                       style={{ objectFit: "contain" }}
                       alt=""
-                      className="pb-20"
+                      className="animate-pulse_scale"
                     ></Image>
                   </div>
                 </div>

@@ -144,28 +144,21 @@ module.exports = {
             transform: "scaleX(0.7);",
           },
         },
-      },
-      pulse_scale: {
-        "0%": {
-          transform: " scale(1);",
-        },
+        pulse_scale: {
+          "0%": {
+            transform: "scale(1);",
+          },
 
-        "25%": {
-          transform: "scale(0.3);",
-        },
+          "50%": {
+            transform: "scale(0.97);",
+          },
 
-        "40%": {
-          transform: "scale(1);",
-        },
-
-        "50%": {
-          transform: "scale(0.2);",
-        },
-
-        "100%": {
-          transform: "scale(1);",
+          "100%": {
+            transform: "scale(1);",
+          },
         },
       },
+
       animation: {
         slide_in_left_fade: "slide_in_left 1s ease-in-out",
         slide_in_left_blur: " slide_in_left_blur 500ms ease-in-out",
@@ -175,7 +168,7 @@ module.exports = {
         zoom_in: "zoom_in 1s ease-in-out",
         float: "float 3s ease-in-out infinite",
         scale_shadow: "scale_shadow 3s ease-in-out infinite",
-        kindPulse: "pulse_scale 3s ease-in-out infinite",
+        pulse_scale: "pulse_scale 3s ease-in-out infinite",
       },
       scale: {
         "-100": "-1",

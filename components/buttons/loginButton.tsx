@@ -42,7 +42,7 @@ export default function LoginButton() {
           }}
           className="duration-500 bg-sacbeBrandColor py-1 px-8  my-3 rounded-md hover:bg-onPrimaryContainer hover:text-onPrimary border-2"
         >
-          <h4>{`${!isLoading ? "ACCOUNT" : "LOADING.."}`}</h4>
+          <h4>{`${!isLoading ? "ACCOUNT" : "LOADING..."}`}</h4>
         </button>
       ) : (
         <Link href={"/api/auth/signin"}>

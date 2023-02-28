@@ -8,36 +8,41 @@ import SimpleSlider from "../carousels/testimonial_slider";
 
 export default function BenifitsOfCacao() {
   return (
-    <div className="bg-surfaceVarient md:p-10">
+    <div className="bg-gradient-to-b from-secondaryContainer to-surfaceVarient py-22 md:p-10">
       {/* <SlideInUp animiation="animate-slide_in_right_fade"> */}
       {/* <SectionHeader title="The Experiance"></SectionHeader> */}
       <div className="flex flex-col lg:flex-row">
         <Card hasColor={false} className="xl:basis-1/3 md:basis-1/3">
-          <h3 className="mb-2">Our customers said it best:</h3>
-          <blockquote>
-            WOWWWZZAAAA!!!! Now, I have tried a few different Cacao’s but I have
-            to say that SACBE is my new absolute fave! The texture & taste is
-            soooo smooth, it foams up beautifully in a blender. The taste is
-            rich but not too bitter. But the thing that got me the most was the
-            sensations it gave me! Mind blowing visuals throughout the ceremony,
-            I felt so deeply connected with my heart centre and Third eye. Lot’s
-            of colours and pleasant tingles, you really can tell its made with
-            love. This is some potent Cacao! It set me up amazingly for the day
-            ahead, I just felt so energised and full of love & compassion.
-            Honestly if I could give it more than 5* I would! Thank you for
-            introducing such a wonderful product. I can’t wait to continue using
-            it on my healing journey
-            <p className="text-end">
-              - Mathilda Heenehan (Very Happy Customer)
+          <SlideInUp animiation="animate-slide_in_left_fade">
+            <h3 className="mb-2">Our customers said it best:</h3>
+          </SlideInUp>
+          <SlideInUp animiation="animate-slide_in_left_fade">
+            <blockquote>
+              WOWWWZZAAAA!!!! Now, I have tried a few different Cacao’s but I
+              have to say that SACBE is my new absolute fave! The texture &
+              taste is soooo smooth, it foams up beautifully in a blender. The
+              taste is rich but not too bitter. But the thing that got me the
+              most was the sensations it gave me! Mind blowing visuals
+              throughout the ceremony, I felt so deeply connected with my heart
+              centre and Third eye. Lot’s of colours and pleasant tingles, you
+              really can tell its made with love. This is some potent Cacao! It
+              set me up amazingly for the day ahead, I just felt so energised
+              and full of love & compassion. Honestly if I could give it more
+              than 5* I would! Thank you for introducing such a wonderful
+              product. I can’t wait to continue using it on my healing journey
+              <p className="text-end">
+                - Mathilda Heenehan (Very Happy Customer)
+              </p>
+            </blockquote>
+          </SlideInUp>
+          <SlideInUp animiation="animate-slide_in_left_fade">
+            <p className="p-3">
+              We know! We know! It cant really be that good can it? It is. The
+              list of health and life style benifits that cacao boasts is
+              astonishing. Dont take it from us, the benifits of cacao are
+              scientificly backed.
             </p>
-          </blockquote>
-
-          <p className="p-3">
-            We know! We know! It cant really be that good can it? It is. The
-            list of health and life style benifits that cacao boasts is
-            astonishing. Dont take it from us, the benifits of cacao are
-            scientificly backed.
-          </p>
+          </SlideInUp>
         </Card>
         <Card hasColor={false} className=" xl:basis-2/3 md:basis-2/4 m-0">
           <h3>The Benefits Of Cacao</h3>
