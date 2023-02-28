@@ -22,10 +22,10 @@ const SimpleSlider: React.FC<Props> = ({ reviews }) => {
       ]}
       align="start"
       slidesToScroll={1}
-      className="mx-0 my-10 flex-col justify-center"
-      plugins={[autoplay.current]}
-      onMouseEnter={autoplay.current.stop}
-      onMouseLeave={autoplay.current.reset}
+      className="mx-0 py-10 flex-col justify-center bg-surfaceVarient"
+      // plugins={[autoplay.current]}
+      // onMouseEnter={autoplay.current.stop}
+      // onMouseLeave={autoplay.current.reset}
     >
       {reviews.map((review) => {
         return (

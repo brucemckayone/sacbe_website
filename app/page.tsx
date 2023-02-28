@@ -22,7 +22,7 @@ export default function Home() {
 
       <BenifitsOfCacao />
 
-      <div className=" bg-gradient-to-b from-surfaceVarient to-secondaryContainer my-10">
+      <div className=" bg-gradient-to-b from-surfaceVarient to-secondaryContainer py-10">
         <div className="flex flex-col justify-center align-middle">
           <h1 className="self-center flex pt-20">TRAINING</h1>
           <div className="flex flex-col md:flex-row ">
@@ -38,6 +38,7 @@ export default function Home() {
                       fill
                       style={{ objectFit: "contain" }}
                       alt=""
+                      className="pb-20"
                     ></Image>
                   </div>
                 </div>
@@ -45,10 +46,10 @@ export default function Home() {
             </Card>
 
             <Card
-              className="basis-1/3 flex flex-col justify-center items-center align-middle"
+              className="basis-2/5 flex flex-col justify-center items-center align-middle"
               hasColor={false}
             >
-              <div className="self-center basis-1/2">
+              <div className="basis-1/2">
                 <SlideInUp animiation="animate-slide_in_left_blur">
                   <h5 className="flex md:w-1/2 underline">
                     Become A Practitioner
@@ -58,7 +59,7 @@ export default function Home() {
                   <h3 className="flex md:w-3/4">Cacao Facilitation Training</h3>
                 </SlideInUp>
                 <SlideInUp animiation="animate-slide_in_left_blur">
-                  <p className="flex md:w-3/4">
+                  <p className="flex md:w-2/4">
                     We welcome those wishing to work with for cacao to join us
                     in an 6 night emmersive training in the wild depths of the
                     scottish highlands where you will develope your skills as a
@@ -81,7 +82,7 @@ export default function Home() {
 
       <NavMenuBottom />
 
-      <Card>
+      {/* <Card>
         <div className="flex flex-col items-center">
           <h2 className="text-center">Sign Up To Our NewsLetter</h2>
           <form action="/api/newsletter_signup" method="post">
@@ -100,7 +101,7 @@ export default function Home() {
             </button>
           </form>
         </div>
-      </Card>
+      </Card> */}
     </main>
   );
 }
