@@ -22,8 +22,9 @@ function GetAffiliateLinkButton({ link }: props) {
   const session = useSession();
   const [accoundId, setAccountId] = useState("");
   const affiliate = useAffiliate();
-  if (!affiliate) {
-    useEffect(() => {
+
+  useEffect(() => {
+    if (!affiliate) {
       console.log(`session: ${session}`);
       setIsLoading(true);
       if (session.data?.user) {
@@ -34,8 +35,8 @@ function GetAffiliateLinkButton({ link }: props) {
         });
       }
       setIsLoading(false);
-    }, []);
-  }
+    }
+  }, []);
 
   return (
     <div>

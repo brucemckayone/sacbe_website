@@ -32,15 +32,15 @@ export default function AffiliateProvider({
     setUser: setAffiliateUser,
   };
 
-  if (session.data?.user) {
-    useEffect(() => {
+  useEffect(() => {
+    if (session.data?.user) {
       fetchPostJSON(
         `${homeUrl}/api/affiliate/user?email=${session.data.user?.email}`
       ).then((res) => {
         setAffiliateUser(res["data"]);
       });
-    });
-  }
+    }
+  });
 
   return (
     <>

@@ -17,9 +17,10 @@ function AfilliateSales({ accountId }: params) {
     {} as Stripe.Response<Stripe.ApiList<Stripe.Charge>>
   );
   const session = useSession();
-  if (session.data?.user) {
-    const affiliate = useAffiliate();
-    useEffect(() => {
+  const affiliate = useAffiliate();
+
+  useEffect(() => {
+    if (session.data?.user) {
       setLoading(true);
       console.log(affiliate.user?.accountId);
       try {
@@ -36,8 +37,8 @@ function AfilliateSales({ accountId }: params) {
         setLoading(false);
       }
       setLoading(false);
-    }, []);
-  }
+    }
+  }, []);
   if (isLoading) {
     return (
       <div>
