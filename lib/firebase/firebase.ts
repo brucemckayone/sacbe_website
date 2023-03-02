@@ -3,6 +3,7 @@ import { initFirestore } from "@next-auth/firebase-adapter";
 import { initializeApp } from "firebase/app";
 import { envConfig } from "../webhooks/envConfig";
 import { cert } from "firebase-admin/app";
+import admin from "firebase-admin";
 import { getAuth } from "firebase/auth";
 
 import { getStorage } from "firebase/storage";
@@ -20,7 +21,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
-
+admin.initializeApp({
+  credential: cert({
+    projectId: envConfig.FIREBASE_PROJECT_ID,
+    clientEmail: envConfig.FIREBASE_CLIENT_EMAIL,
+    privateKey: envConfig.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+  }),
+});
 export const firestore = initFirestore({
   credential: cert({
     projectId: envConfig.FIREBASE_PROJECT_ID,
