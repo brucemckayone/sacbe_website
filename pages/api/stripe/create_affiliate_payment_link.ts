@@ -7,10 +7,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method == "POST") {
-    const accountId = req.body["accoutId"];
-    const itemId = req.body["itemId"];
-    const link = await createPaymentLink(accountId, itemId);
-    res.status(200).json(link);
+    try {
+      const accountId = req.body["accoutId"];
+      const itemId = req.body["itemId"];
+      const link = await createPaymentLink(accountId, itemId);
+      res.status(200).json(link);
+    } catch (e) {
+      res.status(401).json(e);
+    }
   }
 }
 

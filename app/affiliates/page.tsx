@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { getServerSession } from "next-auth/next";
 import AfilliateSales from "@/components/affiliate/affiliate_sales";
 import Card from "@/components/cards/card";
 import GetAffiliateLinkButton from "@/components/buttons/getAffiliateLinkButton";
+
 export default async function AffiliatePage() {
   const session = await getServerSession();
 
@@ -18,16 +19,13 @@ export default async function AffiliatePage() {
         </span>
       </div>
       <div className="self-center my-5">
-        {session && (
-          <GetAffiliateLinkButton
-            // link="https://buy.stripe.com/test_cN2g271tn0wGdm8cMP"
-            isAffilate={true}
-          />
+        {!session && (
+          <GetAffiliateLinkButton link="https://buy.stripe.com/test_cN2g271tn0wGdm8cMP" />
         )}
       </div>
 
       <div className="mt-10 md:mx-96">
-        <AfilliateSales></AfilliateSales>
+        <AfilliateSales accountId=""></AfilliateSales>
         <div>
           <h5 className="underline">Earn £3 for every sale</h5>
           <h2>About The Program</h2>

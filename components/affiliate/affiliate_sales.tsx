@@ -1,48 +1,53 @@
 "use client";
 import { fetchGetJSON } from "@/utils/stripe/fetchPostJson";
-import { apiBaseUrl } from "next-auth/client/_utils";
+
 import homeUrl from "@/lib/constants/urls";
 import React, { useEffect, useState } from "react";
 import Stripe from "stripe";
 import { RxClipboardCopy } from "react-icons/rx";
+import { useAffiliate } from "../auth/affiliate_auth_context";
+import { useSession } from "next-auth/react";
 interface params {
   accountId: string;
 }
-async function getUserSales({ accountId }: params) {
-  return await fetchGetJSON(`${homeUrl}/api/stripe/payments`);
-}
 
 function AfilliateSales({ accountId }: params) {
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [sales, setSales] = useState(
     {} as Stripe.Response<Stripe.ApiList<Stripe.Charge>>
   );
-  useEffect(() => {
-    console.log("helloo");
-    setLoading(true);
-    try {
-      fetchGetJSON(
-        `${homeUrl}/api/stripe/payments?accountId=acct_1MbMvi4ffKpYRYea}`
-      ).then((res) => {
-        setSales(res);
-        console.log(sales);
+  const session = useSession();
+  if (session.data?.user) {
+    const affiliate = useAffiliate();
+    useEffect(() => {
+      setLoading(true);
+      console.log(affiliate.user?.accountId);
+      try {
+        if (accountId)
+          fetchGetJSON(
+            `${homeUrl}/api/stripe/payments?accountId=${
+              affiliate.user?.accountId as string
+            }`
+          ).then((res) => {
+            setSales(res);
+          });
         setLoading(false);
-      });
-    } catch (e) {
+      } catch (e) {
+        setLoading(false);
+      }
       setLoading(false);
-    }
-  }, []);
-
+    }, []);
+  }
   if (isLoading) {
     return (
       <div>
-        <p>loading</p>
+        <p>loading...</p>
       </div>
     );
-  } else {
+  } else if (sales.data) {
     return (
-      <div>
-        <table className="w-full text-sm text-left">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm text-left table-auto overflow-scroll ">
           <thead className="bg-primaryContainer  ">
             <tr>
               <th className="mx-2 rounded-tl-md">
@@ -87,8 +92,7 @@ function AfilliateSales({ accountId }: params) {
       </div>
     );
   }
-
-  return <div>{isLoading ? <p>loading</p> : <p>is complete</p>}</div>;
+  return <></>;
 }
 
 export default AfilliateSales;

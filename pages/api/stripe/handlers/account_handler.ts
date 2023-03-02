@@ -29,7 +29,7 @@ export default async function handler(
       case "account.updated":
         const accountUpdated = event.data.object;
         // Then define and call a function to handle the event account.updated
-        console.log("GOOOTTEEE");
+        console.log(event.type);
 
         break;
       case "account.application.authorized":

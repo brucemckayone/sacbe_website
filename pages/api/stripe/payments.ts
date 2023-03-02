@@ -7,9 +7,13 @@ export default async function handler(
 ) {
   if (req.method == "GET") {
     const { accountId } = req.query;
-    const sales = await stripe.charges.list({
-      stripeAccount: "acct_1MbMvi4ffKpYRYea",
-    });
-    res.status(200).json(sales);
+    if (accountId) {
+      if (accountId.length > 0) {
+        const sales = await stripe.charges.list({
+          stripeAccount: accountId as string,
+        });
+        res.status(200).json(sales);
+      }
+    }
   }
 }

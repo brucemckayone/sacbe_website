@@ -1,27 +1,22 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import Stripe from "stripe";
 
-import { envConfig } from "@/lib/webhooks/envConfig";
+import Stripe from "stripe";
+import stripe from "@/lib/stripe/stripe";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method == "POST") {
-    const accountId = req.body["accoutId"];
-    const itemId = req.body["itemId"];
-    const link = await createPaymentLink(accountId, itemId);
-    res.status(200).json(link);
+    const { accountId, itemId } = req.body;
+    res.status(200).json(await createPaymentLink(accountId, itemId));
   }
 }
 
-async function createPaymentLink(accountId: string, itemId: string) {
-  const stripe = new Stripe(envConfig!.STRIPE_SECRET, {
-    apiVersion: "2022-11-15",
-  });
+async function createPaymentLink(accountId: string, priceId: string) {
   const params: Stripe.PaymentLinkCreateParams = {
     line_items: [
       {
-        price: "price_1Mb8slG859ZdyFmp0ttYsJAh",
+        price: priceId,
         quantity: 1,
         adjustable_quantity: {
           enabled: true,
@@ -32,7 +27,7 @@ async function createPaymentLink(accountId: string, itemId: string) {
     ],
     transfer_data: {
       amount: 400,
-      destination: "acct_1MbMvi4ffKpYRYea",
+      destination: accountId,
     },
     shipping_address_collection: {
       allowed_countries: ["GB"],
@@ -51,8 +46,5 @@ async function createPaymentLink(accountId: string, itemId: string) {
     ],
   };
 
-  const paymentLink = await stripe.paymentLinks.create(params);
-
-  console.log(paymentLink);
-  return paymentLink;
+  return await stripe.paymentLinks.create(params);
 }
