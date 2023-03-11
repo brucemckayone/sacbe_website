@@ -61,7 +61,6 @@ export default function AffiliateProvider({
   const data = useAffiliateSWR({
     email: session.data?.user?.email ?? "", //"brucemckayone@gmail.com",
   });
-
   useEffect(() => {
     if (data.user) {
       console.log(data.user);

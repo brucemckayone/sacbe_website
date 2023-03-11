@@ -6,6 +6,7 @@ import { useAffiliate } from "../auth/affiliate_auth_context";
 import PrimaryButton from "./primaryButton";
 import TextInput from "../form/inputs/TextInput";
 import TextArea from "../form/inputs/TextArea";
+import homeUrl from "@/lib/constants/urls";
 function AffiliateRequestButton() {
   const affiliate = useAffiliate();
   const { data: data } = useSession();
@@ -75,7 +76,7 @@ function AffiliateRequestButton() {
             onClicked={() => {
               setLoading(true);
               if (!affiliate?.user?.affiliateStatus?.refId ?? true) {
-                fetchPostJSON("api/affiliate/request", {
+                fetchPostJSON(`${homeUrl}api/affiliate/request`, {
                   user: {
                     accountId: "",
                     email: affiliate.user.email,

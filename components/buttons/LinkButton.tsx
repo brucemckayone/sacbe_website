@@ -7,10 +7,16 @@ interface props {
   isPrimary: Boolean;
 }
 
-function LinkButton({ url, isPrimary }: props) {
+function LinkButton({ url, isPrimary = false }: props) {
   return (
     <Link href={url}>
-      <PrimaryButton text="Learn More" onClicked={() => {}} isPrimary={false} />
+      <PrimaryButton
+        text="Learn More"
+        onClicked={() => {
+          window.location.href = url;
+        }}
+        isPrimary={isPrimary}
+      />
     </Link>
   );
 }
