@@ -1,4 +1,4 @@
-import createCustomerPortal from "@/lib/stripe/create_customer_protal";
+import stripe from "@/lib/stripe/stripe";
 
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -19,3 +19,18 @@ export default async function handler(
     });
   }
 }
+
+interface params {
+  customerId: string;
+}
+
+const createCustomerPortal = async ({ customerId }: params) => {
+  const configuration = await stripe.billingPortal.configurations.list();
+  console.log(configuration);
+
+  console.log(configuration.data[0].id);
+  return await stripe.billingPortal.sessions.create({
+    customer: customerId,
+    configuration: configuration.data[0].id,
+  });
+};

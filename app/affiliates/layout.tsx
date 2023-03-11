@@ -4,9 +4,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <AffiliateProvider>{children}</AffiliateProvider>
-    </>
-  );
+  return <AffiliateProvider>{children}</AffiliateProvider>;
 }

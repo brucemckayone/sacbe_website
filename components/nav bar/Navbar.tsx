@@ -11,7 +11,7 @@ import menuItems from "@/lib/constants/menu";
 
 export default function Navbar(props: any) {
   return (
-    <header className="sticky top-0 z-50 flex flex-row justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-onPrimary">
+    <header className="sticky top-0 z-50 flex flex-row  justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-onPrimary">
       <Menu />
       <Link className="flex" href="/">
         <Image src="/logo.svg" alt="logo" width={300} height={80}></Image>

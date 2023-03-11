@@ -9,7 +9,7 @@ const menuItems = [
   },
   {
     text: "About",
-    link: "#about_sacbe_cacao",
+    link: "/about",
   },
   {
     text: "Resources",

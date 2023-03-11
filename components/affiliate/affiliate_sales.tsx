@@ -1,95 +1,198 @@
 "use client";
-import { fetchGetJSON } from "@/utils/stripe/fetchPostJson";
-
-import homeUrl from "@/lib/constants/urls";
-import React, { useEffect, useState } from "react";
-import Stripe from "stripe";
+import React, { useState } from "react";
 import { RxClipboardCopy } from "react-icons/rx";
 import { useAffiliate } from "../auth/affiliate_auth_context";
-import { useSession } from "next-auth/react";
-interface params {
-  accountId: string;
+import useSWR from "swr";
+import getAffiliateSales from "@/utils/client/stripe/payments/getAffiliateSales";
+import TableLoader from "../loaders/TableLoader";
+import SlideInUp from "../animations/slide_in_up";
+import getAffiliatePayouts from "@/utils/client/stripe/links/getAffiliatePayouts";
+import PrimaryButton from "../buttons/primaryButton";
+
+async function fetchData(accountId: string) {
+  return await Promise.all([
+    getAffiliatePayouts(accountId),
+    getAffiliateSales(accountId),
+  ]);
 }
+function AfilliateSales() {
+  const { user: affiliate, isLoading: isLoadingAffiliate } = useAffiliate();
+  const [salesFocus, setSalesFocus] = useState(true);
+  const [payoutFocus, setPayoutFocus] = useState(false);
 
-function AfilliateSales({ accountId }: params) {
-  const [isLoading, setLoading] = useState(false);
-  const [sales, setSales] = useState(
-    {} as Stripe.Response<Stripe.ApiList<Stripe.Charge>>
-  );
-  const session = useSession();
-  const affiliate = useAffiliate();
+  function setTabFocus(setFocus: (data: boolean) => void) {
+    setSalesFocus(false);
+    setPayoutFocus(false);
+    setFocus(true);
+  }
 
-  useEffect(() => {
-    if (session.data?.user) {
-      setLoading(true);
-      console.log(affiliate.user?.accountId);
-      try {
-        if (accountId)
-          fetchGetJSON(
-            `${homeUrl}/api/stripe/payments?accountId=${
-              affiliate.user?.accountId as string
-            }`
-          ).then((res) => {
-            setSales(res);
-          });
-        setLoading(false);
-      } catch (e) {
-        setLoading(false);
-      }
-      setLoading(false);
-    }
-  }, []);
-  if (isLoading) {
+  const {
+    isLoading,
+    data: data,
+    error,
+  } = useSWR(affiliate.accountId, fetchData);
+
+  if (isLoadingAffiliate || isLoading) {
+    return <TableLoader />;
+  } else {
+    const sales = data?.[1];
+    const payouts = data?.[0];
+
     return (
-      <div>
-        <p>loading...</p>
-      </div>
-    );
-  } else if (sales.data) {
-    return (
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm text-left table-auto overflow-scroll ">
-          <thead className="bg-primaryContainer  ">
-            <tr>
-              <th className="mx-2 rounded-tl-md">
-                <h5 className="px-2 py-1">ID</h5>
-              </th>
-              <th className="mx-2">
-                <h5>Amount</h5>
-              </th>
-              <th className="mx-2 rounded-tr-md">
-                <h5>Reciept</h5>
-              </th>
-            </tr>
-          </thead>
-          {sales.data.map((sale) => {
-            return (
-              <tbody
-                className="bg-white border-b bg-tertiaryContainer border-onTertiaryContainer"
-                key={sale.id + "row"}
-              >
-                <tr>
-                  <td className="p-3" key={sale.id}>
-                    <p>{sale.id}</p>
-                  </td>
-                  <td key={sale.amount + sale.id}>
-                    {" "}
-                    <p>£{(sale.amount / 100).toFixed(2)}</p>
-                  </td>
-                  <td>
-                    <button
-                      className=" flex border uppercase rounded-md w-20 px-1 py-1 justify-around"
-                      onClick={() => window.open(sale.receipt_url!)}
+      <div className="overflow-x-auto md:m-20 my-10 z- min-h-min">
+        <div className="flex flex-row mt-2">
+          <button
+            onClick={() => {
+              setTabFocus(setSalesFocus);
+            }}
+            className={` rounded-t-md p-2 ${
+              salesFocus
+                ? "bg-primaryContainer  scale-105 relative"
+                : "bg-tertiaryContainer"
+            }`}
+          >
+            <p>Sales</p>
+          </button>
+          <button
+            className={` rounded-t-md p-2 ${
+              payoutFocus
+                ? "bg-primaryContainer  scale-105 relative"
+                : "bg-tertiaryContainer"
+            }`}
+            onClick={() => {
+              setTabFocus(setPayoutFocus);
+            }}
+          >
+            <p>Payouts</p>
+          </button>
+        </div>
+        {salesFocus && (
+          <div className="shadow-xl">
+            <SlideInUp animiation="animate-slide_in_left_blur">
+              <table className="w-full text-sm text-left table-auto overflow-scroll z-1 shadow-xl">
+                <thead className="bg-primaryContainer   ">
+                  <tr>
+                    <th className="mx-2 rounded-tl-md">
+                      <h5 className="px-2 py-1">Customer</h5>
+                    </th>
+                    <th className="mx-2">
+                      <h5>Amount</h5>
+                    </th>
+                    <th className="mx-2 rounded-tr-md">
+                      <h5>Reciept</h5>
+                    </th>
+                  </tr>
+                </thead>
+                {sales?.data.map((sale) => {
+                  return (
+                    <tbody
+                      className="bg-white bg-tertiaryContainer hover:bg-transparent border-onTertiaryContainer duration-300"
+                      key={sale.id + "row"}
                     >
-                      <p>receipt</p>
-                      <RxClipboardCopy size={20} className="pt-1" />
-                    </button>{" "}
-                  </td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
+                      <tr>
+                        <td className="p-3" key={sale.id}>
+                          <p>{sale.receipt_email}</p>
+                        </td>
+                        <td key={sale.amount + sale.id}>
+                          {" "}
+                          <p>
+                            £
+                            {sale.application_fee_amount
+                              ? (
+                                  sale.amount / 100 -
+                                  sale.application_fee_amount / 100
+                                ).toFixed(2)
+                              : (sale.amount / 100).toFixed(2)}
+                          </p>
+                        </td>
+                        <td>
+                          <button
+                            className=" flex border uppercase rounded-md w-20 px-1 py-1 justify-around"
+                            onClick={() => window.open(sale.receipt_url!)}
+                          >
+                            <p>receipt</p>
+                            <RxClipboardCopy size={20} className="pt-1" />
+                          </button>{" "}
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+              </table>
+            </SlideInUp>
+          </div>
+        )}
+        {payoutFocus && (
+          <SlideInUp animiation="animate-slide_in_left_blur">
+            <div className="shadow-xl">
+              <table className="w-full text-sm text-left table-auto overflow-scroll z-50  rounded-l-xl ">
+                <thead className="bg-primaryContainer ">
+                  <tr>
+                    <th className="mx-2 rounded-tl-md">
+                      <h5 className="px-2 py-1">Amount</h5>
+                    </th>
+                    <th className="mx-2">
+                      <h5>Status</h5>
+                    </th>
+                    <th className="mx-2">
+                      <h5>Currancy</h5>
+                    </th>
+                    <th className="mx-2 rounded-tr-md">
+                      <h5>Arv. Date</h5>
+                    </th>
+                  </tr>
+                </thead>
+                {payouts?.data.map((payout) => {
+                  return (
+                    <tbody
+                      className="bg-white  bg-tertiaryContainer border-onTertiaryContainer"
+                      key={payout.id + "row"}
+                    >
+                      <tr>
+                        <td className="p-3" key={payout.id}>
+                          <p>£{(payout.amount / 100).toFixed(2)}</p>
+                        </td>
+                        <td key={payout.status + payout.arrival_date}>
+                          <div
+                            className={`rounded-md mx-2 text-center ${
+                              payout.status == "paid"
+                                ? "bg-recommendedGreen"
+                                : "bg-errorContainer"
+                            }`}
+                          >
+                            <p>{payout.status}</p>
+                          </div>
+                        </td>
+                        <td
+                          className="p-3"
+                          key={payout.description + payout.id}
+                        >
+                          <p>{payout.currency.toUpperCase()}</p>
+                        </td>
+                        <td>
+                          <p>
+                            {new Date(
+                              payout.arrival_date * 1000
+                            ).toDateString()}
+                            .
+                          </p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  );
+                })}
+              </table>
+            </div>
+          </SlideInUp>
+        )}
+        {sales?.data.length == 0 && (
+          <div>
+            {" "}
+            <p>
+              You can see your purchase history here when you get some sales
+            </p>
+          </div>
+        )}
       </div>
     );
   }

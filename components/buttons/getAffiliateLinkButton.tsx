@@ -1,113 +1,96 @@
 "use client";
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import PrimaryButton from "./primaryButton";
 
-import AffiliateRequestButton from "./AffiliateRequestButton";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
-
-import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
-import homeUrl from "@/lib/constants/urls";
+import AffiliateRequestButton from "./AffiliateRequestButton";
 import { useAffiliate } from "../auth/affiliate_auth_context";
-interface props {
-  link?: string;
-}
-function GetAffiliateLinkButton({ link }: props) {
-  const [clicked, setClickedState] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [affiliateLink, setAffiliateLink] = useState(link);
-  const notify = () => toast("Link copied to clipboard");
 
+function GetAffiliateLinkButton() {
   const session = useSession();
-  const [accoundId, setAccountId] = useState("");
+
   const affiliate = useAffiliate();
 
-  useEffect(() => {
-    if (!affiliate) {
-      console.log(`session: ${session}`);
-      setIsLoading(true);
-      if (session.data?.user) {
-        fetchPostJSON(`${homeUrl}/api/affiliate/id`, {
-          email: session.data?.user?.email,
-        }).then((res) => {
-          setAccountId(res["accountId"]);
-        });
+  if (session!.data?.user) {
+    // set loading state
+    if (affiliate.isLoading) {
+      return (
+        <div>
+          <h6>Loading Affiliate Details</h6>
+        </div>
+      );
+    } else {
+      // if loaded
+
+      if (affiliate.user.accountId) {
+        const status = affiliate.user.affiliateStatus.status;
+        if (status == "active") {
+          window.location.href = "affiliates/portal";
+        } else {
+          return (
+            <div className="bg-tertiaryContainer rounded-lg w-full p-5 border h-36 md:h-28">
+              {status == "pending" && (
+                <p>Your request has been sent, you should hear from us soon</p>
+              )}
+              <div className="flex justify-between">
+                <div
+                  className={`${
+                    status == "pending"
+                      ? `bg-errorContainer`
+                      : "bg-recommendedGreen"
+                  } rounded-lg p-2 `}
+                >
+                  <p>status: {status}</p>
+                </div>
+              </div>
+            </div>
+          );
+        }
+      } else {
+        // user has no account id therefore a request needs to be sent
+        if (!affiliate.user.affiliateStatus) {
+          return <AffiliateRequestButton />;
+        } else {
+          const status = affiliate.user.affiliateStatus.status;
+          if (status == "active") {
+            window.location.href = "affiliates/portal";
+          }
+          return (
+            <div className="bg-tertiaryContainer rounded-lg w-full p-5 border h-36 md:h-28">
+              {status == "pending" && (
+                <p>Your request has been sent, you should hear from us soon</p>
+              )}
+              <div className="flex justify-between">
+                <div
+                  className={`${
+                    status == "pending"
+                      ? `bg-errorContainer`
+                      : "bg-recommendedGreen"
+                  } rounded-lg p-2 `}
+                >
+                  <p>status: {status}</p>
+                </div>
+              </div>
+              {/* {status == "active" && (
+                <PrimaryButton onClicked={() => {}} text="Open Portal" />
+              )} */}
+            </div>
+          );
+        }
       }
-      setIsLoading(false);
+      return <> </>;
     }
-  }, []);
-
-  return (
-    <div>
-      <h1>{affiliate.user.affiliateRequest.status}</h1>
-    </div>
-  );
-  // if (session!.data?.user) {
-  //   console.log("has session");
-
-  //   if (isLoading) {
-  //     console.log("is loading");
-
-  //     return (
-  //       <div>
-  //         <h6>loading link ...</h6>
-  //       </div>
-  //     );
-  //   } else {
-  //     console.log("loading complete");
-
-  //     if (accoundId) {
-  //       console.log("has account id");
-
-  //       if (affiliateLink) {
-  //         console.log("has link");
-
-  //         return (
-  //           <div
-  //             onClick={() => {
-  //               setClickedState(true);
-  //               navigator.clipboard.writeText(affiliateLink);
-  //               notify();
-  //             }}
-  //           >
-  //             <h5>Sellers Link</h5>
-  //             <div
-  //               className={`m-0 md:mx-20 lg:m-5 p-5 flex-1 justify-between  ${
-  //                 !clicked ? "bg-tertiaryContainer " : "bg-recommendedGreen"
-  //               }  rounded-md border-2 duration-500`}
-  //             >
-  //               <p>{affiliateLink}</p>
-  //             </div>
-  //           </div>
-  //         );
-  //       } else {
-  //         console.log("has no link");
-
-  //         return (
-  //           <PrimaryButton
-  //             onClicked={() => {
-  //               setAffiliateLink(
-  //                 "https://buy.stripe.com/test_cN2g271tn0wGdm8cMP"
-  //               );
-  //             }}
-  //             text="Generate Link"
-  //           />
-  //         );
-  //       }
-  //     } else {
-  //       console.log("has no account id");
-  //       return <AffiliateRequestButton />;
-  //     }
-  //   }
-  // } else {
-  //   return (
-  //     <PrimaryButton
-  //       text="Log In to send request"
-  //       onClicked={() => (window.location.href = "/api/auth/signin")}
-  //     />
-  //   );
-  // }
+  } else {
+    return (
+      <div className="flex-row justify-center ">
+        <PrimaryButton
+          text="Log In to send request"
+          onClicked={() => (window.location.href = "/api/auth/signin")}
+        />
+      </div>
+    );
+  }
 }
 
 export default GetAffiliateLinkButton;

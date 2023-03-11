@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  reactStrictMod: false,
   experimental: {
     appDir: true,
     fontLoaders: [
@@ -9,8 +10,13 @@ const nextConfig = {
   },
 
   images: {
-    domains: ["www.thirdeyetribe.co.uk", "picsum.photos"],
+    domains: ["www.thirdeyetribe.co.uk", "picsum.photos", "files.stripe.com"],
   },
+  future: {
+    webpack5: true, // by default, if you customize webpack config, they switch back to version 4.
+    // Looks like backward compatibility approach.
+  },
+
   env: {
     // STRIPE_SECRET: envConfig.STRIPE_SECRET,
     // STRIPE_PUBLIC: envConfig.STRIPE_PUBLIC,

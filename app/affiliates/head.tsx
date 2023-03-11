@@ -3,7 +3,7 @@ export default function Head() {
     <>
       <title>Affiliate Program</title>
       <meta content="width=device-width, initial-scale=1" name="viewport" />
-      <meta name="description" content="Sacbe Cacao home page" />
+      <meta name="description" content="Affiliate Sign Up Page" />
       <link rel="icon" href="/favicon.ico" />
     </>
   );

@@ -13,7 +13,7 @@ function ToastContainerClient() {
     <div>
       {domLoaded && (
         <ToastContainer
-          theme="dark"
+          // theme="dark"
           toastStyle={{
             backgroundColor: "beige",
             color: "black",

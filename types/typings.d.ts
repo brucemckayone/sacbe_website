@@ -10,9 +10,11 @@ type Flavours = {
 
 type userType = {
   accountId: string;
-  affiliateRequest: affiliateRequestType;
+  affiliateStatus: affiliateStatusType;
   email: string;
-  id: string;
+  uuid: string;
+  affiliateLink: string;
+  chargesEnabled: boolean;
 };
 
 type marketingType = {
@@ -22,11 +24,13 @@ type marketingType = {
   website?: string;
 };
 
-type affiliateRequestType = {
+type affiliateStatusType = {
   refId: string;
   status: "pending" | "active";
 };
 type authContextType = {
   user: userType;
   setUser: (user: userType) => void;
+  isLoading: Boolean;
+  isError: Boolean;
 };

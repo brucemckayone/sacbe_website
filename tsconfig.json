@@ -35,6 +35,6 @@
     "pages/api/auth/[...nextauth].js",
     "pages/api/auth/[...nextauth].js",
     "pages/api/auth/[...nextauth].js"
-  ],
+, "pages/inits/firebase_admin.js"  ],
   "exclude": ["node_modules"]
 }

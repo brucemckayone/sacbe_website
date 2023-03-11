@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
-import { doc, updateDoc } from "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
-/// this endpoint takes in the request body and adds it to a affiliate request document in "affiliate_requests"
+
+// this endpoint takes in the request body and adds it to a affiliate request document in "affiliate_requests"
 // the document referance is saved along with the status of the request to "users" queried with email;
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -17,7 +17,8 @@ export default async function handler(
       const user = req.body.user as userType;
       const marketingDetails = req.body.marketingDetails;
       const message = req.body.message;
-      if (!user.affiliateRequest) {
+
+      if (!user.accountId) {
         res
           .status(200)
           .json(await sendAffiliateRequest(user, marketingDetails, message));
@@ -77,6 +78,7 @@ async function sendAffiliateRequest(
   message: string
 ) {
   const db = firestore();
+
   // save affiliate request
   db.collection("affiliate_requests")
     .add({
@@ -108,14 +110,18 @@ async function sendAffiliateRequest(
                     // add affiliate request a link it to the created document
                     refId: docRef.id,
                     status: "pending",
-                  } as affiliateRequestType,
+                  } as affiliateStatusType,
                 })
               );
             });
           }
           // update created document with affiliate request;
           const cityRef = db.collection("affiliate_requests").doc(docRef.id);
-          cityRef.update({ userId: userId });
+
+          cityRef.update({
+            userId: userId,
+            userRef: db.doc(`users/${userId}`),
+          });
 
           Promise.all(updates);
         });

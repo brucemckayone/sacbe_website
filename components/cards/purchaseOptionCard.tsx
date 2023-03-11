@@ -43,19 +43,6 @@ const PurchaseOptionCard: React.FC<Props> = ({
   return (
     <div
       key={""}
-      // onClick={async () => {
-      //   setIsLoading(true);
-      //   try {
-      //     await createCheckoutSession({
-      //       mode: paymentMode,
-      //       prices: priceIds,
-      //     });
-      //     setIsLoading(false);
-      //   } catch (e) {
-      //     console.log("there was an error connecting to stripe");
-      //     setIsLoading(false);
-      //   }
-      // }}
       className="flex flex-col basis-1/2 justify-between  content-center mx-1 my-5 hover:scale-105 duration-500"
     >
       <SlideInUp animiation="animate-zoom_in_fade">

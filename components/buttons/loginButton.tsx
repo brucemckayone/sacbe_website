@@ -12,7 +12,7 @@ export default function LoginButton() {
 
   const isLoggedIn = data != null; //data?.user?.email != null;
   return (
-    <div className="m-1">
+    <div className="text-end mr-3">
       {isLoggedIn ? (
         <button
           onClick={async () => {
