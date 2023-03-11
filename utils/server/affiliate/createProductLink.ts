@@ -16,7 +16,7 @@ async function createProductLink({
   uuid,
   priceIds,
 }: createPaymentLinkParams) {
-  const createLink = fetchPostJSON(`${homeUrl}/api/affiliate/link`, {
+  const createLink = fetchPostJSON(`/api/affiliate/link`, {
     accountId: accountId,
     uuid: uuid,
     priceIds: priceIds,

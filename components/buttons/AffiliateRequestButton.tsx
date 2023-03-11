@@ -76,7 +76,7 @@ function AffiliateRequestButton() {
             onClicked={() => {
               setLoading(true);
               if (!affiliate?.user?.affiliateStatus?.refId ?? true) {
-                fetchPostJSON(`${homeUrl}/api/affiliate/request`, {
+                fetchPostJSON(`/api/affiliate/request`, {
                   user: {
                     accountId: "",
                     email: affiliate.user.email,
