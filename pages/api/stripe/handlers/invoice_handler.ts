@@ -3,7 +3,8 @@ import { buffer } from "micro";
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
-
+import admin from "firebase-admin";
+import { cert } from "firebase-admin/app";
 import InvoiceHandler from "@/utils/server/webhooks/invoices";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -21,7 +22,15 @@ export default async function handler(
   const invoiceHandler = new InvoiceHandler();
 
   let event: Stripe.Event;
-
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: cert({
+        projectId: envConfig.FIREBASE_PROJECT_ID,
+        clientEmail: envConfig.FIREBASE_CLIENT_EMAIL,
+        privateKey: envConfig.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      }),
+    });
+  }
   try {
     event = stripe.webhooks.constructEvent(
       reqBuffer,

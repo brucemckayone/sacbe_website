@@ -77,7 +77,7 @@ export const envConfig = {
       "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704",
   }),
   STRIPE_ACCOUNT_WEBHOOK: getEnvironmentVariable({
-    environmentVariable: "STRIPE_PAYMENTLINK_WEBHOOK",
+    environmentVariable: "STRIPE_ACCOUNT_WEBHOOK",
     testKey:
       "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704",
   }),
