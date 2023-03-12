@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 function Footer() {
   return (
-    <footer className="p-4 bg-white sm:p-6 dark:bg-gray-900 mt-10 ">
+    <footer className="p-4 bg-white sm:p-6 dark:bg-gray-900 mt-10 bg-primaryContainer">
       <div className="md:flex md:justify-between">
         <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
           <div>

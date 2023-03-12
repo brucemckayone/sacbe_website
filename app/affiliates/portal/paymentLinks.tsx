@@ -10,23 +10,28 @@ import CardLoader from "@/components/loaders/CardLoader";
 import generatePaymentLinks from "@/pages/api/affiliate/generatePaymentLinks";
 import showToast from "@/lib/toast/showToast";
 import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
+import { link } from "fs";
 
 function PaymentLinks() {
   const { user: affiliate, isLoading: affiliateLoading } = useAffiliate();
   const [isGeneratingLinks, setIsGeneratingLinks] = useState(false);
+  const [hasGeneratedPaymentLinks, setHasGeneratedPaymentLinks] =
+    useState(false);
   const [linksState, setLinks] = useState<PaymentLinkListType>();
+
   let {
     isLoading,
     data: fetchedLinks,
     error,
   } = useSWR(affiliate.uuid, getAffiliatePaymentLinks);
+
   useEffect(() => {
     setLinks(fetchedLinks);
-  }, [fetchedLinks]);
+  }, [linksState, fetchedLinks]);
 
-  if (affiliateLoading || isGeneratingLinks) {
+  if (affiliateLoading || isGeneratingLinks || isLoading) {
     return (
-      <div className="flex flex-row justify-around">
+      <div className="flex flex-row justify-around mx-5 md:mx-20">
         <CardLoader />
         <CardLoader />
       </div>
@@ -73,23 +78,41 @@ function PaymentLinks() {
         </div>
       </div>
     );
-  } else if (affiliate.chargesEnabled && !isLoading) {
+  } else if (
+    affiliate.chargesEnabled &&
+    !isLoading &&
+    !isGeneratingLinks &&
+    !affiliateLoading &&
+    !hasGeneratedPaymentLinks
+  ) {
     return (
       <div className="text-center">
         <PrimaryButton
           text="Generate Affiliate Link"
           onClicked={async () => {
-            setIsGeneratingLinks(true);
-            setLinks(
-              await generatePaymentLinks(affiliate.accountId, affiliate.uuid)
-            );
-            setIsGeneratingLinks(false);
+            try {
+              setHasGeneratedPaymentLinks(true);
+              setIsGeneratingLinks(true);
+              const links = await generatePaymentLinks(
+                affiliate.accountId,
+                affiliate.uuid
+              );
+              setLinks(links);
+              setIsGeneratingLinks(false);
+            } catch (e) {
+              setHasGeneratedPaymentLinks(false);
+            }
           }}
         />
       </div>
     );
   }
-  return <></>;
+  return (
+    <div className="flex flex-row justify-around mx-5 md:mx-20">
+      <CardLoader />
+      <CardLoader />
+    </div>
+  );
 }
 
 export default PaymentLinks;

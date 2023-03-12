@@ -8,9 +8,9 @@ import BenifitsOfCacao from "@/components/body/benifits_of_cacao";
 import Card from "@/components/cards/card";
 import Image from "next/image";
 import AboutSacbe from "@/components/body/about_sacbe";
-import Link from "next/link";
+import Footer from "@/components/footer";
 import LinkButton from "@/components/buttons/LinkButton";
-import { text } from "stream/consumers";
+
 import SlideInUp from "@/components/animations/slide_in_up";
 export default function Home() {
   return (
@@ -79,7 +79,7 @@ export default function Home() {
       </div>
 
       <SimpleSlider reviews={reviews} />
-
+      <Footer></Footer>
       <NavMenuBottom />
 
       {/* <Card>

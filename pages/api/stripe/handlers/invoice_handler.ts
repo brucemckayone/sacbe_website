@@ -4,6 +4,7 @@ import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_comp
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 
+import InvoiceHandler from "@/utils/server/webhooks/invoices";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -16,6 +17,9 @@ export default async function handler(
   });
   const sig: string = req.headers["stripe-signature"] as string;
   const reqBuffer = await buffer(req);
+
+  const invoiceHandler = new InvoiceHandler();
+
   let event: Stripe.Event;
 
   try {
@@ -51,10 +55,10 @@ export default async function handler(
         // Then define and call a function to handle the event invoice.marked_uncollectible
         break;
       case "invoice.paid":
-        const invoicePaid = event.data.object;
-        console.log("invoice paid webhook triggered");
         console.log(`handled event type ${event.type}`);
+        invoiceHandler.invoicePaid(event.data.object as Stripe.Invoice);
         // Then define and call a function to handle the event invoice.paid
+
         break;
       case "invoice.payment_action_required":
         const invoicePaymentActionRequired = event.data.object;
