@@ -18,7 +18,7 @@ export default async function handler(
   const sig: string = req.headers["stripe-signature"] as string;
   const reqBuffer = await buffer(req);
   let event: Stripe.Event;
-  console.log("checkout");
+
   if (!admin.apps.length) {
     admin.initializeApp({
       credential: cert({
@@ -30,11 +30,15 @@ export default async function handler(
   }
 
   try {
+    console.log(envConfig.STRIPE_CHECKOUT_WEBHOOK);
+
     event = stripe.webhooks.constructEvent(
       reqBuffer,
       sig,
       envConfig.STRIPE_CHECKOUT_WEBHOOK
     );
+    console.log("passed");
+
     switch (event.type) {
       case "checkout.session.async_payment_failed":
         const checkoutSessionAsyncPaymentFailed = event.data.object;
