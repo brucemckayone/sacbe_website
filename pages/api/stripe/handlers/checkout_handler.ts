@@ -3,7 +3,8 @@ import { buffer } from "micro";
 import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
-import { firestore } from "firebase-admin";
+import admin, { firestore } from "firebase-admin";
+import { cert } from "firebase-admin/app";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -18,6 +19,15 @@ export default async function handler(
   const reqBuffer = await buffer(req);
   let event: Stripe.Event;
   console.log("checkout");
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: cert({
+        projectId: envConfig.FIREBASE_PROJECT_ID,
+        clientEmail: envConfig.FIREBASE_CLIENT_EMAIL,
+        privateKey: envConfig.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      }),
+    });
+  }
 
   try {
     event = stripe.webhooks.constructEvent(
@@ -56,7 +66,7 @@ export default async function handler(
         console.log(`Unhandled event type ${event.type}`);
     }
   } catch (err) {
-    console.log("webhook error failed");
+    console.log(`webhook error faild ${err}`);
     const error = err as any;
     return res.status(401).send(`web hook error: ${error.message}`);
   }
