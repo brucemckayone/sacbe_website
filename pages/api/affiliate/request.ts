@@ -1,9 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
 
-// this endpoint takes in the request body and adds it to a affiliate request document in "affiliate_requests"
-// the document referance is saved along with the status of the request to "users" queried with email;
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -13,6 +10,8 @@ export default async function handler(
   const message = req.body.message;
 
   switch (req.method) {
+    // this endpoint takes in the request body and adds it to a affiliate request document in "affiliate_requests"
+    // the document referance is saved along with the status of the request to "users" queried with email;
     case "POST":
       const user = req.body.user as userType;
       const marketingDetails = req.body.marketingDetails;
@@ -95,7 +94,7 @@ async function sendAffiliateRequest(
         .then((snapshot) => {
           let userId: string = "";
           // if only one user
-          if (snapshot.docs.length == 1) {
+          if (snapshot.docs.length > 0) {
             console.log("only one user in collection");
             //
             snapshot.forEach((doc) => {
