@@ -10,6 +10,7 @@ export default class InvoiceHandler {
     const products = await stripe.products.list({ ids: productIds });
 
     firestore().collection("orders").add({
+      customer: invoice.customer,
       products: products.data,
       shipping: invoice.shipping_details,
     });
