@@ -73,10 +73,10 @@ function AffiliateRequestButton() {
 
         <div className="flex justify-center">
           <PrimaryButton
-            onClicked={() => {
+            onClicked={async () => {
               setLoading(true);
               if (!affiliate?.user?.affiliateStatus?.refId ?? true) {
-                fetchPostJSON(`/api/affiliate/request`, {
+                await fetchPostJSON(`/api/affiliate/request`, {
                   user: {
                     accountId: "",
                     email: affiliate.user.email,
@@ -91,6 +91,7 @@ function AffiliateRequestButton() {
                 ...affiliate.user,
                 affiliateStatus: { status: "pending", refId: "" },
               });
+              location.reload();
             }}
             text="Send Request"
             className="mx-20 my-4"

@@ -28,7 +28,8 @@ export function useAffiliate() {
 
 const fetcher = (path: string) =>
   fetchGetJSON(
-    path //${session.data.user?.email}`
+    path
+    //${session.data.user?.email}`
   );
 
 interface getAffiliateInterface {
