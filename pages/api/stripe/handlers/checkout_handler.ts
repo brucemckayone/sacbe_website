@@ -30,14 +30,11 @@ export default async function handler(
   }
 
   try {
-    console.log(envConfig.STRIPE_CHECKOUT_WEBHOOK);
-
     event = stripe.webhooks.constructEvent(
       reqBuffer,
       sig,
       envConfig.STRIPE_CHECKOUT_WEBHOOK
     );
-    console.log("passed");
 
     switch (event.type) {
       case "checkout.session.async_payment_failed":
