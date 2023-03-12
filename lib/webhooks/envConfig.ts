@@ -55,6 +55,11 @@ export const envConfig = {
   STRIPE_PUBLIC: getEnvironmentVariable({
     environmentVariable: "STRIPE_PUBLIC",
   }),
+  STRIPE_CHECKOUT_WEBHOOK: getEnvironmentVariable({
+    environmentVariable: "STRIPE_INVOICE_WEBHOOK",
+    testKey:
+      "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704",
+  }),
 
   STRIPE_INVOICE_WEBHOOK: getEnvironmentVariable({
     environmentVariable: "STRIPE_INVOICE_WEBHOOK",

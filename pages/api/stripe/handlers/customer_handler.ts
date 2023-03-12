@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 import { buffer } from "micro";
-import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
+
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 

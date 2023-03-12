@@ -1,6 +1,5 @@
 import Stripe from "stripe";
 import { buffer } from "micro";
-import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 
@@ -25,20 +24,27 @@ export default async function handler(
       //"whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704"
       envConfig.STRIPE_PAYMENTLINK_WEBHOOK
     );
+
     switch (event.type) {
-      case "payment_link.created":
-        const paymentLinkCreated = event.data.object;
-        console.log(`handled event type ${event.type}`);
-
+      case "checkout.session.async_payment_failed":
+        const checkoutSessionAsyncPaymentFailed = event.data.object;
+        // Then define and call a function to handle the event checkout.session.async_payment_failed
         break;
-      case "payment_link.updated":
-        const paymentLinkUpdated = event.data.object;
-        console.log(`handled event type ${event.type}`);
-
+      case "checkout.session.async_payment_succeeded":
+        const checkoutSessionAsyncPaymentSucceeded = event.data.object;
+        // Then define and call a function to handle the event checkout.session.async_payment_succeeded
         break;
-
+      case "checkout.session.completed":
+        const checkoutSessionCompleted = event.data.object;
+        // Then define and call a function to handle the event checkout.session.completed
+        break;
+      case "checkout.session.expired":
+        const checkoutSessionExpired = event.data.object;
+        // Then define and call a function to handle the event checkout.session.expired
+        break;
+      // ... handle other event types
       default:
-        console.log(`Unhandled event type ${event.type}`);
+        console.log(`Unhandle`);
     }
     res.status(200).send(`${event.type}: processeed`);
   } catch (err) {

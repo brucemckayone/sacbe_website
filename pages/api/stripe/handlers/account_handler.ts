@@ -24,7 +24,7 @@ export default async function handler(
       sig,
       envConfig.STRIPE_ACCOUNT_WEBHOOK
     );
-    console.log(event.type);
+
     switch (event.type) {
       case "account.updated":
         const accountUpdated = event.data.object;

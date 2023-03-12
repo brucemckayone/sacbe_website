@@ -7,7 +7,18 @@ export default class InvoiceHandler {
       (line) => line.price!.product as string
     );
 
-    const products = await stripe.products.list({ ids: productIds });
+    const products = await stripe.products.list({
+      ids: productIds,
+      limit: 100,
+    });
+    if (products.has_more) {
+      const moreProducts = await stripe.products.list({
+        ids: productIds,
+        limit: 100,
+        starting_after: "100",
+      });
+      products.data.push(...moreProducts.data);
+    }
 
     firestore().collection("orders").add({
       customer: invoice.customer,
