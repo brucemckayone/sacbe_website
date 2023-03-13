@@ -47,16 +47,23 @@ export default async function handler(
         break;
       case "checkout.session.completed":
         // const csCompleted = event.data.object as Stripe.Checkout.Session;
+
         // const checkoutSession = await stripe.checkout.sessions.retrieve(
         //   csCompleted.id,
         //   { expand: ["line_items"] }
         // );
 
-        // firestore().collection("orders").add({
-        //   customer: csCompleted.customer_details,
-        //   shipping: csCompleted.shipping_details,
-        //   line_items: checkoutSession.line_items?.data,
-        // });
+        // if (checkoutSession.mode != "subscription") {
+        //   const checkoutSession = await stripe.checkout.sessions.retrieve(
+        //     csCompleted.id,
+        //     { expand: ["line_items"] }
+        //   );
+        //   firestore().collection("orders").add({
+        //     customer: csCompleted.customer_details,
+        //     shipping: csCompleted.shipping_details,
+        //     line_items: checkoutSession.line_items?.data,
+        //   });
+        // }
         break;
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object;

@@ -33,9 +33,7 @@ export default async function handler(
     allow_promotion_codes: true,
     cancel_url: homeUrl,
     currency: "GBP",
-    // invoice_creation: {
-    //   enabled: true,
-    // },
+
     locale: "auto",
 
     // submit_type: "pay",
@@ -56,6 +54,7 @@ export default async function handler(
       shipping_options: shippingRateIds.map((id) => ({
         shipping_rate: id,
       })),
+      invoice_creation: { enabled: true },
     };
   }
   if (customerEmail) {
