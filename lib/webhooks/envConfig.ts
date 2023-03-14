@@ -128,4 +128,7 @@ export const envConfig = {
   APPLE_CLIENT_SECRET: getEnvironmentVariable({
     environmentVariable: "APPLE_CLIENT_SECRET",
   }),
+  SENDINBLUE_API_KEY: getEnvironmentVariable({
+    environmentVariable: "SENDINBLUE_API_KEY",
+  }),
 };

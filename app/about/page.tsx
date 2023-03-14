@@ -131,6 +131,7 @@ async function About() {
           ></Section>
         </SlideInUp>
       </div>
+
       <Footer />
     </div>
   );

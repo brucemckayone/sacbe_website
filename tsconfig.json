@@ -11,6 +11,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -34,7 +35,9 @@
     "pages/api/stripe_handler.ts",
     "pages/api/auth/[...nextauth].js",
     "pages/api/auth/[...nextauth].js",
-    "pages/api/auth/[...nextauth].js"
-, "pages/inits/firebase_admin.js"  ],
+    "pages/api/auth/[...nextauth].js",
+    "pages/inits/firebase_admin.js",
+    "utils/email/emailBuilder.ts"
+  ],
   "exclude": ["node_modules"]
 }

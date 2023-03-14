@@ -11,7 +11,21 @@ function GetAffiliateLinkButton() {
   const session = useSession();
 
   const affiliate = useAffiliate();
-
+  // return (
+  //   <PrimaryButton
+  //     text="Email"
+  //     onClicked={() => {
+  //       EmailBuilder.sendTransactionalEmail({
+  //         htmlContent: "<h1>Hello there this is a tes</h1>",
+  //         sender: { email: "bruce.r.mckay@outlook.com", name: "bruce mckay" },
+  //         replayTo: { email: "bruce.r.mckay@outlook.com", name: "bruce mckay" },
+  //         params: { bodyMessage: "hellow" },
+  //         subject: "subject",
+  //         to: [{ email: "brucemckayone@gmail.com", name: "bruce" }],
+  //       });
+  //     }}
+  //   />
+  // );
   if (session!.data?.user) {
     // set loading state
     if (affiliate.isLoading) {
@@ -21,8 +35,6 @@ function GetAffiliateLinkButton() {
         </div>
       );
     } else {
-      // if loaded
-
       if (affiliate.user.accountId) {
         const status = affiliate.user.affiliateStatus.status;
         if (status == "active") {
