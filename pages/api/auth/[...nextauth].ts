@@ -2,7 +2,8 @@ import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import AppleProvider from "next-auth/providers/apple";
 import { envConfig } from "@/lib/webhooks/envConfig";
-import { firestore } from "@/lib/firebase/firebase";
+import { firestore as firestoreAdaptorVersion } from "@/lib/firebase/firebase";
+import { firestore } from "firebase-admin";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
 import getOrSaveCustomerIdFromFirebase from "@/lib/stripe/getOrSaveStripeCustomerIdFromFirebase";
@@ -24,7 +25,7 @@ export default NextAuth({
         // Add logic here to look up the user from the credentials supplied
         const { email, password } = credentials!;
 
-        const snapshots = await firestore
+        const snapshots = await firestore()
           .collection("users")
           .where("email", "==", email)
           .get();
@@ -93,6 +94,6 @@ export default NextAuth({
       return true;
     },
   },
-  adapter: FirestoreAdapter(firestore),
+  adapter: FirestoreAdapter(firestoreAdaptorVersion),
   debug: false,
 });
