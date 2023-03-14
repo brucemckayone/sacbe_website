@@ -1,7 +1,7 @@
-import { firestore } from "../firebase/firebase";
+import { firestore } from "firebase-admin";
 import { getOrCreateCustomer } from "@/pages/api/stripe/client/create_customer/_create_customer";
 export default async function getOrSaveCustomerIdFromFirebase(email: string) {
-  firestore
+  firestore()
     .collection("users")
     .where("email", "==", email)
     .get()
