@@ -2,7 +2,7 @@
 
 const nextConfig = {
   reactStrictMod: false,
-
+  // basePath: "https://sacbe-ceremonial-cacao.vercel.app/",
   experimental: {
     appDir: true,
     fontLoaders: [

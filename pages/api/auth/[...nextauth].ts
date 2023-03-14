@@ -9,7 +9,7 @@ import getOrSaveCustomerIdFromFirebase from "@/lib/stripe/getOrSaveStripeCustome
 import bcrypt from "bcrypt";
 
 export default NextAuth({
-  secret: "M12LE48Huqf99H9iWIdlUe8w/1VmLrkcdAVYi0t1AcU=", // envConfig.NEXTAUTH_SECRET,
+  secret: envConfig.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
