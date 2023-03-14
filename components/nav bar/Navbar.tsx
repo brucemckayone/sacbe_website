@@ -14,7 +14,13 @@ export default function Navbar(props: any) {
     <header className="sticky top-0 z-50 flex flex-row  justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-onPrimary">
       <Menu />
       <Link className="flex" href="/">
-        <Image src="/logo.svg" alt="logo" width={300} height={80}></Image>
+        <Image
+          src="/logo.svg"
+          alt="logo"
+          width={300}
+          height={80}
+          priority
+        ></Image>
       </Link>
       <LoginButton></LoginButton>
     </header>
