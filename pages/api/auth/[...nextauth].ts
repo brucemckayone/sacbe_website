@@ -14,6 +14,7 @@ export default NextAuth({
   session: {
     strategy: "jwt",
   },
+  //added cookies because o
   cookies: {
     csrfToken: {
       name: "next-auth.csrf-token",

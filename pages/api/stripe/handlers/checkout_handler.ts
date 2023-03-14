@@ -46,24 +46,25 @@ export default async function handler(
         // Then define and call a function to handle the event checkout.session.async_payment_succeeded
         break;
       case "checkout.session.completed":
-        const csCompleted = event.data.object as Stripe.Checkout.Session;
+        // const csCompleted = event.data.object as Stripe.Checkout.Session;
 
-        const checkoutSession = await stripe.checkout.sessions.retrieve(
-          csCompleted.id,
-          { expand: ["line_items"] }
-        );
+        // const checkoutSession = await stripe.checkout.sessions.retrieve(
+        //   csCompleted.id,
+        //   { expand: ["line_items"] }
+        // );
 
-        if (checkoutSession.mode != "subscription") {
-          const checkoutSession = await stripe.checkout.sessions.retrieve(
-            csCompleted.id,
-            { expand: ["line_items"] }
-          );
-          firestore().collection("orders").add({
-            customer: csCompleted.customer_details,
-            shipping: csCompleted.shipping_details,
-            line_items: checkoutSession.line_items?.data,
-          });
-        }
+        // if (checkoutSession.mode != "subscription") {
+        //   const checkoutSession = await stripe.checkout.sessions.retrieve(
+        //     csCompleted.id,
+        //     { expand: ["line_items"] }
+        //   );
+        //   firestore().collection("orders").add({
+        //     customer: csCompleted.customer_details,
+        //     shipping: csCompleted.shipping_details,
+        //     line_items: checkoutSession.line_items?.data,
+        //   });
+        // }
+        res.status(200).json({});
         break;
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object;
@@ -73,6 +74,7 @@ export default async function handler(
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
+    res.status(200).json({});
   } catch (err) {
     console.log(`webhook error faild ${err}`);
     const error = err as any;

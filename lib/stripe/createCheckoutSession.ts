@@ -56,6 +56,6 @@ export default async function createCheckoutSession({ prices, mode }: params) {
   );
 
   if (checkoutSession.url) {
-    window.open(checkoutSession.url);
+    location.href = checkoutSession.url;
   }
 }
