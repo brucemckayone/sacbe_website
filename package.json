@@ -34,7 +34,7 @@
     "hamburger-react": "^2.5.0",
     "micro": "^10.0.1",
     "next": "13.1.4",
-    "next-auth": ">=4.20.1",
+    "next-auth": "^4.19.2",
     "nodemailer": "^6.9.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
