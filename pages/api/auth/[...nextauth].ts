@@ -9,7 +9,7 @@ import getOrSaveCustomerIdFromFirebase from "@/lib/stripe/getOrSaveStripeCustome
 import bcrypt from "bcrypt";
 
 export default NextAuth({
-  secret: envConfig.NEXTAUTH_SECRET,
+  // secret: envConfig.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
   },
@@ -79,7 +79,7 @@ export default NextAuth({
     brandColor: "#ff932f",
     // buttonText: "Marcellus",
     colorScheme: "light",
-    logo: "https://www.thirdeyetribe.co.uk/wp-content/uploads/2020/08/Third_Eye_Logo_Words_Only_.svg",
+    logo: "/sacbe_logo_icon.png",
   },
   callbacks: {
     async signIn({ account, user }) {
