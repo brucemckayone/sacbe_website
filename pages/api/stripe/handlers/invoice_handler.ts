@@ -6,11 +6,12 @@ import { envConfig } from "@/lib/webhooks/envConfig";
 import admin from "firebase-admin";
 import { cert } from "firebase-admin/app";
 import InvoiceHandler from "@/utils/server/webhooks/invoices";
-import EmailBuilder from "@/utils/email/emailBuilder";
+
 import emailTemplateSender from "@/utils/email/templates/templateSender";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -68,7 +69,7 @@ export default async function handler(
       case "invoice.paid":
         console.log(`handled event type ${event.type}`);
         invoiceHandler.invoicePaid(event.data.object as Stripe.Invoice);
-        new emailTemplateSender().purchaseConfirmation({
+        emailTemplateSender.purchaseConfirmation({
           email: "bruce.r.mckay@outlook.com",
           name: "bruce McKay",
           product: "Sacbe Cacao",

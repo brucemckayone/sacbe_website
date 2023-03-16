@@ -1,13 +1,12 @@
 import EmailBuilder from "../emailBuilder";
 import purchase_confirmation from "./purchase_confirmation";
 export default class emailTemplateSender {
-  private readonly sendTrans = EmailBuilder.sendTransactionalEmail;
-  private readonly salesSender = {
+  private static readonly salesSender = {
     email: "sales@sacbe-ceremonial-cacao.com",
     name: "Sacbe Cacao",
   };
 
-  public purchaseConfirmation({
+  static async purchaseConfirmation({
     name,
     email,
     product,
@@ -16,7 +15,7 @@ export default class emailTemplateSender {
     email: string;
     product: string;
   }) {
-    this.sendTrans({
+    return await EmailBuilder.sendTransactionalEmail({
       sender: this.salesSender,
       replayTo: this.salesSender,
       to: [{ name: name, email: email }],

@@ -1,3 +1,10 @@
+type orderStatusType =
+  | "processing"
+  | "complete"
+  | "failed"
+  | "refunded"
+  | "cancelled";
+
 type Review = {
   title: string;
   review: string;

@@ -5,7 +5,7 @@ const menuItems = [
   },
   {
     text: "Learn",
-    link: "/learn",
+    link: "https://skyeonearth.com/cacaofacilitation",
   },
   {
     text: "About",
@@ -13,7 +13,7 @@ const menuItems = [
   },
   {
     text: "Resources",
-    link: "/resources",
+    link: "https://skyeonearth.com/cacaofacilitation",
   },
   {
     text: "Affiliates",

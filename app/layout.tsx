@@ -25,17 +25,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthProvider>
-      <html
-        className={`${raleway.variable} ${merriweather.variable} bg-surface`}
-      >
+    <html className={`${raleway.variable} ${merriweather.variable} bg-surface`}>
+      <AuthProvider>
         <head />
         <body>
           <Navbar />
           {children}
           <ToastContainerClient />
         </body>
-      </html>
-    </AuthProvider>
+      </AuthProvider>
+    </html>
   );
 }

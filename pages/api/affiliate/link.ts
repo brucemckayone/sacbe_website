@@ -112,6 +112,9 @@ async function createPaymentLink({
       clone.application_fee_percent = 90;
     } else {
       clone.transfer_data!.amount = 300;
+      clone.invoice_creation = {
+        enabled: true,
+      };
     }
     return clone;
   });
