@@ -7,7 +7,7 @@ import admin from "firebase-admin";
 import { cert } from "firebase-admin/app";
 import InvoiceHandler from "@/utils/server/webhooks/invoices";
 
-import emailTemplateSender from "@/utils/email/templates/templateSender";
+// import emailTemplateSender from "@/utils/email/templates/templateSender";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
