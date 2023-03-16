@@ -5,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 
 import adminInit from "@/utils/firebase/admin_init";
+
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -20,7 +21,9 @@ export default async function handler(
   let event: Stripe.Event;
 
   adminInit();
-
+  let status = 200;
+  let message = "unhandeld webhook";
+  let data = {};
   try {
     event = stripe.webhooks.constructEvent(
       reqBuffer,
@@ -56,7 +59,7 @@ export default async function handler(
         //     line_items: checkoutSession.line_items?.data,
         //   });
         // }
-        res.status(200).json({});
+        // res.status(200).send("checkout session complete handled");
         break;
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object;
@@ -66,14 +69,12 @@ export default async function handler(
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
-    res.status(200).json({});
   } catch (err) {
     console.log(`webhook error faild ${err}`);
     const error = err as any;
     return res.status(401).send(`web hook error: ${error.message}`);
   }
-
-  res.status(200).json({ status: 200, message: "success" });
+  res.status(status).json({ status: status, message: message, data: data });
 }
 
 // {

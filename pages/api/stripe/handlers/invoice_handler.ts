@@ -7,6 +7,12 @@ import { envConfig } from "@/lib/webhooks/envConfig";
 import InvoiceHandler from "@/utils/server/webhooks/invoices";
 import adminInit from "@/utils/firebase/admin_init";
 
+import { messaging } from "firebase-admin";
+import {
+  Message,
+  TopicMessage,
+} from "firebase-admin/lib/messaging/messaging-api";
+
 // import emailTemplateSender from "@/utils/email/templates/templateSender";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -26,7 +32,9 @@ export default async function handler(
 
   let event: Stripe.Event;
   adminInit();
-
+  let status = 200;
+  let message = "message not set";
+  let data = {};
   try {
     event = stripe.webhooks.constructEvent(
       reqBuffer,
@@ -61,7 +69,29 @@ export default async function handler(
         break;
       case "invoice.paid":
         console.log(`handled event type ${event.type}`);
-        invoiceHandler.invoicePaid(event.data.object as Stripe.Invoice);
+
+        try {
+          invoiceHandler.invoicePaid(event.data.object as Stripe.Invoice);
+          status = 200;
+          message = "invoice.paid has been handled";
+
+          const FCMid = await messaging().send({
+            topic: "all",
+            notification: {
+              title: "Notification Title",
+              body: "Notification Body ",
+            },
+            data: {
+              Nick: "Mario",
+              Room: "PortugalVSDenmark",
+            },
+          });
+          console.log(FCMid);
+        } catch (e) {
+          status = 400;
+          message = `invoicehandler.invoicePaided() has failed with the following error:${"\n"} ${e}`;
+        }
+
         // emailTemplateSender.purchaseConfirmation({
         //   email: "bruce.r.mckay@outlook.com",
         //   name: "bruce McKay",
@@ -113,10 +143,13 @@ export default async function handler(
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
-    res.status(200).json({ status: 200, message: "success" });
   } catch (err) {
     console.log("webhook error failed");
     const error = err as any;
     return res.status(401).send(`web hook error: ${error.message}`);
   }
+
+  return res
+    .status(status)
+    .json({ status: status, message: message, data: data });
 }
