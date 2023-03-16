@@ -69,11 +69,11 @@ export default async function handler(
       case "invoice.paid":
         console.log(`handled event type ${event.type}`);
         invoiceHandler.invoicePaid(event.data.object as Stripe.Invoice);
-        emailTemplateSender.purchaseConfirmation({
-          email: "bruce.r.mckay@outlook.com",
-          name: "bruce McKay",
-          product: "Sacbe Cacao",
-        });
+        // emailTemplateSender.purchaseConfirmation({
+        //   email: "bruce.r.mckay@outlook.com",
+        //   name: "bruce McKay",
+        //   product: "Sacbe Cacao",
+        // });
         res.status(200).json({
           status: 200,
           message: "Payed Invoice has been handled and sent to databse",
