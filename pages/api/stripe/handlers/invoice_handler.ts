@@ -3,9 +3,9 @@ import { buffer } from "micro";
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
-import admin from "firebase-admin";
-import { cert } from "firebase-admin/app";
+
 import InvoiceHandler from "@/utils/server/webhooks/invoices";
+import adminInit from "@/utils/firebase/admin_init";
 
 // import emailTemplateSender from "@/utils/email/templates/templateSender";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
@@ -25,15 +25,8 @@ export default async function handler(
   const invoiceHandler = new InvoiceHandler();
 
   let event: Stripe.Event;
-  if (!admin.apps.length) {
-    admin.initializeApp({
-      credential: cert({
-        projectId: envConfig.FIREBASE_PROJECT_ID,
-        clientEmail: envConfig.FIREBASE_CLIENT_EMAIL,
-        privateKey: envConfig.FIREBASE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-      }),
-    });
-  }
+  adminInit();
+
   try {
     event = stripe.webhooks.constructEvent(
       reqBuffer,
@@ -74,10 +67,10 @@ export default async function handler(
         //   name: "bruce McKay",
         //   product: "Sacbe Cacao",
         // });
-        res.status(200).json({
-          status: 200,
-          message: "Payed Invoice has been handled and sent to databse",
-        });
+        // res.status(200).json({
+        //   status: 200,
+        //   message: "Payed Invoice has been handled and sent to databse",
+        // });
         // Then define and call a function to handle the event invoice.paid
 
         break;

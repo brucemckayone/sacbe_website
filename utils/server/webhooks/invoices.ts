@@ -24,14 +24,7 @@ export default class InvoiceHandler {
       firestore()
         .collection("orders")
         .add({
-          customer: {
-            id: invoice.customer,
-            name: invoice.customer_name,
-            phone: invoice.customer_phone,
-            email: invoice.customer_email,
-            address: invoice.customer_address,
-            customer_standard_shipping_address: invoice.customer_shipping,
-          },
+          customer: await stripe.customers.retrieve(invoice.customer as string),
           products: products.data.map((product) => {
             return {
               id: product.id,
