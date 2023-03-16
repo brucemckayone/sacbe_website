@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import { firestore } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
-import { Timestamp } from "firebase/firestore";
+
 export default class InvoiceHandler {
   async invoicePaid(invoice: Stripe.Invoice) {
     try {
@@ -44,8 +44,8 @@ export default class InvoiceHandler {
           givenShippingDetails: invoice.shipping_details,
           orderStatus: "processing" as orderStatusType,
           invoiceNumber: invoice.id,
-          dateCreated: Timestamp.fromDate(new Date()),
-          lastUpdated: Timestamp.fromDate(new Date()),
+          dateCreated: new Date(),
+          lastUpdated: new Date(),
         });
     } catch (e) {
       console.log(e);
