@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import { firestore } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
+import { Timestamp } from "firebase/firestore";
 export default class InvoiceHandler {
   async invoicePaid(invoice: Stripe.Invoice) {
     try {
@@ -24,7 +25,14 @@ export default class InvoiceHandler {
       firestore()
         .collection("orders")
         .add({
-          customer: await stripe.customers.retrieve(invoice.customer as string),
+          customer: {
+            id: invoice.customer,
+            name: invoice.customer_name,
+            phone: invoice.customer_phone,
+            email: invoice.customer_email,
+            address: invoice.customer_address,
+            customer_standard_shipping_address: invoice.customer_shipping,
+          },
           products: products.data.map((product) => {
             return {
               id: product.id,
@@ -34,6 +42,10 @@ export default class InvoiceHandler {
             };
           }),
           givenShippingDetails: invoice.shipping_details,
+          orderStatus: "processing" as orderStatusType,
+          invoiceNumber: invoice.id,
+          dateCreated: Timestamp.fromDate(new Date()),
+          lastUpdated: Timestamp.fromDate(new Date()),
         });
     } catch (e) {
       console.log(e);
