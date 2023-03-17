@@ -43,59 +43,59 @@ export default async function handler(
         // Then define and call a function to handle the event checkout.session.async_payment_succeeded
         break;
       case "checkout.session.completed":
-        const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-        const csCompleted = event.data.object as Stripe.Checkout.Session;
+      // const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+      // const csCompleted = event.data.object as Stripe.Checkout.Session;
 
-        const checkoutSession = await stripe.checkout.sessions.retrieve(
-          csCompleted.id,
-          { expand: ["line_items"] }
-        );
+      // const checkoutSession = await stripe.checkout.sessions.retrieve(
+      //   csCompleted.id,
+      //   { expand: ["line_items"] }
+      // );
 
-        const db = firestore();
-        console.log(checkoutSession.invoice);
-        console.log(checkoutSession.shipping_details);
-        let customerid = checkoutSession.customer as string;
+      // const db = firestore();
+      // console.log(checkoutSession.invoice);
+      // console.log(checkoutSession.shipping_details);
+      // let customerid = checkoutSession.customer as string;
 
-        // if (checkoutSession.customer instanceof String) {
-        //   customerid = checkoutSession.customer as string;
-        // } else {
-        //   const cust = checkoutSession.customer as Stripe.Customer;
-        //   customerid = cust.id;
-        // }
+      // // if (checkoutSession.customer instanceof String) {
+      // //   customerid = checkoutSession.customer as string;
+      // // } else {
+      // //   const cust = checkoutSession.customer as Stripe.Customer;
+      // //   customerid = cust.id;
+      // // }
 
-        await stripe.customers.update(customerid, {
-          address: {
-            city: checkoutSession.shipping_details?.address?.city as string,
-            country: checkoutSession.shipping_details?.address
-              ?.country as string,
-            line1: checkoutSession.shipping_details?.address?.line1 as string,
-            line2: checkoutSession.shipping_details?.address?.line2 as string,
-            postal_code: checkoutSession.shipping_details?.address
-              ?.postal_code as string,
-            state: checkoutSession.shipping_details?.address?.state as string,
-          },
-        });
-        await delay(4000);
+      // await stripe.customers.update(customerid, {
+      //   address: {
+      //     city: checkoutSession.shipping_details?.address?.city as string,
+      //     country: checkoutSession.shipping_details?.address
+      //       ?.country as string,
+      //     line1: checkoutSession.shipping_details?.address?.line1 as string,
+      //     line2: checkoutSession.shipping_details?.address?.line2 as string,
+      //     postal_code: checkoutSession.shipping_details?.address
+      //       ?.postal_code as string,
+      //     state: checkoutSession.shipping_details?.address?.state as string,
+      //   },
+      // });
+      // await delay(4000);
 
-        const snapshot = await firestore()
-          .collection("orders")
-          .where("invoiceNumber", "==", checkoutSession.invoice as string)
-          .get();
-        if (snapshot.docs.length == 1) {
-          let order = snapshot.docs[0].data();
-          order = {
-            ...order,
-            shippingDetails: checkoutSession.shipping_details,
-          };
-          db.collection("orders")
-            .doc(snapshot.docs[0].id)
-            .set(
-              { shippingDetails: checkoutSession.shipping_details },
-              { merge: true }
-            );
-        } else {
-          console.log("there was no invoice");
-        }
+      // const snapshot = await firestore()
+      //   .collection("orders")
+      //   .where("invoiceNumber", "==", checkoutSession.invoice as string)
+      //   .get();
+      // if (snapshot.docs.length == 1) {
+      //   let order = snapshot.docs[0].data();
+      //   order = {
+      //     ...order,
+      //     shippingDetails: checkoutSession.shipping_details,
+      //   };
+      //   db.collection("orders")
+      //     .doc(snapshot.docs[0].id)
+      //     .set(
+      //       { shippingDetails: checkoutSession.shipping_details },
+      //       { merge: true }
+      //     );
+      // } else {
+      //   console.log("there was no invoice");
+      // }
 
       // if (checkoutSession.mode != "subscription") {
       //   const checkoutSession = await stripe.checkout.sessions.retrieve(
