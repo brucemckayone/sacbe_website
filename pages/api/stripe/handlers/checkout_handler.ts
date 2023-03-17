@@ -54,18 +54,18 @@ export default async function handler(
         const db = firestore();
         console.log(checkoutSession.invoice);
         console.log(checkoutSession.shipping_details);
-        await stripe.customers.update(checkoutSession.customer as string, {
-          address: {
-            city: checkoutSession.shipping_details?.address?.city as string,
-            country: checkoutSession.shipping_details?.address
-              ?.country as string,
-            line1: checkoutSession.shipping_details?.address?.line1 as string,
-            line2: checkoutSession.shipping_details?.address?.line2 as string,
-            postal_code: checkoutSession.shipping_details?.address
-              ?.postal_code as string,
-            state: checkoutSession.shipping_details?.address?.state as string,
-          },
-        });
+        // await stripe.customers.update(checkoutSession.customer as string, {
+        //   address: {
+        //     city: checkoutSession.shipping_details?.address?.city as string,
+        //     country: checkoutSession.shipping_details?.address
+        //       ?.country as string,
+        //     line1: checkoutSession.shipping_details?.address?.line1 as string,
+        //     line2: checkoutSession.shipping_details?.address?.line2 as string,
+        //     postal_code: checkoutSession.shipping_details?.address
+        //       ?.postal_code as string,
+        //     state: checkoutSession.shipping_details?.address?.state as string,
+        //   },
+        // });
         await delay(10000);
 
         const snapshot = await firestore()
