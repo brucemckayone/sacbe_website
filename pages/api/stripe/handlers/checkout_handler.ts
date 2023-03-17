@@ -52,23 +52,38 @@ export default async function handler(
 
         const db = firestore();
         console.log(checkoutSession.invoice);
+        console.log(checkoutSession.shipping_details);
+        await stripe.customers.update(checkoutSession.customer as string, {
+          address: {
+            city: checkoutSession.shipping_details?.address?.city as string,
+            country: checkoutSession.shipping_details?.address
+              ?.country as string,
+            line1: checkoutSession.shipping_details?.address?.line1 as string,
+            line2: checkoutSession.shipping_details?.address?.line2 as string,
+            postal_code: checkoutSession.shipping_details?.address
+              ?.postal_code as string,
+            state: checkoutSession.shipping_details?.address?.state as string,
+          },
+        });
 
-        const snapshot = await firestore()
-          .collection("orders")
-          .where("invoiceNumber", "==", checkoutSession.invoice as string)
-          .get();
-        if (snapshot.docs.length == 1) {
-          let order = snapshot.docs[0].data();
-          order = {
-            ...order,
-            shippingDetails: checkoutSession.shipping_details,
-          };
-          db.collection("orders")
-            .doc(snapshot.docs[0].id)
-            .update({ shippingDetails: checkoutSession.shipping_details });
-        } else {
-          console.log("there was no invoice");
-        }
+        setTimeout(async () => {
+          const snapshot = await firestore()
+            .collection("orders")
+            .where("invoiceNumber", "==", checkoutSession.invoice as string)
+            .get();
+          if (snapshot.docs.length == 1) {
+            let order = snapshot.docs[0].data();
+            order = {
+              ...order,
+              shippingDetails: checkoutSession.shipping_details,
+            };
+            db.collection("orders")
+              .doc(snapshot.docs[0].id)
+              .update({ shippingDetails: checkoutSession.shipping_details });
+          } else {
+            console.log("there was no invoice");
+          }
+        }, 15000 * 1);
 
       // if (checkoutSession.mode != "subscription") {
       //   const checkoutSession = await stripe.checkout.sessions.retrieve(
