@@ -75,7 +75,7 @@ export default async function handler(
             state: checkoutSession.shipping_details?.address?.state as string,
           },
         });
-        await delay(10000);
+        await delay(4000);
 
         const snapshot = await firestore()
           .collection("orders")
