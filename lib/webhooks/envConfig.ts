@@ -63,7 +63,8 @@ export const envConfig = {
 
   STRIPE_INVOICE_WEBHOOK: getEnvironmentVariable({
     environmentVariable: "STRIPE_INVOICE_WEBHOOK",
-    testKey: "whsec_BDbA2upv9Bc5wYFvQwvqWhV7ezXReG2I",
+    testKey:
+      "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704",
   }),
   STRIPE_CUSTOMER_WEBHOOK: getEnvironmentVariable({
     environmentVariable: "STRIPE_CUSTOMER_WEBHOOK",

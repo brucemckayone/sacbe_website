@@ -149,7 +149,5 @@ export default async function handler(
     return res.status(401).send(`web hook error: ${error.message}`);
   }
 
-  return res
-    .status(status)
-    .json({ status: status, message: message, data: data });
+  res.status(status).json({ status: status, message: message, data: data });
 }
