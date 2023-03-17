@@ -26,10 +26,14 @@ export default async function handler(
     success_url: homeUrl,
     line_items: lineItems,
     mode: mode,
-    billing_address_collection: "auto",
+    billing_address_collection: "required",
     shipping_address_collection: {
       allowed_countries: ["GB"],
     },
+    customer_email:
+      customerEmail != null || undefined
+        ? (customerEmail as string)
+        : undefined,
     allow_promotion_codes: true,
     cancel_url: homeUrl,
     currency: "GBP",
@@ -55,6 +59,10 @@ export default async function handler(
         shipping_rate: id,
       })),
       invoice_creation: { enabled: true },
+    };
+  } else {
+    payload = {
+      ...payload,
     };
   }
   if (customerEmail) {
