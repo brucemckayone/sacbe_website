@@ -22,9 +22,9 @@ export default class InvoiceHandler {
         products.data.push(...moreProducts.data);
       }
 
-      const customer = await stripe.customers.retrieve(
-        invoice.customer as string
-      );
+      // const customer = await stripe.customers.retrieve(
+      //   invoice.customer as string
+      // );
 
       firestore()
         .collection("orders")
