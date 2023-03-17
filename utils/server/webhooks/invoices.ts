@@ -8,7 +8,6 @@ export default class InvoiceHandler {
       const productIds = invoice.lines.data.map(
         (line) => line.price!.product as string
       );
-
       const products = await stripe.products.list({
         ids: productIds,
         limit: 100,
@@ -21,11 +20,6 @@ export default class InvoiceHandler {
         });
         products.data.push(...moreProducts.data);
       }
-
-      // const customer = await stripe.customers.retrieve(
-      //   invoice.customer as string
-      // );
-
       firestore()
         .collection("orders")
         .add({
