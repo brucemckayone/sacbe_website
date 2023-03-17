@@ -5,6 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 
 import adminInit from "@/utils/firebase/admin_init";
+import { firestore } from "firebase-admin";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -41,12 +42,29 @@ export default async function handler(
         // Then define and call a function to handle the event checkout.session.async_payment_succeeded
         break;
       case "checkout.session.completed":
-        // const csCompleted = event.data.object as Stripe.Checkout.Session;
+        const csCompleted = event.data.object as Stripe.Checkout.Session;
 
-        // const checkoutSession = await stripe.checkout.sessions.retrieve(
-        //   csCompleted.id,
-        //   { expand: ["line_items"] }
-        // );
+        const checkoutSession = await stripe.checkout.sessions.retrieve(
+          csCompleted.id,
+          { expand: ["line_items"] }
+        );
+
+        const db = firestore();
+
+        const snapshot = await firestore()
+          .collection("orders")
+          .where("invoiceNumber", "==", checkoutSession.invoice as string)
+          .get();
+
+        let order = snapshot.docs[0].data();
+
+        order = {
+          ...order,
+          shippingDetails: checkoutSession.shipping_details,
+        };
+        db.collection("orders")
+          .doc(snapshot.docs[0].id)
+          .update({ shippingDetails: checkoutSession.shipping_details });
 
         // if (checkoutSession.mode != "subscription") {
         //   const checkoutSession = await stripe.checkout.sessions.retrieve(
@@ -60,7 +78,7 @@ export default async function handler(
         //   });
         // }
         // res.status(200).send("checkout session complete handled");
-        break;
+        firestore().collection("orders").firestore.break;
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object;
         // Then define and call a function to handle the event checkout.session.expired
