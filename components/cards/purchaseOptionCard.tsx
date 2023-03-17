@@ -6,6 +6,14 @@ import PrimaryButton from "../buttons/primaryButton";
 import SlideInUp from "../animations/slide_in_up";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import AffiliateProvider from "../auth/affiliate_auth_context";
+import { Modal, Group, Button } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import { useAffiliate } from "../auth/affiliate_auth_context";
+
+import { getStripeCustomerIdByEmail } from "@/lib/firebase/getStripeCustomerId";
+import getCustomerShipping from "@/lib/stripe/getCustomerShipping";
+import TextInput from "../form/inputs/TextInput";
 interface Props {
   headerText: string;
   listHeaderText: string;
@@ -33,6 +41,13 @@ const PurchaseOptionCard: React.FC<Props> = ({
 }) => {
   const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
+  const [line1, setLine1] = useState("");
+  const [line2, setLine2] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [town, setTown] = useState("");
+
+  const [opened, { open, close }] = useDisclosure(false);
+
   const notify = () =>
     toast(
       <div>
@@ -78,10 +93,29 @@ const PurchaseOptionCard: React.FC<Props> = ({
                     setIsLoading(false);
                   } else {
                     if (session) {
-                      await createCheckoutSession({
-                        mode: paymentMode,
-                        prices: priceIds,
+                      console.log("session subscroption");
+
+                      const customerid = await getStripeCustomerIdByEmail(
+                        session.user?.email
+                      );
+                      console.log(customerid);
+
+                      const shipping = await getCustomerShipping({
+                        id: customerid,
                       });
+                      console.log(shipping);
+                      if (shipping) {
+                        console.log("has shipping");
+
+                        await createCheckoutSession({
+                          mode: paymentMode,
+                          prices: priceIds,
+                        });
+                      } else {
+                        console.log("no shipping");
+
+                        open();
+                      }
                       setIsLoading(false);
                     } else {
                       console.log("not signed in for subscription");
@@ -102,6 +136,60 @@ const PurchaseOptionCard: React.FC<Props> = ({
           </h4>
         </div>
       </SlideInUp>
+      <Modal
+        opened={opened}
+        onClose={close}
+        title="Enter Your shipping details"
+      >
+        <form action="" method="post">
+          <TextInput
+            update={setLine1}
+            value={line1}
+            placeHolder={"Address Line 1"}
+            key={"key one"}
+          />
+          <TextInput
+            update={setLine2}
+            value={line2}
+            placeHolder={"Address Line 2"}
+            key={"key one"}
+          />
+          <TextInput
+            update={setPostCode}
+            value={postCode}
+            placeHolder={"Post Code"}
+            key={"key one"}
+          />
+          <TextInput
+            update={setTown}
+            value={town}
+            placeHolder={"Town/City"}
+            key={"key one"}
+          />
+        </form>
+        <div className="flex flex-row md:flex-row justify-between">
+          <div className="">
+            <PrimaryButton
+              onClicked={() => {
+                close();
+              }}
+              isPrimary={false}
+              text="Cancel"
+              key={"cancel to subscription button"}
+            ></PrimaryButton>
+          </div>
+          <div className="">
+            <PrimaryButton
+              onClicked={() => {
+                //TODO post customer address to customer then send to checkout with
+              }}
+              isPrimary={true}
+              text="Contine"
+              key={"continue to subscription button"}
+            ></PrimaryButton>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };

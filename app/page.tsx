@@ -66,8 +66,12 @@ export default function Home() {
                     space holder & gaurdian of cacao.
                   </p>
                 </SlideInUp>
-                <SlideInUp animiation="animate-slide_in_left_blur">
+                <SlideInUp
+                  key={"sky on eart slidy"}
+                  animiation="animate-slide_in_left_blur"
+                >
                   <LinkButton
+                    key={"sky on on earth thingy"}
                     url="https://skyeonearth.com/cacaofacilitation"
                     isPrimary={false}
                   ></LinkButton>

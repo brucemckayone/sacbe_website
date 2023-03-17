@@ -64,7 +64,7 @@ function Menu() {
                     onClick={() => {
                       toggleDrawer();
                     }}
-                    key={`drawerMenu ${item.link}`}
+                    key={`drawerMenu ${item.link}+${item.text}`}
                     href={item.link}
                   >
                     <h1 className="my-10 hover:text-[white] duration-300">
