@@ -51,6 +51,7 @@ export default async function handler(
         );
 
         const db = firestore();
+        console.log(checkoutSession.invoice);
 
         const snapshot = await firestore()
           .collection("orders")
