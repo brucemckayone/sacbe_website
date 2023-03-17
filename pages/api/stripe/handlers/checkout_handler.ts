@@ -66,19 +66,20 @@ export default async function handler(
           .doc(snapshot.docs[0].id)
           .update({ shippingDetails: checkoutSession.shipping_details });
 
-        // if (checkoutSession.mode != "subscription") {
-        //   const checkoutSession = await stripe.checkout.sessions.retrieve(
-        //     csCompleted.id,
-        //     { expand: ["line_items"] }
-        //   );
-        //   firestore().collection("orders").add({
-        //     customer: csCompleted.customer_details,
-        //     shipping: csCompleted.shipping_details,
-        //     line_items: checkoutSession.line_items?.data,
-        //   });
-        // }
-        // res.status(200).send("checkout session complete handled");
-        firestore().collection("orders").firestore.break;
+      // if (checkoutSession.mode != "subscription") {
+      //   const checkoutSession = await stripe.checkout.sessions.retrieve(
+      //     csCompleted.id,
+      //     { expand: ["line_items"] }
+      //   );
+      //   firestore().collection("orders").add({
+      //     customer: csCompleted.customer_details,
+      //     shipping: csCompleted.shipping_details,
+      //     line_items: checkoutSession.line_items?.data,
+      //   });
+      // }
+      // res.status(200).send("checkout session complete handled");
+      // firestore().collection("orders").firestore.break;
+
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object;
         // Then define and call a function to handle the event checkout.session.expired
@@ -92,7 +93,9 @@ export default async function handler(
     const error = err as any;
     return res.status(401).send(`web hook error: ${error.message}`);
   }
-  res.status(status).json({ status: status, message: message, data: data });
+  return res
+    .status(status)
+    .json({ status: status, message: message, data: data });
 }
 
 // {
