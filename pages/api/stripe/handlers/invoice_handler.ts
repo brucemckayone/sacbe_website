@@ -144,7 +144,7 @@ export default async function handler(
         console.log(`Unhandled event type ${event.type}`);
     }
   } catch (err) {
-    console.log("webhook error failed");
+    console.log(`webhook error failed: ${err}`);
     const error = err as any;
     return res.status(401).send(`web hook error: ${error.message}`);
   }
