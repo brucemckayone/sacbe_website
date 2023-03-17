@@ -24,13 +24,14 @@ export default async function handler(
   adminInit();
   let status = 200;
   let message = "unhandeld webhook";
-  let data = {};
+  let data = { message: "no message" };
   try {
     event = stripe.webhooks.constructEvent(
       reqBuffer,
       sig,
       envConfig.STRIPE_CHECKOUT_WEBHOOK
     );
+    console.log(`handling ${event.type}`);
 
     switch (event.type) {
       case "checkout.session.async_payment_failed":
@@ -55,16 +56,18 @@ export default async function handler(
           .collection("orders")
           .where("invoiceNumber", "==", checkoutSession.invoice as string)
           .get();
-
-        let order = snapshot.docs[0].data();
-
-        order = {
-          ...order,
-          shippingDetails: checkoutSession.shipping_details,
-        };
-        db.collection("orders")
-          .doc(snapshot.docs[0].id)
-          .update({ shippingDetails: checkoutSession.shipping_details });
+        if (snapshot.docs.length == 1) {
+          let order = snapshot.docs[0].data();
+          order = {
+            ...order,
+            shippingDetails: checkoutSession.shipping_details,
+          };
+          db.collection("orders")
+            .doc(snapshot.docs[0].id)
+            .update({ shippingDetails: checkoutSession.shipping_details });
+        } else {
+          console.log("there was no invoice");
+        }
 
       // if (checkoutSession.mode != "subscription") {
       //   const checkoutSession = await stripe.checkout.sessions.retrieve(

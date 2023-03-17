@@ -22,6 +22,10 @@ export default class InvoiceHandler {
         products.data.push(...moreProducts.data);
       }
 
+      const customer = await stripe.customers.retrieve(
+        invoice.customer as string
+      );
+
       firestore()
         .collection("orders")
         .add({
@@ -41,6 +45,7 @@ export default class InvoiceHandler {
               metaData: product.metadata,
             };
           }),
+          shipping: invoice.customer_shipping,
           givenShippingDetails: invoice.shipping_details,
           orderStatus: "processing" as orderStatusType,
           invoiceNumber: invoice.id,
