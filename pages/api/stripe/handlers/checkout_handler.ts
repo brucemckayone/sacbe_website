@@ -43,6 +43,7 @@ export default async function handler(
         // Then define and call a function to handle the event checkout.session.async_payment_succeeded
         break;
       case "checkout.session.completed":
+        const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
         const csCompleted = event.data.object as Stripe.Checkout.Session;
 
         const checkoutSession = await stripe.checkout.sessions.retrieve(
@@ -65,25 +66,24 @@ export default async function handler(
             state: checkoutSession.shipping_details?.address?.state as string,
           },
         });
+        await delay(10000);
 
-        setTimeout(async () => {
-          const snapshot = await firestore()
-            .collection("orders")
-            .where("invoiceNumber", "==", checkoutSession.invoice as string)
-            .get();
-          if (snapshot.docs.length == 1) {
-            let order = snapshot.docs[0].data();
-            order = {
-              ...order,
-              shippingDetails: checkoutSession.shipping_details,
-            };
-            db.collection("orders")
-              .doc(snapshot.docs[0].id)
-              .update({ shippingDetails: checkoutSession.shipping_details });
-          } else {
-            console.log("there was no invoice");
-          }
-        }, 15000 * 1);
+        const snapshot = await firestore()
+          .collection("orders")
+          .where("invoiceNumber", "==", checkoutSession.invoice as string)
+          .get();
+        if (snapshot.docs.length == 1) {
+          let order = snapshot.docs[0].data();
+          order = {
+            ...order,
+            shippingDetails: checkoutSession.shipping_details,
+          };
+          db.collection("orders")
+            .doc(snapshot.docs[0].id)
+            .update({ shippingDetails: checkoutSession.shipping_details });
+        } else {
+          console.log("there was no invoice");
+        }
 
       // if (checkoutSession.mode != "subscription") {
       //   const checkoutSession = await stripe.checkout.sessions.retrieve(
