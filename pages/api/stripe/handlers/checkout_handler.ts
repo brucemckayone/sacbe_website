@@ -89,7 +89,10 @@ export default async function handler(
           };
           db.collection("orders")
             .doc(snapshot.docs[0].id)
-            .update({ shippingDetails: checkoutSession.shipping_details });
+            .set(
+              { shippingDetails: checkoutSession.shipping_details },
+              { merge: true }
+            );
         } else {
           console.log("there was no invoice");
         }
