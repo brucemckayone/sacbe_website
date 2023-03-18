@@ -25,7 +25,7 @@ export default async function handler(
     success_url: homeUrl,
     line_items: lineItems,
     mode: mode,
-    // billing_address_collection: "required",
+    billing_address_collection: "required",
     allow_promotion_codes: true,
     cancel_url: homeUrl,
     currency: "GBP",
@@ -42,7 +42,7 @@ export default async function handler(
       allowed_countries: ["GB"],
     },
 
-    customer: customerId ?? "",
+    customer: customerId ?? undefined,
 
     customer_update: {
       shipping: "auto",
