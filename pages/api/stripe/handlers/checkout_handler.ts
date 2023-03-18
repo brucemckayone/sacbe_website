@@ -6,6 +6,7 @@ import { envConfig } from "@/lib/webhooks/envConfig";
 
 import adminInit from "@/utils/firebase/admin_init";
 import { firestore } from "firebase-admin";
+import updateStripeCustomerShipping from "@/lib/stripe/updateStripeCustomerShipping";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -43,47 +44,42 @@ export default async function handler(
         // Then define and call a function to handle the event checkout.session.async_payment_succeeded
         break;
       case "checkout.session.completed":
-        const csCompleted = event.data.object as Stripe.Checkout.Session;
-        // get expanded customerSession
-        const checkoutSession = await stripe.checkout.sessions.retrieve(
-          csCompleted.id,
-          { expand: ["line_items", "customer"] }
-        );
+      // const csCompleted = event.data.object as Stripe.Checkout.Session;
+      // // get expanded customerSession
+      // const checkoutSession = await stripe.checkout.sessions.retrieve(
+      //   csCompleted.id,
+      //   { expand: ["line_items", "customer"] }
+      // );
 
-        const db = firestore();
+      // const db = firestore();
 
-        db.collection("orderShippingDetails")
-          .doc((checkoutSession.invoice as string) ?? "testing")
-          .set(
-            { shipping_details: checkoutSession.shipping_details },
-            { merge: true }
-          );
+      // db.collection("orderShippingDetails")
+      //   .doc(checkoutSession.invoice as string)
+      //   .set(
+      //     { shipping_details: checkoutSession.shipping_details },
+      //     { merge: true }
+      //   );
 
-        let customer = checkoutSession.customer as Stripe.Customer;
+      // let customer = checkoutSession.customer as Stripe.Customer;
 
-        console.log(checkoutSession);
+      // console.log(checkoutSession);
 
-        if (!customer.shipping) {
-          stripe.customers.update(customer.id, {
-            shipping: {
-              address: {
-                city: checkoutSession.shipping_details?.address?.city as string,
-                country: checkoutSession.shipping_details?.address
-                  ?.country as string,
-                line1: checkoutSession.shipping_details?.address
-                  ?.line1 as string,
-                line2: checkoutSession.shipping_details?.address
-                  ?.line2 as string,
-                postal_code: checkoutSession.shipping_details?.address
-                  ?.postal_code as string,
-                state: checkoutSession.shipping_details?.address
-                  ?.state as string,
-              },
-              name: checkoutSession.shipping_details?.name ?? "",
-              phone: checkoutSession.shipping_details?.phone ?? undefined,
-            },
-          });
-        }
+      // if (!customer.shipping) {
+      //   updateStripeCustomerShipping({
+      //     address: {
+      //       city: checkoutSession.shipping_details?.address?.city as string,
+      //       country: checkoutSession.shipping_details?.address
+      //         ?.country as string,
+      //       line1: checkoutSession.shipping_details?.address?.line1 as string,
+      //       line2: checkoutSession.shipping_details?.address?.line2 as string,
+      //       postal_code: checkoutSession.shipping_details?.address
+      //         ?.postal_code as string,
+      //       state: checkoutSession.shipping_details?.address?.state as string,
+      //     },
+      //     id: customer.id,
+      //     name: customer.name ?? "",
+      //   });
+      // }
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object;
         // Then define and call a function to handle the event checkout.session.expired

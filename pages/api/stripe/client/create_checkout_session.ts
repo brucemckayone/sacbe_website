@@ -1,14 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { envConfig } from "@/lib/webhooks/envConfig";
+
 import homeUrl from "@/lib/constants/urls";
 import Stripe from "stripe";
+import stripe from "@/lib/stripe/stripe";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const stripe = new Stripe(envConfig.STRIPE_SECRET, {
-    apiVersion: "2022-11-15",
-  });
   const prices = req.body.prices as string[];
   const customerEmail = req.body.customerEmail as string | null | undefined;
   const customerId = req.body.customerId as string | null | undefined;
@@ -22,30 +20,36 @@ export default async function handler(
       price: price,
     });
   });
+
   let payload: Stripe.Checkout.SessionCreateParams = {
     success_url: homeUrl,
     line_items: lineItems,
     mode: mode,
     billing_address_collection: "required",
-
-    customer_email:
-      customerEmail != null || undefined
-        ? (customerEmail as string)
-        : undefined,
     allow_promotion_codes: true,
     cancel_url: homeUrl,
     currency: "GBP",
-
     locale: "auto",
 
-    // submit_type: "pay",
+    client_reference_id: customerId as string,
+    // consent_collection: {
+    //   // terms_of_service: "required",
+    // },
+    phone_number_collection: {
+      enabled: true,
+    },
+    shipping_address_collection: {
+      allowed_countries: ["GB"],
+    },
+
+    customer: customerId ?? "",
+
+    customer_update: {
+      shipping: "auto",
+      name: "auto",
+      address: "auto",
+    },
   };
-  if (customerId) {
-    payload = {
-      ...payload,
-      customer: customerId,
-    };
-  }
 
   if (mode == "payment") {
     const shippingRates = await stripe.shippingRates.list({ active: true });
@@ -60,18 +64,11 @@ export default async function handler(
         allowed_countries: ["GB"],
       },
       invoice_creation: { enabled: true },
-    };
-  } else {
-    payload = {
-      ...payload,
-    };
-  }
-  if (customerEmail) {
-    payload = {
-      ...payload,
-      customer_email: customerEmail,
+      phone_number_collection: {
+        enabled: true,
+      },
     };
   }
-  const response = await stripe.checkout.sessions.create(payload);
-  res.status(200).json(response);
+
+  res.status(200).json(await stripe.checkout.sessions.create(payload));
 }
