@@ -9,7 +9,7 @@ export default class InvoiceHandler {
       (line) => line.price!.product as string
     );
     const products = await stripe.products.list({
-      ids: productIds,
+      ids: invoice.lines.data.map((line) => line.price!.product as string),
       limit: 100,
     });
     if (products.has_more) {

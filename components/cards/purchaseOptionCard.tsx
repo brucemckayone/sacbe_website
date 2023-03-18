@@ -14,6 +14,11 @@ import { useAffiliate } from "../auth/affiliate_auth_context";
 import { getStripeCustomerIdByEmail } from "@/lib/firebase/getStripeCustomerId";
 import getCustomerShipping from "@/lib/stripe/getCustomerShipping";
 import TextInput from "../form/inputs/TextInput";
+import updateStripeCustomerShipping from "@/lib/stripe/updateStripeCustomerShipping";
+import Stripe from "stripe";
+import { showNotification } from "@mantine/notifications";
+import showToast from "@/lib/toast/showToast";
+import getOrSaveCustomerIdFromFirebase from "@/lib/stripe/getOrSaveStripeCustomerIdFromFirebase";
 interface Props {
   headerText: string;
   listHeaderText: string;
@@ -45,6 +50,8 @@ const PurchaseOptionCard: React.FC<Props> = ({
   const [line2, setLine2] = useState("");
   const [postCode, setPostCode] = useState("");
   const [town, setTown] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
 
   const [opened, { open, close }] = useDisclosure(false);
 
@@ -95,15 +102,14 @@ const PurchaseOptionCard: React.FC<Props> = ({
                     if (session) {
                       console.log("session subscroption");
 
-                      const customerid = await getStripeCustomerIdByEmail(
+                      const id = await getStripeCustomerIdByEmail(
                         session.user?.email
                       );
-                      console.log(customerid);
 
                       const shipping = await getCustomerShipping({
-                        id: customerid,
+                        id: id,
                       });
-                      console.log(shipping);
+
                       if (shipping) {
                         console.log("has shipping");
 
@@ -146,25 +152,37 @@ const PurchaseOptionCard: React.FC<Props> = ({
             update={setLine1}
             value={line1}
             placeHolder={"Address Line 1"}
-            key={"key one"}
+            key={"line 1"}
           />
           <TextInput
             update={setLine2}
             value={line2}
             placeHolder={"Address Line 2"}
-            key={"key one"}
+            key={"adders line 1"}
           />
           <TextInput
             update={setPostCode}
             value={postCode}
             placeHolder={"Post Code"}
-            key={"key one"}
+            key={"post code"}
           />
           <TextInput
             update={setTown}
             value={town}
             placeHolder={"Town/City"}
-            key={"key one"}
+            key={"town"}
+          />
+          <TextInput
+            update={setState}
+            value={state}
+            placeHolder={"State"}
+            key={"stataea"}
+          />
+          <TextInput
+            update={setCountry}
+            value={country}
+            placeHolder={"country"}
+            key={"country"}
           />
         </form>
         <div className="flex flex-row md:flex-row justify-between">
@@ -180,8 +198,31 @@ const PurchaseOptionCard: React.FC<Props> = ({
           </div>
           <div className="">
             <PrimaryButton
-              onClicked={() => {
+              onClicked={async () => {
                 //TODO post customer address to customer then send to checkout with
+                const address: Stripe.Address = {
+                  city: town,
+                  country: country,
+                  line1: line1,
+                  line2: line2,
+                  postal_code: postCode,
+                  state: state,
+                };
+
+                const shippingAddressPosted =
+                  await updateStripeCustomerShipping({
+                    address: address,
+                    id: await getStripeCustomerIdByEmail(session?.user?.email!),
+                    name: session?.user?.name ?? "Name Not Given",
+                  });
+                if (shippingAddressPosted) {
+                  await createCheckoutSession({
+                    mode: paymentMode,
+                    prices: priceIds,
+                  });
+                } else {
+                  close();
+                }
               }}
               isPrimary={true}
               text="Contine"

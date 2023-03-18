@@ -34,6 +34,7 @@ export default async function getOrSaveCustomerIdFromFirebase(email: string) {
         });
       } else {
         console.error("there is no user in database with this email address");
+        return "";
       }
     });
 }

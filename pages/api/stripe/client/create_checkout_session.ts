@@ -27,9 +27,7 @@ export default async function handler(
     line_items: lineItems,
     mode: mode,
     billing_address_collection: "required",
-    shipping_address_collection: {
-      allowed_countries: ["GB"],
-    },
+
     customer_email:
       customerEmail != null || undefined
         ? (customerEmail as string)
@@ -58,6 +56,9 @@ export default async function handler(
       shipping_options: shippingRateIds.map((id) => ({
         shipping_rate: id,
       })),
+      shipping_address_collection: {
+        allowed_countries: ["GB"],
+      },
       invoice_creation: { enabled: true },
     };
   } else {
