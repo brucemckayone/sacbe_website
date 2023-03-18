@@ -1,8 +1,10 @@
 import Stripe from "stripe";
 import { firestore } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
-
-export default class InvoiceHandler {
+import adminInit from "@/utils/firebase/admin_init";
+adminInit();
+export class InvoiceHandler {
+  private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
     // try {
     const productIds = invoice.lines.data.map(
@@ -20,7 +22,8 @@ export default class InvoiceHandler {
       });
       products.data.push(...moreProducts.data);
     }
-    firestore()
+
+    this.db
       .collection("orders")
       .add({
         customer: {
@@ -45,7 +48,12 @@ export default class InvoiceHandler {
         invoiceNumber: invoice.id,
         dateCreated: new Date(),
         lastUpdated: new Date(),
-      });
+      })
+      .then((res) => {
+        return res.id;
+      })
+      .catch((e) => console.log(e));
+
     // } catch (e) {
     //   console.log(e);
     // }

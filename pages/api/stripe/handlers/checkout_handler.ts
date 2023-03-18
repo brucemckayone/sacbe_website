@@ -44,25 +44,25 @@ export default async function handler(
         // Then define and call a function to handle the event checkout.session.async_payment_succeeded
         break;
       case "checkout.session.completed":
-      // const csCompleted = event.data.object as Stripe.Checkout.Session;
-      // // get expanded customerSession
-      // const checkoutSession = await stripe.checkout.sessions.retrieve(
-      //   csCompleted.id,
-      //   { expand: ["line_items", "customer"] }
-      // );
+        const csCompleted = event.data.object as Stripe.Checkout.Session;
+        // get expanded customerSession
+        const checkoutSession = await stripe.checkout.sessions.retrieve(
+          csCompleted.id,
+          { expand: ["line_items", "customer"] }
+        );
 
-      // const db = firestore();
+        const db = firestore();
 
-      // db.collection("orderShippingDetails")
-      //   .doc(checkoutSession.invoice as string)
-      //   .set(
-      //     { shipping_details: checkoutSession.shipping_details },
-      //     { merge: true }
-      //   );
+        db.collection("orderShippingDetails")
+          .doc(checkoutSession.invoice as string)
+          .set(
+            { shipping_details: checkoutSession.shipping_details },
+            { merge: true }
+          );
 
-      // let customer = checkoutSession.customer as Stripe.Customer;
+        let customer = checkoutSession.customer as Stripe.Customer;
 
-      // console.log(checkoutSession);
+        console.log(checkoutSession);
 
       // if (!customer.shipping) {
       //   updateStripeCustomerShipping({

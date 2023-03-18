@@ -110,7 +110,7 @@ const PurchaseOptionCard: React.FC<Props> = ({
                         id: id,
                       });
 
-                      if (shipping) {
+                      if (!shipping) {
                         console.log("has shipping");
 
                         await createCheckoutSession({

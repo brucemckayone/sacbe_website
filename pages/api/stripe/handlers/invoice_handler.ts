@@ -4,7 +4,7 @@ import { buffer } from "micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 
-import InvoiceHandler from "@/utils/server/webhooks/invoices";
+import { InvoiceHandler } from "@/utils/server/webhooks/invoices";
 import adminInit from "@/utils/firebase/admin_init";
 
 import { messaging } from "firebase-admin";
@@ -31,7 +31,7 @@ export default async function handler(
   const invoiceHandler = new InvoiceHandler();
 
   let event: Stripe.Event;
-  adminInit();
+
   let status = 200;
   let message = "message not set";
   let data = {};
@@ -71,7 +71,7 @@ export default async function handler(
         console.log(`handled event type ${event.type}`);
 
         try {
-          invoiceHandler.invoicePaid(event.data.object as Stripe.Invoice);
+          await invoiceHandler.invoicePaid(event.data.object as Stripe.Invoice);
           status = 200;
           message = "invoice.paid has been handled";
 
