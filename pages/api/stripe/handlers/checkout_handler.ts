@@ -44,34 +44,46 @@ export default async function handler(
         break;
       case "checkout.session.completed":
         const csCompleted = event.data.object as Stripe.Checkout.Session;
-
+        // get expanded customerSession
         const checkoutSession = await stripe.checkout.sessions.retrieve(
           csCompleted.id,
-          { expand: ["line_items"] }
+          { expand: ["line_items", "customer"] }
         );
 
         const db = firestore();
-        console.log(checkoutSession.invoice);
-        console.log(checkoutSession.shipping_details);
-        let customerid = checkoutSession.customer as string;
 
-        stripe.customers.update(customerid, {
-          shipping: {
-            address: {
-              city: checkoutSession.shipping_details?.address?.city as string,
-              country: checkoutSession.shipping_details?.address
-                ?.country as string,
-              line1: checkoutSession.shipping_details?.address?.line1 as string,
-              line2: checkoutSession.shipping_details?.address?.line2 as string,
-              postal_code: checkoutSession.shipping_details?.address
-                ?.postal_code as string,
-              state: checkoutSession.shipping_details?.address?.state as string,
+        db.collection("orderShippingDetails")
+          .doc((checkoutSession.invoice as string) ?? "testing")
+          .set(
+            { shipping_details: checkoutSession.shipping_details },
+            { merge: true }
+          );
+
+        let customer = checkoutSession.customer as Stripe.Customer;
+
+        console.log(checkoutSession);
+
+        if (!customer.shipping) {
+          stripe.customers.update(customer.id, {
+            shipping: {
+              address: {
+                city: checkoutSession.shipping_details?.address?.city as string,
+                country: checkoutSession.shipping_details?.address
+                  ?.country as string,
+                line1: checkoutSession.shipping_details?.address
+                  ?.line1 as string,
+                line2: checkoutSession.shipping_details?.address
+                  ?.line2 as string,
+                postal_code: checkoutSession.shipping_details?.address
+                  ?.postal_code as string,
+                state: checkoutSession.shipping_details?.address
+                  ?.state as string,
+              },
+              name: checkoutSession.shipping_details?.name ?? "",
+              phone: checkoutSession.shipping_details?.phone ?? undefined,
             },
-            name: checkoutSession.shipping_details?.name ?? "",
-            phone: checkoutSession.shipping_details?.phone ?? undefined,
-          },
-        });
-
+          });
+        }
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object;
         // Then define and call a function to handle the event checkout.session.expired
