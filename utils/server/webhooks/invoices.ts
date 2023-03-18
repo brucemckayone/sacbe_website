@@ -4,51 +4,51 @@ import stripe from "@/lib/stripe/stripe";
 
 export default class InvoiceHandler {
   async invoicePaid(invoice: Stripe.Invoice) {
-    try {
-      const productIds = invoice.lines.data.map(
-        (line) => line.price!.product as string
-      );
-      const products = await stripe.products.list({
+    // try {
+    const productIds = invoice.lines.data.map(
+      (line) => line.price!.product as string
+    );
+    const products = await stripe.products.list({
+      ids: productIds,
+      limit: 100,
+    });
+    if (products.has_more) {
+      const moreProducts = await stripe.products.list({
         ids: productIds,
         limit: 100,
+        starting_after: "100",
       });
-      if (products.has_more) {
-        const moreProducts = await stripe.products.list({
-          ids: productIds,
-          limit: 100,
-          starting_after: "100",
-        });
-        products.data.push(...moreProducts.data);
-      }
-      firestore()
-        .collection("orders")
-        .add({
-          customer: {
-            id: invoice.customer,
-            name: invoice.customer_name,
-            phone: invoice.customer_phone,
-            email: invoice.customer_email,
-            address: invoice.customer_address,
-            customer_standard_shipping_address: invoice.customer_shipping,
-          },
-          products: products.data.map((product) => {
-            return {
-              id: product.id,
-              name: product.name,
-              image: product.images[0],
-              metaData: product.metadata,
-            };
-          }),
-          shipping: invoice.customer_shipping,
-          givenShippingDetails: invoice.shipping_details,
-          orderStatus: "processing" as orderStatusType,
-          invoiceNumber: invoice.id,
-          dateCreated: new Date(),
-          lastUpdated: new Date(),
-        });
-    } catch (e) {
-      console.log(e);
+      products.data.push(...moreProducts.data);
     }
+    firestore()
+      .collection("orders")
+      .add({
+        customer: {
+          id: invoice.customer,
+          name: invoice.customer_name,
+          phone: invoice.customer_phone,
+          email: invoice.customer_email,
+          address: invoice.customer_address,
+          customer_standard_shipping_address: invoice.customer_shipping,
+        },
+        products: products.data.map((product) => {
+          return {
+            id: product.id,
+            name: product.name,
+            image: product.images[0],
+            metaData: product.metadata,
+          };
+        }),
+        shipping: invoice.customer_shipping,
+        givenShippingDetails: invoice.shipping_details,
+        orderStatus: "processing" as orderStatusType,
+        invoiceNumber: invoice.id,
+        dateCreated: new Date(),
+        lastUpdated: new Date(),
+      });
+    // } catch (e) {
+    //   console.log(e);
+    // }
   }
 }
 
