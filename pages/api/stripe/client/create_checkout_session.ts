@@ -30,10 +30,9 @@ export default async function handler(
     cancel_url: homeUrl,
     currency: "GBP",
     locale: "auto",
-
-    client_reference_id: customerId as string,
+    client_reference_id: customerId ? customerId : "guest checkout",
     // consent_collection: {
-    //   // terms_of_service: "required",
+    //   terms_of_service: "required",
     // },
     phone_number_collection: {
       enabled: true,
@@ -44,11 +43,13 @@ export default async function handler(
 
     customer: customerId ?? undefined,
 
-    customer_update: {
-      shipping: "auto",
-      name: "auto",
-      address: "auto",
-    },
+    customer_update: customerId
+      ? {
+          shipping: "auto",
+          name: "auto",
+          address: "auto",
+        }
+      : undefined,
   };
 
   if (mode == "payment") {
@@ -64,9 +65,6 @@ export default async function handler(
         allowed_countries: ["GB"],
       },
       invoice_creation: { enabled: true },
-      phone_number_collection: {
-        enabled: true,
-      },
     };
   }
 
