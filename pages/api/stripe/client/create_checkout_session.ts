@@ -8,7 +8,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const prices = req.body.prices as string[];
-  const customerEmail = req.body.customerEmail as string | null | undefined;
+
   const customerId = req.body.customerId as string | null | undefined;
   const mode = req.body.mode as Stripe.Checkout.SessionCreateParams.Mode;
 
