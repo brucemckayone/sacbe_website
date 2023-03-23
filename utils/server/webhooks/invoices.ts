@@ -23,6 +23,18 @@ export class InvoiceHandler {
       products.data.push(...moreProducts.data);
     }
 
+    let productList = {};
+    for (let i = 0; i < products.data.length; i++) {
+      productList = {
+        id: products.data[i].id,
+        name: products.data[i].name,
+        image: products.data[i].images[0],
+        quantity: invoice.lines.data[i].quantity,
+        cost: invoice.lines.data[i].amount,
+        subscriptionId: invoice.lines.data[i].subscription,
+      };
+    }
+
     this.db
       .collection("orders")
       .add({
@@ -34,16 +46,7 @@ export class InvoiceHandler {
           address: invoice.customer_address,
           customer_standard_shipping_address: invoice.customer_shipping,
         },
-        products: products.data.map((product) => {
-          return {
-            id: product.id,
-            name: product.name,
-            image: product.images[0],
-            metaData: product.metadata,
-          };
-        }),
-        shipping: invoice.customer_shipping,
-        givenShippingDetails: invoice.shipping_details,
+        products: productList,
         orderStatus: "processing" as orderStatusType,
         invoiceNumber: invoice.id,
         dateCreated: new Date(),
