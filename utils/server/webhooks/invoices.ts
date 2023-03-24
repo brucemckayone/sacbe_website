@@ -23,9 +23,9 @@ export class InvoiceHandler {
       products.data.push(...moreProducts.data);
     }
 
-    let productList = {};
+    let productList = [];
     for (let i = 0; i < products.data.length; i++) {
-      productList = {
+      const product = {
         id: products.data[i].id,
         name: products.data[i].name,
         image: products.data[i].images[0],
@@ -33,6 +33,7 @@ export class InvoiceHandler {
         cost: invoice.lines.data[i].amount,
         subscriptionId: invoice.lines.data[i].subscription,
       };
+      productList.push(product);
     }
     const data = {
       customer: {
