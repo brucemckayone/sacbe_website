@@ -34,29 +34,32 @@ export class InvoiceHandler {
         subscriptionId: invoice.lines.data[i].subscription,
       };
     }
-
+    const data = {
+      customer: {
+        id: invoice.customer,
+        name: invoice.customer_name,
+        phone: invoice.customer_phone,
+        email: invoice.customer_email,
+        address: invoice.customer_address,
+        customer_standard_shipping_address: invoice.customer_shipping,
+      },
+      products: productList,
+      orderStatus: "processing" as orderStatusType,
+      invoiceNumber: invoice.id,
+      dateCreated: new Date(),
+      lastUpdated: new Date(),
+      amount_paid: invoice.amount_paid,
+      amount_due: invoice.amount_due,
+      shipping_cost: invoice.shipping_cost,
+    };
     this.db
       .collection("orders")
-      .add({
-        customer: {
-          id: invoice.customer,
-          name: invoice.customer_name,
-          phone: invoice.customer_phone,
-          email: invoice.customer_email,
-          address: invoice.customer_address,
-          customer_standard_shipping_address: invoice.customer_shipping,
-        },
-        products: productList,
-        orderStatus: "processing" as orderStatusType,
-        invoiceNumber: invoice.id,
-        dateCreated: new Date(),
-        lastUpdated: new Date(),
-      })
+      .add(data)
       .then((res) => {
         return res.id;
       })
       .catch((e) => console.log(e));
-
+    return data;
     // } catch (e) {
     //   console.log(e);
     // }
