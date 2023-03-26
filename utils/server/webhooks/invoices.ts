@@ -6,14 +6,15 @@ adminInit();
 export class InvoiceHandler {
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
-    // try {
     const productIds = invoice.lines.data.map(
       (line) => line.price!.product as string
     );
+
     const products = await stripe.products.list({
       ids: invoice.lines.data.map((line) => line.price!.product as string),
       limit: 100,
     });
+
     if (products.has_more) {
       const moreProducts = await stripe.products.list({
         ids: productIds,
@@ -35,6 +36,7 @@ export class InvoiceHandler {
       };
       productList.push(product);
     }
+
     const data = {
       customer: {
         id: invoice.customer,
@@ -61,9 +63,6 @@ export class InvoiceHandler {
       })
       .catch((e) => console.log(e));
     return data;
-    // } catch (e) {
-    //   console.log(e);
-    // }
   }
 }
 

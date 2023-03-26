@@ -75,7 +75,7 @@ export default function HeaderInformation() {
           priceString="£25.00/month"
           url="https://buy.stripe.com/test_cN2g271tn0wGdm8cMP"
           bgColor="bg-[black]"
-          priceIds={["price_1McZEzG859ZdyFmp0pxRMveW"]}
+          priceIds={["price_1MpD0AG859ZdyFmp43Kt9Twz"]}
           paymentMode="subscription"
         ></PurchaseOptionCard>
       </div>

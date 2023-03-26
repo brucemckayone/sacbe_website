@@ -100,29 +100,33 @@ const PurchaseOptionCard: React.FC<Props> = ({
                     setIsLoading(false);
                   } else {
                     if (session) {
-                      console.log("session subscroption");
-
-                      const id = await getStripeCustomerIdByEmail(
-                        session.user?.email
-                      );
-
-                      const shipping = await getCustomerShipping({
-                        id: id,
+                      await createCheckoutSession({
+                        mode: paymentMode,
+                        prices: priceIds,
                       });
+                      // console.log("session subscroption");
 
-                      if (!shipping) {
-                        console.log("has shipping");
+                      // const id = await getStripeCustomerIdByEmail(
+                      //   session.user?.email
+                      // );
 
-                        await createCheckoutSession({
-                          mode: paymentMode,
-                          prices: priceIds,
-                        });
-                      } else {
-                        console.log("no shipping");
+                      // const shipping = await getCustomerShipping({
+                      //   id: id,
+                      // });
 
-                        open();
-                      }
-                      setIsLoading(false);
+                      // if (!shipping) {
+                      //   console.log("has shipping");
+
+                      //   await createCheckoutSession({
+                      //     mode: paymentMode,
+                      //     prices: priceIds,
+                      //   });
+                      // } else {
+                      //   console.log("no shipping");
+
+                      //   open();
+                      // }
+                      // setIsLoading(false);
                     } else {
                       console.log("not signed in for subscription");
                       notify();
