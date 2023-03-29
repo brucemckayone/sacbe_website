@@ -107,6 +107,12 @@ export default async function handler(
         // Then define and call a function to handle the event invoice.paid
 
         break;
+      case "invoice.payment_failed":
+        const invoiceFailed = event.data.object as Stripe.Invoice;
+        data = invoiceHandler.invoiceFailed(invoiceFailed);
+        console.log(`handled event type ${event.type}`);
+
+        break;
       case "invoice.payment_action_required":
         const invoicePaymentActionRequired = event.data.object;
         console.log(`handled event type ${event.type}`);

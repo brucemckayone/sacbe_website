@@ -19,6 +19,7 @@ import Stripe from "stripe";
 import { showNotification } from "@mantine/notifications";
 import showToast from "@/lib/toast/showToast";
 import getOrSaveCustomerIdFromFirebase from "@/lib/stripe/getOrSaveStripeCustomerIdFromFirebase";
+import SmallButton from "../buttons/small_button";
 interface Props {
   headerText: string;
   listHeaderText: string;
@@ -100,10 +101,11 @@ const PurchaseOptionCard: React.FC<Props> = ({
                     setIsLoading(false);
                   } else {
                     if (session) {
-                      await createCheckoutSession({
-                        mode: paymentMode,
-                        prices: priceIds,
-                      });
+                      open();
+                      // await createCheckoutSession({
+                      //   mode: paymentMode,
+                      //   prices: priceIds,
+                      // });
                       // console.log("session subscroption");
 
                       // const id = await getStripeCustomerIdByEmail(
@@ -149,47 +151,46 @@ const PurchaseOptionCard: React.FC<Props> = ({
       <Modal
         opened={opened}
         onClose={close}
-        title="Enter Your shipping details"
+        title="Please elect a shipping option"
       >
-        <form action="" method="post">
-          <TextInput
-            update={setLine1}
-            value={line1}
-            placeHolder={"Address Line 1"}
-            key={"line 1"}
+        <p>Subsciptions are shipped out on the 1st of every month</p>
+        <div className="flex flex-row justify-around">
+          <SmallButton
+            isPrimary={false}
+            onClicked={async () => {
+              await createCheckoutSession({
+                prices: [
+                  "price_1MpwvjG859ZdyFmp3xDUTY6Z",
+                  "price_1MqhygG859ZdyFmpZYxxL1aN",
+                ],
+                mode: "subscription",
+                customerId: "",
+              });
+              setIsLoading(false);
+              close();
+            }}
+            text="2nd Class ($3.95)"
           />
-          <TextInput
-            update={setLine2}
-            value={line2}
-            placeHolder={"Address Line 2"}
-            key={"adders line 1"}
+
+          <SmallButton
+            isPrimary={true}
+            onClicked={async () => {
+              await createCheckoutSession({
+                prices: [
+                  "price_1MpxuKG859ZdyFmpoIIVYaVt",
+                  "price_1MqhygG859ZdyFmpZYxxL1aN",
+                ],
+                mode: "subscription",
+                customerId: "",
+              });
+              setIsLoading(false);
+              close();
+            }}
+            text="1st Class (£4.95)"
           />
-          <TextInput
-            update={setPostCode}
-            value={postCode}
-            placeHolder={"Post Code"}
-            key={"post code"}
-          />
-          <TextInput
-            update={setTown}
-            value={town}
-            placeHolder={"Town/City"}
-            key={"town"}
-          />
-          <TextInput
-            update={setState}
-            value={state}
-            placeHolder={"State"}
-            key={"stataea"}
-          />
-          <TextInput
-            update={setCountry}
-            value={country}
-            placeHolder={"country"}
-            key={"country"}
-          />
-        </form>
-        <div className="flex flex-row md:flex-row justify-between">
+        </div>
+
+        {/* <div className="flex flex-row md:flex-row justify-between">
           <div className="">
             <PrimaryButton
               onClicked={() => {
@@ -233,7 +234,7 @@ const PurchaseOptionCard: React.FC<Props> = ({
               key={"continue to subscription button"}
             ></PrimaryButton>
           </div>
-        </div>
+        </div> */}
       </Modal>
     </div>
   );

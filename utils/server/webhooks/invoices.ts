@@ -6,6 +6,16 @@ adminInit();
 export class InvoiceHandler {
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
+    return this.saveData(await this.parseInvoiceForFirebase(invoice));
+  }
+  async invoiceFailed(invoice: Stripe.Invoice) {
+    const data = await this.parseInvoiceForFirebase(invoice);
+    data.orderStatus = "failed";
+    this.saveData(data);
+    return data;
+  }
+
+  private async parseInvoiceForFirebase(invoice: Stripe.Invoice) {
     const productIds = invoice.lines.data.map(
       (line) => line.price!.product as string
     );
@@ -37,7 +47,7 @@ export class InvoiceHandler {
       productList.push(product);
     }
 
-    const data = {
+    return {
       customer: {
         id: invoice.customer,
         name: invoice.customer_name,
@@ -54,7 +64,11 @@ export class InvoiceHandler {
       amount_paid: invoice.amount_paid,
       amount_due: invoice.amount_due,
       shipping_cost: invoice.shipping_cost,
+      charge: invoice.charge,
     };
+  }
+
+  async saveData(data: any) {
     this.db
       .collection("orders")
       .add(data)
