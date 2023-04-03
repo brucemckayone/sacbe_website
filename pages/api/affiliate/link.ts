@@ -110,6 +110,13 @@ async function createPaymentLink({
     clone.line_items[0].price = price.id;
     if (price.type == "recurring") {
       clone.application_fee_percent = 90;
+      clone.line_items = [
+        ...clone.line_items,
+        {
+          price: "price_1MpwvjG859ZdyFmp3xDUTY6Z",
+          quantity: 1,
+        },
+      ];
     } else {
       clone.transfer_data!.amount = 300;
       clone.invoice_creation = {
@@ -122,7 +129,7 @@ async function createPaymentLink({
   const createdLinks = await Promise.all(
     linkParams.map((params) => stripe.paymentLinks.create(params))
   );
-  console.log("return");
+
   let data = [] as any;
   for (var i = 0; i < prices.length; i++) {
     data.push({
