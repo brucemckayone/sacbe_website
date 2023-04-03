@@ -7,6 +7,7 @@ export default async function handler(
 ) {
   if (req.method == "POST") {
     const charges = req.body.charges as string[];
+    console.log(charges);
     let data = {
       failed: [] as string[],
       successed: [] as string[],
