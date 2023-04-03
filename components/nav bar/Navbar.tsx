@@ -6,7 +6,7 @@ import Link from "next/link";
 import PrimaryButton from "../buttons/primaryButton";
 import { useState } from "react";
 import LoginButton from "../buttons/loginButton";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import menuItems from "@/lib/constants/menu";
 
 export default function Navbar(props: any) {
@@ -28,6 +28,7 @@ export default function Navbar(props: any) {
 }
 
 function Menu() {
+  const session = useSession();
   const [isDrawerOpen, setDrawerOpenState] = useState(false);
   function toggleDrawer() {
     setDrawerOpenState(!isDrawerOpen);
@@ -73,12 +74,15 @@ function Menu() {
                   </Link>
                 );
               })}
-              <PrimaryButton
-                text="log Out"
-                onClicked={() => {
-                  signOut();
-                }}
-              ></PrimaryButton>
+
+              {session.data?.user?.email != null && (
+                <PrimaryButton
+                  text="log Out"
+                  onClicked={() => {
+                    signOut();
+                  }}
+                />
+              )}
             </div>
           </div>
           <div

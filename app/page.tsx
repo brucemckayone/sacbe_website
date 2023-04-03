@@ -81,9 +81,8 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       <SimpleSlider reviews={reviews} />
-      <Footer></Footer>
+      <Footer />
       <NavMenuBottom />
 
       {/* <Card>
