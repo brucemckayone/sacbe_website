@@ -102,38 +102,12 @@ const PurchaseOptionCard: React.FC<Props> = ({
                   } else {
                     if (session) {
                       open();
-                      // await createCheckoutSession({
-                      //   mode: paymentMode,
-                      //   prices: priceIds,
-                      // });
-                      // console.log("session subscroption");
-
-                      // const id = await getStripeCustomerIdByEmail(
-                      //   session.user?.email
-                      // );
-
-                      // const shipping = await getCustomerShipping({
-                      //   id: id,
-                      // });
-
-                      // if (!shipping) {
-                      //   console.log("has shipping");
-
-                      //   await createCheckoutSession({
-                      //     mode: paymentMode,
-                      //     prices: priceIds,
-                      //   });
-                      // } else {
-                      //   console.log("no shipping");
-
-                      //   open();
-                      // }
-                      // setIsLoading(false);
                     } else {
-                      console.log("not signed in for subscription");
-                      notify();
-                      setIsLoading(false);
-                      window.location.href = "/api/auth/signin";
+                      open();
+                      // console.log("not signed in for subscription");
+                      // notify();
+                      // setIsLoading(false);
+                      // window.location.href = "/api/auth/signin";
                     }
                   }
                 } catch (e) {

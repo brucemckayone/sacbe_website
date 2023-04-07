@@ -6,12 +6,13 @@ adminInit();
 export class InvoiceHandler {
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
-    return this.saveData(await this.parseInvoiceForFirebase(invoice));
+    const data = this.parseInvoiceForFirebase(invoice);
+    return this.saveData(data, invoice);
   }
   async invoiceFailed(invoice: Stripe.Invoice) {
     const data = await this.parseInvoiceForFirebase(invoice);
     data.orderStatus = "failed";
-    this.saveData(data);
+    this.saveData(data, invoice);
     return data;
   }
 
@@ -68,12 +69,13 @@ export class InvoiceHandler {
     };
   }
 
-  async saveData(data: any) {
+  async saveData(data: any, invoice: Stripe.Invoice) {
     this.db
       .collection("orders")
-      .add(data)
+      .doc(invoice.id)
+      .set(data)
       .then((res) => {
-        return res.id;
+        return res;
       })
       .catch((e) => console.log(e));
     return data;
