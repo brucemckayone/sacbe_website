@@ -1,13 +1,23 @@
 import Stripe from "stripe";
-import { firestore } from "firebase-admin";
+import { firestore, messaging } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
 import adminInit from "@/utils/firebase/admin_init";
 adminInit();
 export class InvoiceHandler {
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
-    const data = this.parseInvoiceForFirebase(invoice);
-    return this.saveData(data, invoice);
+    let data = await this.parseInvoiceForFirebase(invoice);
+    this.saveData(data, invoice);
+
+    messaging().send({
+      topic: "all",
+      notification: {
+        title: "New Order £" + data.amount_paid + data.products[0].name,
+        body: data.customer.name! + " has ordered",
+        imageUrl: data.products[0].image,
+      },
+    });
+    return data;
   }
   async invoiceFailed(invoice: Stripe.Invoice) {
     const data = await this.parseInvoiceForFirebase(invoice);
@@ -69,7 +79,7 @@ export class InvoiceHandler {
     };
   }
 
-  async saveData(data: any, invoice: Stripe.Invoice) {
+  saveData(data: any, invoice: Stripe.Invoice) {
     this.db
       .collection("orders")
       .doc(invoice.id)

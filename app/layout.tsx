@@ -1,7 +1,7 @@
 import Navbar from "../components/nav bar/Navbar";
 import "../app/globals.css";
 import AuthProvider from "@/components/providers/SessionProvider";
-import Footer from "@/components/footer";
+
 import {
   Marcellus as displayFont,
   Marcellus as bodyFont,

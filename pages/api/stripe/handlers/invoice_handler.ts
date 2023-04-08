@@ -77,20 +77,8 @@ export default async function handler(
 
           status = 200;
           message = "invoice.paid has been handled";
-
-          const FCMid = await messaging().send({
-            topic: "all",
-            notification: {
-              title: "Notification Title",
-              body: "Notification Body ",
-            },
-            data: {
-              Nick: "Mario",
-              Room: "PortugalVSDenmark",
-            },
-          });
-          console.log(FCMid);
         } catch (e) {
+          console.log(e);
           status = 400;
           message = `invoicehandler.invoicePaided() has failed with the following error:${"\n"} ${e}`;
         }
