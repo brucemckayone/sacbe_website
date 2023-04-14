@@ -21,6 +21,7 @@ export default async function handler(
         klarna_payments: { requested: true },
       },
     });
+    console.log(email);
 
     const snapshot = await firestore()
       .collection("users")
@@ -39,7 +40,10 @@ export default async function handler(
         .then(() => {
           console.log("firebase saved account id");
         });
+    } else {
+      console.log("NUMBER OF ACCOUNTS " + snapshot.docs.length);
     }
+
     res.status(200).json(account);
   } else if (req.method == "GET") {
     const accountId = req.query.accountId;
