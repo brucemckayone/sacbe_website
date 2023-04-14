@@ -5,7 +5,7 @@ async function createStripeAccount(email: string) {
   const account: Stripe.Account = await fetchPostJSON(
     "/api/stripe/affiliate/account",
     {
-      email: "brucemckayone@gmail.com",
+      email: email,
     }
   );
   return account;

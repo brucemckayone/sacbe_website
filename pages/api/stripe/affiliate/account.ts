@@ -46,7 +46,6 @@ export default async function handler(
     } else {
       console.log("NUMBER OF ACCOUNTS " + snapshot.docs.length);
     }
-
     res.status(200).json(account);
   } else if (req.method == "GET") {
     const accountId = req.query.accountId;
