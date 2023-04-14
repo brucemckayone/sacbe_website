@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { sendSignInLinkToEmail } from "firebase/auth";
 import { auth } from "@/lib/firebase/firebase";
+import homeUrl from "@/lib/constants/urls";
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +15,7 @@ export default async function handler(
       console.log(email);
       try {
         sendSignInLinkToEmail(auth, email, {
-          url: "http://localhost:3000/finish-signin",
+          url: `${homeUrl}/finish-signin`,
           // This must be true.
           handleCodeInApp: true,
         })
