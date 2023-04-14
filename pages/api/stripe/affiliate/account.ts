@@ -33,10 +33,13 @@ export default async function handler(
       firestore()
         .collection("users")
         .doc(snapshot.docs[0].id)
-        .update({
-          accountId: account.id,
-          chargesEnabled: account.charges_enabled,
-        })
+        .set(
+          {
+            accountId: account.id,
+            chargesEnabled: account.charges_enabled,
+          },
+          { mergeFields: true }
+        )
         .then(() => {
           console.log("firebase saved account id");
         });
