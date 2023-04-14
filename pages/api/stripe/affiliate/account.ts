@@ -38,7 +38,7 @@ export default async function handler(
             accountId: account.id,
             chargesEnabled: account.charges_enabled,
           },
-          { mergeFields: true }
+          { merge: true }
         )
         .then(() => {
           console.log("firebase saved account id");
