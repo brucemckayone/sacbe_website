@@ -42,7 +42,10 @@ function PaymentLinks() {
     return (
       <div>
         <h4>My Affiliate Links</h4>
-        <p>Copy these links and use them to sell sacbe</p>
+        <p>
+          Copy these links and use them to sell sacbe. You will recieve payments
+          everytime a subscription is renewed!
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-1 mx-2 my-2">
           {links?.map((link) => {
             return (

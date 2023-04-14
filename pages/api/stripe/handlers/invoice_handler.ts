@@ -74,7 +74,6 @@ export default async function handler(
           data = await invoiceHandler.invoicePaid(
             event.data.object as Stripe.Invoice
           );
-
           status = 200;
           message = "invoice.paid has been handled";
         } catch (e) {

@@ -127,7 +127,14 @@ const PurchaseOptionCard: React.FC<Props> = ({
         onClose={close}
         title="Please elect a shipping option"
       >
+        <p>
+          We recommend you sign in. So that you can manage your subscription
+        </p>
+        <Link href={"/api/auth/signin"}>
+          <SmallButton text="Sign In" onClicked={() => {}} />
+        </Link>
         <p>Subsciptions are shipped out on the 1st of every month</p>
+
         <div className="flex flex-row justify-around">
           <SmallButton
             isPrimary={false}
@@ -163,52 +170,6 @@ const PurchaseOptionCard: React.FC<Props> = ({
             text="1st Class (£4.95)"
           />
         </div>
-
-        {/* <div className="flex flex-row md:flex-row justify-between">
-          <div className="">
-            <PrimaryButton
-              onClicked={() => {
-                close();
-              }}
-              isPrimary={false}
-              text="Cancel"
-              key={"cancel to subscription button"}
-            ></PrimaryButton>
-          </div>
-          <div className="">
-            <PrimaryButton
-              onClicked={async () => {
-                //TODO post customer address to customer then send to checkout with
-                const address: Stripe.Address = {
-                  city: town,
-                  country: country,
-                  line1: line1,
-                  line2: line2,
-                  postal_code: postCode,
-                  state: state,
-                };
-
-                const shippingAddressPosted =
-                  await updateStripeCustomerShipping({
-                    address: address,
-                    id: await getStripeCustomerIdByEmail(session?.user?.email!),
-                    name: session?.user?.name ?? "Name Not Given",
-                  });
-                if (shippingAddressPosted) {
-                  await createCheckoutSession({
-                    mode: paymentMode,
-                    prices: priceIds,
-                  });
-                } else {
-                  close();
-                }
-              }}
-              isPrimary={true}
-              text="Contine"
-              key={"continue to subscription button"}
-            ></PrimaryButton>
-          </div>
-        </div> */}
       </Modal>
     </div>
   );

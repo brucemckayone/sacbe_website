@@ -1,4 +1,4 @@
-import { firestore } from "../firebase/firebase";
+import { firestore } from "firebase-admin";
 import Stripe from "stripe";
 import { envConfig } from "./envConfig";
 
@@ -26,7 +26,7 @@ const checkoutSessionCompleteHandler = async (params: Stripe.Event) => {
 
   console.log(dbProducts);
   // purchases
-  firestore.collection("purchases").add({
+  firestore().collection("purchases").add({
     lineItems: dbProducts,
     // purchaseDate: firestore.Timestamp,
     status: "processing",

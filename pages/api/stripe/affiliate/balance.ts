@@ -17,6 +17,8 @@ export default async function handler(
           }
         );
         res.status(200).json(balance);
+      } else {
+        res.status(200).json({ message: "account id no provided" });
       }
     } catch (e) {
       res.status(200).json(e);
