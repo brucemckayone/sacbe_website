@@ -1,19 +1,17 @@
 "use client";
 import { auth } from "@/lib/firebase/firebase";
 import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
-import { Divide } from "hamburger-react";
-import { getCsrfToken, getProviders, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
-import TextInput from "@/components/form/inputs/TextInput";
 import { fetchGetJSON } from "@/utils/stripe/fetchPostJson";
 import homeUrl from "@/lib/constants/urls";
 import PrimaryButton from "@/components/buttons/primaryButton";
+import SlideInUp from "@/components/animations/slide_in_up";
+import MagicLinkForm from "@/components/form/MagicLinkForm";
 function finishSignin() {
-  // Confirm the link is a sign-in with email link.
-  // Confirm the link is a sign-in with email link.
   const [isValidLink, setIsValidLink] = useState(false);
-  const [emailProviders, setProvider] = useState(<div></div>);
   const [crfToken, setCrfToken] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (isSignInWithEmailLink(auth, window.location.href)) {
@@ -21,11 +19,13 @@ function finishSignin() {
       if (!email) {
         email = window.prompt("Please provide your email for confirmation");
       }
+      setEmail(email!);
       signInWithEmailLink(auth, email!, window.location.href)
         .then(async (result) => {
           setIsValidLink(true);
           const res = await fetchGetJSON("/api/auth/csrf");
-          handleSignin(email!, res["csrfToken"]);
+          setCrfToken(res["csrfToken"]);
+          handleSignin(email!, crfToken);
         })
         .catch(async (error) => {
           setIsValidLink(false);
@@ -34,16 +34,39 @@ function finishSignin() {
   }, []);
   if (isValidLink) {
     return (
-      <div>
-        <PrimaryButton
-          onClicked={() => {}}
-          text="Confirm Sign in"
-          key={"confirm signin button"}
-        />
+      <div className="flex flex-col items-center justify-around h-screen bg-gradient-to-br from-sacbeBrandColor to-primaryContainer">
+        <SlideInUp animiation="animate-zoom_in_fade">
+          <div className=" bg-surfaceVarient px-20 py-24 mb-40 rounded-xl border-2 shadow-2xl">
+            <div className="text-center border-b-2 pb-6 mb-3">
+              <PrimaryButton
+                onClicked={() => {
+                  handleSignin(email!, crfToken);
+                }}
+                text="Validate Link"
+              />
+            </div>
+          </div>
+        </SlideInUp>
       </div>
     );
   } else {
-    return <div>Looks like there was an issue with </div>;
+    return (
+      <div className="flex flex-col items-center justify-around h-screen bg-gradient-to-br from-sacbeBrandColor to-primaryContainer">
+        <SlideInUp animiation="animate-zoom_in_fade">
+          <div className=" bg-surfaceVarient px-20 py-24 mb-40 rounded-xl border-2 shadow-2xl">
+            <div className="text-center border-b-2 pb-6 mb-3">
+              <MagicLinkForm />
+              <p className="w-96">
+                It looks like there was a problem with your link. Its possible
+                you waited too link, or there was a problem with the link
+                generation. OR your are a hacker!!! please try again, unless
+                your a hacker!
+              </p>
+            </div>
+          </div>
+        </SlideInUp>
+      </div>
+    );
   }
 }
 
