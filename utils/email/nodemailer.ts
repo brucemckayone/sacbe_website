@@ -29,7 +29,7 @@ type transactionalEmailParamType = {
 };
 
 export default class emailSender {
-  send({
+  async send({
     subject,
     sender,
     replayTo,
@@ -37,7 +37,7 @@ export default class emailSender {
     htmlContent,
     bodyMessage,
   }: transactionalEmailParamType) {
-    transport.sendMail({
+    return await transport.sendMail({
       from: sender,
       replayTo: replayTo,
       to: to,

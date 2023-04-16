@@ -6,10 +6,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const method = req.method as requestMethodType;
+  const sender = new emailSender();
   switch (method) {
     case "POST":
       let { bodyMessage, to, subject, htmlContent } = req.body;
-      new emailSender().send({
+      const response = await sender.send({
         bodyMessage: bodyMessage,
         htmlContent: purchase_confirmation({
           affiliateProgramUrl: "",
@@ -25,6 +26,6 @@ export default async function handler(
         subject: subject,
         to: to,
       });
-      return res.status(200).json({});
+      return res.status(200).json(response.messageId);
   }
 }

@@ -27,6 +27,7 @@ export class InvoiceHandler {
       orderNumber: data.invoiceNumber,
       orderNumberUrl: invoice.hosted_invoice_url!,
       productName: data.products[0].name,
+      recipeUrl: invoice.hosted_invoice_url!,
     });
 
     return data;

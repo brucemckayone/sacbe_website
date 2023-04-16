@@ -26,12 +26,14 @@ class InvoiceSender {
     productName,
     orderNumber,
     orderNumberUrl,
+    recipeUrl,
   }: {
     name: string;
     email: string;
     productName: string;
     orderNumber: string;
     orderNumberUrl: string;
+    recipeUrl: string;
   }) {
     this.send({
       bodyMessage: `Your ${productName} order has been paid successful`,
@@ -43,7 +45,7 @@ class InvoiceSender {
 
         orderNumberUrl: orderNumberUrl,
         orderNumer: orderNumber,
-        recipesUrl: "",
+        recipesUrl: recipeUrl,
       }),
       subject: `Order Confirmation for ${productName}`,
       to: email,
