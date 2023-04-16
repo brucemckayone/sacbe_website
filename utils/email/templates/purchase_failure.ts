@@ -1,5 +1,5 @@
-function purchase_confirmation({}) {
+function purchase_failure({}) {
   return ``;
 }
 
-export default purchase_confirmation;
+export default purchase_failure;

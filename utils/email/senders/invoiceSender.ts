@@ -9,7 +9,7 @@ interface SendInterface {
   bodyMessage: string;
 }
 class InvoiceSender {
-  send({ htmlContent, subject, to, toName, bodyMessage }: SendInterface) {
+  send({ htmlContent, subject, to, bodyMessage }: SendInterface) {
     new emailSender().send({
       bodyMessage: bodyMessage,
       htmlContent: htmlContent,
