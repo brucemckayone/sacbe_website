@@ -2,8 +2,11 @@ import Stripe from "stripe";
 import { firestore, messaging } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
 import adminInit from "@/utils/firebase/admin_init";
+import InvoiceSender from "@/utils/email/senders/invoiceSender";
 adminInit();
+
 export class InvoiceHandler {
+  email = new InvoiceSender();
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
     let data = await this.parseInvoiceForFirebase(invoice);
@@ -12,16 +15,35 @@ export class InvoiceHandler {
     messaging().send({
       topic: "all",
       notification: {
-        title: "New Order £" + data.amount_paid + data.products[0].name,
+        title: "New Order £" + data.amount_paid / 100 + data.products[0].name,
         body: data.customer.name! + " has ordered",
         imageUrl: data.products[0].image,
       },
     });
+
+    this.email.success({
+      email: invoice.customer_email!,
+      name: invoice.customer_name ?? "",
+      orderNumber: data.invoiceNumber,
+      orderNumberUrl: invoice.hosted_invoice_url!,
+      productName: data.products[0].name,
+    });
+
     return data;
   }
   async invoiceFailed(invoice: Stripe.Invoice) {
     const data = await this.parseInvoiceForFirebase(invoice);
     data.orderStatus = "failed";
+    messaging().send({
+      topic: "all",
+      notification: {
+        title:
+          "Payment Failed £" + data.amount_paid / 100 + data.products[0].name,
+        body: data.customer.name! + " payment has failed",
+        imageUrl: data.products[0].image,
+      },
+    });
+
     this.saveData(data, invoice);
     return data;
   }
