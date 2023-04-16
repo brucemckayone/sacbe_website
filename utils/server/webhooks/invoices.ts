@@ -39,7 +39,10 @@ export class InvoiceHandler {
       topic: "all",
       notification: {
         title:
-          "Payment Failed £" + data.amount_paid / 100 + data.products[0].name,
+          "Payment Failed £" +
+          data.amount_paid / 100 +
+          " " +
+          data.products[0].name,
         body: data.customer.name! + " payment has failed",
         imageUrl: data.products[0].image,
       },
