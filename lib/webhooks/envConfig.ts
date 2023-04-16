@@ -128,7 +128,16 @@ export const envConfig = {
   APPLE_CLIENT_SECRET: getEnvironmentVariable({
     environmentVariable: "APPLE_CLIENT_SECRET",
   }),
-  SENDINBLUE_API_KEY: getEnvironmentVariable({
-    environmentVariable: "SENDINBLUE_API_KEY",
+  // SENDINBLUE_API_KEY: getEnvironmentVariable({
+  //   environmentVariable: "SENDINBLUE_API_KEY",
+  // }),
+  AWS_SECRET_ACCESS_KEY: getEnvironmentVariable({
+    environmentVariable: "AWS_SECRET_ACCESS_KEY",
+  }),
+  AWS_ACCESS_KEY_ID: getEnvironmentVariable({
+    environmentVariable: "AWS_ACCESS_KEY_ID",
+  }),
+  AWS_REGION: getEnvironmentVariable({
+    environmentVariable: "AWS_REGION",
   }),
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import EmailBuilder from "../emailBuilder";
+import emailSender from "../nodemailer";
 import purchase_confirmation from "../templates/purchase_confirmation";
 interface SendInterface {
   htmlContent: string;
@@ -10,26 +10,13 @@ interface SendInterface {
 }
 class InvoiceSender {
   send({ htmlContent, subject, to, toName, bodyMessage }: SendInterface) {
-    EmailBuilder.sendTransactionalEmail({
+    new emailSender().send({
+      bodyMessage: bodyMessage,
       htmlContent: htmlContent,
-      params: {
-        bodyMessage: bodyMessage,
-      },
-      sender: {
-        email: "no-replay@sacbe-ceremonial-cacao.com",
-        name: "Sacbe Ceremonial cacao",
-      },
-      replayTo: {
-        email: "no-replay@sacbe-ceremonial-cacao.com",
-        name: "Sacbe Ceremonial cacao",
-      },
+      replayTo: "no-replay@sacbe-ceremonial-cacao.com",
+      sender: "no-replay@sacbe-ceremonial-cacao.com",
       subject: subject,
-      to: [
-        {
-          email: to,
-          name: toName,
-        },
-      ],
+      to: to,
     });
   }
 

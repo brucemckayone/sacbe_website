@@ -1,6 +1,6 @@
+import emailSender from "@/utils/email/nodemailer";
+import purchase_confirmation from "@/utils/email/templates/purchase_confirmation";
 import { NextApiRequest, NextApiResponse } from "next";
-
-import EmailBuilder from "@/utils/email/emailBuilder";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -8,21 +8,23 @@ export default async function handler(
   const method = req.method as requestMethodType;
   switch (method) {
     case "POST":
-      let { bodyMessage, to, toName, subject, htmlContent } = req.body;
-      const response = await EmailBuilder.sendTransactionalEmail({
-        htmlContent: htmlContent,
-        sender: {
-          email: "no-reply@sacbe-ceremonial-cacao.com",
-          name: "Sacbe Ceremonial Cacao",
-        },
-        replayTo: {
-          email: "no-reply@sacbe-ceremonial-cacao.com",
-          name: "Sacbe Ceremonial Cacao",
-        },
-        params: { bodyMessage: bodyMessage },
+      let { bodyMessage, to, subject, htmlContent } = req.body;
+      new emailSender().send({
+        bodyMessage: bodyMessage,
+        htmlContent: purchase_confirmation({
+          affiliateProgramUrl: "",
+          facilitatorUrl: "",
+          name: "bruce",
+          orderNumberUrl: "",
+          orderNumer: "order number",
+          productName: "a delicous product",
+          recipesUrl: "",
+        }),
+        replayTo: "no-reply@sacbe-ceremonial-cacao.com",
+        sender: "no-reply@sacbe-ceremonial-cacao.com",
         subject: subject,
-        to: [{ email: to, name: toName }],
+        to: to,
       });
-      return res.status(200).json(response);
+      return res.status(200).json({});
   }
 }
