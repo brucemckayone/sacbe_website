@@ -16,7 +16,7 @@ export default function HeaderInformation() {
       </div>
       <p className="italic font-bold p-0">
         &quot;This cacao is absolutely delicious and very nourishing! The energy
-        behind the cacao production, it's origins and the reverence for the
+        behind the cacao production, it&apos;s origins and the reverence for the
         medicine from the indigenous cultures that harvest the beans can be
         deeply felt.&quot;
       </p>
