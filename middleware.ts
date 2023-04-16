@@ -17,9 +17,9 @@ export async function middleware(request: NextRequest) {
     secret: process.env.SECRET,
   });
 
-  // if (!token) {
-  //   if (request.nextUrl.pathname.startsWith("/affiliates")) {
-  //     return NextResponse.rewrite(new NextURL("/api/auth/signin", request.url));
-  //   }
-  // }
+  if (!token) {
+    if (request.nextUrl.pathname.startsWith("/affiliates/portal")) {
+      return NextResponse.rewrite(new NextURL("/api/auth/signin", request.url));
+    }
+  }
 }
