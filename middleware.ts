@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
 
   if (!token) {
     if (request.nextUrl.pathname.startsWith("/affiliates/portal")) {
-      return NextResponse.rewrite(new NextURL("/auth/signin", request.url));
+      return NextResponse.rewrite(new NextURL("/api/auth/signin", request.url));
     }
   }
 }

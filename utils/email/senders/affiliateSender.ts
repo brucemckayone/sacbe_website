@@ -28,7 +28,7 @@ export default class AffiliateSender {
   }) {
     this.send({
       bodyMessage: `Your affiliate status has been updated to: ${status}`,
-      htmlContent: affiliate_update_status(),
+      htmlContent: affiliate_update_status({ status: status }),
       subject: `Your affiliate status has been updated to: ${status}`,
       to: email,
     });

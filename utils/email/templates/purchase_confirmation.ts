@@ -21,11 +21,8 @@ function purchase_confirmation({
 <head>
 	<title></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]-->
-	<!--[if !mso]><!-->
-	<link href="https://fonts.googleapis.com/css?family=Quattrocento" rel="stylesheet" type="text/css">
-	<!--<![endif]-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml><![endif]--><!--[if !mso]><!-->
+	<link href="https://fonts.googleapis.com/css?family=Quattrocento" rel="stylesheet" type="text/css"><!--<![endif]-->
 	<style>
 		* {
 			box-sizing: border-box;
@@ -110,16 +107,6 @@ function purchase_confirmation({
 			.row-1 .column-1 .block-2.heading_block h1 {
 				font-size: 29px !important;
 			}
-
-			.row-3 .column-1 .block-8.button_block td.pad {
-				padding: 0 !important;
-			}
-
-			.row-3 .column-1 .block-8.button_block a span,
-			.row-3 .column-1 .block-8.button_block div,
-			.row-3 .column-1 .block-8.button_block div span {
-				line-height: 2 !important;
-			}
 		}
 	</style>
 </head>
@@ -170,10 +157,8 @@ function purchase_confirmation({
 													<table class="button_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
-																<div class="alignment" align="center">
-																	<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:44px;width:262px;v-text-anchor:middle;" arcsize="10%" strokeweight="0.75pt" strokecolor="#000000" fillcolor="#d2feb0"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:'Trebuchet MS', sans-serif; font-size:16px"><![endif]-->
-																	<div style="text-decoration:none;display:inline-block;color:#000000;background-color:#d2feb0;border-radius:4px;width:auto;border-top:1px solid #000000;font-weight:400;border-right:1px solid #000000;border-bottom:1px solid #000000;border-left:1px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="margin: 0; word-break: break-word; line-height: 32px;">ORDER STATUS: PROCESSING</span></span></div>
-																	<!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
+																<div class="alignment" align="center"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" style="height:44px;width:246px;v-text-anchor:middle;" arcsize="10%" strokeweight="0.75pt" strokecolor="#000000" fillcolor="#d2feb0"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:'Trebuchet MS', sans-serif; font-size:16px"><![endif]-->
+																	<div style="text-decoration:none;display:inline-block;color:#000000;background-color:#d2feb0;border-radius:4px;width:auto;border-top:1px solid #000000;font-weight:400;border-right:1px solid #000000;border-bottom:1px solid #000000;border-left:1px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="margin: 0; word-break: break-word; line-height: 32px;">ORDER STATUS: PROCESSING</span></span></div><!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
 																</div>
 															</td>
 														</tr>
@@ -183,10 +168,7 @@ function purchase_confirmation({
 													<table class="button_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
-																<div class="alignment" align="center">
-																	<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${orderNumberUrl}" style="height:44px;width:212px;v-text-anchor:middle;" arcsize="10%" strokeweight="0.75pt" strokecolor="#000000" fillcolor="#ffdcc2"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#410002; font-family:'Trebuchet MS', sans-serif; font-size:16px"><![endif]--><a href="${orderNumberUrl}" target="_blank" style="text-decoration:none;display:inline-block;color:#410002;background-color:#ffdcc2;border-radius:4px;width:auto;border-top:1px solid #000000;font-weight:400;border-right:1px solid #000000;border-bottom:1px solid #000000;border-left:1px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="margin: 0; word-break: break-word; line-height: 32px;">ORDER: ${orderNumer}</span></span></a>
-																	<!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
-																</div>
+																<div class="alignment" align="center"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${orderNumberUrl}" style="height:44px;width:212px;v-text-anchor:middle;" arcsize="10%" strokeweight="0.75pt" strokecolor="#000000" fillcolor="#ffdcc2"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#410002; font-family:'Trebuchet MS', sans-serif; font-size:16px"><![endif]--><a href="${orderNumberUrl}" target="_blank" style="text-decoration:none;display:inline-block;color:#410002;background-color:#ffdcc2;border-radius:4px;width:auto;border-top:1px solid #000000;font-weight:400;border-right:1px solid #000000;border-bottom:1px solid #000000;border-left:1px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="margin: 0; word-break: break-word; line-height: 32px;">ORDER: ${orderNumer}</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
 															</td>
 														</tr>
 													</table>
@@ -228,7 +210,14 @@ function purchase_confirmation({
 															</td>
 														</tr>
 													</table>
-													<table class="divider_block block-3" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+													<table class="button_block block-3" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+														<tr>
+															<td class="pad">
+																<div class="alignment" align="center"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${orderNumberUrl}" style="height:50px;width:246px;v-text-anchor:middle;" arcsize="15%" strokeweight="1.5pt" strokecolor="#000000" fillcolor="#ff932f"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#2e1500; font-family:'Trebuchet MS', sans-serif; font-size:18px"><![endif]--><a href="${orderNumberUrl}" target="_blank" style="text-decoration:none;display:inline-block;color:#2e1500;background-color:#ff932f;border-radius:7px;width:auto;border-top:2px solid #000000;font-weight:400;border-right:2px solid #000000;border-bottom:2px solid #000000;border-left:2px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:18px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:18px;display:inline-block;letter-spacing:1px;"><span dir="ltr" style="word-break: break-word; line-height: 36px;">SEE ONLINE RECEIPT&nbsp;</span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+															</td>
+														</tr>
+													</table>
+													<table class="divider_block block-4" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
 																<div class="alignment" align="center">
@@ -241,26 +230,19 @@ function purchase_confirmation({
 															</td>
 														</tr>
 													</table>
-													<table class="heading_block block-4" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+													<table class="heading_block block-5" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
 																<h1 style="margin: 0; color: #2a1700; direction: ltr; font-family: 'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">What Now?</span></h1>
 															</td>
 														</tr>
 													</table>
-													<table class="paragraph_block block-5" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+													<table class="paragraph_block block-6" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
 															<td class="pad">
 																<div style="color:#101112;direction:ltr;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
 																	<p style="margin: 0;">While waiting on your cacao why not check out what less we have to offer.</p>
 																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-6" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad">
-																<h2 style="margin: 0; color: #241a00; direction: ltr; font-family: 'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif; font-size: 30px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Recipes</span></h2>
 															</td>
 														</tr>
 													</table>
@@ -273,24 +255,14 @@ function purchase_confirmation({
 															</td>
 														</tr>
 													</table>
-													<table class="button_block block-8" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad">
-																<div class="alignment" align="center">
-																	<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${recipesUrl}" style="height:46px;width:228px;v-text-anchor:middle;" arcsize="9%" strokeweight="1.5pt" strokecolor="#000000" fillcolor="#ffdcc2"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:'Trebuchet MS', sans-serif; font-size:16px"><![endif]--><a href="${recipesUrl}" target="_blank" style="text-decoration:none;display:block;color:#000000;background-color:#ffdcc2;border-radius:4px;width:70%;border-top:2px solid #000000;font-weight:400;border-right:2px solid #000000;border-bottom:2px solid #000000;border-left:2px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 32px;"><strong>BROWES RECIPES</strong></span></span></a>
-																	<!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-9" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+													<table class="heading_block block-8" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
 																<h2 style="margin: 0; color: #241a00; direction: ltr; font-family: 'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif; font-size: 30px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Go Deeper</span></h2>
 															</td>
 														</tr>
 													</table>
-													<table class="paragraph_block block-10" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+													<table class="paragraph_block block-9" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
 															<td class="pad">
 																<div style="color:#101112;direction:ltr;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
@@ -299,24 +271,21 @@ function purchase_confirmation({
 															</td>
 														</tr>
 													</table>
-													<table class="button_block block-11" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+													<table class="button_block block-10" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
-																<div class="alignment" align="center">
-																	<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${facilitatorUrl}" style="height:46px;width:214px;v-text-anchor:middle;" arcsize="9%" strokeweight="1.5pt" strokecolor="#000000" fillcolor="#ffdcc2"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#2e1500; font-family:'Trebuchet MS', sans-serif; font-size:16px"><![endif]--><a href="${facilitatorUrl}" target="_blank" style="text-decoration:none;display:block;color:#2e1500;background-color:#ffdcc2;border-radius:4px;width:70.00%;border-top:2px solid #000000;font-weight:400;border-right:2px solid #000000;border-bottom:2px solid #000000;border-left:2px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 32px;"><strong>FIND OUT MORE</strong></span></span></a>
-																	<!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
-																</div>
+																<div class="alignment" align="center"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${facilitatorUrl}" style="height:52px;width:242px;v-text-anchor:middle;" arcsize="8%" strokeweight="1.5pt" strokecolor="#000000" fillcolor="#ffdcc2"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#2e1500; font-family:'Trebuchet MS', sans-serif; font-size:19px"><![endif]--><a href="${facilitatorUrl}" target="_blank" style="text-decoration:none;display:block;color:#2e1500;background-color:#ffdcc2;border-radius:4px;width:40%;border-top:2px solid #000000;font-weight:400;border-right:2px solid #000000;border-bottom:2px solid #000000;border-left:2px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:19px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:19px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 38px;"><strong>FIND OUT MORE</strong></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
 															</td>
 														</tr>
 													</table>
-													<table class="heading_block block-12" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+													<table class="heading_block block-11" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad" style="padding-bottom:10px;padding-left:25px;padding-right:10px;padding-top:10px;text-align:center;width:100%;">
 																<h3 style="margin: 0; color: #2e1500; direction: ltr; font-family: 'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif; font-size: 24px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: left; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Affiliate Program</span></h3>
 															</td>
 														</tr>
 													</table>
-													<table class="paragraph_block block-13" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
+													<table class="paragraph_block block-12" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
 														<tr>
 															<td class="pad" style="padding-bottom:10px;padding-left:40px;padding-right:10px;padding-top:10px;">
 																<div style="color:#101112;direction:ltr;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
@@ -325,24 +294,14 @@ function purchase_confirmation({
 															</td>
 														</tr>
 													</table>
-													<table class="button_block block-14" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+													<table class="button_block block-13" width="100%" border="0" cellpadding="15" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
-																<div class="alignment" align="center">
-																	<!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${affiliateProgramUrl}" style="height:46px;width:289px;v-text-anchor:middle;" arcsize="9%" strokeweight="1.5pt" strokecolor="#000000" fillcolor="#ff932f"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:'Trebuchet MS', sans-serif; font-size:16px"><![endif]--><a href="${affiliateProgramUrl}" target="_blank" style="text-decoration:none;display:block;color:#000000;background-color:#ff932f;border-radius:4px;width:95%;border-top:2px solid #000000;font-weight:400;border-right:2px solid #000000;border-bottom:2px solid #000000;border-left:2px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:20px;padding-right:20px;font-size:16px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 32px;"><strong>BECOME AN AFFILIATE</strong></span></span></a>
-																	<!--[if mso]></center></v:textbox></v:roundrect><![endif]-->
-																</div>
+																<div class="alignment" align="center"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${affiliateProgramUrl}" style="height:56px;width:355px;v-text-anchor:middle;" arcsize="8%" strokeweight="1.5pt" strokecolor="#000000" fillcolor="#ff932f"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#000000; font-family:'Trebuchet MS', sans-serif; font-size:21px"><![endif]--><a href="${affiliateProgramUrl}" target="_blank" style="text-decoration:none;display:block;color:#000000;background-color:#ff932f;border-radius:4px;width:60%;border-top:2px solid #000000;font-weight:400;border-right:2px solid #000000;border-bottom:2px solid #000000;border-left:2px solid #000000;padding-top:5px;padding-bottom:5px;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:21px;text-align:center;mso-border-alt:none;word-break:keep-all;"><span style="padding-left:0px;padding-right:0px;font-size:21px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 42px;"><strong>BECOME AN AFFILIATE</strong></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
 															</td>
 														</tr>
 													</table>
-													<table class="heading_block block-15" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad">
-																<h1 style="margin: 0; color: #2e1500; direction: ltr; font-family: 'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">Follow Us</span></h1>
-															</td>
-														</tr>
-													</table>
-													<table class="divider_block block-16" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
+													<table class="divider_block block-14" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
 																<div class="alignment" align="center">
@@ -351,15 +310,6 @@ function purchase_confirmation({
 																			<td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;"><span>&#8202;</span></td>
 																		</tr>
 																	</table>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-17" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad">
-																<div style="color:#101112;direction:ltr;font-family:'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:120%;text-align:left;mso-line-height-alt:19.2px;">
-																	<p style="margin: 0;">I'm a new paragraph block.</p>
 																</div>
 															</td>
 														</tr>
@@ -385,11 +335,9 @@ function purchase_confirmation({
 															<td class="pad" style="vertical-align: middle; color: #9d9d9d; font-family: inherit; font-size: 15px; padding-bottom: 5px; padding-top: 5px; text-align: center;">
 																<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 																	<tr>
-																		<td class="alignment" style="vertical-align: middle; text-align: center;">
-																			<!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
+																		<td class="alignment" style="vertical-align: middle; text-align: center;"><!--[if vml]><table align="left" cellpadding="0" cellspacing="0" role="presentation" style="display:inline-block;padding-left:0px;padding-right:0px;mso-table-lspace: 0pt;mso-table-rspace: 0pt;"><![endif]-->
 																			<!--[if !vml]><!-->
-																			<table class="icons-inner" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;" cellpadding="0" cellspacing="0" role="presentation">
-																				<!--<![endif]-->
+																			<table class="icons-inner" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;" cellpadding="0" cellspacing="0" role="presentation"><!--<![endif]-->
 																				<tr>
 																					<td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 6px;"><a href="https://www.designedwithbee.com/?utm_source=editor&utm_medium=bee_pro&utm_campaign=free_footer_link" target="_blank" style="text-decoration: none;"><img class="icon" alt="Designed with BEE" src="https://d1oco4z2z1fhwp.cloudfront.net/assets/bee.png" height="32" width="34" align="center" style="display: block; height: auto; margin: 0 auto; border: 0;"></a></td>
 																					<td style="font-family: 'Quattrocento', 'Trebuchet MS', Helvetica, sans-serif; font-size: 15px; color: #9d9d9d; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="https://www.designedwithbee.com/?utm_source=editor&utm_medium=bee_pro&utm_campaign=free_footer_link" target="_blank" style="color: #9d9d9d; text-decoration: none;">Designed with BEE</a></td>

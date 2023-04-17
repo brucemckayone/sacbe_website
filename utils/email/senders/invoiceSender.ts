@@ -1,4 +1,3 @@
-import React from "react";
 import emailSender from "../nodemailer";
 import purchase_confirmation from "../templates/purchase_confirmation";
 interface SendInterface {
@@ -42,7 +41,6 @@ class InvoiceSender {
         productName: productName,
         affiliateProgramUrl: "https://sacbe-ceremonial-cacao.com/affiliate",
         facilitatorUrl: "https://skyeonearth.com/cacaofacilitation",
-
         orderNumberUrl: orderNumberUrl,
         orderNumer: orderNumber,
         recipesUrl: recipeUrl,

@@ -9,7 +9,9 @@ export class InvoiceHandler {
   email = new InvoiceSender();
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
+
     let data = await this.parseInvoiceForFirebase(invoice);
+    
     this.saveData(data, invoice);
 
     messaging().send({

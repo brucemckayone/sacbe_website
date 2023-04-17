@@ -5,13 +5,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 
 import { InvoiceHandler } from "@/utils/server/webhooks/invoices";
-import adminInit from "@/utils/firebase/admin_init";
-
-import { messaging } from "firebase-admin";
-import {
-  Message,
-  TopicMessage,
-} from "firebase-admin/lib/messaging/messaging-api";
 
 // import emailTemplateSender from "@/utils/email/templates/templateSender";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
@@ -81,18 +74,6 @@ export default async function handler(
           status = 400;
           message = `invoicehandler.invoicePaided() has failed with the following error:${"\n"} ${e}`;
         }
-
-        // emailTemplateSender.purchaseConfirmation({
-        //   email: "bruce.r.mckay@outlook.com",
-        //   name: "bruce McKay",
-        //   product: "Sacbe Cacao",
-        // });
-        // res.status(200).json({
-        //   status: 200,
-        //   message: "Payed Invoice has been handled and sent to databse",
-        // });
-        // Then define and call a function to handle the event invoice.paid
-
         break;
       case "invoice.payment_failed":
         const invoiceFailed = event.data.object as Stripe.Invoice;

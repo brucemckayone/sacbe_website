@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
+import adminInit from "@/utils/firebase/admin_init";
+import AffiliateSender from "@/utils/email/senders/affiliateSender";
+import affiliate_update_status from "@/utils/email/templates/affiliate_update_status";
 
 export default async function handler(
   req: NextApiRequest,
@@ -26,8 +29,14 @@ export default async function handler(
       }
       break;
     case "PUT":
-      const { status, docRef, userId } = req.body;
-      res.status(200).json(await updateAffiliateStatus(status, docRef, userId));
+      new AffiliateSender().send({
+        bodyMessage: `Your Affiliate Status has been updated: ${req.body.status}`,
+        htmlContent: affiliate_update_status({ status: req.body.status }),
+        subject: `Your Affiliate Status has been updated: ${req.body.status}`,
+        to: req.body.email,
+      });
+      await updateAffiliateStatus(req.body);
+      res.status(200).json({ message: "success" });
       break;
     case "GET":
       const requestId = req.query.userId as string;
@@ -51,24 +60,20 @@ async function getStatus(userId: string) {
     return null;
   }
 }
-
-async function updateAffiliateStatus(
-  status: "active" | "pending",
-  docRef: string,
-  userId: string
-) {
+adminInit();
+async function updateAffiliateStatus({
+  status,
+  userId,
+}: {
+  status: "active" | "pending";
+  userId: string;
+}) {
   const db = firestore();
-  const affiliateResult = await db
-    .collection("affiliate_requests")
-    .doc(docRef)
-    .set({ status: status }, { merge: true });
   const userResult = await db
     .collection("users")
     .doc(userId)
-    .set(
-      { affiliateStatus: { status: status, refId: docRef } },
-      { merge: true }
-    );
+    .set({ affiliateStatus: { status: status } }, { merge: true });
+  return userResult;
 }
 
 async function sendAffiliateRequest(
