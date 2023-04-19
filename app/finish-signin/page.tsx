@@ -8,6 +8,7 @@ import homeUrl from "@/lib/constants/urls";
 import PrimaryButton from "@/components/buttons/primaryButton";
 import SlideInUp from "@/components/animations/slide_in_up";
 import MagicLinkForm from "@/components/form/MagicLinkForm";
+import Footer from "@/components/footer";
 function finishSignin() {
   const [isValidLink, setIsValidLink] = useState(false);
   const [crfToken, setCrfToken] = useState("");
@@ -47,16 +48,17 @@ function finishSignin() {
             </div>
           </div>
         </SlideInUp>
+        <Footer />
       </div>
     );
   } else {
     return (
-      <div className="flex flex-col items-center justify-around h-screen bg-gradient-to-br from-sacbeBrandColor to-primaryContainer ">
+      <div className="flex flex-col items-center justify-around h-screen bg-gradient-to-br pt-96 from-sacbeBrandColor to-primaryContainer ">
         <SlideInUp animiation="animate-zoom_in_fade">
-          <div className=" bg-surfaceVarient px-20 py-24 mb-40 rounded-xl border-2 shadow-2xl m-4">
+          <div className=" bg-surfaceVarient  px-5 md:px-20 py-24 mx-3 rounded-xl border-2 shadow-2xl">
             <div className="text-center border-b-2 pb-6 mb-3">
               <MagicLinkForm />
-              <p className="md:w-96">
+              <p className="md:w-96 p-4 rounded-md border bg-error text-onError">
                 It looks like there was a problem with your link. Its possible
                 you waited too link, or there was a problem with the link
                 generation. OR your are a hacker!!! please try again, unless
@@ -65,6 +67,7 @@ function finishSignin() {
             </div>
           </div>
         </SlideInUp>
+        <Footer />
       </div>
     );
   }

@@ -3,7 +3,6 @@ function purchase_confirmation({
   orderNumer,
   name,
   orderNumberUrl,
-  recipesUrl,
   facilitatorUrl,
   affiliateProgramUrl,
 }: {

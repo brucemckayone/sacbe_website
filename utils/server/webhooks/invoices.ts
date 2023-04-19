@@ -9,9 +9,8 @@ export class InvoiceHandler {
   email = new InvoiceSender();
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
-
     let data = await this.parseInvoiceForFirebase(invoice);
-    
+
     this.saveData(data, invoice);
 
     messaging().send({
@@ -51,6 +50,12 @@ export class InvoiceHandler {
     });
 
     this.saveData(data, invoice);
+    this.email.failure({
+      email: invoice.customer_email!,
+      name: invoice.customer_name ?? "",
+      orderNumber: data.invoiceNumber,
+      orderNumberUrl: invoice.hosted_invoice_url!,
+    });
     return data;
   }
 

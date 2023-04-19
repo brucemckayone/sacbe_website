@@ -1,5 +1,6 @@
 import emailSender from "../nodemailer";
 import purchase_confirmation from "../templates/purchase_confirmation";
+import purchase_failure from "../templates/purchase_failure";
 interface SendInterface {
   htmlContent: string;
   to: string;
@@ -46,6 +47,30 @@ class InvoiceSender {
         recipesUrl: recipeUrl,
       }),
       subject: `Order Confirmation for ${productName}`,
+      to: email,
+      toName: name,
+    });
+  }
+
+  failure({
+    name,
+    email,
+    orderNumber,
+    orderNumberUrl,
+  }: {
+    name: string;
+    email: string;
+    orderNumber: string;
+    orderNumberUrl: string;
+  }) {
+    this.send({
+      bodyMessage: `Your payment has failed`,
+      htmlContent: purchase_failure({
+        name: name,
+        orderNumberUrl: orderNumberUrl,
+        orderNumer: orderNumber,
+      }),
+      subject: `Your Payment Has Failed}`,
       to: email,
       toName: name,
     });
