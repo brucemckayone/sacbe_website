@@ -10,7 +10,7 @@ export default async function SignIn() {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-around h-screen bg-gradient-to-br pt-10 from-sacbeBrandColor to-primaryContainer">
+      <div className="flex flex-col items-center justify-around bg-gradient-to-br pt-10 from-sacbeBrandColor to-primaryContainer">
         <SlideInUp animiation="animate-zoom_in_fade">
           <div className=" bg-surfaceVarient px-10 md:px-20 py-24 mb-40 rounded-xl border-2 shadow-2xl m-4 ">
             <div className="text-center border-b-2 pb-6 mb-3">

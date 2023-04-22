@@ -1,6 +1,6 @@
 "use client";
 import createCheckoutSession from "@/lib/stripe/createCheckoutSession";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useState } from "react";
 import PrimaryButton from "../buttons/primaryButton";
 import SlideInUp from "../animations/slide_in_up";
@@ -127,13 +127,16 @@ const PurchaseOptionCard: React.FC<Props> = ({
         onClose={close}
         title="Please elect a shipping option"
       >
-        <p>
-          We recommend you sign in. So that you can manage your subscription
-        </p>
-        <Link href={"/api/auth/signin"}>
-          <SmallButton text="Sign In" onClicked={() => {}} />
-        </Link>
-        <p>Subsciptions are shipped out on the 1st of every month</p>
+        {!session?.user && (
+          <div>
+            <p>
+              We recommend you sign in. So that you can manage your subscription
+              more easily
+            </p>
+            <SmallButton text="Sign In" onClicked={() => signIn()} />
+            <p>Subsciptions are shipped out on the 1st of every month</p>
+          </div>
+        )}
 
         <div className="flex flex-row justify-around">
           <SmallButton

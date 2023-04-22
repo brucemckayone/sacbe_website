@@ -35,38 +35,42 @@ function finishSignin() {
   }, []);
   if (isValidLink) {
     return (
-      <div className="flex flex-col items-center justify-around h-screen bg-gradient-to-br from-sacbeBrandColor to-primaryContainer">
-        <SlideInUp animiation="animate-zoom_in_fade">
-          <div className=" bg-surfaceVarient px-20 py-24 mb-40 rounded-xl border-2 shadow-2xl">
-            <div className="text-center border-b-2 pb-6 mb-3">
-              <PrimaryButton
-                onClicked={() => {
-                  handleSignin(email!, crfToken);
-                }}
-                text="Validate Link"
-              />
+      <div>
+        <div className="flex flex-col items-center justify-around bg-gradient-to-br from-sacbeBrandColor to-primaryContainer">
+          <SlideInUp animiation="animate-zoom_in_fade">
+            <div className=" bg-surfaceVarient px-20 py-24 mb-40 rounded-xl border-2 shadow-2xl">
+              <div className="text-center border-b-2 pb-6 mb-3">
+                <PrimaryButton
+                  onClicked={() => {
+                    handleSignin(email!, crfToken);
+                  }}
+                  text="Validate Link"
+                />
+              </div>
             </div>
-          </div>
-        </SlideInUp>
+          </SlideInUp>
+        </div>
         <Footer />
       </div>
     );
   } else {
     return (
-      <div className="flex flex-col items-center justify-around h-screen bg-gradient-to-br pt-96 from-sacbeBrandColor to-primaryContainer ">
-        <SlideInUp animiation="animate-zoom_in_fade">
-          <div className=" bg-surfaceVarient  px-5 md:px-20 py-24 mx-3 rounded-xl border-2 shadow-2xl">
-            <div className="text-center border-b-2 pb-6 mb-3">
-              <MagicLinkForm />
-              <p className="md:w-96 p-4 rounded-md border bg-error text-onError">
-                It looks like there was a problem with your link. Its possible
-                you waited too link, or there was a problem with the link
-                generation. OR your are a hacker!!! please try again, unless
-                your a hacker!
-              </p>
+      <div>
+        <div className="flex flex-col items-center justify-around bg-gradient-to-br from-sacbeBrandColor to-primaryContainer ">
+          <SlideInUp animiation="animate-zoom_in_fade">
+            <div className=" bg-surfaceVarient  px-5 md:px-20  py-5 my-24 mx-5 md:mx-20 rounded-xl border-2 shadow-2xl">
+              <div className="text-center border-b-2 pb-6 mb-3">
+                <MagicLinkForm />
+                <p className="md:w-96 p-4 rounded-md border bg-error text-onError shadow-md border-onError">
+                  It looks like there was a problem with your link. Its possible
+                  you waited too link, or there was a problem with the link
+                  generation. OR your are a hacker!!! please try again, unless
+                  your a hacker!
+                </p>
+              </div>
             </div>
-          </div>
-        </SlideInUp>
+          </SlideInUp>
+        </div>
         <Footer />
       </div>
     );

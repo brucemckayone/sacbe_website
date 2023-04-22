@@ -3,6 +3,7 @@ import { buffer } from "micro";
 
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
+import SubscriptionWebHooks from "@/utils/server/webhooks/subscriptions";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -17,7 +18,7 @@ export default async function handler(
   const sig: string = req.headers["stripe-signature"] as string;
   const reqBuffer = await buffer(req);
   let event: Stripe.Event;
-
+  const subWebhooks = new SubscriptionWebHooks();
   try {
     event = stripe.webhooks.constructEvent(
       reqBuffer,
@@ -57,6 +58,7 @@ export default async function handler(
         break;
       case "customer.subscription.created":
         const customerSubscriptionCreated = event.data.object;
+        subWebhooks.created(customerSubscriptionCreated as Stripe.Subscription);
         console.log(`handled event type ${event.type}`);
         // Then define and call a function to handle the event customer.subscription.created
         break;
