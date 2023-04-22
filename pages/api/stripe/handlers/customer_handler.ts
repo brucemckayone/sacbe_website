@@ -7,6 +7,7 @@ import SubscriptionWebHooks from "@/utils/server/webhooks/subscriptions";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import homeUrl from "@/lib/constants/urls";
 import SubscriptionSender from "@/utils/email/senders/subscriptionSender";
+import { log } from "console";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -71,7 +72,11 @@ export default async function handler(
           ),
           stripe.customers.retrieve(subscription.customer as string),
         ]);
+
         const { name, email } = customer as Stripe.Customer;
+        console.log(name);
+        console.log(email);
+        console.log(billingPortal.url);
         new SubscriptionSender().created({
           name: name!,
           email: email!,
