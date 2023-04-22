@@ -79,12 +79,7 @@ export default async function handler(
           configuration: configuration.data[0].id,
         });
 
-        console.log("billingPortal");
-        console.log(billingPortal);
         const { name, email } = customer as Stripe.Customer;
-        console.log(name);
-        console.log(email);
-        console.log(billingPortal.url);
 
         sendEmail.created({
           name: name!,
