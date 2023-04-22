@@ -37,7 +37,7 @@ export default class SubscriptionSender {
           portalLink: portalLink,
         }),
         subject: `Welcome ${name} to the Sacbe Cacao Community`,
-        to: email,
+        to: email ?? "brucemckayone@gmail.com",
       });
     } catch (e) {
       console.log(e);

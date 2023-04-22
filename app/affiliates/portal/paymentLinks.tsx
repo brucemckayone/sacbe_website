@@ -38,7 +38,6 @@ function PaymentLinks() {
     );
   } else if (fetchedLinks) {
     const links = linksState?.links;
-
     return (
       <div>
         <h4>My Affiliate Links</h4>

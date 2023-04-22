@@ -11,7 +11,7 @@ function SetUpAccountButton() {
 
   if (isLoading || isloading) {
     return <ButtonLoader />;
-  } else if (!affiliate.accountId) {
+  } else if (!affiliate.accountId || isloading) {
     return (
       <div className="text-center">
         <PrimaryButton
@@ -25,7 +25,7 @@ function SetUpAccountButton() {
         />
       </div>
     );
-  } else if (affiliate.accountId && !affiliate.chargesEnabled) {
+  } else if (affiliate.accountId && !affiliate.chargesEnabled && !isloading) {
     return (
       <div className="text-center">
         <PrimaryButton

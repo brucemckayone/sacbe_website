@@ -45,24 +45,11 @@ const PurchaseOptionCard: React.FC<Props> = ({
   priceIds,
   paymentMode,
 }) => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(false);
-  const [line1, setLine1] = useState("");
-  const [line2, setLine2] = useState("");
-  const [postCode, setPostCode] = useState("");
-  const [town, setTown] = useState("");
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
-
+  const [isShippingLoading, setIsShippingLoading] = useState(false);
   const [opened, { open, close }] = useDisclosure(false);
 
-  const notify = () =>
-    toast(
-      <div>
-        <h4>You must log in to purchase a</h4>
-        <Link href={"/"}>Learn More</Link>
-      </div>
-    );
   return (
     <div
       key={""}
@@ -142,6 +129,7 @@ const PurchaseOptionCard: React.FC<Props> = ({
           <SmallButton
             isPrimary={false}
             onClicked={async () => {
+              setIsShippingLoading(true);
               await createCheckoutSession({
                 prices: [
                   "price_1MpwvjG859ZdyFmp3xDUTY6Z",
@@ -150,15 +138,17 @@ const PurchaseOptionCard: React.FC<Props> = ({
                 mode: "subscription",
                 customerId: "",
               });
+              setIsShippingLoading(false);
               setIsLoading(false);
               close();
             }}
-            text="2nd Class ($3.95)"
+            text={isShippingLoading ? "Loading" : "2nd Class ($3.95)"}
           />
 
           <SmallButton
             isPrimary={true}
             onClicked={async () => {
+              setIsShippingLoading(true);
               await createCheckoutSession({
                 prices: [
                   "price_1MpxuKG859ZdyFmpoIIVYaVt",
@@ -167,10 +157,11 @@ const PurchaseOptionCard: React.FC<Props> = ({
                 mode: "subscription",
                 customerId: "",
               });
+              setIsShippingLoading(false);
               setIsLoading(false);
               close();
             }}
-            text="1st Class (£4.95)"
+            text={isShippingLoading ? "Loading" : "1st Class (£4.95)"}
           />
         </div>
       </Modal>
