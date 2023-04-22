@@ -8,8 +8,6 @@ import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import homeUrl from "@/lib/constants/urls";
 import SubscriptionSender from "@/utils/email/senders/subscriptionSender";
 import stripe from "@/lib/stripe/stripe";
-import Stripe from "stripe";
-import { log } from "console";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };

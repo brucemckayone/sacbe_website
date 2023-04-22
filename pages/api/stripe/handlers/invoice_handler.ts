@@ -62,7 +62,6 @@ export default async function handler(
         break;
       case "invoice.paid":
         console.log(`handled event type ${event.type}`);
-
         try {
           data = await invoiceHandler.invoicePaid(
             event.data.object as Stripe.Invoice
