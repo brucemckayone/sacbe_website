@@ -20,7 +20,7 @@ export default class SubscriptionSender {
     });
   }
 
-  created({
+  async created({
     email,
     name,
     portalLink,
@@ -29,11 +29,18 @@ export default class SubscriptionSender {
     email: string;
     portalLink: string;
   }) {
-    this.send({
-      bodyMessage: `Welcome ${name} to the Sacbe Community`,
-      htmlContent: subscription_created({ name: name, portalLink: portalLink }),
-      subject: `Welcome ${name} to the Sacbe Cacao Community`,
-      to: "brucemckayone@gmail.com",
-    });
+    try {
+      this.send({
+        bodyMessage: `Welcome ${name} to the Sacbe Community`,
+        htmlContent: subscription_created({
+          name: name,
+          portalLink: portalLink,
+        }),
+        subject: `Welcome ${name} to the Sacbe Cacao Community`,
+        to: email,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

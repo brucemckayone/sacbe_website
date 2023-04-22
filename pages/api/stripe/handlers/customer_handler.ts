@@ -17,15 +17,7 @@ export default async function handler(
   const reqBuffer = await buffer(req);
   let event: Stripe.Event;
   const subWebhooks = new SubscriptionWebHooks();
-  try {
-    event = stripe.webhooks.constructEvent(
-      reqBuffer,
-      sig,
-      envConfig.STRIPE_CUSTOMER_WEBHOOK
-    );
-  } catch {
-    console.log("failed authentication ");
-  }
+  const sendEmail = new SubscriptionSender();
   try {
     event = stripe.webhooks.constructEvent(
       reqBuffer,
@@ -93,7 +85,8 @@ export default async function handler(
         console.log(name);
         console.log(email);
         console.log(billingPortal.url);
-        new SubscriptionSender().created({
+
+        sendEmail.created({
           name: name!,
           email: email!,
           portalLink: billingPortal.url,
