@@ -61,7 +61,10 @@ export default async function handler(
         // Then define and call a function to handle the event customer.discount.updated
         break;
       case "customer.subscription.created":
+        console.log(`handling event type ${event.type}`);
         const subscription = event.data.object as Stripe.Subscription;
+        console.log(subscription);
+
         // subWebhooks.created(customerSubscriptionCreated as Stripe.Subscription);
         const [billingPortal, customer] = await Promise.all([
           fetchPostJSON(
