@@ -1,5 +1,6 @@
 import emailSender from "../nodemailer";
 import affiliate_update_status from "../templates/affiliate_update_status";
+import subscription_created from "../templates/subscriptions/subscription_created";
 
 type SendInterface = {
   htmlContent: string;
@@ -30,7 +31,7 @@ export default class SubscriptionSender {
   }) {
     this.send({
       bodyMessage: `Welcome ${name} to the Sacbe Community`,
-      htmlContent: `how can i get in involved ${portalLink}`,
+      htmlContent: subscription_created({ name: name, portalLink: portalLink }),
       subject: `Welcome ${name} to the Sacbe Cacao Community`,
       to: "brucemckayone@gmail.com",
     });

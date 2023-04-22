@@ -4,6 +4,9 @@ import { buffer } from "micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 import SubscriptionWebHooks from "@/utils/server/webhooks/subscriptions";
+import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import homeUrl from "@/lib/constants/urls";
+import SubscriptionSender from "@/utils/email/senders/subscriptionSender";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -57,8 +60,23 @@ export default async function handler(
         // Then define and call a function to handle the event customer.discount.updated
         break;
       case "customer.subscription.created":
-        const customerSubscriptionCreated = event.data.object;
-        subWebhooks.created(customerSubscriptionCreated as Stripe.Subscription);
+        const subscription = event.data.object as Stripe.Subscription;
+        // subWebhooks.created(customerSubscriptionCreated as Stripe.Subscription);
+        const [billingPortal, customer] = await Promise.all([
+          fetchPostJSON(
+            `${homeUrl}/api/stripe/billing/create_customer_portal`,
+            {
+              customerId: subscription.customer as string,
+            }
+          ),
+          stripe.customers.retrieve(subscription.customer as string),
+        ]);
+        const { name, email } = customer as Stripe.Customer;
+        new SubscriptionSender().created({
+          name: name!,
+          email: email!,
+          portalLink: billingPortal.url,
+        });
         console.log(`handled event type ${event.type}`);
         // Then define and call a function to handle the event customer.subscription.created
         break;

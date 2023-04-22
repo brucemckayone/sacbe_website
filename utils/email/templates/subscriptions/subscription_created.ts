@@ -1,4 +1,4 @@
-export default function created({
+export default function subscription_created({
   name,
   portalLink,
 }: {
