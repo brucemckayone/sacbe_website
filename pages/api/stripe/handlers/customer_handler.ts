@@ -1,14 +1,11 @@
 import Stripe from "stripe";
 import { buffer } from "micro";
-
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 import SubscriptionWebHooks from "@/utils/server/webhooks/subscriptions";
-import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
-import homeUrl from "@/lib/constants/urls";
 import SubscriptionSender from "@/utils/email/senders/subscriptionSender";
 import stripe from "@/lib/stripe/stripe";
-import { log } from "console";
+
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -80,13 +77,18 @@ export default async function handler(
         );
         console.log("billing");
 
-        const billingPortal = await fetchPostJSON(
-          `https://sacbe-ceremonial-cacao.com/api/stripe/billing/create_customer_portal`,
-          {
-            customerId: subscription.customer as string,
-          }
-        );
+        const configuration = await stripe.billingPortal.configurations.list();
 
+        console.log("configuration");
+        console.log(configuration);
+
+        const billingPortal = await stripe.billingPortal.sessions.create({
+          customer: subscription.customer as string,
+          configuration: configuration.data[0].id,
+        });
+
+        console.log("billingPortal");
+        console.log(billingPortal);
         const { name, email } = customer as Stripe.Customer;
         console.log(name);
         console.log(email);
