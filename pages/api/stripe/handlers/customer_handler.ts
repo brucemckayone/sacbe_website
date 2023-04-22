@@ -23,7 +23,7 @@ export default async function handler(
     event = stripe.webhooks.constructEvent(
       reqBuffer,
       sig,
-      envConfig.STRIPE_INVOICE_WEBHOOK
+      envConfig.STRIPE_CUSTOMER_WEBHOOK
     );
     switch (event.type) {
       case "customer.created":
