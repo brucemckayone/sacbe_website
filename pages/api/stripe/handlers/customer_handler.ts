@@ -7,8 +7,9 @@ import SubscriptionWebHooks from "@/utils/server/webhooks/subscriptions";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import homeUrl from "@/lib/constants/urls";
 import SubscriptionSender from "@/utils/email/senders/subscriptionSender";
+import stripe from "@/lib/stripe/stripe";
+import Stripe from "stripe";
 import { log } from "console";
-
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -16,13 +17,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const stripe = new Stripe(envConfig.STRIPE_SECRET, {
-    apiVersion: "2022-11-15",
-  });
   const sig: string = req.headers["stripe-signature"] as string;
   const reqBuffer = await buffer(req);
   let event: Stripe.Event;
   const subWebhooks = new SubscriptionWebHooks();
+  try {
+    event = stripe.webhooks.constructEvent(
+      reqBuffer,
+      sig,
+      envConfig.STRIPE_CUSTOMER_WEBHOOK
+    );
+  } catch {
+    console.log("failed authentication ");
+  }
   try {
     event = stripe.webhooks.constructEvent(
       reqBuffer,
@@ -62,6 +69,7 @@ export default async function handler(
         break;
       case "customer.subscription.created":
         console.log(`handling event type ${event.type}`);
+
         const subscription = event.data.object as Stripe.Subscription;
         console.log(subscription);
 
@@ -129,8 +137,8 @@ export default async function handler(
     }
   } catch (err) {
     console.log("webhook error failed");
-    const error = err as any;
-    return res.status(401).send(`web hook error: ${error.message}`);
+    // const error = err as any;
+    // return res.status(401).send(`web hook error: ${error.message}`);
   }
 
   res.status(200).json({ status: 200, message: "success" });
