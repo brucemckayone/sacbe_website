@@ -16,9 +16,9 @@ export class InvoiceHandler {
     messaging().send({
       topic: "all",
       notification: {
-        title: "New Order £" + data.amount_paid / 100 + data.products[0].name,
-        body: data.customer.name! + " has ordered",
-        imageUrl: data.products[0].image,
+        title: `New Order £${data.amount_paid / 100} ${data.products[0].name}`,
+        body: data.customer.name + " has ordered" ?? " NO name has ordered ",
+        imageUrl: data.products[0].image ?? "",
       },
     });
 
@@ -27,8 +27,8 @@ export class InvoiceHandler {
       name: invoice.customer_name ?? "",
       orderNumber: data.invoiceNumber,
       orderNumberUrl: invoice.hosted_invoice_url!,
-      productName: data.products[0].name,
-      recipeUrl: invoice.hosted_invoice_url!,
+      productName: data.products[0].name?"",
+      recipeUrl: invoice.hosted_invoice_url??"",
     });
 
     return data;
