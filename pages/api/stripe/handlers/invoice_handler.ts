@@ -61,18 +61,18 @@ export default async function handler(
         // Then define and call a function to handle the event invoice.marked_uncollectible
         break;
       case "invoice.paid":
-        console.log(`handled event type ${event.type}`);
-        try {
-          data = await invoiceHandler.invoicePaid(
-            event.data.object as Stripe.Invoice
-          );
-          status = 200;
-          message = "invoice.paid has been handled";
-        } catch (e) {
-          console.log(e);
-          status = 400;
-          message = `invoicehandler.invoicePaided() has failed with the following error:${"\n"} ${e}`;
-        }
+        // console.log(`handled event type ${event.type}`);
+        // try {
+        //   data = await invoiceHandler.invoicePaid(
+        //     event.data.object as Stripe.Invoice
+        //   );
+        //   status = 200;
+        //   message = "invoice.paid has been handled";
+        // } catch (e) {
+        //   console.log(e);
+        //   status = 400;
+        //   message = `invoicehandler.invoicePaided() has failed with the following error:${"\n"} ${e}`;
+        // }
         break;
       case "invoice.payment_failed":
         const invoiceFailed = event.data.object as Stripe.Invoice;
