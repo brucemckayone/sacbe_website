@@ -91,9 +91,19 @@ export default async function handler(
         // Then define and call a function to handle the event invoice.payment_failed
         break;
       case "invoice.payment_succeeded":
-        const invoicePaymentSucceeded = event.data.object;
         console.log(`handled event type ${event.type}`);
-        // Then define and call a function to handle the event invoice.payment_succeeded
+        try {
+          data = await invoiceHandler.invoicePaid(
+            event.data.object as Stripe.Invoice
+          );
+          status = 200;
+          message = "invoice.paid has been handled";
+        } catch (e) {
+          console.log(e);
+          status = 400;
+          message = `invoicehandler.invoicePaided() has failed with the following error:${"\n"} ${e}`;
+        }
+        break;
         break;
       case "invoice.sent":
         const invoiceSent = event.data.object;
