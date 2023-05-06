@@ -8,7 +8,7 @@ import homeUrl from "@/lib/constants/urls";
 import PrimaryButton from "@/components/buttons/primaryButton";
 import SlideInUp from "@/components/animations/slide_in_up";
 import MagicLinkForm from "@/components/form/MagicLinkForm";
-import Footer from "@/components/footer";
+
 function finishSignin() {
   const [isValidLink, setIsValidLink] = useState(false);
   const [crfToken, setCrfToken] = useState("");
@@ -50,7 +50,6 @@ function finishSignin() {
             </div>
           </SlideInUp>
         </div>
-        <Footer />
       </div>
     );
   } else {
@@ -71,7 +70,6 @@ function finishSignin() {
             </div>
           </SlideInUp>
         </div>
-        <Footer />
       </div>
     );
   }

@@ -12,12 +12,14 @@ export default function BenifitsOfCacao() {
       {/* <SlideInUp animiation="animate-slide_in_right_fade"> */}
       {/* <SectionHeader title="The Experiance"></SectionHeader> */}
       <div className="flex flex-col lg:flex-row">
-        <Card hasColor={false} className="xl:basis-1/3 md:basis-1/3">
+        <Card hasColor={false} className="xl:basis-1/3 md:basis-1/3 pt-20">
           <SlideInUp animiation="animate-slide_in_left_fade">
-            <h3 className="mb-2">Our customers said it best:</h3>
+            <h3 className="mb-2 text-7xl md:text-4xl">
+              Our customers said it best:
+            </h3>
           </SlideInUp>
           <SlideInUp animiation="animate-slide_in_left_fade">
-            <blockquote>
+            <blockquote className="text-xl">
               WOWWWZZAAAA!!!! Now, I have tried a few different Cacao’s but I
               have to say that SACBE is my new absolute fave! The texture &
               taste is soooo smooth, it foams up beautifully in a blender. The
@@ -45,7 +47,7 @@ export default function BenifitsOfCacao() {
           </SlideInUp>
         </Card>
         <Card hasColor={false} className=" xl:basis-2/3 md:basis-2/4 m-0">
-          <h3>The Benefits Of Cacao</h3>
+          <h3 className="text-7xl my-10">The Benefits Of Cacao</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-2 animate-slide_in_up_fade ">
             <BenifitsCard
               headerText="Sustained Energy"

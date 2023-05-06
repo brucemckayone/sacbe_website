@@ -28,7 +28,6 @@ export default async function SignIn() {
           </div>
         </SlideInUp>
       </div>
-      <Footer></Footer>
     </div>
   );
 }

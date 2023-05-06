@@ -11,7 +11,15 @@ const nextConfig = {
   },
 
   images: {
-    domains: ["www.thirdeyetribe.co.uk", "picsum.photos", "files.stripe.com"],
+    domains: [
+      "www.thirdeyetribe.co.uk",
+      "picsum.photos",
+      "files.stripe.com",
+      "127.0.0.1",
+      "localhost",
+
+      "upload.wikimedia.org",
+    ],
   },
   future: {
     webpack5: true, // by default, if you customize webpack config, they switch back to version 4.

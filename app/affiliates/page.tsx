@@ -1,10 +1,10 @@
 import React from "react";
-import Footer from "@/components/footer";
+
 import GetAffiliateLinkButton from "@/components/buttons/getAffiliateLinkButton";
 
 export default async function AffiliatePage() {
   return (
-    <main className="flex flex-col m-10 h-14 ">
+    <div className="flex flex-col h-screen mx-40 ">
       <div className="flex justify-center md:mx-52">
         <span className="flex flex-col md:flex-row text-center whitespace-nowrap ">
           <h1 className="text-6xl lg:text-7xl  ">BECOME A </h1>
@@ -14,7 +14,6 @@ export default async function AffiliatePage() {
           <h1 className="text-6xl lg:text-7xl">AFFILIATE</h1>
         </span>
       </div>
-
       <div className="flex flex-col md:flex-row-reverse self-center my-5">
         <div className="flex basis-1/2 my-0 mx-3 mt-20 justify-center">
           <GetAffiliateLinkButton />
@@ -46,7 +45,6 @@ export default async function AffiliatePage() {
           </div>
         </div>
       </div>
-      <Footer></Footer>
-    </main>
+    </div>
   );
 }

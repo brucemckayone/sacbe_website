@@ -8,15 +8,18 @@ import {
 } from "@next/font/google";
 
 import ToastContainerClient from "@/components/toast/toast_container";
+import Footer from "@/components/footer";
 
 const raleway = displayFont({
   variable: "--display-font",
   weight: "400",
+  subsets: ["latin", "latin-ext"],
 });
 
 const merriweather = bodyFont({
   variable: "--body-font",
   weight: "400",
+  subsets: ["latin", "latin-ext"],
 });
 
 export default function RootLayout({
@@ -31,9 +34,9 @@ export default function RootLayout({
         <body>
           <Navbar />
           {children}
-          <ToastContainerClient />
         </body>
       </AuthProvider>
+      <Footer />
     </html>
   );
 }

@@ -4,7 +4,7 @@ import AfilliateSales from "@/components/affiliate/affiliate_sales";
 import SetUpAccountButton from "./SetUpAccountButton";
 import AccountBalanceTabs from "./AccountBalanceTabs";
 import PaymentLinks from "./paymentLinks";
-import Footer from "@/components/footer";
+
 import NavMenuBottom from "@/components/menu/NavMenuBottom";
 
 function Portal() {
@@ -16,7 +16,7 @@ function Portal() {
         <SetUpAccountButton />
         <AfilliateSales />
       </div>
-      <Footer />
+
       <NavMenuBottom></NavMenuBottom>
     </span>
   );

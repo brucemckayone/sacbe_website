@@ -35,7 +35,9 @@ function WeLoveOurMotherCard() {
 const AboutSacbe: React.FC = () => {
   return (
     <div className="bg-secondaryContainer pb-28">
-      <h1 className="text-center p-20 text-4xl">OUR JOURNEY</h1>
+      <h2 className="py-20 mx-5 md:mx-10 md:text-center  text-8xl md:text-7xl">
+        OUR JOURNEY
+      </h2>
 
       <div className="flex flex-col justify-center align-middle">
         <div className="flex flex-col md:flex-row">
@@ -80,7 +82,7 @@ const AboutSacbe: React.FC = () => {
                 </h3>
               </SlideInUp>
               <SlideInUp animiation="animate-slide_in_left_blur">
-                <p className="flex md:w-2/4">
+                <p className="flex md:w-3/4 text-xl">
                   Sacbe Cacao is sourced from Arriba Nacional beans. Organically
                   and sustainably grown in Esmeraldas, placed in the north west
                   Andean Mountain range and situated at 2000 meters altitude,
