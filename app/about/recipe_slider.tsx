@@ -2,10 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { firestore } from "firebase-admin";
-import { initFirestore } from "@next-auth/firebase-adapter";
+
+import adminInit from "@/utils/firebase/admin_init";
 
 async function getData() {
-  initFirestore();
+  adminInit();
   const snapshots = await firestore()
     .collection("blog_posts")
     .limit(3)

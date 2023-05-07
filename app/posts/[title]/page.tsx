@@ -1,21 +1,19 @@
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { BlogPostsType } from "@/types/blogposts";
 import ReactMarkdown from "react-markdown";
-import strapiGET from "@/utils/server/strapi/get";
-import { Firestore, getFirestore } from "firebase/firestore";
+
 import { firestore } from "firebase-admin";
-import { initFirestore } from "@next-auth/firebase-adapter";
+
+import adminInit from "@/utils/firebase/admin_init";
+
 async function getPost(title: string) {
   // return await strapiGET({
   //   endpoint: "/api/blog-posts",
   //   filters: `filters[uid][$eq]=${uid}`,
   //   populate: `populate=*`,
   // });
-  initFirestore();
+  adminInit();
   const reformattedTitle = title.replaceAll("-", " ").replaceAll("%3A", ":");
-  console.log("reformated title");
 
   console.log(reformattedTitle);
 
