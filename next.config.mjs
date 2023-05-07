@@ -16,8 +16,8 @@ const nextConfig = {
       "picsum.photos",
       "files.stripe.com",
       "127.0.0.1",
+      "firebasestorage.googleapis.com",
       "localhost",
-
       "upload.wikimedia.org",
     ],
   },

@@ -27,11 +27,11 @@ export default async function AffiliatePage() {
               enhance your mood? Look no further than Sacbe Ceremonial Cacao!
               And now, you can not only enjoy the benefits of this amazing
               superfood, but also earn money by becoming an affiliate. For every
-              sale you make, you'll earn £3, which can really add up over time.
-              Plus, with the popularity of cacao on the rise, there's never been
-              a better time to get in on this exciting opportunity. So why wait?
-              Sign up now and start earning money while promoting a product you
-              can truly believe in!
+              sale you make, you will earn £3, which can really add up over
+              time. Plus, with the popularity of cacao on the rise, there is
+              never been a better time to get in on this exciting opportunity.
+              So why wait? Sign up now and start earning money while promoting a
+              product you can truly believe in!
             </p>
           </div>
           <div className=" mt-10">

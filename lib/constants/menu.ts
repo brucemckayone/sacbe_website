@@ -11,10 +11,10 @@ const menuItems = [
     text: "About",
     link: "/about",
   },
-  // {
-  //   text: "Resources",
-  //   link: "https://skyeonearth.com/cacaofacilitation",
-  // },
+  {
+    text: "Blog",
+    link: "https://skyeonearth.com/posts",
+  },
   {
     text: "Affiliates",
     link: "/affiliates",

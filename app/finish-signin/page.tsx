@@ -9,7 +9,7 @@ import PrimaryButton from "@/components/buttons/primaryButton";
 import SlideInUp from "@/components/animations/slide_in_up";
 import MagicLinkForm from "@/components/form/MagicLinkForm";
 
-function finishSignin() {
+function FinishSignin() {
   const [isValidLink, setIsValidLink] = useState(false);
   const [crfToken, setCrfToken] = useState("");
   const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ function finishSignin() {
           setIsValidLink(false);
         });
     }
-  }, []);
+  }, [crfToken]);
   if (isValidLink) {
     return (
       <div>
@@ -88,4 +88,4 @@ function handleSignin(email: string, token: string) {
   }
 }
 
-export default finishSignin;
+export default FinishSignin;
