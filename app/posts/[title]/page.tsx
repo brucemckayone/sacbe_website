@@ -83,24 +83,16 @@ export default async function Page({
           alt={"blog header post "}
           className="rounded-lg"
         />
-        {/* <div className="flex items-center justify-center space-x-4 mt-10 mb-5">
-          <img
-            className="w-10 h-10 rounded-full"
-            src="/docs/images/people/profile-picture-5.jpg"
-            alt=""
-          /> */}
-        {/* <div className="font-medium dark:text-white">
-            <div>{data.author}</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              {data.created??''}
-            </div>
-          </div> */}
+
         <h1 className="my-10 md:text-8xl">{data.title}</h1>
         <div className="flex flex-row justify-start items-baseline">
           <h4>Categories: </h4>
           {data.categories.map((cat) => {
             return (
-              <p className="mx-1 bg-tertiaryContainer shadow rounded-md px-2">
+              <p
+                className="mx-1 bg-tertiaryContainer shadow rounded-md px-2"
+                key={`${cat} category key`}
+              >
                 {cat}
               </p>
             );
@@ -111,7 +103,10 @@ export default async function Page({
           <h4>Tags:</h4>
           {data.tags.map((tag) => {
             return (
-              <div className="center relative inline-block select-none whitespace-nowrap ">
+              <div
+                className="center relative inline-block select-none whitespace-nowrap"
+                key={`${tag} KEY`}
+              >
                 <p className="mx-1 bg-tertiaryContainer shadow rounded-md px-2">
                   {tag.replaceAll(";", "")}
                 </p>
@@ -146,9 +141,9 @@ export default async function Page({
                   </div>
                 );
               },
-              // p: ({ node, ...props }) => (
-              //   <p style={{ fontSize: "1.3rem" }} {...props} />
-              // ),
+              p: ({ node, ...props }) => (
+                <p style={{ fontSize: "1.3rem" }} {...props} />
+              ),
             }}
           >
             {data.content}
