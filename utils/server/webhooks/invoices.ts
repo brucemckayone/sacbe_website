@@ -11,26 +11,37 @@ export class InvoiceHandler {
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
     let data = await this.parseInvoiceForFirebase(invoice);
-
-    this.saveData(data, invoice);
-
-    messaging().send({
-      topic: "all",
-      notification: {
-        title: `New Order £${data.amount_paid / 100} ${data.products[0].name}`,
-        body: data.customer.name + " has ordered" ?? " NO name has ordered ",
-        imageUrl: data.products[0].image ?? "",
-      },
-    });
-
-    this.email.success({
-      email: invoice.customer_email!,
-      name: invoice.customer_name ?? "",
-      orderNumber: data.invoiceNumber,
-      orderNumberUrl: invoice.hosted_invoice_url!,
-      productName: data.products[0].name ?? "",
-      recipeUrl: invoice.hosted_invoice_url ?? "",
-    });
+    try {
+      this.saveData(data, invoice);
+    } catch (e) {
+      console.log("saving invoice data failed");
+    }
+    try {
+      messaging().send({
+        topic: "all",
+        notification: {
+          title: `New Order £${data.amount_paid / 100} ${
+            data.products[0].name
+          }`,
+          body: data.customer.name + " has ordered" ?? " NO name has ordered ",
+          imageUrl: data.products[0].image ?? "",
+        },
+      });
+    } catch (e) {
+      console.log("notification failed for invoice ");
+    }
+    try {
+      this.email.success({
+        email: invoice.customer_email!,
+        name: invoice.customer_name ?? "",
+        orderNumber: data.invoiceNumber,
+        orderNumberUrl: invoice.hosted_invoice_url!,
+        productName: data.products[0].name ?? "",
+        recipeUrl: invoice.hosted_invoice_url ?? "",
+      });
+    } catch (e) {
+      console.log("failed to send email for invoice to customer");
+    }
 
     return data;
   }
