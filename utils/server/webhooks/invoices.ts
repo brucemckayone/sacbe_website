@@ -3,6 +3,7 @@ import { firestore, messaging } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
 import adminInit from "@/utils/firebase/admin_init";
 import InvoiceSender from "@/utils/email/senders/invoiceSender";
+import { log } from "console";
 adminInit();
 
 export class InvoiceHandler {
@@ -62,12 +63,13 @@ export class InvoiceHandler {
     const productIds = invoice.lines.data.map(
       (line) => line.price!.product as string
     );
-
+    console.log(productIds);
     const products = await stripe.products.list({
-      ids: invoice.lines.data.map((line) => line.price!.product as string),
+      ids: productIds,
       limit: 100,
     });
 
+    console.log(products);
     if (products.has_more) {
       const moreProducts = await stripe.products.list({
         ids: productIds,
@@ -80,16 +82,16 @@ export class InvoiceHandler {
     let productList = [];
     for (let i = 0; i < products.data.length; i++) {
       const product = {
-        id: products.data[i].id,
-        name: products.data[i].name,
-        image: products.data[i].images[0],
-        quantity: invoice.lines.data[i].quantity,
-        cost: invoice.lines.data[i].amount,
-        subscriptionId: invoice.lines.data[i].subscription,
+        id: products.data[i].id ?? "no id",
+        name: products.data[i].name ?? "no nake",
+        image: products.data[i].images[0] ?? "no image",
+        quantity: invoice.lines.data[i].quantity ?? "non quantity",
+        cost: invoice.lines.data[i].amount ?? 0,
+        subscriptionId: invoice.lines.data[i].subscription ?? "no sub id",
       };
       productList.push(product);
     }
-
+    console.log(productList);
     return {
       customer: {
         id: invoice.customer,

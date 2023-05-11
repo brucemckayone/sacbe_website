@@ -35,7 +35,7 @@ function WeLoveOurMotherCard() {
 const AboutSacbe: React.FC = () => {
   return (
     <div className="bg-secondaryContainer pb-28">
-      <h2 className="py-20 mx-5 md:mx-10 md:text-center  text-8xl md:text-7xl">
+      <h2 className="py-20 mx-5 md:mx-10 text-center text-7xl lg:text-8xl md:text-7xl">
         OUR JOURNEY
       </h2>
 

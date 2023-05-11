@@ -4,7 +4,7 @@ import Link from "next/link";
 import { firestore } from "firebase-admin";
 
 import adminInit from "@/utils/firebase/admin_init";
-import Loading from "../posts/[title]/loading";
+
 import CardLoader from "@/components/loaders/CardLoader";
 
 async function getData() {
@@ -48,7 +48,6 @@ async function RecipeSlider() {
           </div>
         </div>
         <div className="flex justify-between">
-          <p>{post.readingTime}</p>
           <Link
             href={`/posts/${slug}`}
             className="self-end m-2 bottom-0 inline-flex align-bottom px-3 py-2 w-32  font-medium text-center text-onTertiaryContainer hover:text-onTertiaryContainer duration-150 bg-tertiaryContainer rounded-lg hover:bg-sacbeBrandColor p-10 "
@@ -74,10 +73,10 @@ async function RecipeSlider() {
   });
   return (
     <div className="bg-gradient-to-b to-secondaryContainer from-surfaceVarient  py-20">
-      <h3 className="text-4xl md:text-7xl md:text-center my-20">
+      <h3 className="text-5xl text-center md:text-7xl md:text-center my-20">
         GET TO KNOW CACAO
       </h3>
-      <Suspense fallback={<Loading />}>
+      <Suspense>
         <div className=" md:mx-20 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 place-items-center">
           {cards}
         </div>

@@ -93,9 +93,11 @@ export default async function handler(
       case "invoice.payment_succeeded":
         console.log(`handled event type ${event.type}`);
         try {
+          console.log("handling invoice");
           data = await invoiceHandler.invoicePaid(
             event.data.object as Stripe.Invoice
           );
+          console.log(data);
           status = 200;
           message = "invoice.paid has been handled";
         } catch (e) {
@@ -104,7 +106,7 @@ export default async function handler(
           message = `invoicehandler.invoicePaided() has failed with the following error:${"\n"} ${e}`;
         }
         break;
-        break;
+
       case "invoice.sent":
         const invoiceSent = event.data.object;
         console.log(`handled event type ${event.type}`);
@@ -135,5 +137,7 @@ export default async function handler(
     return res.status(401).send(`web hook error: ${error.message}`);
   }
 
-  res.status(status).json({ status: status, message: message, data: data });
+  return res
+    .status(status)
+    .json({ status: status, message: message, data: data });
 }
