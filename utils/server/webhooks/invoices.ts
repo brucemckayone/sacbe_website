@@ -3,7 +3,7 @@ import { firestore, messaging } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
 import adminInit from "@/utils/firebase/admin_init";
 import InvoiceSender from "@/utils/email/senders/invoiceSender";
-import { log } from "console";
+
 adminInit();
 
 export class InvoiceHandler {
@@ -113,7 +113,7 @@ export class InvoiceHandler {
     };
   }
 
-  saveData(data: any, invoice: Stripe.Invoice) {
+  private async saveData(data: any, invoice: Stripe.Invoice) {
     console.log("saving started");
     this.db.collection("orders").doc(invoice.id).set(data);
     console.log("saving complete");
