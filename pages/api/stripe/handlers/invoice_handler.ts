@@ -108,6 +108,7 @@ export default async function handler(
         } catch (e) {
           console.log(e);
         }
+        message = "all went well and it should have sent";
 
       case "invoice.sent":
         const invoiceSent = event.data.object;
