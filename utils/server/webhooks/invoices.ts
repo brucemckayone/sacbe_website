@@ -11,7 +11,12 @@ export class InvoiceHandler {
   private readonly db = firestore();
   async invoicePaid(invoice: Stripe.Invoice) {
     let data = await this.parseInvoiceForFirebase(invoice);
-    this.saveData(data, invoice);
+    console.log("saving started");
+
+    data = await this.saveData(data, invoice);
+    console.log("saving complete");
+    console.log("message started");
+
     messaging().send({
       topic: "all",
       notification: {
@@ -20,6 +25,8 @@ export class InvoiceHandler {
         imageUrl: data.products[0].image ?? "",
       },
     });
+    console.log("message sent");
+    console.log("emaio started");
     this.email.success({
       email: invoice.customer_email!,
       name: invoice.customer_name ?? "",
@@ -28,6 +35,7 @@ export class InvoiceHandler {
       productName: data.products[0].name ?? "",
       recipeUrl: invoice.hosted_invoice_url ?? "",
     });
+    console.log("email sent");
     return data;
   }
   async invoiceFailed(invoice: Stripe.Invoice) {
@@ -59,13 +67,10 @@ export class InvoiceHandler {
     const productIds = invoice.lines.data.map(
       (line) => line.price!.product as string
     );
-    console.log(productIds);
     const products = await stripe.products.list({
       ids: productIds,
       limit: 100,
     });
-
-    console.log(products);
     if (products.has_more) {
       const moreProducts = await stripe.products.list({
         ids: productIds,
@@ -87,7 +92,6 @@ export class InvoiceHandler {
       };
       productList.push(product);
     }
-    console.log(productList);
     return {
       customer: {
         id: invoice.customer,
@@ -110,8 +114,9 @@ export class InvoiceHandler {
   }
 
   saveData(data: any, invoice: Stripe.Invoice) {
+    console.log("saving started");
     this.db.collection("orders").doc(invoice.id).set(data);
-
+    console.log("saving complete");
     return data;
   }
 }

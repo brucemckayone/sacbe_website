@@ -43,7 +43,6 @@ export default async function handler(
       case "invoice.payment_succeeded":
         const invoice = event.data.object as Stripe.Invoice;
         data = invoiceHandler.invoicePaid(invoice);
-
         message = "all went well and it should have sent";
 
       case "invoice.sent":
