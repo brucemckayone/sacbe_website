@@ -78,7 +78,7 @@ export default async function handler(
           };
           productList.push(product);
         }
-        console.log(productList);
+
         data = {
           customer: {
             id: invoice.customer,
@@ -99,15 +99,13 @@ export default async function handler(
           charge: invoice.charge,
         };
         const db = firestore();
-        try {
-          const firebaseResponse = await db
-            .collection("orders")
-            .doc(invoice.id)
-            .set(data);
-          console.log(firebaseResponse);
-        } catch (e) {
-          console.log(e);
-        }
+
+        const firebaseResponse = await db
+          .collection("orders")
+          .doc(invoice.id)
+          .set(data);
+        console.log(firebaseResponse);
+
         message = "all went well and it should have sent";
 
       case "invoice.sent":
