@@ -18,7 +18,7 @@ function BecomeAPractioner() {
   return (
     <div className=" bg-gradient-to-b from-surfaceVarient to-secondaryContainer py-10">
       <div className="flex flex-col justify-center align-middle">
-        <h1 className="text-center flex pt-32 pb-20 text-6xl md:text-7xl">
+        <h1 className="flex justify-center pt-32 pb-20 text-6xl md:text-7xl">
           CACAO FACILITATION TRAINING
         </h1>
         <div className="flex flex-col md:flex-row ">

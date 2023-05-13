@@ -52,6 +52,7 @@ export default async function handler(
           status: subData.status,
           pauseCollection: subData.pause_collection,
           latest_invoice: {
+            id: latestInvoice.id,
             total: latestInvoice.amount_paid,
             products: latestInvoice.lines.data.map((line) => {
               //   const product = await stripe.products.retrieve(
