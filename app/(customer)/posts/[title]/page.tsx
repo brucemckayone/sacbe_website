@@ -7,7 +7,7 @@ import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
 import { Metadata } from "next";
 import { DocumentReference } from "@firebase/firestore";
-import { BlogPostsType } from "@/types/blogposts";
+
 import console, { log } from "console";
 import Categorychip from "@/components/blog/categorychips";
 import Link from "next/link";
@@ -208,14 +208,13 @@ export default async function Page({
                       key={slug}
                     >
                       <div
-                        className="flex flex-row my-10 border-b py-10 hover:bg-tertiaryContainer duration-500 hover:rounded-lg hover:shadow-lg hover:border-none "
+                        className="flex flex-col md:flex-row my-10 border-b py-10 hover:bg-tertiaryContainer duration-500 hover:rounded-lg hover:shadow-lg hover:border-none "
                         key={post.title + "related posts"}
                       >
-                        <div className="basis 3/12 relative  mx-10">
+                        <div className="max-w-full h-[200px]  md:basis-3/12 relative my-2  md:mx-10">
                           <Image
                             src={post.main_image}
-                            width={200}
-                            height={200}
+                            fill
                             className="object-cover rounded-lg"
                             alt={`${post.title} main header image`}
                           />

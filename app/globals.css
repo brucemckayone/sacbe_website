@@ -22,7 +22,9 @@
   h5 {
     @apply text-xl font-display;
   }
-  p,
+  p {
+    @apply text-lg;
+  }
   li {
     @apply font-body text-onBackground;
   }

@@ -5,6 +5,7 @@ const nextConfig = {
   // basePath: "https://sacbe-ceremonial-cacao.vercel.app/",
   experimental: {
     appDir: true,
+    serverActions: true,
     fontLoaders: [
       { loader: "@next/font/google", options: { subsets: ["latin"] } },
     ],

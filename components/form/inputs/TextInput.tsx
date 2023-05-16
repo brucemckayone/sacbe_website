@@ -8,8 +8,16 @@ interface Props {
   key: string;
   label?: string;
   type?: string;
+  className?: string;
 }
-function TextInput({ value, placeHolder, update, key, label }: Props) {
+function TextInput({
+  value,
+  placeHolder,
+  update,
+  key,
+  label,
+  className,
+}: Props) {
   return (
     <div className="mb-6" key={key}>
       {label && (
@@ -19,7 +27,7 @@ function TextInput({ value, placeHolder, update, key, label }: Props) {
       )}
       <input
         key={`input key ${key}`}
-        className="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:outline-sacbeBrandColor focus:border-sacbeBrandColor block w-full p-2.5 hover:scale-105 duration-200 font-body"
+        className={`bg-gray-50 border text-gray-900 text-sm rounded-lg focus:outline-sacbeBrandColor focus:border-sacbeBrandColor block w-full p-2.5 hover:scale-105 duration-200 font-body ${className}`}
         type=""
         value={value}
         placeholder={placeHolder}

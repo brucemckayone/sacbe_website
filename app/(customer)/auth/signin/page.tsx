@@ -3,7 +3,6 @@ import MagicLinkForm from "@/components/form/MagicLinkForm";
 import ProviderSigninButton from "@/components/buttons/ProviderSigninButton";
 
 import SlideInUp from "@/components/animations/slide_in_up";
-import Footer from "@/components/footer";
 
 export default async function SignIn() {
   const providers = await getProviders();

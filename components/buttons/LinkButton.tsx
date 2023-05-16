@@ -5,13 +5,14 @@ import Link from "next/link";
 interface props {
   url: string;
   isPrimary: Boolean;
+  text: string;
 }
 
-function LinkButton({ url, isPrimary = false }: props) {
+function LinkButton({ url, text, isPrimary = false }: props) {
   return (
     <Link href={url}>
       <PrimaryButton
-        text="Learn More"
+        text={text}
         onClicked={() => {
           window.location.href = url;
         }}

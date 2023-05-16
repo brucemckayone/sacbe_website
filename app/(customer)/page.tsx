@@ -72,6 +72,7 @@ function BecomeAPractioner() {
                   key={"sky on on earth thingy"}
                   url="https://skyeonearth.com/cacaofacilitation"
                   isPrimary={false}
+                  text="Learn More"
                 ></LinkButton>
               </SlideInUp>
             </div>

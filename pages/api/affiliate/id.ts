@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import Stripe from "stripe";
 
-import { envConfig } from "@/lib/webhooks/envConfig";
 import { firestore } from "firebase-admin";
 export default async function handler(
   req: NextApiRequest,

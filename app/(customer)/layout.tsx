@@ -1,13 +1,11 @@
-import Navbar from "../components/nav bar/Navbar";
-import "../app/globals.css";
+import Navbar from "@/components/nav bar/Navbar";
+import "../../app/globals.css";
 import AuthProvider from "@/components/providers/SessionProvider";
 
 import {
   Marcellus as displayFont,
   Marcellus as bodyFont,
 } from "@next/font/google";
-
-import ToastContainerClient from "@/components/toast/toast_container";
 import Footer from "@/components/footer";
 
 const raleway = displayFont({
