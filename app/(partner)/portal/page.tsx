@@ -17,7 +17,7 @@ function DashboardBody() {
   );
 }
 
-function page() {
+function Page() {
   const [mainBody, setMainBody] = useState(
     <div className="p-4 sm:ml-64">
       <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
@@ -108,9 +108,7 @@ function page() {
                       </div>
                       <PrimaryButton
                         text="Request Invoice"
-                        onClicked={() => {
-                          "send inoive";
-                        }}
+                        onClicked={() => {}}
                         isPrimary={true}
                         key={"send invoice button "}
                       ></PrimaryButton>
@@ -138,4 +136,4 @@ function page() {
 
 function sideBar() {}
 
-export default page;
+export default Page;

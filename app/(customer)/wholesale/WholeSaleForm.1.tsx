@@ -14,9 +14,6 @@ import sendWholeSaleRequest from "./sendRequest";
 
 export function WholeSaleForm(): JSX.Element {
   let wholeSaleAccount: { accountId: string } = { accountId: "" };
-  useEffect(() => {
-    wholeSaleAccount = { accountId: "string" };
-  }, []);
 
   const [email, setEmail] = useState("");
   const [firstName, setFirstname] = useState("");
