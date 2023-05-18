@@ -2,6 +2,7 @@ import stripe from "../../../../lib/stripe/stripe";
 import Stripe from "stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
+import adminInit from "@/utils/firebase/admin_init";
 
 export default async function handler(
   req: NextApiRequest,
@@ -40,34 +41,29 @@ export async function sendWholeSaleInvoice({
   bulk,
   retail,
 }: sendWholeSaleInvoiceType) {
+  adminInit();
   const currentDate = new Date();
   const futureDate = new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
 
   const unixTimestamp = Math.floor(futureDate.getTime() / 1000);
 
-  const bulksnap = firestore().collection("wholesale_prices").doc("bulk").get();
-  const retailsnap = firestore()
+  const bulksnap = await firestore()
+    .collection("wholesale_prices")
+    .doc("bulk")
+    .get();
+  const retailsnap = await firestore()
     .collection("wholesale_prices")
     .doc("retail")
     .get();
 
-  const bulkUnitPirce = (await bulksnap).data();
-  const retailUnitPirce = (await retailsnap).data();
+  const bulkUnitPrice = bulksnap.data();
+  const retailUnitPrice = retailsnap.data();
+
   const invoiceParams: Stripe.InvoiceCreateParams = {
     auto_advance: false,
     currency: "GBP",
     customer: customerId,
     description: "a descriptions ",
-    shipping_cost: {
-      shipping_rate_data: {
-        display_name: name,
-        fixed_amount: {
-          amount: 0,
-          currency: "GBP",
-        },
-        type: "fixed_amount",
-      },
-    },
     shipping_details: {
       address: shipping.address,
       name: name,
@@ -78,24 +74,27 @@ export async function sendWholeSaleInvoice({
   try {
     const invoice = await stripe.invoices.create(invoiceParams);
 
-    if (bulk)
+    if (bulk) {
       await stripe.invoiceItems.create({
         customer: customerId,
-        unit_amount: bulkUnitPirce!.Price,
+        unit_amount: bulkUnitPrice!.Price,
         quantity: bulk.qty,
         description: "bulk cacao",
         invoice: invoice.id,
       });
+    }
 
-    if (retail)
-      await stripe.invoiceItems.create({
-        customer: customerId,
-        quantity: retail.qty,
-        unit_amount: retailUnitPirce!.price,
-        description: "retail cacao",
-        invoice: invoice.id,
-      });
-    console.log(await stripe.invoices.finalizeInvoice(invoice.id));
+    // if (retail) {
+    //   await stripe.invoiceItems.create({
+    //     customer: customerId,
+    //     quantity: retail.qty,
+    //     unit_amount: retailUnitPrice!.price,
+    //     description: "retail cacao",
+    //     invoice: invoice.id,
+    //   });
+    // }
+    const finalInvoice = await stripe.invoices.finalizeInvoice(invoice.id);
+    console.log(finalInvoice);
     await stripe.invoices.sendInvoice(invoice.id);
 
     console.log("Email invoice sent successfully.");
