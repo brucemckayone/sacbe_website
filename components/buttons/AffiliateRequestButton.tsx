@@ -2,13 +2,13 @@
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { useSession } from "next-auth/react";
 import React, { useState } from "react";
-import { useAffiliate } from "../auth/affiliate_auth_context";
+import { useUser } from "../auth/affiliate_auth_context";
 import PrimaryButton from "./primaryButton";
 import TextInput from "../form/inputs/TextInput";
 import TextArea from "../form/inputs/TextArea";
 import homeUrl from "@/lib/constants/urls";
 function AffiliateRequestButton() {
-  const affiliate = useAffiliate();
+  const affiliate = useUser();
   const { data: data } = useSession();
   const [website, setWebsite] = useState("");
   const [twitter, setTwitter] = useState("");
@@ -33,6 +33,8 @@ function AffiliateRequestButton() {
     return (
       <div className="rounded-lg bg-tertiaryContainer p-10 border w-full">
         <div className=" flex flex-col ">
+          <h2>Affiliate Request Form</h2>
+          <p>Enter Your details to request an affiliate account</p>
           <form action="" method="post">
             <div className="flex flex-col m-1">
               <h2>Socials</h2>

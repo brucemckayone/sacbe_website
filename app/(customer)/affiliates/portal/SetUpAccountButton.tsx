@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import PrimaryButton from "@/components/buttons/primaryButton";
 import setUpAffiliateAccount from "@/utils/server/stripe/setUpAffiliateAccount";
-import { useAffiliate } from "@/components/auth/affiliate_auth_context";
+import { useUser } from "@/components/auth/affiliate_auth_context";
 import createOnBoardingLink from "@/utils/server/stripe/createOnboardingLink";
 import ButtonLoader from "@/components/loaders/ButtonLoader";
 
 function SetUpAccountButton() {
-  const { user: affiliate, isLoading: isloading } = useAffiliate();
+  const { user: affiliate, isLoading: isloading } = useUser();
   const [isLoading, setIsLoading] = useState(false);
+  const [hasPressed, setHasPressed] = useState(false);
 
   if (isLoading || isloading) {
     return <ButtonLoader />;
@@ -29,12 +30,18 @@ function SetUpAccountButton() {
     return (
       <div className="text-center">
         <PrimaryButton
+          isPrimary={!hasPressed}
           text="Continue Set up"
           onClicked={async () => {
-            setIsLoading(true);
-            const accountLink = await createOnBoardingLink(affiliate.accountId);
-            window.location.href = accountLink.url;
-            setIsLoading(false);
+            if (!hasPressed) {
+              setHasPressed(true);
+              setIsLoading(true);
+              const accountLink = await createOnBoardingLink(
+                affiliate.accountId
+              );
+              window.location.href = accountLink.url;
+              setIsLoading(false);
+            }
           }}
         />
       </div>

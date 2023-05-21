@@ -1,6 +1,6 @@
 import React from "react";
 
-import GetAffiliateLinkButton from "@/components/buttons/getAffiliateLinkButton";
+import AffiliateStatusChecker from "@/components/buttons/getAffiliateLinkButton";
 
 export default async function AffiliatePage() {
   return (
@@ -16,7 +16,7 @@ export default async function AffiliatePage() {
       </div>
       <div className="flex flex-col md:flex-row-reverse self-center my-5">
         <div className="flex basis-1/2 my-0 mx-3 mt-20 justify-center">
-          <GetAffiliateLinkButton />
+          <AffiliateStatusChecker />
         </div>
         <div className="flex flex-col basis-1/2 m-3 justify-center mt-20">
           <div>

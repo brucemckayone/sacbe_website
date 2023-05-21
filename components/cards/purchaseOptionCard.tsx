@@ -6,10 +6,10 @@ import PrimaryButton from "../buttons/primaryButton";
 import SlideInUp from "../animations/slide_in_up";
 import { toast } from "react-toastify";
 import Link from "next/link";
-import AffiliateProvider from "../auth/affiliate_auth_context";
+import UserProvider from "../auth/affiliate_auth_context";
 import { Modal, Group, Button } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useAffiliate } from "../auth/affiliate_auth_context";
+import { useUser } from "../auth/affiliate_auth_context";
 
 import { getStripeCustomerIdByEmail } from "@/lib/firebase/getStripeCustomerId";
 import getCustomerShipping from "@/lib/stripe/getCustomerShipping";

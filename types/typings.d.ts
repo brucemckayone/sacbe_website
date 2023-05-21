@@ -22,6 +22,9 @@ type userType = {
   uuid: string;
   affiliateLink: string;
   chargesEnabled: boolean;
+  wholesale?: boolean;
+  name?: string;
+  customerId?: string;
 };
 
 type marketingType = {

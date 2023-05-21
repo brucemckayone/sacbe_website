@@ -1,11 +1,7 @@
 import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 
-export default async function sendWholeSaleRequest(body: {
-  email: string;
-  name: string;
-}) {
+export default async function sendWholeSaleRequest(user: userType) {
   return await fetchPostJSON(`api/wholesale/request`, {
-    email: body.email,
-    name: body.name,
+    user: user,
   });
 }

@@ -4,24 +4,37 @@ import AfilliateSales from "@/components/affiliate/affiliate_sales";
 import SetUpAccountButton from "./SetUpAccountButton";
 import AccountBalanceTabs from "./AccountBalanceTabs";
 import PaymentLinks from "./paymentLinks";
-import { useAffiliate } from "@/components/auth/affiliate_auth_context";
-import GetAffiliateLinkButton from "@/components/buttons/getAffiliateLinkButton";
+import { useUser } from "@/components/auth/affiliate_auth_context";
+import AffiliateStatusChecker from "@/components/buttons/getAffiliateLinkButton";
+import { useSession } from "next-auth/react";
 
 function Portal() {
-  const { user: affiliate, isLoading: affiliateLoading } = useAffiliate();
+  const { user: affiliate, isLoading: affiliateLoading } = useUser();
+  const session = useSession();
 
-  if (!affiliate.accountId) return <GetAffiliateLinkButton />;
-
-  return (
-    <span>
-      <div className="  mx-2">
-        <AccountBalanceTabs />
-        <PaymentLinks />
-        <SetUpAccountButton />
-        <AfilliateSales />
-      </div>
-    </span>
-  );
+  if (session!.data?.user) {
+    // set loading state
+    if (affiliateLoading) {
+      return (
+        <div>
+          <h6>Loading Affiliate Details</h6>
+        </div>
+      );
+    } else {
+      return (
+        <span>
+          <div className="  mx-2">
+            <h1 className="mt-10">Affiliate Portal</h1>
+            <AccountBalanceTabs />
+            <PaymentLinks />
+            <SetUpAccountButton />
+            <AfilliateSales />
+          </div>
+        </span>
+      );
+    }
+  }
+  return <> </>;
 }
 
 export default Portal;

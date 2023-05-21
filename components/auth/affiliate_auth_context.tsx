@@ -22,7 +22,7 @@ const authContextDefaultValues: authContextType = {
 
 const AuthContext = createContext<authContextType>(authContextDefaultValues);
 
-export function useAffiliate() {
+export function useUser() {
   return useContext(AuthContext);
 }
 
@@ -35,7 +35,7 @@ const fetcher = (path: string) =>
 interface getAffiliateInterface {
   email: string;
 }
-function useAffiliateSWR({ email }: getAffiliateInterface) {
+function useUserSWR({ email }: getAffiliateInterface) {
   const { data, error, isLoading } = useSWR(
     `/api/affiliate/user?email=${email}`,
     fetcher
@@ -48,31 +48,31 @@ function useAffiliateSWR({ email }: getAffiliateInterface) {
   };
 }
 
-export default function AffiliateProvider({
+export default function UserProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<userType>({} as userType);
-  const setAffiliateUser = (updatedUser: userType) => {
+  const setUserDetails = (updatedUser: userType) => {
     setUser(updatedUser);
   };
 
   const session = useSession();
-  const data = useAffiliateSWR({
+  const data = useUserSWR({
     email: session.data?.user?.email ?? "", //"brucemckayone@gmail.com",
   });
   useEffect(() => {
     if (data.user) {
       console.log(data.user);
 
-      setAffiliateUser(data.user);
+      setUserDetails(data.user);
     }
   }, [data.user]);
 
   const value: authContextType = {
     user: user,
-    setUser: setAffiliateUser,
+    setUser: setUserDetails,
     isLoading: data.isLoading,
     isError: data.isError,
   };

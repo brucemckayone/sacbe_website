@@ -19,7 +19,7 @@ export default async function handler(
           .doc(snapshot.docs[0].id)
           .update({ chargesEnabled: true });
       }
-      res.status(200).redirect("/affiliates/portal");
+      res.status(200).redirect("/portal");
       break;
     case "POST":
       break;

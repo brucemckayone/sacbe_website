@@ -3,10 +3,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Stripe from "stripe";
 import getStripeBalance from "@/utils/server/stripe/account/balance";
-import { useAffiliate } from "@/components/auth/affiliate_auth_context";
+import { useUser } from "@/components/auth/affiliate_auth_context";
 import HeaderLoader from "@/components/loaders/HeaderLoader";
 function AccountBalanceTabs() {
-  const { user: affiliate, isLoading: isAffilateLoading } = useAffiliate();
+  const { user: affiliate, isLoading: isAffilateLoading } = useUser();
   const [isloading, setIsLoading] = useState(true);
 
   const [totalAvailable, setTotalAvailable] = useState(0);

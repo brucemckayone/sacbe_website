@@ -3,16 +3,17 @@ import React, { ReactNode } from "react";
 
 export function DashboardSideBarListTile(props: {
   text: string;
-
   iconUrl?: string;
   update: React.Dispatch<React.SetStateAction<JSX.Element>>;
   mainBody: JSX.Element;
+  toggleBar: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   return (
     <li>
       <div
         onClick={() => {
           props.update(props.mainBody);
+          props.toggleBar(false);
         }}
         className="text-xl no-underline flex items-center p-2 text-onTertiaryContainer bg-primaryContainer rounded-lg hover:bg-surface duration-300"
       >

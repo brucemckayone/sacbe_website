@@ -15,90 +15,99 @@ export default async function handler(
 }
 
 type sendWholeSaleInvoiceType = {
-  customerId: string;
-  name: string;
+  user: userType;
   bulk: {
-    priceId: string;
     qty: number;
     total: number;
   };
   retail: {
-    priceId: string;
     qty: number;
     total: number;
   };
   shipping: {
-    displayName: string;
     fixedAmount: number;
     address: Stripe.AddressParam;
   };
 };
 
 export async function sendWholeSaleInvoice({
-  customerId,
-  name,
+  user,
   shipping,
   bulk,
   retail,
 }: sendWholeSaleInvoiceType) {
   adminInit();
-  const currentDate = new Date();
-  const futureDate = new Date(currentDate.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-  const unixTimestamp = Math.floor(futureDate.getTime() / 1000);
-
-  const bulksnap = await firestore()
-    .collection("wholesale_prices")
-    .doc("bulk")
-    .get();
-  const retailsnap = await firestore()
+  const bulksnap = firestore().collection("wholesale_prices").doc("bulk").get();
+  const retailsnap = firestore()
     .collection("wholesale_prices")
     .doc("retail")
     .get();
 
-  const bulkUnitPrice = bulksnap.data();
-  const retailUnitPrice = retailsnap.data();
+  const bulkUnitPirce = (await bulksnap).data();
+  const retailUnitPirce = (await retailsnap).data();
 
-  const invoiceParams: Stripe.InvoiceCreateParams = {
-    auto_advance: false,
-    currency: "GBP",
-    customer: customerId,
-    description: "a descriptions ",
-    shipping_details: {
-      address: shipping.address,
-      name: name,
-    },
-    collection_method: "send_invoice",
-    due_date: unixTimestamp,
-  };
   try {
-    const invoice = await stripe.invoices.create(invoiceParams);
-
+    const invoiceParams: Stripe.InvoiceCreateParams = {
+      auto_advance: false,
+      currency: "GBP",
+      customer: user.customerId!,
+      description: "a descriptions",
+      shipping_details: {
+        address: shipping.address,
+        name: user.name!,
+      },
+      collection_method: "send_invoice",
+      days_until_due: 30,
+    };
+    const invoice = await stripe.invoices.create({
+      customer: user.customerId,
+      collection_method: "send_invoice",
+      days_until_due: 30,
+      shipping_cost: {
+        shipping_rate_data: {
+          display_name: user.name ?? "No Name",
+          fixed_amount: {
+            amount: shipping.fixedAmount,
+            currency: "GBP",
+          },
+          type: "fixed_amount",
+        },
+      },
+    });
+    let items = [];
     if (bulk) {
+      items.push({
+        name: "bulk",
+        invoice: invoice.id,
+        quantity: 2,
+        unit_amount: bulkUnitPirce!.price,
+      });
+    }
+    if (retail) {
+      items.push({
+        name: "Retail",
+        invoice: invoice.id,
+        quantity: 1,
+        unit_amount: retailUnitPirce!.price,
+      });
+    }
+
+    for (const item of items) {
       await stripe.invoiceItems.create({
-        customer: customerId,
-        unit_amount: bulkUnitPrice!.Price,
-        quantity: bulk.qty,
-        description: "bulk cacao",
+        customer: user.customerId!,
+        currency: "GBP",
+        description: item.name,
+        quantity: item.quantity,
+        unit_amount: item.unit_amount,
         invoice: invoice.id,
       });
     }
 
-    // if (retail) {
-    //   await stripe.invoiceItems.create({
-    //     customer: customerId,
-    //     quantity: retail.qty,
-    //     unit_amount: retailUnitPrice!.price,
-    //     description: "retail cacao",
-    //     invoice: invoice.id,
-    //   });
-    // }
-    const finalInvoice = await stripe.invoices.finalizeInvoice(invoice.id);
-    console.log(finalInvoice);
     await stripe.invoices.sendInvoice(invoice.id);
 
-    console.log("Email invoice sent successfully.");
+    console.log("Invoice created and sent:", invoice);
   } catch (error) {
-    console.error("Error sending email invoice:", error);
+    console.error("Error creating and sending invoice:", error);
   }
 }

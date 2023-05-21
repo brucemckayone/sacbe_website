@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import useSWR from "swr";
-import { useAffiliate } from "@/components/auth/affiliate_auth_context";
+import { useUser } from "@/components/auth/affiliate_auth_context";
 import getAffiliatePaymentLinks from "@/utils/client/stripe/links/getAffiliatePaymentLinks";
 import PrimaryButton from "@/components/buttons/primaryButton";
 import Image from "next/image";
@@ -13,8 +13,9 @@ import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
 import { link } from "fs";
 
 function PaymentLinks() {
-  const { user: affiliate, isLoading: affiliateLoading } = useAffiliate();
+  const { user: affiliate, isLoading: affiliateLoading } = useUser();
   const [isGeneratingLinks, setIsGeneratingLinks] = useState(false);
+  const [hasSendLinkRequest, setHasSentLinkRequest] = useState(false);
   const [hasGeneratedPaymentLinks, setHasGeneratedPaymentLinks] =
     useState(false);
   const [linksState, setLinks] = useState<PaymentLinkListType>();
@@ -29,7 +30,7 @@ function PaymentLinks() {
     setLinks(fetchedLinks);
   }, [linksState, fetchedLinks]);
 
-  if (affiliateLoading || isGeneratingLinks || isLoading) {
+  if (affiliateLoading || isGeneratingLinks) {
     return (
       <div className="flex flex-row justify-around mx-5 md:mx-20">
         <CardLoader />
@@ -85,7 +86,8 @@ function PaymentLinks() {
     !isLoading &&
     !isGeneratingLinks &&
     !affiliateLoading &&
-    !hasGeneratedPaymentLinks
+    !hasGeneratedPaymentLinks &&
+    !hasSendLinkRequest
   ) {
     return (
       <div className="text-center">
@@ -94,6 +96,7 @@ function PaymentLinks() {
           onClicked={async () => {
             try {
               setHasGeneratedPaymentLinks(true);
+              setHasSentLinkRequest(true);
               setIsGeneratingLinks(true);
               const links = await generatePaymentLinks(
                 affiliate.accountId,
@@ -109,12 +112,7 @@ function PaymentLinks() {
       </div>
     );
   }
-  return (
-    <div className="flex flex-row justify-around mx-5 md:mx-20">
-      <CardLoader />
-      <CardLoader />
-    </div>
-  );
+  return <></>;
 }
 
 export default PaymentLinks;

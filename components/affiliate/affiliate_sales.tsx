@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { RxClipboardCopy } from "react-icons/rx";
-import { useAffiliate } from "../auth/affiliate_auth_context";
+import { useUser } from "../auth/affiliate_auth_context";
 import useSWR from "swr";
 import getAffiliateSales from "@/utils/client/stripe/payments/getAffiliateSales";
 import TableLoader from "../loaders/TableLoader";
@@ -16,7 +16,7 @@ async function fetchData(accountId: string) {
   ]);
 }
 function AfilliateSales() {
-  const { user: affiliate, isLoading: isLoadingAffiliate } = useAffiliate();
+  const { user: affiliate, isLoading: isLoadingAffiliate } = useUser();
   const [salesFocus, setSalesFocus] = useState(true);
   const [payoutFocus, setPayoutFocus] = useState(false);
 

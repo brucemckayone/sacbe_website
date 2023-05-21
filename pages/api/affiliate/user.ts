@@ -32,6 +32,8 @@ async function getAffiliateUser(email: string) {
 
     if (snapshot.docs.length > 0) {
       const data = snapshot.docs[0].data() as userType;
+      console.log(data);
+
       return { status: 200, data: data };
     } else {
       return {
