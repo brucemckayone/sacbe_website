@@ -9,8 +9,14 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if ((req.method = "POST")) {
-    await sendWholeSaleInvoice(req.body as sendWholeSaleInvoiceType);
-    res.status(200).json({ send: "send" });
+    try {
+      const invoice = await sendWholeSaleInvoice(
+        req.body as sendWholeSaleInvoiceType
+      );
+      res.status(200).json(invoice);
+    } catch (e) {
+      res.status(200).json(false);
+    }
   }
 }
 
@@ -18,11 +24,9 @@ type sendWholeSaleInvoiceType = {
   user: userType;
   bulk: {
     qty: number;
-    total: number;
   };
   retail: {
     qty: number;
-    total: number;
   };
   shipping: {
     fixedAmount: number;
@@ -48,27 +52,20 @@ export async function sendWholeSaleInvoice({
   const retailUnitPirce = (await retailsnap).data();
 
   try {
-    const invoiceParams: Stripe.InvoiceCreateParams = {
-      auto_advance: false,
-      currency: "GBP",
-      customer: user.customerId!,
-      description: "a descriptions",
-      shipping_details: {
-        address: shipping.address,
-        name: user.name!,
-      },
-      collection_method: "send_invoice",
-      days_until_due: 30,
-    };
     const invoice = await stripe.invoices.create({
       customer: user.customerId,
+
       collection_method: "send_invoice",
       days_until_due: 30,
+      shipping_details: {
+        address: shipping.address,
+        name: user.name ?? "No name given",
+      },
       shipping_cost: {
         shipping_rate_data: {
           display_name: user.name ?? "No Name",
           fixed_amount: {
-            amount: shipping.fixedAmount,
+            amount: shipping.fixedAmount ?? 50,
             currency: "GBP",
           },
           type: "fixed_amount",
@@ -80,7 +77,7 @@ export async function sendWholeSaleInvoice({
       items.push({
         name: "bulk",
         invoice: invoice.id,
-        quantity: 2,
+        quantity: bulk.qty,
         unit_amount: bulkUnitPirce!.price,
       });
     }
@@ -88,7 +85,7 @@ export async function sendWholeSaleInvoice({
       items.push({
         name: "Retail",
         invoice: invoice.id,
-        quantity: 1,
+        quantity: retail.qty,
         unit_amount: retailUnitPirce!.price,
       });
     }
@@ -104,9 +101,8 @@ export async function sendWholeSaleInvoice({
       });
     }
 
-    await stripe.invoices.sendInvoice(invoice.id);
-
-    console.log("Invoice created and sent:", invoice);
+    await stripe.invoices.finalizeInvoice(invoice.id);
+    return await stripe.invoices.sendInvoice(invoice.id);
   } catch (error) {
     console.error("Error creating and sending invoice:", error);
   }

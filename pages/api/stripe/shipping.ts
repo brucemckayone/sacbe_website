@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import stripe from "@/lib/stripe/stripe";
 import Stripe from "stripe";
+import { fetchGetJSON } from "@/utils/stripe/fetchPostJson";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -8,7 +9,10 @@ export default async function handler(
   let customerId: string;
   if (req.method == "GET") {
     customerId = req.query.customerId as string;
-    stripe.customers.retrieve(customerId);
-    // res.status(200).json(data);
+    const customer = (await stripe.customers.retrieve(
+      customerId
+    )) as Stripe.Customer;
+
+    return res.status(200).json(customer.shipping?.address);
   }
 }

@@ -107,6 +107,9 @@ const authOptions: AuthOptions = {
     logo: "/sacbe_logo_icon.png",
   },
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
     // async signIn({ account, user }) {
     //   console.log("sign in callback called from nextauth.ts");
     //   console.log("account");

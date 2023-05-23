@@ -5,12 +5,11 @@ import PrimaryButton from "@/components/buttons/primaryButton";
 import CardLoader from "@/components/loaders/CardLoader";
 import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { Checkbox, Modal, Button, Group } from "@mantine/core";
-import { useSession } from "next-auth/react";
-import PageLoader from "next/dist/client/page-loader";
-import { totalmem } from "os";
 import React, { useEffect, useState } from "react";
-
+import TextInput from "@/components/form/inputs/TextInput";
 import { useDisclosure } from "@mantine/hooks";
+import Stripe from "stripe";
+import { useToasts } from "react-toast-notifications";
 
 function WholeSalePortalSignUpForm() {
   return (
@@ -23,17 +22,53 @@ function WholeSalePortalSignUpForm() {
 }
 
 export function WholesalePortalPage() {
+  const { addToast } = useToasts();
   const [opened, { open, close }] = useDisclosure(false);
   const [retailQty, setRetailQty] = useState(5);
   const [bulkQty, setBulkQty] = useState(5);
   const [hasBulk, setHasBulk] = useState(false);
   const [hasRetail, setHasRetail] = useState(false);
 
+  const [line1, setLine1] = useState("");
+  const [line2, setLine2] = useState("");
+  const [city, setCity] = useState("");
+  const [postcode, setPostcode] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [saveShipping, setSaveShipping] = useState(false);
   const [shippingCost, setshippingGost] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [cacaoCost, setCacaoCost] = useState(0);
 
+  const [isSendingOrder, setIsSendingOrder] = useState(false);
+
   const { isError, isLoading, setUser, user } = useUser();
+
+  let shipping = {
+    line1: line1,
+    line2: line2,
+    country: country,
+    state: state,
+    postcode: postcode,
+    city: city,
+  };
+
+  let orderDetails = {
+    user: user,
+    bulk: { qty: bulkQty },
+    retail: { qty: retailQty },
+    shipping: {
+      fixed_amount: shippingCost,
+      address: {
+        city: city,
+        country: country,
+        line1: line1,
+        line2: line2 ?? " ",
+        state: state ?? "",
+        postal_code: postcode,
+      },
+    },
+  };
 
   useEffect(() => {
     calculate();
@@ -56,15 +91,100 @@ export function WholesalePortalPage() {
 
   return (
     <div className="p-4 sm:ml-64">
-      <Modal opened={opened} onClose={close} title="Authentication">
-        {/* Modal content */}
+      <Modal opened={opened} onClose={close} title="Enter Shipping Details">
+        <form className="p-4">
+          <div className="flex justify-between">
+            <TextInput
+              placeHolder="line 1"
+              value={line1}
+              update={setLine1}
+              type="address"
+              label="Address Line 1"
+              key={"eg. Flat A"}
+            />
+            <TextInput
+              placeHolder="line 2"
+              value={line2}
+              update={setLine2}
+              type="address"
+              label="Address Line 1"
+              key={"eg. Cacao Road"}
+            />
+          </div>
+          <TextInput
+            placeHolder="eg. Cacao Town"
+            value={city}
+            update={setCity}
+            type="address"
+            key={"city"}
+            label={"City"}
+          />
+
+          <TextInput
+            label="State/County"
+            value={state}
+            update={setState}
+            type="address"
+            placeHolder={"Cacaoshire"}
+            key={"postcode"}
+          />
+          <TextInput
+            label="Country"
+            value={country}
+            update={setCountry}
+            type="address"
+            placeHolder={"United Cacaoingdom"}
+            key={"postcode"}
+          />
+          <TextInput
+            label="Postcode"
+            value={postcode}
+            update={setPostcode}
+            type="address"
+            placeHolder={"CAC70 2A"}
+            key={"postcode"}
+          />
+        </form>
+        <div>
+          <PrimaryButton
+            onClicked={() => {
+              close();
+            }}
+            text="cancel"
+            isPrimary={false}
+            key={"cancel order button"}
+          ></PrimaryButton>
+
+          <PrimaryButton
+            onClicked={async () => {
+              setIsSendingOrder(true);
+              const isOK = await fetchPostJSON(
+                "api/stripe/billing/invoice",
+                orderDetails
+              );
+              if (isOK) {
+                setIsSendingOrder(false);
+                addToast("Invoice Created", { appearance: "success" });
+                close();
+              } else {
+                setIsSendingOrder(false);
+                addToast("Error", { appearance: "error" });
+              }
+            }}
+            text={isSendingOrder ? "Loading" : "Confirm order"}
+            isPrimary={true}
+            key={"confirm order button"}
+          />
+        </div>
       </Modal>
       <div>
         <h1 className="my-10">Place An Wholesale Order</h1>
         <div>
           <h3>Retail Orders</h3>
           <div className="flex flex-col md:flex-row justify-between">
-            <p>Branded Beautiful Pouches sold by the case 1 case = 6 pouches</p>
+            <p>
+              Branded Beautiful Pouches sold by the case.6 pouches to a case
+            </p>
             <div
               onClick={handleRetailOnChange}
               className={`p-4 my-5 rounded-lg shadow-lg border duration-300 ${
@@ -181,11 +301,13 @@ export function WholesalePortalPage() {
             </div>
           </div>
 
-          <div className="overflow-auto rounded-md shadow-xl">
+          <div
+            className={`overflow-auto rounded-md shadow-xl border   ${
+              !hasBulk && "opacity-10"
+            }`}
+          >
             <table
-              className={`w-full text-sm text-left text-bg-surfaceVarient shadow-lg border  ${
-                !hasBulk && "opacity-10"
-              }`}
+              className={`w-full text-sm text-left text-bg-surfaceVarient shadow-lg`}
             >
               <thead className="text-xs text-bg-surface uppercase bg-surfaceVarient dark:bg-bg-surface ">
                 <tr className="bg-surface border-b-2">
@@ -303,18 +425,16 @@ export function WholesalePortalPage() {
           </table>
         </div>
 
-        <PrimaryButton
-          text="Place Order"
-          onClicked={() => {
-            fetchPostJSON("api/stripe/invoice", {
-              user: user,
-              bulk: { qty: bulkQty },
-              retail: { qty: retailQty },
-            });
-          }}
-          isPrimary={true}
-          key={"send invoice button "}
-        ></PrimaryButton>
+        <div className={`${!hasBulk && !hasRetail && "opacity-10"}`}>
+          <PrimaryButton
+            text="Place Order"
+            onClicked={async () => {
+              if (hasBulk || hasRetail) open();
+            }}
+            isPrimary={true}
+            key={"send invoice button "}
+          ></PrimaryButton>
+        </div>
       </div>
     </div>
   );

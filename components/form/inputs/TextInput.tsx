@@ -21,8 +21,8 @@ function TextInput({
   return (
     <div className="mb-6" key={key}>
       {label && (
-        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white font-body">
-          <h5>{label}</h5>
+        <label className="block mb-2">
+          <h5 className="">{label}</h5>
         </label>
       )}
       <input

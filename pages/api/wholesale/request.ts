@@ -27,7 +27,7 @@ export default async function handler(
       }
 
       if (!user.customerId) {
-        await addCustomerIdToUser(user.uuid);
+        await addCustomerIdToUser(user.uuid, user.email);
       }
 
       await userCol.doc(user.uuid).set({ wholesale: false }, { merge: true });
@@ -84,8 +84,10 @@ export default async function handler(
   }
 }
 
-export async function addCustomerIdToUser(uuid: string) {
-  const customer = await stripe.customers.create();
+export async function addCustomerIdToUser(uuid: string, email: string) {
+  const customer = await stripe.customers.create({
+    email: email,
+  });
   firestore()
     .collection("users")
     .doc(uuid)

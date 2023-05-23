@@ -4,6 +4,7 @@ import Portal from "@/app/(customer)/affiliates/portal/page";
 import UserProvider from "@/components/auth/affiliate_auth_context";
 import AuthProvider from "@/components/providers/SessionProvider";
 import React, { useState } from "react";
+import { ToastProvider } from "react-toast-notifications";
 import { PortalSideBar } from "./PortalSideBar";
 
 function Page() {
@@ -15,14 +16,16 @@ function Page() {
     </div>
   );
   return (
-    <UserProvider>
-      <AuthProvider>
-        <div>
-          <PortalSideBar setMainBody={setMainBody}></PortalSideBar>
-          {mainBody}
-        </div>
-      </AuthProvider>
-    </UserProvider>
+    <ToastProvider>
+      <UserProvider>
+        <AuthProvider>
+          <div>
+            <PortalSideBar setMainBody={setMainBody}></PortalSideBar>
+            {mainBody}
+          </div>
+        </AuthProvider>
+      </UserProvider>
+    </ToastProvider>
   );
 }
 export default Page;

@@ -45,6 +45,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-markdown": "^8.0.7",
+    "react-toast-notifications": "^2.5.1",
     "react-toastify": "^9.1.1",
     "sharp": "^0.31.3",
     "sib-api-v3-sdk": "^8.5.0",
