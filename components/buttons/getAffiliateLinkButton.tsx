@@ -22,12 +22,11 @@ function AffiliateStatusChecker() {
         </div>
       );
     } else {
+      const status = affiliate.user.affiliateStatus.status;
+      if (status == "active") {
+        return <Portal />;
+      }
       if (affiliate.user.accountId) {
-        const status = affiliate.user.affiliateStatus.status;
-
-        if (status == "active") {
-          return <Portal />;
-        }
         return (
           <div className="bg-tertiaryContainer rounded-lg w-full p-5 border h-36 md:h-28">
             {status == "pending" && (

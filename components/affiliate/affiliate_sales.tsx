@@ -67,7 +67,7 @@ function AfilliateSales() {
           </button>
         </div>
         {salesFocus && (
-          <div className="shadow-xl">
+          <div className="shadow-lg">
             <SlideInUp animiation="animate-slide_in_left_blur">
               <table className="w-full text-sm text-left table-auto overflow-scroll z-1 shadow-xl">
                 <thead className="bg-primaryContainer   ">
@@ -86,11 +86,11 @@ function AfilliateSales() {
                 {sales?.data.map((sale) => {
                   return (
                     <tbody
-                      className="bg-white bg-tertiaryContainer hover:bg-transparent border-onTertiaryContainer duration-300"
+                      className="bg-white bg-surface hover:bg-transparent border-onTertiaryContainer duration-300 shadow-lg"
                       key={sale.id + "row"}
                     >
-                      <tr>
-                        <td className="p-3" key={sale.id}>
+                      <tr className="border-b border-primaryContainer">
+                        <td className="p-6" key={sale.id}>
                           <p>{sale.receipt_email}</p>
                         </td>
                         <td key={sale.amount + sale.id}>
@@ -123,67 +123,69 @@ function AfilliateSales() {
           </div>
         )}
         {payoutFocus && (
-          <SlideInUp animiation="animate-slide_in_left_blur">
-            <div className="shadow-xl">
-              <table className="w-full text-sm text-left table-auto overflow-scroll z-50  rounded-l-xl ">
-                <thead className="bg-primaryContainer ">
-                  <tr>
-                    <th className="mx-2 rounded-tl-md">
-                      <h5 className="px-2 py-1">Amount</h5>
-                    </th>
-                    <th className="mx-2">
-                      <h5>Status</h5>
-                    </th>
-                    <th className="mx-2">
-                      <h5>Currancy</h5>
-                    </th>
-                    <th className="mx-2 rounded-tr-md">
-                      <h5>Arv. Date</h5>
-                    </th>
-                  </tr>
-                </thead>
-                {payouts?.data.map((payout) => {
-                  return (
-                    <tbody
-                      className="bg-white  bg-tertiaryContainer border-onTertiaryContainer"
-                      key={payout.id + "row"}
-                    >
-                      <tr>
-                        <td className="p-3" key={payout.id}>
-                          <p>£{(payout.amount / 100).toFixed(2)}</p>
-                        </td>
-                        <td key={payout.status + payout.arrival_date}>
-                          <div
-                            className={`rounded-md mx-2 text-center ${
-                              payout.status == "paid"
-                                ? "bg-recommendedGreen"
-                                : "bg-errorContainer"
-                            }`}
+          <div className="shadow-lg">
+            <SlideInUp animiation="animate-slide_in_left_blur">
+              <div className="shadow-xl">
+                <table className="w-full text-sm text-left table-auto overflow-scroll z-50  rounded-l-xl ">
+                  <thead className="bg-primaryContainer ">
+                    <tr>
+                      <th className="mx-2 rounded-tl-md">
+                        <h5 className="px-2 py-1">Amount</h5>
+                      </th>
+                      <th className="mx-2">
+                        <h5>Status</h5>
+                      </th>
+                      <th className="mx-2">
+                        <h5>Currancy</h5>
+                      </th>
+                      <th className="mx-2 rounded-tr-md">
+                        <h5>Arv. Date</h5>
+                      </th>
+                    </tr>
+                  </thead>
+                  {payouts?.data.map((payout) => {
+                    return (
+                      <tbody
+                        className="bg-white  bg-tertiaryContainer border-onTertiaryContainer shadow-lg"
+                        key={payout.id + "row"}
+                      >
+                        <tr>
+                          <td className="p-3" key={payout.id}>
+                            <p>£{(payout.amount / 100).toFixed(2)}</p>
+                          </td>
+                          <td key={payout.status + payout.arrival_date}>
+                            <div
+                              className={`rounded-md mx-2 text-center ${
+                                payout.status == "paid"
+                                  ? "bg-recommendedGreen"
+                                  : "bg-errorContainer"
+                              }`}
+                            >
+                              <p>{payout.status}</p>
+                            </div>
+                          </td>
+                          <td
+                            className="p-3"
+                            key={payout.description + payout.id}
                           >
-                            <p>{payout.status}</p>
-                          </div>
-                        </td>
-                        <td
-                          className="p-3"
-                          key={payout.description + payout.id}
-                        >
-                          <p>{payout.currency.toUpperCase()}</p>
-                        </td>
-                        <td>
-                          <p>
-                            {new Date(
-                              payout.arrival_date * 1000
-                            ).toDateString()}
-                            .
-                          </p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  );
-                })}
-              </table>
-            </div>
-          </SlideInUp>
+                            <p>{payout.currency.toUpperCase()}</p>
+                          </td>
+                          <td>
+                            <p>
+                              {new Date(
+                                payout.arrival_date * 1000
+                              ).toDateString()}
+                              .
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    );
+                  })}
+                </table>
+              </div>
+            </SlideInUp>
+          </div>
         )}
         {sales?.data.length == 0 && (
           <div>

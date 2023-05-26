@@ -107,24 +107,23 @@ const authOptions: AuthOptions = {
     logo: "/sacbe_logo_icon.png",
   },
   callbacks: {
-    async redirect({ url, baseUrl }) {
-      return baseUrl;
-    },
-    // async signIn({ account, user }) {
-    //   console.log("sign in callback called from nextauth.ts");
-    //   console.log("account");
-    //   if (account) {
-    //     if (user?.email) {
-    //       getOrSaveCustomerIdFromFirebase(user.email);
-    //     }
-    //   }
-    //   return true;
+    // async redirect({ url, baseUrl }) {
+    //   // if (url.startsWith(baseUrl) && url != undefined) {
+    //   //   const params = getSearchParams(url);
+    //   //   const redirect = params.get("callbackUrl");
+    //   //   console.log(redirect);
+
+    //   //   return redirect!;
+    //   // }
+
+    //   // return baseUrl;
     // },
+
     async signIn({ user }) {
       return true;
     },
     async session({ session }) {
-      // session.user.isLoggedIn = true;
+      // session.user.isLoggedIn = true;yarn
       return session;
     },
     async jwt({ token, user }) {
@@ -137,3 +136,14 @@ const authOptions: AuthOptions = {
 export { authOptions };
 
 export default NextAuth(authOptions);
+
+function getSearchParams(url: string): Map<string, string> {
+  const urlObj = new URL(url);
+  const paramsMap = new Map<string, string>();
+
+  urlObj.searchParams.forEach((value, key) => {
+    paramsMap.set(key, value);
+  });
+
+  return paramsMap;
+}

@@ -4,12 +4,13 @@ import LinkButton from "@/components/buttons/LinkButton";
 import PrimaryButton from "@/components/buttons/primaryButton";
 import TextInput from "@/components/form/inputs/TextInput";
 import ButtonLoader from "@/components/loaders/ButtonLoader";
-import { fetchGetJSON } from "@/utils/stripe/fetchPostJson";
-import { Divide } from "hamburger-react";
+import homeUrl from "@/lib/constants/urls";
+import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
 
-import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
-import Wholesale from "../affiliates/portal/wholesale/page";
+import { signIn, useSession } from "next-auth/react";
+
+import React, { useState } from "react";
+
 import sendWholeSaleRequest from "./sendRequest";
 
 // async function sendRequest(data: any) {
@@ -46,32 +47,11 @@ export function WholeSaleForm(): JSX.Element {
             approved we will contact you with the next steps.
           </p>
 
-          <TextInput
-            key="first name"
-            type="text"
-            placeHolder="First Name"
-            update={setFirstname}
-            value={firstName}
-          />
-          <TextInput
-            key="Last Name"
-            type="text"
-            placeHolder="Last Name"
-            update={setLastName}
-            value={lastName}
-          />
-          <TextInput
-            key="email"
-            type="email"
-            placeHolder="email"
-            update={setEmail}
-            value={email}
-          />
           <div className="flex justify-center">
             <PrimaryButton
-              text={"Login To Request Wholesale Account"}
-              onClicked={() => {
-                location.href = "/auth/signin";
+              text={"Join Now"}
+              onClicked={async () => {
+                signInAndRedirectTo("/wholesale");
               }}
             />
           </div>
@@ -102,16 +82,21 @@ export function WholeSaleForm(): JSX.Element {
     } else {
       if (user.wholesale != null) {
         return (
-          <div className="m-10">
-            <h1>Wholesale Request Status</h1>
+          <div className=" mb-10">
+            <h3>Wholesale Request Status</h3>
             <p>
               Your whole sale request is is being processed, you will be
               notified by email when your request is processed
             </p>
 
-            <div className="bg-recommendedGreen rounded-lg p-4 m-4 shadow-md ">
-              <h5>Request Status</h5>
-              <p>Your request has been sent</p>
+            <div className="flex justify-between bg-recommendedGreen rounded-lg p-4 my-4 drop-shadow-lg">
+              <div>
+                <h5>Request Status</h5>
+                <p>Your request has been sent</p>
+              </div>
+              <div className="bg-errorContainer p-4  rounded-lg drop-shadow-lg">
+                <p className="text-onErrorContainer">Pending</p>
+              </div>
             </div>
           </div>
         );
@@ -124,39 +109,40 @@ export function WholeSaleForm(): JSX.Element {
             Simpily enter your details and hit send. When your request is
             approved we will contact you with the next steps.
           </p>
-          {!session.data?.user?.name && (
-            <TextInput
-              key="first name"
-              type="text"
-              placeHolder="Enter Name"
-              update={setFirstname}
-              value={firstName}
-            />
-          )}
-
-          {isSending ? (
+          {isLoading ? (
             <ButtonLoader />
           ) : (
-            <div>
-              <PrimaryButton
-                text={"Send Request"}
-                onClicked={async () => {
-                  if (!isSent) {
-                    setIsSending(true);
-                    const response = await sendWholeSaleRequest(user);
-                    console.log(response);
-                    setIsSent(true);
-                    setIsSending(false);
-                  }
-                }}
-              />
-
-              {isSent && (
-                <div className="bg-recommendedGreen rounded-lg p-4 m-4">
-                  <h5>Request Status</h5>
-                  <p>Your request has been sent</p>
+            <div className="flex justify-start">
+              {!session.data?.user?.name && (
+                <TextInput
+                  key="first name"
+                  type="text"
+                  placeHolder="Enter Name"
+                  update={setFirstname}
+                  value={firstName}
+                />
+              )}
+              {isSending ? (
+                <ButtonLoader />
+              ) : (
+                <div>
+                  {!isSent && (
+                    <PrimaryButton
+                      text={"Send Request"}
+                      onClicked={async () => {
+                        if (!isSent) {
+                          setIsSending(true);
+                          const response = await sendWholeSaleRequest(user);
+                          console.log(response);
+                          setIsSent(true);
+                          setIsSending(false);
+                        }
+                      }}
+                    />
+                  )}
                 </div>
               )}
+              )
             </div>
           )}
         </div>

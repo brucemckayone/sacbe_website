@@ -39,7 +39,8 @@ export function WholesalePortalPage() {
   const [shippingCost, setshippingGost] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [cacaoCost, setCacaoCost] = useState(0);
-
+  const [addCustomEmail, setAddCustomEmail] = useState(false);
+  const [email, setEmail] = useState("");
   const [isSendingOrder, setIsSendingOrder] = useState(false);
 
   const { isError, isLoading, setUser, user } = useUser();
@@ -144,6 +145,23 @@ export function WholesalePortalPage() {
             placeHolder={"CAC70 2A"}
             key={"postcode"}
           />
+          <Checkbox
+            label="Send invoice to a different email address"
+            checked={addCustomEmail}
+            onChange={() => {
+              setAddCustomEmail(!addCustomEmail);
+            }}
+          ></Checkbox>
+          {addCustomEmail && (
+            <TextInput
+              className="animate-zoom_in_fade mt-2"
+              value={email}
+              update={setEmail}
+              type="email"
+              placeHolder={"cacaolover@gmail.com"}
+              key={"email"}
+            />
+          )}
         </form>
         <div>
           <PrimaryButton
@@ -158,13 +176,16 @@ export function WholesalePortalPage() {
           <PrimaryButton
             onClicked={async () => {
               setIsSendingOrder(true);
+              if (addCustomEmail) user.email = email;
               const isOK = await fetchPostJSON(
                 "api/stripe/billing/invoice",
                 orderDetails
               );
               if (isOK) {
                 setIsSendingOrder(false);
-                addToast("Invoice Created", { appearance: "success" });
+                addToast("Invoice , check your email for your invoice", {
+                  appearance: "success",
+                });
                 close();
               } else {
                 setIsSendingOrder(false);

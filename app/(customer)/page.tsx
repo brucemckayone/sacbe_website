@@ -13,14 +13,15 @@ import LinkButton from "@/components/buttons/LinkButton";
 
 import SlideInUp from "@/components/animations/slide_in_up";
 import RecipeSlider from "./about/recipe_slider";
+import { AboutClouds } from "./wholesale/AboutClouds";
 
 function BecomeAPractioner() {
   return (
     <div className=" bg-gradient-to-b from-surfaceVarient to-secondaryContainer py-10">
       <div className="flex flex-col justify-center align-middle">
-        <h1 className="flex justify-center pt-32 pb-20 text-6xl md:text-7xl">
+        <h2 className="flex justify-center text-center pt-32 pb-20 text-6xl md:text-7xl">
           CACAO FACILITATION TRAINING
-        </h1>
+        </h2>
         <div className="flex flex-col md:flex-row ">
           <div></div>
 
@@ -89,6 +90,7 @@ export default function Home() {
       <HomePageHeader />
       <NavMenuBottom />
       <AboutSacbe />
+      <AboutClouds></AboutClouds>
       <BenifitsOfCacao />
 
       <BecomeAPractioner />

@@ -8,11 +8,11 @@ import SimpleSlider from "../carousels/testimonial_slider";
 
 export default function BenifitsOfCacao() {
   return (
-    <div className="bg-gradient-to-b from-secondaryContainer to-surfaceVarient py-22 md:p-10">
+    <div className="bg-gradient-to-b from-secondaryContainer to-surfaceVarient py-14 md:p-10">
       {/* <SlideInUp animiation="animate-slide_in_right_fade"> */}
       {/* <SectionHeader title="The Experiance"></SectionHeader> */}
       <div className="flex flex-col lg:flex-row">
-        <Card hasColor={false} className="xl:basis-1/3 md:basis-1/3 pt-20">
+        <Card hasColor={false} className="xl:basis-1/3 md:basis-1/3 ">
           <SlideInUp animiation="animate-slide_in_left_fade">
             <h3 className="mb-2 text-5xl md:text-4xl">
               Our customers said it best:
@@ -38,7 +38,7 @@ export default function BenifitsOfCacao() {
             </blockquote>
           </SlideInUp>
           <SlideInUp animiation="animate-slide_in_left_fade">
-            <p className="p-3">
+            <p className="pt-3">
               We know! We know! It cant really be that good can it? It is. The
               list of health and life style benifits that cacao boasts is
               astonishing. Dont take it from us, the benifits of cacao are

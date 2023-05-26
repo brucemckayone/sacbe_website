@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function WholesaleHeader() {
   return (
-    <div className="flex flex-col md:flex-row justify-between h-full mx-10">
+    <div className="flex flex-col md:flex-row justify-between h-full py-24 px-5 md:px-0">
       <div className="relative w-full h-full basis-1/2 self-center">
         <Image
           src={"/cacao_love_heart.png"}
@@ -21,12 +21,11 @@ export function WholesaleHeader() {
           </h1>
         </div>
         <p className="md:w-8/12 mt-5">
-          Welcome to the divine world of Wholesale Cacao, where every bite is a
-          sacred experience. Our ethically-sourced cacao products are infused
-          with love and positive energy to nourish your body and elevate your
-          spirit. Immerse yourself in the blissful aroma and heavenly flavor of
-          Wholesale Cacao and embark on a spiritual journey unlike any other.
-          Indulge in the divine essence of cacao today.
+          Revitalize Your Business with Wholesale Sacbe Cacao! Harness the
+          Authentic Essence of Cacao and Offer Your Customers a Truly Enchanting
+          Experience. Maximize Profits and Delight Your Clients With Our Premium
+          Bulk Cacao Offerings. Take the Leap and Amplify Your Success with
+          Wholesale Ceremonial Cacao Today!
         </p>
 
         <div className="md:w-8/12">

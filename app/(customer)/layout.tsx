@@ -7,6 +7,7 @@ import {
   Marcellus as bodyFont,
 } from "@next/font/google";
 import Footer from "@/components/footer";
+import UserProvider from "@/components/auth/affiliate_auth_context";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -28,12 +29,14 @@ export default function RootLayout({
   return (
     <html className={`${raleway.variable} ${merriweather.variable} bg-surface`}>
       <AuthProvider>
-        <head />
-        <body>
-          <Navbar />
-          {children}
-          <Footer />
-        </body>
+        <UserProvider>
+          <head />
+          <body>
+            <Navbar />
+            {children}
+            <Footer />
+          </body>
+        </UserProvider>
       </AuthProvider>
     </html>
   );

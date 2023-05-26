@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export function AboutClouds() {
   return (
-    <div className="grid grid-cols-1 grid-rows-1 gap-10 mt-44 ">
-      <div className="col-span-3  bg-secondaryContainer my-10 rounded-xl">
+    <div className="grid grid-cols-1 grid-rows-1 gap-10 pt-20 px-1 md:mx-20 bg-secondaryContainer">
+      <div className="col-span-3 py-10 rounded-xl">
         <div className="flex flex-row justify-center h-[400px]">
           <Image
             src={"/clouds_green.jpg"}
@@ -42,13 +42,16 @@ export function AboutClouds() {
             className="w-3/12 md:w-2/12 rounded-3xl object-cover ml-2 md:ml-5 duration-200 hover:scale-105"
           ></Image>
         </div>
-        <h2 className="text-7xl text-center mt-10">
+        <h2 className="text-7xl text-center mt-10 md:hidden">
           Grown In The Heart of The Ecuadorian Cloud Forests
         </h2>
-        <div className="flex flex-row mt-20">
-          <div className="md:basis-3/5 md:mx-20">
+        <div className="flex flex-row pt-0 md:pt-32">
+          <div className="md:basis-3/5 md:mx-20 mx-10">
+            <h2 className="text-7xl text-start mt-10 hidden md:block">
+              Grown In The Heart of The Ecuadorian Cloud Forests
+            </h2>
             <h3 className="mt-10">Small-Scale Family Farms </h3>
-            <p className="p-5">
+            <p className="">
               Sacbe Ceremonial Cacao is sourced from small-scale family farms
               located in the north-west coastal region of Ecuador. The cacao
               grows at high altitudes in cloud forests where the land is rich in
@@ -58,7 +61,7 @@ export function AboutClouds() {
               texture.
             </p>
             <h3 className="mt-10">Grown with Sacred Intention</h3>
-            <p className="p-5">
+            <p>
               Our cacao is grown and harvested by farmers who deeply understand
               cacao as a sacred resource. They conduct their work with the
               utmost respect and loving intention, and follow sustainable
@@ -68,7 +71,7 @@ export function AboutClouds() {
               down from their ancestors.
             </p>
           </div>
-          <div className="sm: md:block md:hid md:basis-2/5 relative h-[600px] flex flex-col justify-center">
+          <div className="sm: md:block md:hid md:basis-2/5 relative h-[700px] flex flex-col justify-center">
             <Image
               src={"/cacao_pod_held_on_tree.jpg"}
               fill

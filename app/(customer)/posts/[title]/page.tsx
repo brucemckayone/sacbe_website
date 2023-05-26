@@ -121,7 +121,7 @@ export default async function Page({
     return (
       <main className="grid grid-cols-1 place-items-center mx-3">
         <div className="sm:w-full sm:mx-3 md:w-8/12 my-10 ">
-          <div className=" relative h-[500px] shadow-xl">
+          <div className=" relative h-[500px] w-full px-5 shadow-xl">
             <Image
               src={data.main_image}
               fill

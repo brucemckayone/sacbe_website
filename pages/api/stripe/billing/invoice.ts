@@ -72,6 +72,7 @@ export async function sendWholeSaleInvoice({
         },
       },
     });
+
     let items = [];
     if (bulk) {
       items.push({
@@ -102,7 +103,8 @@ export async function sendWholeSaleInvoice({
     }
 
     await stripe.invoices.finalizeInvoice(invoice.id);
-    return await stripe.invoices.sendInvoice(invoice.id);
+
+    return await stripe.invoices.sendInvoice(invoice.id, {}, {});
   } catch (error) {
     console.error("Error creating and sending invoice:", error);
   }

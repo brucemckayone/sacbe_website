@@ -1,4 +1,4 @@
-import { getProviders } from "next-auth/react";
+import { getProviders, useSession } from "next-auth/react";
 import MagicLinkForm from "@/components/form/MagicLinkForm";
 import ProviderSigninButton from "@/components/buttons/ProviderSigninButton";
 

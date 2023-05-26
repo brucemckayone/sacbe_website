@@ -1,7 +1,7 @@
 const menuItems = [
   {
-    text: "Home",
-    link: "/",
+    text: "Wholesale",
+    link: "/wholesale",
   },
   {
     text: "Learn",
