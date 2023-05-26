@@ -13,7 +13,7 @@ const SacbeCacaoWholesale = async () => {
       <NavMenuBottom />
       <div className="flex flex-row items-center justify-center bg-secondaryContainer pt-20 ">
         <div className="self-center w-11/12 md:w-10/12">
-          <h2 className="text-8xl text-center mb-10 mt-5">
+          <h2 className="text-5xl text-center mb-10 mt-5">
             Embrace the Spiritual Connection: Enter our Cacao Affiliate Portal
           </h2>
           <div className="flex justify-center">
@@ -26,7 +26,7 @@ const SacbeCacaoWholesale = async () => {
             ></Image>
           </div>
           <div>
-            <p className="mb-20 w-9/12 m-auto">
+            <p className="mb-20 mx-3 md:w-9/12 m-auto">
               Discover a dedicated space crafted exclusively for our spiritual
               affiliates. Our cacao affiliate portal serves as a platform to
               foster a deeper spiritual connection and share the profound

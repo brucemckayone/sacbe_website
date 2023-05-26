@@ -76,7 +76,7 @@ export default async function AffiliatePage() {
             className=""
           ></Image>
           <div>
-            <h3 className="text-5xl mb-10 mt-5">
+            <h3 className="mb-10 mt-5">
               Embrace the Spiritual Connection: Enter our Cacao Affiliate Portal
             </h3>
             <p className="mb-20">

@@ -119,8 +119,8 @@ export default async function Page({
     )) as blogPostType[];
 
     return (
-      <main className="grid grid-cols-1 place-items-center mx-3">
-        <div className="sm:w-full sm:mx-3 md:w-8/12 my-10 ">
+      <main className="mx-3">
+        <div className=" sm:mx-3 md:w-8/12 my-10 ">
           <div className=" relative h-[500px] w-full px-5 shadow-xl">
             <Image
               src={data.main_image}
@@ -133,7 +133,7 @@ export default async function Page({
           <h1 className="my-10 md:text-8xl">{data.title}</h1>
 
           <div className="flex flex-row justify-between items-baseline">
-            <div className="flex flex-row justify-start items-baseline">
+            <div className="flex flex-row justify-start items-baseline flex-wrap">
               <h4>Categories: </h4>
               {data.categories.map((cat) => {
                 return <Categorychip title={cat} key={cat + "catchip"} />;
@@ -141,7 +141,9 @@ export default async function Page({
             </div>
             <h5>{`Author: ${data.publisher.name}`}</h5>
           </div>
+
           <div className=" w-full h-0.5 bg-onPrimaryContainer opacity-25 my-3 rounded-lg px-20" />
+
           <div className="flex flex-row justify-start items-baseline flex-wrap">
             <h4>Tags:</h4>
             {data.tags.map((tag) => {
@@ -222,7 +224,7 @@ export default async function Page({
                         <div className="basis-9/12">
                           <h3>{post.title}</h3>
                           <p>{post.excerpt}</p>
-                          <div className="flex flex-row justify-start items-baseline">
+                          <div className="flex flex-row justify-start items-baseline flex-wrap">
                             {data.categories.map((cat) => {
                               return (
                                 <Categorychip

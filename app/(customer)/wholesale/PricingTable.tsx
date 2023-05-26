@@ -7,9 +7,9 @@ export function WholesalePricingTable() {
       <div>
         <h3>Retail Orders</h3>
         <p>Branded Beautiful Pouches sold by the case 1 case = 6 pouches</p>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto drop-shadow-xl rounded-lg">
           <table className="w-full text-sm text-left text-bg-surfaceVarient ">
-            <thead className="text-xs text-bg-surface uppercase bg-surfaceVarient dark:bg-bg-surface ">
+            <thead className="text-bg-surface uppercase bg-surfaceVarient ">
               <tr className="bg-surface border-b-2">
                 <th scope="col" className="px-6 py-3">
                   Quantity
@@ -78,7 +78,7 @@ export function WholesalePricingTable() {
       <div>
         <h3 className="mt-5">Bulk Orders</h3>
         <p>Non-Branded Bulk cacao in its purest form ideal for facilitators</p>
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div className="relative overflow-x-auto drop-shadow-xl rounded-lg">
           <table className="w-full text-sm text-left text-bg-surfaceVarient ">
             <thead className="text-xs text-bg-surface uppercase bg-surfaceVarient dark:bg-bg-surface ">
               <tr className="bg-surface border-b-2">
@@ -154,7 +154,7 @@ export function PricingTable() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-5 grid-rows-1 gap-5 md:gap-10 ">
       <div className="md:col-span-2 flex flex-col justify-center">
-        <h2>Why Work With Us</h2>
+        <h2 className="text-4xl">Why Work With Us</h2>
         <p>
           At Sacbe We Beleieve in nuturing equal partnerships and helping one
           and other grow together
@@ -226,7 +226,7 @@ export function PricingTable() {
           </li>
         </ol>
       </div>
-      <div className="md:col-span-4 md:col-start-3 p-5 bg-surfaceVarient my-10 rounded-lg shadow-xl hover:shadow-2xl duration-200">
+      <div className="md:col-span-4 md:col-start-3 p-3 bg-surfaceVarient my-10 rounded-lg shadow-xl hover:shadow-2xl duration-200">
         <WholesalePricingTable></WholesalePricingTable>
       </div>
     </div>
