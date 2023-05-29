@@ -7,6 +7,7 @@ import { getAuth } from "firebase/auth";
 import admin from "firebase-admin";
 
 import { getStorage } from "firebase/storage";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBftZZHS0GpQ8ooSmrc63MsWweUPX3sZuI",
@@ -30,6 +31,8 @@ if (!admin.apps.length) {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
+
+export const clientFirestore = getFirestore(app);
 
 export const firestore = initFirestore({
   credential: cert({

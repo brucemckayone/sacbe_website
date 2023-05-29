@@ -1,22 +1,29 @@
 const menuItems = [
   {
-    text: "Wholesale",
-    link: "/wholesale",
+    text: "Blog",
+    subTitle: "Recipes & Articles",
+    link: "/resources",
   },
+
   {
     text: "Learn",
+    subTitle: "Become A Facilitator",
     link: "https://skyeonearth.com/cacaofacilitation",
   },
   {
     text: "About",
+    subTitle: "Learn about our origins",
     link: "/about",
   },
+
   {
-    text: "Blog",
-    link: "https://skyeonearth.com/posts",
+    text: "Wholesale",
+    subTitle: "Share This Medicine",
+    link: "/wholesale",
   },
   {
     text: "Affiliates",
+    subTitle: "Join, and grow with us",
     link: "/affiliates",
   },
 ];

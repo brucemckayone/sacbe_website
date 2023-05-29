@@ -65,12 +65,6 @@ export function WholeSaleForm(): JSX.Element {
     if (user.wholesale) {
       return (
         <div>
-          <h2>How To Order</h2>
-          <h3>Request a wholesale account</h3>
-          <p className="mb-3">
-            Simpily enter your details and hit send. When your request is
-            approved we will contact you with the next steps.
-          </p>
           <LinkButton
             isPrimary={true}
             text="Go To Portal"

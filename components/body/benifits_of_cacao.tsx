@@ -8,7 +8,7 @@ import SimpleSlider from "../carousels/testimonial_slider";
 
 export default function BenifitsOfCacao() {
   return (
-    <div className="bg-gradient-to-b from-secondaryContainer to-surfaceVarient py-14 md:p-10">
+    <div className="bg-gradient-to-b from-secondaryContainer to-primaryContainer py-14 md:p-10">
       {/* <SlideInUp animiation="animate-slide_in_right_fade"> */}
       {/* <SectionHeader title="The Experiance"></SectionHeader> */}
       <div className="flex flex-col lg:flex-row">

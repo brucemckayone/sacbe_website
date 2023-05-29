@@ -209,17 +209,17 @@ export function PricingTable() {
           <li>
             <div className="flex">
               <Image
-                src={"/icons/customer_portal.svg"}
+                src={"/icons/heart.svg"}
                 width={80}
                 height={80}
                 alt="customer service icon"
-                className="p-1 bg-primaryContainer rounded-md m-3"
+                className="p-1 bg-primaryContainer h-[80px] w-[80px] rounded-md m-3"
               />
               <div className="flex flex-col justify-center">
-                <h4>Customer Portal</h4>
+                <h4>Ethical Supply Chain, & Global Good</h4>
                 <p>
-                  Manage your orders in your custom wholesale portal coming
-                  soon!
+                  Our Cacao is fairtrade, supporting ancient tradition, and
+                  families in South America
                 </p>
               </div>
             </div>

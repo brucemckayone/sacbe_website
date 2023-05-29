@@ -3,8 +3,11 @@ import Image from "next/image";
 
 export function AboutClouds() {
   return (
-    <div className="grid grid-cols-1 grid-rows-1 gap-10 pt-20 px-1 md:mx-20 bg-secondaryContainer">
+    <div className="grid grid-cols-1 grid-rows-1 gap-10 pt-20 px-1 md:px-20 bg-secondaryContainer">
       <div className="col-span-3 py-10 rounded-xl">
+        <h2 className="text-6xl md:text-8xl text-center my-16 ">
+          Grown In The Heart of The Ecuadorian Cloud Forests
+        </h2>
         <div className="flex flex-row justify-center h-[400px]">
           <Image
             src={"/clouds_green.jpg"}
@@ -46,10 +49,7 @@ export function AboutClouds() {
           Grown In The Heart of The Ecuadorian Cloud Forests
         </h2>
         <div className="flex flex-row pt-0 md:pt-32">
-          <div className="md:basis-3/5 md:mx-20 mx-10">
-            <h2 className="text-7xl text-start mt-10 hidden md:block">
-              Grown In The Heart of The Ecuadorian Cloud Forests
-            </h2>
+          <div className="md:basis-2/5 md:mx-20 mx-10">
             <h3 className="mt-10">Small-Scale Family Farms </h3>
             <p className="">
               Sacbe Ceremonial Cacao is sourced from small-scale family farms
@@ -71,12 +71,12 @@ export function AboutClouds() {
               down from their ancestors.
             </p>
           </div>
-          <div className="sm: md:block md:hid md:basis-2/5 relative h-[700px] flex flex-col justify-center">
+          <div className="sm: md:block md:hid md:basis-2/5 relative h-[550px] flex flex-col justify-center">
             <Image
               src={"/cacao_pod_held_on_tree.jpg"}
               fill
               alt="cloud forest picture"
-              className="rounded-lg shadow-md object-cover"
+              className="rounded-lg drop-shadow-2xl object-cover"
             ></Image>
           </div>
         </div>

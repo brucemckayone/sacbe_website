@@ -8,10 +8,11 @@ import { useState } from "react";
 import LoginButton from "../buttons/loginButton";
 import { signOut, useSession } from "next-auth/react";
 import menuItems from "@/lib/constants/menu";
+import SearchBar from "@/app/(customer)/search/SearchBar";
 
 export default function Navbar(props: any) {
   return (
-    <header className="sticky top-0 z-50 flex flex-row  justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-onPrimary">
+    <header className="sticky top-0 z-50 flex flex-row  justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
       <Menu />
       <Link className="flex" href="/">
         <Image
@@ -34,7 +35,7 @@ function Menu() {
     setDrawerOpenState(!isDrawerOpen);
   }
   return (
-    <div className="flex mt-3">
+    <div className="flex m-3 rounded-lg shadow bg-surface ">
       <Hamburger
         toggled={isDrawerOpen}
         onToggle={() => {
@@ -50,14 +51,17 @@ function Menu() {
           } `}
         >
           <div className="w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
-            <div className="flex justify-end px-6 py-2">
-              <Hamburger
-                toggled={isDrawerOpen}
-                onToggle={() => {
-                  toggleDrawer();
-                }}
-              ></Hamburger>
+            <div className="flex justify-end mr-16 rounded-lg">
+              <div className="bg-surface drop-shadow-lg rounded-full mt-3 mr-5 opacity-80">
+                <Hamburger
+                  toggled={isDrawerOpen}
+                  onToggle={() => {
+                    toggleDrawer();
+                  }}
+                ></Hamburger>
+              </div>
             </div>
+
             <div className="ml-10 ">
               {menuItems.map((item) => {
                 return (
@@ -67,24 +71,20 @@ function Menu() {
                     }}
                     key={`drawerMenu ${item.link}+${item.text}`}
                     href={item.link}
+                    className="no-underline"
                   >
-                    <h1 className="my-10 hover:text-[white] duration-300">
+                    <h1 className="mt-10 underline hover:text-[white] duration-300">
                       {item.text}
                     </h1>
+                    <h4 className="no-underline">{item.subTitle}</h4>
                   </Link>
                 );
               })}
-
-              {session.data?.user?.email != null && (
-                <PrimaryButton
-                  text="log Out"
-                  onClicked={() => {
-                    signOut();
-                  }}
-                />
-              )}
             </div>
+
+            <SearchBar toggleMenu={setDrawerOpenState} />
           </div>
+
           <div
             className="w-2/3"
             onClick={() => setDrawerOpenState(!isDrawerOpen)}

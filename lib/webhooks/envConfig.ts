@@ -140,4 +140,10 @@ export const envConfig = {
   AWS_REGION: getEnvironmentVariable({
     environmentVariable: "AWS_REGION",
   }),
+  ALGOLIA_ID: getEnvironmentVariable({
+    environmentVariable: "ALGOLIA_ID",
+  }),
+  ALGOLIA_SEARCH_SECRET: getEnvironmentVariable({
+    environmentVariable: "ALGOLIA_SEARCH_SECRET",
+  }),
 };

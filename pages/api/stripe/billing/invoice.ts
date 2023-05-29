@@ -3,6 +3,8 @@ import Stripe from "stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
+import emailSender from "@/utils/email/nodemailer";
+import wholesale_invoice_email from "@/utils/email/templates/wholesale/invoice";
 
 export default async function handler(
   req: NextApiRequest,
@@ -21,6 +23,7 @@ export default async function handler(
 }
 
 type sendWholeSaleInvoiceType = {
+  extraEmail: string;
   user: userType;
   bulk: {
     qty: number;
@@ -39,6 +42,7 @@ export async function sendWholeSaleInvoice({
   shipping,
   bulk,
   retail,
+  extraEmail,
 }: sendWholeSaleInvoiceType) {
   adminInit();
 
@@ -54,7 +58,6 @@ export async function sendWholeSaleInvoice({
   try {
     const invoice = await stripe.invoices.create({
       customer: user.customerId,
-
       collection_method: "send_invoice",
       days_until_due: 30,
       shipping_details: {
@@ -102,7 +105,17 @@ export async function sendWholeSaleInvoice({
       });
     }
 
-    await stripe.invoices.finalizeInvoice(invoice.id);
+    const finalInvoice = await stripe.invoices.finalizeInvoice(invoice.id);
+
+    if (extraEmail != "")
+      new emailSender().send({
+        bodyMessage: "Your Wholesale Invoice is ready",
+        htmlContent: wholesale_invoice_email(finalInvoice.hosted_invoice_url!),
+        replayTo: "no-reply@sacbe-ceremonial-cacao.com",
+        sender: "no-reply@sacbe-ceremonial-cacao.com",
+        subject: "Your Wholesale Order Is Ready To Pay",
+        to: extraEmail,
+      });
 
     return await stripe.invoices.sendInvoice(invoice.id);
   } catch (error) {

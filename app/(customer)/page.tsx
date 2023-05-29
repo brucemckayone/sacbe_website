@@ -5,98 +5,50 @@ import NavMenuBottom from "@/components/menu/NavMenuBottom";
 import SimpleSlider from "@/components/carousels/testimonial_slider";
 import reviews from "@/lib/constants/reviews";
 import BenifitsOfCacao from "@/components/body/benifits_of_cacao";
-import Card from "@/components/cards/card";
-import Image from "next/image";
 import AboutSacbe from "@/components/body/about_sacbe";
 
-import LinkButton from "@/components/buttons/LinkButton";
-
-import SlideInUp from "@/components/animations/slide_in_up";
 import RecipeSlider from "./about/recipe_slider";
 import { AboutClouds } from "./wholesale/AboutClouds";
+import ResourcesPage from "./resources/page";
+import adminInit from "@/utils/firebase/admin_init";
+import { firestore } from "firebase-admin";
+import { limit } from "firebase/firestore";
+import { BlogPostSuggestionCard } from "./posts/[title]/BlogPostSuggestionCard";
+import { RecipeCard } from "./recipes/[title]/RecipeCard";
+import { RecipeType } from "@/types/recipieType";
+import { blogPostType } from "./posts/[title]/page";
+import { BecomeAPractioner } from "./BecomeAPractioner";
 
-function BecomeAPractioner() {
-  return (
-    <div className=" bg-gradient-to-b from-surfaceVarient to-secondaryContainer py-10">
-      <div className="flex flex-col justify-center align-middle">
-        <h2 className="flex justify-center text-center pt-32 pb-20 text-6xl md:text-7xl">
-          CACAO FACILITATION TRAINING
-        </h2>
-        <div className="flex flex-col md:flex-row ">
-          <div></div>
+export default async function Home() {
+  const posts = await getFeaturedPosts();
+  const recipes = await getFeaturedRecipes();
+  console.log(posts);
 
-          <Card className="flex basis-1/2" hasColor={false}>
-            <SlideInUp animiation="animate-zoom_in">
-              <div className="absolute w-[400px] md:w-[500px] bg-primaryContainer rounded-full h-[500px] blur-md"></div>
-              <div className="relative w-[400px]  md:w-[500px] h-[500px]">
-                <div className="absolute top-0 right-0 left-0 w-full h-[500px]">
-                  <Image
-                    src={"/pouring_cacao_cup.png"}
-                    fill
-                    style={{
-                      objectFit: "contain",
-                    }}
-                    alt=""
-                    className="animate-pulse_scale"
-                  ></Image>
-                </div>
-              </div>
-            </SlideInUp>
-          </Card>
+  const postCards = posts.map((e) => {
+    return <BlogPostSuggestionCard post={e} />;
+  });
+  const recipeCards = recipes.map((e) => {
+    return <RecipeCard recipe={e} />;
+  });
 
-          <Card
-            className="basis-2/5 flex flex-col justify-center items-center align-middle"
-            hasColor={false}
-          >
-            <div className="basis-1/2">
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <h5 className="flex md:w-1/2 underline">
-                  Become A Practitioner
-                </h5>
-              </SlideInUp>
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <h3 className="flex md:w-3/4">Cacao Facilitation Training</h3>
-              </SlideInUp>
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <p className="flex md:w-3/5 text-xl">
-                  We welcome those wishing to work with for cacao to join us in
-                  an 6 night emmersive training in the wild depths of the
-                  scottish highlands where you will develope your skills as a
-                  space holder & gaurdian of cacao.
-                </p>
-              </SlideInUp>
-              <SlideInUp
-                key={"sky on eart slidy"}
-                animiation="animate-slide_in_left_blur"
-              >
-                <LinkButton
-                  key={"sky on on earth thingy"}
-                  url="https://skyeonearth.com/cacaofacilitation"
-                  isPrimary={false}
-                  text="Learn More"
-                ></LinkButton>
-              </SlideInUp>
-            </div>
-          </Card>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function Home() {
+  const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);
   return (
     <main>
       <HomePageHeader />
       <NavMenuBottom />
-      <AboutSacbe />
       <AboutClouds></AboutClouds>
       <BenifitsOfCacao />
+      <AboutSacbe />
 
       <BecomeAPractioner />
       <SimpleSlider reviews={reviews} />
-      {/* @ts-expect-error Async Server Component */}
-      <RecipeSlider />
+
+      {/* <RecipeSlider /> */}
+
+      <div className="bg-gradient-to-b from-tertiaryContainer to-surface ">
+        <h3 className="text-7xl text-center py-20">Recipes & Articles</h3>
+        <div className=" w-11/12 md:w-7/12 mx-auto">{Cards}</div>
+      </div>
       <NavMenuBottom />
       {/* <Card>
         <div className="flex flex-col items-center">
@@ -120,4 +72,25 @@ export default function Home() {
       </Card> */}
     </main>
   );
+}
+async function getFeaturedPosts() {
+  adminInit();
+  const db = firestore();
+  const snapshot = await db
+    .collection("blog_posts")
+    .where("featured", "==", true)
+    .limit(2)
+    .get();
+  return snapshot.docs.map((e) => e.data() as blogPostType);
+}
+
+async function getFeaturedRecipes() {
+  adminInit();
+  const db = firestore();
+  const snapshot = await db
+    .collection("recipes")
+    .where("featured", "==", true)
+    .limit(2)
+    .get();
+  return snapshot.docs.map((e) => e.data() as RecipeType);
 }

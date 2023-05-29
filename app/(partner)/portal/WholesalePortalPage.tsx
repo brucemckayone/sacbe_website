@@ -9,7 +9,6 @@ import React, { useEffect, useState } from "react";
 import TextInput from "@/components/form/inputs/TextInput";
 import { useDisclosure } from "@mantine/hooks";
 import Stripe from "stripe";
-import { useToasts } from "react-toast-notifications";
 
 function WholeSalePortalSignUpForm() {
   return (
@@ -22,7 +21,6 @@ function WholeSalePortalSignUpForm() {
 }
 
 export function WholesalePortalPage() {
-  const { addToast } = useToasts();
   const [opened, { open, close }] = useDisclosure(false);
   const [retailQty, setRetailQty] = useState(5);
   const [bulkQty, setBulkQty] = useState(5);
@@ -55,6 +53,7 @@ export function WholesalePortalPage() {
   };
 
   let orderDetails = {
+    extraEmail: email,
     user: user,
     bulk: { qty: bulkQty },
     retail: { qty: retailQty },
@@ -164,14 +163,14 @@ export function WholesalePortalPage() {
           )}
         </form>
         <div>
-          <PrimaryButton
-            onClicked={() => {
-              close();
-            }}
-            text="cancel"
-            isPrimary={false}
-            key={"cancel order button"}
-          ></PrimaryButton>
+          {/* <PrimaryButton
+              onClicked={() => {
+                close();
+              }}
+              text="cancel"
+              isPrimary={false}
+              key={"cancel order button"}
+            ></PrimaryButton> */}
 
           <PrimaryButton
             onClicked={async () => {
@@ -183,13 +182,10 @@ export function WholesalePortalPage() {
               );
               if (isOK) {
                 setIsSendingOrder(false);
-                addToast("Invoice , check your email for your invoice", {
-                  appearance: "success",
-                });
+
                 close();
               } else {
                 setIsSendingOrder(false);
-                addToast("Error", { appearance: "error" });
               }
             }}
             text={isSendingOrder ? "Loading" : "Confirm order"}

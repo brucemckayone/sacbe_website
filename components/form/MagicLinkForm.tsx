@@ -27,6 +27,7 @@ export default function MagicLinkForm() {
         placeHolder="cacaolover@gmail.com"
         update={setEmail}
         value={email}
+        type="email"
         key={"magic link sign email form "}
       />
       <p>An magic link will be sent to your email</p>
