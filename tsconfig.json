@@ -37,7 +37,8 @@
     "pages/api/auth/[...nextauth].js",
     "pages/api/auth/[...nextauth].js",
     "pages/inits/firebase_admin.js",
-    "utils/email/emailBuilder.ts"
+    "utils/email/emailBuilder.ts",
+    "middleware.ts"
   ],
   "exclude": ["node_modules"]
 }
