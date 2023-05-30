@@ -5,7 +5,7 @@ import PrimaryButton from "@/components/buttons/primaryButton";
 import CardLoader from "@/components/loaders/CardLoader";
 import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { Checkbox, Modal, Button, Group } from "@mantine/core";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import TextInput from "@/components/form/inputs/TextInput";
 import { useDisclosure } from "@mantine/hooks";
 import Stripe from "stripe";
@@ -70,9 +70,15 @@ export function WholesalePortalPage() {
     },
   };
 
+  function calculate() {
+    calculateShipping();
+    calculateTotalCost();
+    calculateCacaoCost();
+  }
+
   useEffect(() => {
     calculate();
-  }, [bulkQty, retailQty, hasBulk, hasRetail]);
+  }, [bulkQty, retailQty, hasBulk, hasRetail, calculate]);
 
   function handleRetailOnChange() {
     setHasRetail(!hasRetail);
@@ -455,12 +461,6 @@ export function WholesalePortalPage() {
       </div>
     </div>
   );
-
-  function calculate() {
-    calculateShipping();
-    calculateTotalCost();
-    calculateCacaoCost();
-  }
 
   function calculateCacaoCost() {
     let total = 0;

@@ -42,7 +42,10 @@ export function RecipeCard(props: any) {
               <div>
                 {props.recipe.feels.map((e: any) => {
                   return (
-                    <div className=" px-2 mb-3 mt-4 md:mt-0">
+                    <div
+                      className=" px-2 mb-3 mt-4 md:mt-0"
+                      key={`${e.name} + ${e.percentage}`}
+                    >
                       <p>{e.name}</p>
                       <FeelsProgressBar
                         percentage={e.percentage}

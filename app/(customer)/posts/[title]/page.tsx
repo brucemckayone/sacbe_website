@@ -137,6 +137,7 @@ export default async function Page({
                   return (
                     <BlogPostSuggestionCard
                       post={post}
+                      key={post.title + "aeroijaregoi"}
                     ></BlogPostSuggestionCard>
                   );
                 })}

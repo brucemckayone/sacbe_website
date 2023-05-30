@@ -23,7 +23,7 @@ const menuItems = [
   },
   {
     text: "Affiliates",
-    subTitle: "Join, and grow with us",
+    subTitle: "Join, and grow with us!",
     link: "/affiliates",
   },
 ];

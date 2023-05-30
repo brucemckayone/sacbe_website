@@ -53,7 +53,7 @@ async function RercipePage({
             <h2>Feels</h2>
             {recipe.feels.map((e: any) => {
               return (
-                <div className="my-4">
+                <div className="my-4" key={`${e.name + e.percentage}`}>
                   <p>{e.name}</p>
                   <FeelsProgressBar
                     percentage={e.percentage}
@@ -67,7 +67,10 @@ async function RercipePage({
             <ol className=" list-disc px-10 pb-10">
               {recipe.ingredients.map((e: any) => {
                 return (
-                  <li className=" p-2 rounded-2xl bg-tertiaryContainer hover:bg-surface my-3">
+                  <li
+                    className=" p-2 rounded-2xl bg-tertiaryContainer hover:bg-surface my-3"
+                    key={`${e.quantity} x ${e.quantityType} ${e.name}`}
+                  >
                     <p className="text-onTertiaryContainer">{`${e.quantity} x ${e.quantityType} ${e.name}`}</p>
                   </li>
                 );
@@ -79,14 +82,20 @@ async function RercipePage({
           <h2>Steps</h2>
           {recipe.steps.map((e: any) => {
             return (
-              <div className="bg-surface hover:bg-tertiaryContainer hover:drop-shadow-xl  duration-300 p-5 my-5 drop-shadow-md">
+              <div
+                className="bg-surface hover:bg-tertiaryContainer hover:drop-shadow-xl  duration-300 p-5 my-5 drop-shadow-md"
+                key={e.StepTitle + e.ingredient[0]}
+              >
                 <p></p>
                 <div className="flex flex-col md:flex-row justify-between my-3">
                   <h3 className="">{e.StepTitle}</h3>
                   <div className="flex flex-wrap">
                     {e.ingredient.map((e: any) => {
                       return (
-                        <div className="mx-2 rounded-full my-2 bg-tertiaryContainer self-center px-3 drop-shadow-md flex-wrap">{`${e}`}</div>
+                        <div
+                          className="mx-2 rounded-full my-2 bg-tertiaryContainer self-center px-3 drop-shadow-md flex-wrap"
+                          key={"e"}
+                        >{`${e}`}</div>
                       );
                     })}
                   </div>
@@ -107,7 +116,9 @@ async function RercipePage({
         {related != undefined && (
           <div>
             {related.map((recipe) => {
-              return <RecipeCard recipe={recipe}></RecipeCard>;
+              return (
+                <RecipeCard recipe={recipe} key={recipe.title}></RecipeCard>
+              );
             })}
           </div>
         )}

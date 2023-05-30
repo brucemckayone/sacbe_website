@@ -48,10 +48,10 @@ async function ResourcesPage({
 
   console.log(recipes);
   const postCards = posts.map((e) => {
-    return <BlogPostSuggestionCard post={e.data} />;
+    return <BlogPostSuggestionCard post={e.data} key={e.data.title} />;
   });
   const recipeCards = recipes.map((e) => {
-    return <RecipeCard recipe={e.data} />;
+    return <RecipeCard recipe={e.data} key={e.data.title} />;
   });
 
   const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);

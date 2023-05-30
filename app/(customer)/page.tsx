@@ -25,10 +25,10 @@ export default async function Home() {
   console.log(posts);
 
   const postCards = posts.map((e) => {
-    return <BlogPostSuggestionCard post={e} />;
+    return <BlogPostSuggestionCard post={e} key={e.title} />;
   });
   const recipeCards = recipes.map((e) => {
-    return <RecipeCard recipe={e} />;
+    return <RecipeCard recipe={e} key={e.title} />;
   });
 
   const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);
@@ -47,7 +47,9 @@ export default async function Home() {
 
       <div className="bg-gradient-to-b from-tertiaryContainer to-surface ">
         <h3 className="text-7xl text-center py-20">Recipes & Articles</h3>
-        <div className=" w-11/12 md:w-7/12 mx-auto">{Cards}</div>
+        <div className=" w-11/12 md:w-7/12 mx-auto" key={"cards holder"}>
+          {Cards}
+        </div>
       </div>
       <NavMenuBottom />
       {/* <Card>

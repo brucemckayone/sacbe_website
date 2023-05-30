@@ -30,11 +30,11 @@ const SacbeCacaoWholesale = async () => {
             <p className="lg:w-11/12 m-auto mb-20">
               With our Wholesale Cacao Portal, you have a reliable partner for
               sourcing premium cacao products for your spiritual business.
-              Whether you're looking for bulk cacao for retail, ceremonial cacao
-              for transformative experiences, or simply seeking sustainable
-              cacao options, we have you covered. Start exploring our wholesale
-              portal today and unlock the essence of pure cacao for your
-              discerning customers.
+              Whether you are looking for bulk cacao for retail, ceremonial
+              cacao for transformative experiences, or simply seeking
+              sustainable cacao options, we have you covered. Start exploring
+              our wholesale portal today and unlock the essence of pure cacao
+              for your discerning customers.
             </p>
           </div>
           <PricingTable></PricingTable>

@@ -8,13 +8,7 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  const db = firestore();
-
-  const snap = await db.collection("recipes").limit(1).get();
-
-  const a = snap.docs[0].data() as object;
-
-  res.status(200).json(a);
+  res.status(200).json({});
 }
