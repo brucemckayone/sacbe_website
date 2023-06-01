@@ -8,7 +8,7 @@ interface Props {
 }
 const SimpleSlider: React.FC<Props> = ({ reviews }) => {
   return (
-    <div className=" bg-tertiaryContainer py-52 ">
+    <div className=" bg-primaryContainer py-52 ">
       <h1 className="text-center sm:text-4xl ">REVIEWS</h1>
       <Carousel
         height={200}

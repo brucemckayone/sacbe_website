@@ -5,7 +5,7 @@ import SlideInUp from "@/components/animations/slide_in_up";
 
 export function BecomeAPractioner() {
   return (
-    <div className=" bg-gradient-to-b from-primaryContainer to-tertiaryContainer py-10">
+    <div className=" bg-gradient-to-b to-primaryContainer from-tertiaryContainer py-10">
       <div className="flex flex-col justify-center align-middle">
         <h2 className="flex justify-center text-center pt-32 pb-20 text-6xl md:text-7xl">
           CACAO FACILITATION TRAINING

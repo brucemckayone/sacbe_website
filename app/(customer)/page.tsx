@@ -6,18 +6,17 @@ import SimpleSlider from "@/components/carousels/testimonial_slider";
 import reviews from "@/lib/constants/reviews";
 import BenifitsOfCacao from "@/components/body/benifits_of_cacao";
 import AboutSacbe from "@/components/body/about_sacbe";
-
-import RecipeSlider from "./about/recipe_slider";
 import { AboutClouds } from "./wholesale/AboutClouds";
-import ResourcesPage from "./resources/page";
 import adminInit from "@/utils/firebase/admin_init";
 import { firestore } from "firebase-admin";
-import { limit } from "firebase/firestore";
 import { BlogPostSuggestionCard } from "./posts/[title]/BlogPostSuggestionCard";
 import { RecipeCard } from "./recipes/[title]/RecipeCard";
 import { RecipeType } from "@/types/recipieType";
 import { blogPostType } from "./posts/[title]/page";
 import { BecomeAPractioner } from "./BecomeAPractioner";
+import { VitiminPopovers } from "./VitiminPopovers";
+import { RiskApealCards } from "./RiskApealCards";
+import { TheHook } from "./TheHook";
 
 export default async function Home() {
   const posts = await getFeaturedPosts();
@@ -33,24 +32,46 @@ export default async function Home() {
 
   const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);
   return (
-    <main>
+    <main className="">
       <HomePageHeader />
       <NavMenuBottom />
-      <AboutClouds></AboutClouds>
+      <TheHook />
       <BenifitsOfCacao />
-      <AboutSacbe />
 
-      <BecomeAPractioner />
+      <VitiminPopovers />
+
+      <div className="md:hidden bg-primaryContainer ">
+        <div className="w-11/12 m-auto pt-10">
+          <h2>
+            Awaken Your Senses,{" "}
+            <strong className="text-5xl text-sacbeBrandColor text-stroke-3`">
+              Embrace the Journey
+            </strong>
+          </h2>
+          <p>
+            Immerse yourself in the Enchanting world of Sacbe Cacao, where
+            flavor and wellness intertwine. Uncover the transformative power of
+            this extraordinary beverage and let it ignite your spirit. It is
+            time to elevate your daily ritual and savor the magic that Sacbe
+            Cacao brings to your life.
+          </p>
+          <RiskApealCards />
+        </div>
+      </div>
       <SimpleSlider reviews={reviews} />
+      <p>read on for more info</p>
+      <AboutClouds></AboutClouds>
+      <AboutSacbe />
+      <BecomeAPractioner />
 
       {/* <RecipeSlider /> */}
-
-      <div className="bg-gradient-to-b from-tertiaryContainer to-surface ">
+      <div className="bg-gradient-to-b from-primaryContainer to-surface ">
         <h3 className="text-7xl text-center py-20">Recipes & Articles</h3>
         <div className=" w-11/12 md:w-7/12 mx-auto" key={"cards holder"}>
           {Cards}
         </div>
       </div>
+
       <NavMenuBottom />
       {/* <Card>
         <div className="flex flex-col items-center">

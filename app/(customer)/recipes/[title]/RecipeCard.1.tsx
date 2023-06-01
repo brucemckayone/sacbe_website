@@ -18,7 +18,7 @@ export function RecipeCard(props: any) {
       >
         <div>
           <div
-            className="flex flex-col md:flex-row my-10  "
+            className="flex flex-col md:flex-row   "
             key={props.recipe.title + "related posts"}
           >
             <div className="max-w-full h-[270px] md:h-[500px] md:basis-3/12 relative my-2  md:mx-10">

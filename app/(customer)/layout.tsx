@@ -8,6 +8,7 @@ import {
 } from "@next/font/google";
 import Footer from "@/components/footer";
 import UserProvider from "@/components/auth/affiliate_auth_context";
+import { QuickPurchase } from "./QuickPurchase";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -27,13 +28,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html className={`${raleway.variable} ${merriweather.variable} bg-surface`}>
+    <html
+      className={`${raleway.variable} ${merriweather.variable} bg-surface w-[100%]`}
+    >
       <AuthProvider>
         <UserProvider>
           <head />
           <body>
             <Navbar />
             {children}
+            <QuickPurchase />
             <Footer />
           </body>
         </UserProvider>

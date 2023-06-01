@@ -5,6 +5,8 @@ export default function HeaderInformation() {
   return (
     <div className=" basis-5/12 py-5 px-5 md:px-0 lg:w-1/3 animate-slide_in_right_fade">
       <div className="relative w-auto pb-2">
+        <h1 className="mt-5">DISCOVER YOUR HEART</h1>
+
         <Image
           src="/mayan_ceremonial_cacao_text.svg"
           alt="Mayan Ceremonial Cacao"
@@ -24,31 +26,29 @@ export default function HeaderInformation() {
         <li key={1} className="border-onSecondaryContainer border-b-2 my-5">
           <div className="flex flex-row align-bottom">
             <h5>300g</h5>
-            <p className="self-end">
-              &nbsp; - Organic Product of Ecuador & Belize
-            </p>
+            <p className="self-end ml-2">- Organic Cacao</p>
           </div>
         </li>
         <li key={2} className="border-onSecondaryContainer border-b-2 my-5">
-          <div className=" flex flex-row align-bottom">
-            <h5>Taste Notes:</h5>
-            <p className="self-end">
-              &nbsp; Plum, Pineapple, Fudge, Caramel, Raison
+          <div className=" flex flex-row align-bottom ">
+            <h5>Notes:</h5>
+            <p className="ml-2 self-end whitespace-nowrap">
+              Plum, Fudge, Caramel, Raison
             </p>
           </div>
         </li>
         <li key={3} className="border-onSecondaryContainer border-b-2 my-5">
           <div className="flex flex-row align-bottom">
             <h5>Feels:</h5>
-            <p className="self-end">
-              &nbsp; Grounded + loving Creative + expansive
+            <p className="ml-2 self-start text-md ">
+              Grounded, Loving, Creative, expansive
             </p>
           </div>
         </li>
         <li key={4} className="border-onSecondaryContainer border-b-2 my-5">
           <div className="flex flex-row align-bottom">
             <h5>Buttons:</h5>
-            <p className="self-end">&nbsp; For easy and intuitive dosing</p>
+            <p className="self-end ml-2">For easy and intuitive dosing</p>
           </div>
         </li>
       </ol>
@@ -57,7 +57,11 @@ export default function HeaderInformation() {
         <PurchaseOptionCard
           key={1}
           headerText="One-Off-Purchase"
-          list={["300g Sacbe Cacao", "Recipe Guide", "A few good days"]}
+          list={[
+            "300g Sacbe Cacao",
+            "App & Guided Meditation",
+            "A few good days",
+          ]}
           listHeaderText="Included:"
           priceString="£30.00"
           buttonText="Buy"
@@ -66,6 +70,7 @@ export default function HeaderInformation() {
           priceIds={["price_1Mb8slG859ZdyFmp0ttYsJAh"]}
           paymentMode="payment"
         ></PurchaseOptionCard>
+
         <PurchaseOptionCard
           key={2}
           headerText="SUBSCRIBE"

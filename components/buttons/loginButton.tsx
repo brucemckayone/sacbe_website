@@ -24,7 +24,7 @@ export default function LoginButton() {
               src={null}
               alt="no image here"
               color={"orange"}
-              className="rounded-full bg-transparent align-bottom h-[45px] w-[45px] drop-shadow-lg"
+              className="rounded-full bg-transparent align-bottom h-[50px] w-[50px] shadow-lg"
             />
           </div>
         </Popover.Target>

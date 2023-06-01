@@ -73,7 +73,7 @@ async function ResourcesPage({
             },
           }}
         >
-          <p className="text-2xl hover Black">Load More</p>
+          <p className="text-2xl hover:Black">Load More</p>
         </Link>
       </div>
     </div>

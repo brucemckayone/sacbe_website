@@ -84,20 +84,21 @@ async function RercipePage({
             return (
               <div
                 className="bg-surface hover:bg-tertiaryContainer hover:drop-shadow-xl  duration-300 p-5 my-5 drop-shadow-md"
-                key={e.StepTitle + e.ingredient[0]}
+                key={e.StepTitle}
               >
                 <p></p>
                 <div className="flex flex-col md:flex-row justify-between my-3">
                   <h3 className="">{e.StepTitle}</h3>
                   <div className="flex flex-wrap">
-                    {e.ingredient.map((e: any) => {
-                      return (
-                        <div
-                          className="mx-2 rounded-full my-2 bg-tertiaryContainer self-center px-3 drop-shadow-md flex-wrap"
-                          key={"e"}
-                        >{`${e}`}</div>
-                      );
-                    })}
+                    {e.ingredient &&
+                      e.ingredient.map((e: any) => {
+                        return (
+                          <div
+                            className="mx-2 rounded-full my-2 bg-tertiaryContainer self-center px-3 drop-shadow-md flex-wrap"
+                            key={e}
+                          >{`${e}`}</div>
+                        );
+                      })}
                   </div>
                 </div>
 

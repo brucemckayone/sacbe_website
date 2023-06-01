@@ -5,13 +5,12 @@ import Card from "../cards/card";
 import BenifitsCard from "../cards/benifits_card";
 import reviews from "@/lib/constants/reviews";
 import SimpleSlider from "../carousels/testimonial_slider";
+import PrimaryButton from "../buttons/primaryButton";
 
 export default function BenifitsOfCacao() {
   return (
     <div className="bg-gradient-to-b from-secondaryContainer to-primaryContainer py-14 md:p-10">
-      {/* <SlideInUp animiation="animate-slide_in_right_fade"> */}
-      {/* <SectionHeader title="The Experiance"></SectionHeader> */}
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col-reverse lg:flex-row">
         <Card hasColor={false} className="xl:basis-1/3 md:basis-1/3 ">
           <SlideInUp animiation="animate-slide_in_left_fade">
             <h3 className="mb-2 text-5xl md:text-4xl">
@@ -19,7 +18,7 @@ export default function BenifitsOfCacao() {
             </h3>
           </SlideInUp>
           <SlideInUp animiation="animate-slide_in_left_fade">
-            <blockquote className="text-xl">
+            <blockquote className="text-lg">
               WOWWWZZAAAA!!!! Now, I have tried a few different Cacao’s but I
               have to say that SACBE is my new absolute fave! The texture &
               taste is soooo smooth, it foams up beautifully in a blender. The
@@ -32,9 +31,7 @@ export default function BenifitsOfCacao() {
               and full of love & compassion. Honestly if I could give it more
               than 5* I would! Thank you for introducing such a wonderful
               product. I can’t wait to continue using it on my healing journey
-              <p className="text-end">
-                - Mathilda Heenehan (Very Happy Customer)
-              </p>
+              <p className="text-end">- Mathilda Heenehan</p>
             </blockquote>
           </SlideInUp>
           <SlideInUp animiation="animate-slide_in_left_fade">
@@ -47,7 +44,7 @@ export default function BenifitsOfCacao() {
           </SlideInUp>
         </Card>
         <Card hasColor={false} className=" xl:basis-2/3 md:basis-2/4 m-0">
-          <h3 className="text-6xl my-10">The Benefits Of Cacao</h3>
+          <h3 className="text-6xl my-10 md:my-0">The Benefits Of Cacao</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-2 animate-slide_in_up_fade ">
             <BenifitsCard
               headerText="Sustained Energy"

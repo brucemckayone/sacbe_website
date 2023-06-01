@@ -31,8 +31,12 @@
   a {
     @apply underline  hover:text-sacbeBrandColor text-onBackground;
   }
+
+  strong {
+    @apply text-primary text-xl;
+  }
   blockquote {
-    @apply border-l-2 pl-3 ml-5 italic font-display border-sacbeBrandColor;
+    @apply border-l-2 pl-1 ml-1 font-display border-sacbeBrandColor;
   }
   .btn-primary {
     @apply font-display p-10 bg-primary;
@@ -42,5 +46,10 @@
   }
   .btn-tertiary {
     @apply;
+  }
+
+  .text-stroke-3 {
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+      1px 1px 0 black;
   }
 }

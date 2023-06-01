@@ -29,7 +29,7 @@ export function ImageLeftTextRight({
   jiggle,
 }: IImageLeftTextRight): JSX.Element {
   return (
-    <div className="bg-primaryContainer pb-28">
+    <div className="bg-tertiaryContainer pb-28">
       <h2 className="py-20 mx-5 md:mx-10 text-center text-7xl lg:text-8xl md:text-7xl">
         {title}
       </h2>

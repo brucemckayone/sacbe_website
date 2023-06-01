@@ -154,7 +154,7 @@ const PurchaseOptionCard: React.FC<Props> = ({
                   "price_1MpxuKG859ZdyFmpoIIVYaVt",
                   "price_1MqhygG859ZdyFmpZYxxL1aN",
                 ],
-                mode: "subscription",
+                mode: "payment",
                 customerId: "",
               });
               setIsShippingLoading(false);
