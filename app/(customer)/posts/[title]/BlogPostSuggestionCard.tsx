@@ -6,7 +6,7 @@ import { blogPostType } from "./page";
 
 export function BlogPostSuggestionCard(props: { post: blogPostType }) {
   const slug = props.post.title.replaceAll(" ", "-").replaceAll("%3A", ":");
-  console.log("hereh " + slug);
+
   return (
     <div className="py-5 border-b border-primaryContainer">
       <Link

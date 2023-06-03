@@ -63,29 +63,12 @@ export default function LoginButton() {
           </div>
         </Popover.Dropdown>
       </Popover>
-      {/* {isLoggedIn ? (
-        <button
-          onClick={async () => {
-            await goToAccountManagement();
-          }}
-          className="duration-500 bg-sacbeBrandColor py-1 px-8  my-3 rounded-md hover:bg-onPrimaryContainer hover:text-onPrimary border-2"
-        >
-          <h4>{`${!isLoading ? "ACCOUNT" : "LOADING..."}`}</h4>
-        </button>
-      ) : (
-        <Link href={"/api/auth/signin"}>
-          <button className="duration-500 bg-sacbeBrandColor py-1 px-8  my-3 rounded-md hover:bg-onPrimaryContainer hover:text-onPrimary border-2">
-            <h4>LOGIN</h4>
-          </button>
-        </Link>
-      )} */}
     </div>
   );
 
   async function goToAccountManagement() {
     setIsLoading(true);
     try {
-      console.log(data?.user?.email);
       const customerId = await fetchPostJSON("api/users/get_user_id_by_email", {
         email: data?.user?.email,
       });

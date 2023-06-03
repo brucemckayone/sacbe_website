@@ -64,8 +64,6 @@ export default function UserProvider({
   });
   useEffect(() => {
     if (data.user) {
-      console.log(data.user);
-
       setUserDetails(data.user);
     }
   }, [data.user]);

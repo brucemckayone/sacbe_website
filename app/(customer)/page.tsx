@@ -21,7 +21,6 @@ import { TheHook } from "./TheHook";
 export default async function Home() {
   const posts = await getFeaturedPosts();
   const recipes = await getFeaturedRecipes();
-  console.log(posts);
 
   const postCards = posts.map((e) => {
     return <BlogPostSuggestionCard post={e} key={e.title} />;

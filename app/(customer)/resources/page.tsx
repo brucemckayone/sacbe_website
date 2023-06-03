@@ -46,7 +46,6 @@ async function ResourcesPage({
   const posts = await getFeaturedPosts(postAfter);
   const recipes = await getFeaturedRecipes(recipeAfter);
 
-  console.log(recipes);
   const postCards = posts.map((e) => {
     return <BlogPostSuggestionCard post={e.data} key={e.data.title} />;
   });

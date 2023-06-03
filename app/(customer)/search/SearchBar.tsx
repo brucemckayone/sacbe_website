@@ -149,8 +149,7 @@ export default function SearchBar(props: {
   function generateLink(result: { title: string; type: string }) {
     const subPath = generateSubPath(result.type);
     const path = subPath + formatTitleForUrl(result.title);
-    console.log("hhehehehehehehehehreoiheorihroiher");
-    console.log(path);
+
     return path;
   }
 

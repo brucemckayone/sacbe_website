@@ -40,7 +40,6 @@ export async function middleware(request: NextRequest) {
   const user = await checkAuthentication(request);
 
   console.log(`is Authenticated: ${await checkAuthentication(request)} `);
-  console.log(request.url);
 
   if (!user) {
     if (pathNameIncludes("/portal")) {
