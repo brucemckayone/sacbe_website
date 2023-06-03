@@ -2,6 +2,7 @@ import Navbar from "@/components/nav bar/Navbar";
 import "../../app/globals.css";
 import AuthProvider from "@/components/providers/SessionProvider";
 
+import { Analytics } from "@vercel/analytics/react";
 import {
   Marcellus as displayFont,
   Marcellus as bodyFont,
@@ -96,6 +97,7 @@ export default function RootLayout({
           </body>
         </UserProvider>
       </AuthProvider>
+      <Analytics />
     </html>
   );
 }
