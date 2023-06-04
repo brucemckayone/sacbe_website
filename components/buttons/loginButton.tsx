@@ -36,7 +36,8 @@ export default function LoginButton() {
               className="text-start py-2 mx-5 "
               aria-labelledby="dropdown-button"
             >
-              {user.user.wholesale || user.user.affiliateStatus ? (
+              {!user.isLoading &&
+              (user.user.wholesale || user.user.affiliateStatus) ? (
                 <div>
                   <li
                     className="py-4 pr-5  border-b border-primaryContainer"
