@@ -103,15 +103,13 @@ export default async function handler(
         messaging().send({
           topic: "all",
           notification: {
-            body: `New Order ${invoice.customer_name} £${
+            body: ` Fuck Yes! Another sale worth £${
               productList.reduce((total, a) => a.cost + total, 0) / 100
-            }`,
+            } Smackaroonies`,
             imageUrl:
               productList[0].image ??
               "https://www.sacbe-ceremonial-cacao.com/logo.svg",
-            title: `${productList.map((e) => {
-              e.name + ", ";
-            })}`,
+            title: `New Order: ${invoice.customer_name}`,
           },
         });
       default:
