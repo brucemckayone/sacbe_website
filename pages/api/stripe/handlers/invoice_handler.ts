@@ -4,6 +4,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 import { handlePaymentSucceeded } from "./handlePaymentSucceeded";
 import { firestore } from "firebase-admin";
+import stripe from "@/lib/stripe/stripe";
+import adminInit from "@/utils/firebase/admin_init";
 
 // import { InvoiceHandler } from "@/utils/server/webhooks/invoices";
 
@@ -16,9 +18,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const stripe = new Stripe(envConfig.STRIPE_SECRET, {
-    apiVersion: "2022-11-15",
-  });
   const sig: string = req.headers["stripe-signature"] as string;
   const reqBuffer = await buffer(req);
 
@@ -28,6 +27,7 @@ export default async function handler(
   let message = "message not set";
   let data = {};
   try {
+    adminInit();
     event = stripe.webhooks.constructEvent(
       reqBuffer,
       sig,
