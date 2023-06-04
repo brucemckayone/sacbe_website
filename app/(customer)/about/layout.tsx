@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     "Sustainability",
     "Wellness",
     "Commitment",
+
     "Vision",
     "Expertise",
     "Community",

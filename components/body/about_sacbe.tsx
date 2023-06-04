@@ -1,35 +1,5 @@
 import React from "react";
-import Image from "next/image";
-import Card from "../cards/card";
-import Link from "next/link";
 import { ImageLeftTextRight } from "./ImageLeftTextRight";
-
-function WeLoveOurMotherCard() {
-  return (
-    <Card className="mb-5 mx-10 rounded-md p-3  md:mx-48 border-2">
-      <div className="flex justify-center">
-        <Image
-          src={"/we_love_mother_leaf.png"}
-          width={25}
-          height={25}
-          className="-scale-x-100"
-          alt="leaf header decoration"
-        ></Image>
-        <h4 className="self-center px-5 text-center">WE LOVE OUR MOTHER</h4>
-        <Image
-          src={"/we_love_mother_leaf.png"}
-          width={25}
-          height={25}
-          alt="leaf header decoration"
-        ></Image>
-      </div>
-      <p className="mx-5 text-center">
-        Our pouches are eco-friendly + fully recyclable, featuring labels made
-        from recycled wood pulp and printed with vegetable inks.
-      </p>
-    </Card>
-  );
-}
 
 const AboutSacbe: React.FC = () => {
   return (

@@ -1,16 +1,18 @@
 import { MetadataRoute } from "next";
 import homeUrl from "@/lib/constants/urls";
 import { firestore } from "firebase-admin";
-import { blogPostType } from "./(customer)/posts/[title]/page";
+import adminInit from "@/utils/firebase/admin_init";
 
 async function getAllBlogPosts() {
+  adminInit();
   const db = firestore();
   const snap = await db.collection("blog_posts").get();
   return snap.docs.map((e) => {
-    return e.data() as blogPostType;
+    return e.data();
   });
 }
 async function getAllRecipes() {
+  adminInit();
   const db = firestore();
   const snap = await db.collection("recipes").get();
   return snap.docs.map((e) => {
@@ -21,15 +23,15 @@ async function getAllRecipes() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = (await getAllBlogPosts()).map((e) => {
     return {
-      url: `${homeUrl}/blog/${e.title.replaceAll(" ", "-")}`,
-      lastModified: new Date(),
+      url: `${homeUrl}/posts/${e.title.replaceAll(" ", "-")}`,
+      lastModified: e.dateCreated,
     };
   });
 
   const recipes = (await getAllRecipes()).map((e) => {
     return {
       url: `${homeUrl}/recipes/${e.title.replaceAll(" ", "-")}`,
-      lastModified: new Date(),
+      lastModified: e.dateCreated,
     };
   });
 

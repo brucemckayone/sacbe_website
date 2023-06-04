@@ -1,14 +1,12 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  reactStrictMod: false,
-  // basePath: "https://sacbe-ceremonial-cacao.vercel.app/",
   experimental: {
     appDir: true,
     serverActions: true,
-    fontLoaders: [
-      { loader: "@next/font/google", options: { subsets: ["latin"] } },
-    ],
+    // fontLoaders: [
+    //   { loader: "@next/font/google", options: { subsets: ["latin"] } },
+    // ],
   },
 
   images: {
@@ -21,10 +19,6 @@ const nextConfig = {
       "localhost",
       "upload.wikimedia.org",
     ],
-  },
-  future: {
-    webpack5: true, // by default, if you customize webpack config, they switch back to version 4.
-    // Looks like backward compatibility approach.
   },
 
   // env: {

@@ -84,7 +84,7 @@ function VitiminPill(props: { name: string; popover: string }) {
           <div
             onMouseEnter={open}
             onMouseLeave={close}
-            className="group-hover:mx-5 group-hover:my-5 my-2 mx-1 px-3 py-2 rounded-full drop-shadow-md bg-surface hover:scale-105 hover:bg-primaryContainer hover:drop-shadow-2xl duration-700"
+            className=" my-2 mx-1 px-3 py-2 rounded-full drop-shadow-md bg-surface hover:scale-105 hover:bg-primaryContainer hover:drop-shadow-2xl duration-700"
           >
             <p>{props.name}</p>
           </div>
@@ -118,7 +118,7 @@ export function VitiminPopovers() {
             </h2>
             <p className="md:hidden my-8 ml-1">Tap the tabs for more info</p>
             <div className="md:hidden flex flex-wrap justify-center w-11/12 md:w-7/12 m-auto md:px-10 group my-28 duration-700">
-              <div className="absolute bg-tertiaryContainer rounded-full h-[500px] group-hover:h-[650px] w-screen md:w-[800px] blur-2xl  "></div>
+              <div className="absolute bg-tertiaryContainer rounded-full h-[500px] w-screen md:w-[800px] blur-2xl  "></div>
               {vits.map((e) => {
                 return (
                   <VitiminPill
@@ -129,7 +129,7 @@ export function VitiminPopovers() {
                 );
               })}
             </div>
-            <h5 className="underline text-xl md:text-2xl mt-5 pt-16">
+            <h5 className="text-xl md:text-2xl mt-5 pt-16 font-extrabold">
               Harness the Nutritional Marvel of Cacao
             </h5>
             <p className="ml-1  mr-2">

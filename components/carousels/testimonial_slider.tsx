@@ -2,16 +2,16 @@
 import { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import FiveStars from "../ratings/five_stars";
 
 interface Props {
   reviews: Review[];
 }
 const SimpleSlider: React.FC<Props> = ({ reviews }) => {
   return (
-    <div className=" bg-primaryContainer py-52 ">
-      <h1 className="text-center sm:text-4xl ">REVIEWS</h1>
+    <div className=" bg-primaryContainer py-10 ">
       <Carousel
-        height={200}
+        height={380}
         draggable
         slideGap="md"
         loop
@@ -23,15 +23,14 @@ const SimpleSlider: React.FC<Props> = ({ reviews }) => {
         align="start"
         slidesToScroll={1}
         className="mx-0  flex-col justify-center"
-        // plugins={[autoplay.current]}
-        // onMouseEnter={autoplay.current.stop}
-        // onMouseLeave={autoplay.current.reset}
       >
         {reviews &&
           reviews.map((review) => {
             return (
               <Carousel.Slide key={review.review} className="self-center">
+                <FiveStars />
                 <h4 className="text-center mx-10">{review.title}</h4>
+
                 <p className="text-center mx-16 ">{review.review}</p>
               </Carousel.Slide>
             );

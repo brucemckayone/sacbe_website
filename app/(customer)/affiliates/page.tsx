@@ -4,6 +4,34 @@ import NavMenuBottom from "@/components/menu/NavMenuBottom";
 import { AffiliateHeader } from "./AffiliateHeader";
 import Image from "next/image";
 import SlideInUp from "@/components/animations/slide_in_up";
+import { Metadata } from "next";
+
+const metaData: Metadata = {
+  title: "Affiliate Program",
+  description:
+    "Join Our Affiliate Program Today! Unlock the power of ceremonial cacao and embark on a journey of spiritual awakening while earning enticing rewards. Become a part of our affiliate community and share the profound benefits of ceremonial cacao with others. Join now in the abundant opportunities that await you!",
+  keywords: [
+    "Sacbe Ambassador Program",
+    "ceremonial cacao",
+    "spiritual awakening",
+    "affiliate program",
+    "transformative properties",
+    "spiritual connection",
+    "affiliate portal",
+    "like-minded community",
+    "spiritual growth",
+    "ancient traditions",
+    "fair trade",
+    "sustainability",
+    "exceptional product quality",
+    "lucrative commission rates",
+    "captivating marketing materials",
+    "exclusive offers",
+    "ethics",
+    "social responsibility",
+    "environmental consciousness",
+  ],
+};
 
 function ReasonToJoin({
   imageUrl,
@@ -57,7 +85,7 @@ export default async function AffiliatePage() {
       <AffiliateHeader></AffiliateHeader>
       <NavMenuBottom></NavMenuBottom>
       <div className=" px-4 flex flex-row  w-full justify-center bg-tertiaryContainer">
-        <div className=" w-fit lg:w-8/12 pt-20">
+        <div className=" w-fit lg:w-7/12 pt-20">
           <h2 className="text-7xl mt-10 mb-5">Spread The Medicine</h2>
           <p>
             What sets ceremonial cacao apart is its ability to create a profound
@@ -73,7 +101,7 @@ export default async function AffiliatePage() {
             width={1080}
             height={800}
             alt={"affiliate portal mock up "}
-            className=""
+            className=" m-auto"
           ></Image>
           <div>
             <h3 className="text-5xl mb-10 mt-5">

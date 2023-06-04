@@ -30,6 +30,7 @@ export const metadata: Metadata = {
     template: "%s | Sacbe Cacao",
   },
   applicationName: "Sacbe Cacao",
+  metadataBase: new URL("https://sacbe-ceremonial-cacao.com"),
   category: "Cacao",
   keywords: [
     "Ceremonial cacao",
@@ -50,6 +51,8 @@ export const metadata: Metadata = {
     width: "device-width",
     initialScale: 1,
   },
+  colorScheme: "light",
+
   twitter: {
     title: {
       default: "Sacbe Cacao",
@@ -74,7 +77,6 @@ export const metadata: Metadata = {
     type: "website",
     countryName: "United Kingdom",
   },
-  robots: {},
 };
 
 export default function RootLayout({

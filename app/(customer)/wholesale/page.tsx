@@ -6,16 +6,40 @@ import { AboutClouds } from "./AboutClouds";
 import { WholesaleHeader } from "./WholesaleHeader";
 import { AboutPackaging } from "./AboutPackaging";
 import Image from "next/image";
+import { Metadata } from "next";
+
+const metaData: Metadata = {
+  title: "Wholesale",
+  description:
+    "Revitalize Your Business with Wholesale Sacbe Cacao! Harness the Authentic Essence of Cacao and Offer Your Customers a Truly Enchanting Experience. Maximize Profits and Delight Your Clients With Our Premium Bulk Cacao Offerings. Take the Leap and Amplify Your Success with Wholesale Ceremonial Cacao Today!",
+  keywords: [
+    "Wholesale ceremonial cacao",
+    "bulk cacao",
+    "premium cacao offerings",
+    "authentic cacao",
+    "enchanting experience",
+    "maximize profits",
+    "wholesale portal",
+    "sustainable cacao",
+    "spiritual business",
+    "transformative experiences",
+    "discerning customers",
+  ],
+};
+
 const SacbeCacaoWholesale = async () => {
   return (
     <div>
       <WholesaleHeader></WholesaleHeader>
       <NavMenuBottom />
       <div className="flex flex-row items-center justify-center bg-secondaryContainer pt-20 ">
-        <div className="self-center w-11/12 md:w-10/12">
-          <h2 className="text-5xl text-center mb-10 mt-5">
-            WHOLESALE CACAO PORTAL: AUTHENTIC AND SUSTAINABLE BULK CACAO FOR
-            SPIRITUAL & WELLBEING BUSINESSES IN THE UK
+        <div className="self-center w-11/12 md:w-8/12">
+          <h2 className=" text-3xl md:text-8xl text-center mb-10 mt-5">
+            <strong className="text-stroke-3 text-3xl md:text-8xl text-sacbeBrandColor">
+              WHOLESALE CACAO:
+            </strong>{" "}
+            AUTHENTIC AND SUSTAINABLE BULK CACAO FOR SPIRITUAL & HEALTH &
+            WELLBEING BUSINESSES IN THE UK
           </h2>
           <div className="flex flex-row justify-center">
             <Image

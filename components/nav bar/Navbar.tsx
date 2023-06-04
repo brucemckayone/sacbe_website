@@ -8,9 +8,9 @@ import { useState } from "react";
 import LoginButton from "../buttons/loginButton";
 import { signOut, useSession } from "next-auth/react";
 import menuItems from "@/lib/constants/menu";
-import SearchBar from "@/app/(customer)/search/SearchBar";
+import SearchBar from "../search/searchbar";
 
-export default function Navbar(props: any) {
+export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 flex flex-row  justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
       <Menu />
@@ -23,7 +23,7 @@ export default function Navbar(props: any) {
           priority
         ></Image>
       </Link>
-      <LoginButton></LoginButton>
+      <LoginButton />
     </header>
   );
 }
@@ -71,12 +71,14 @@ function Menu() {
                     }}
                     key={`drawerMenu ${item.link}+${item.text}`}
                     href={item.link}
-                    className="no-underline"
+                    className="no-underline group"
                   >
-                    <h1 className="mt-10 underline hover:text-[white] duration-300">
+                    <h1 className="mt-10 underline group-hover:text-[white] duration-300">
                       {item.text}
                     </h1>
-                    <h4 className="no-underline">{item.subTitle}</h4>
+                    <h4 className="no-underline text-xl group-hover:text-onPrimary">
+                      {item.subTitle}
+                    </h4>
                   </Link>
                 );
               })}

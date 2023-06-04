@@ -5,9 +5,6 @@ import Card from "@/components/cards/card";
 export function TheHook() {
   return (
     <div className="bg-tertiaryContainer">
-      <div className="hidden md:block">
-        <RiskApealCards />
-      </div>
       <div className="">
         <h2 className="w-11/12 md:w-7/12 text-center text-5xl md:text-8xl m-auto pt-20">
           Seeking Inner Bliss and Vitality? Embrace the
@@ -57,23 +54,19 @@ export function TheHook() {
                       objectFit: "contain",
                     }}
                     alt=""
-                    className="animate-scale_shadow"
                   ></Image>
                 </div>
 
                 <div
-                  className={`absolute top-10 right-0 left-0 w-full h-[400px]`}
+                  className={`absolute top-10 right-0 left-0 w-full h-[540px]`}
                 >
                   <Image
-                    src={"/cacao_pod_floating.png"}
+                    src={"/chocolate_buttons.png"}
                     fill
                     style={{
                       objectFit: "contain",
                     }}
-                    alt=""
-                    className={
-                      "animate-float hover:animate-bounce duration-700"
-                    }
+                    alt=" Chocolate Buttons"
                   ></Image>
                 </div>
               </div>

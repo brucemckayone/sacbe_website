@@ -5,8 +5,8 @@ export function AboutClouds() {
   return (
     <div className="bg-gradient-to-b from-primaryContainer to-tertiaryContainer">
       <div className="flex flex-col md:flex-row pt-20 w-11/12 md:w-10/12 m-auto">
-        <div className="col-span-3 py-10 rounded-xl">
-          <h2 className="text-6xl md:text-8xl text-center my-16 ">
+        <div className="col-span-3 rounded-xl">
+          <h2 className="text-6xl md:text-8xl text-center mb-10 ">
             Grown In The Heart of The Ecuadorian Cloud Forests
           </h2>
           <div className="flex flex-col-reverse md:flex-row pt-0 md:pt-32">
@@ -32,42 +32,42 @@ export function AboutClouds() {
                 the wisdom passed down from their ancestors.
               </p>
             </div>
-            <div className="md:block md:basis-2/5 h-[300px] flex flex-col justify-center">
+            <div className="md:block md:basis-2/5 h-[300px] md:h-[500px] flex flex-col justify-center">
               <div className="flex flex-row justify-center h-full">
                 <Image
                   src={"/clouds_green.jpg"}
                   width={100}
                   height={100}
                   alt="heart"
-                  className="w-2/12 md:w-1/12 ml-2 md:ml-3 rounded-2xl object-cover  duration-200 hover:scale-105"
+                  className="w-2/12 md:w-1/12 ml-2  rounded-2xl object-cover  duration-200 hover:scale-105"
                 ></Image>
                 <Image
                   src={"/clouds_green.jpg"}
                   width={500}
                   height={500}
                   alt="heart"
-                  className="w-1/12 md:w-3/12 rounded-3xl object-cover ml-2 md:mx-3 duration-200 hover:scale-105"
+                  className="w-1/12 md:w-3/12 rounded-3xl object-cover ml-2   duration-200 hover:scale-105"
                 ></Image>
                 <Image
                   src={"/clouds_yellow.jpg"}
                   width={200}
                   height={200}
                   alt="heart"
-                  className=" w-3/12 md:w-4/12 rounded-3xl ml-2 md:ml-5 object-cover duration-200 hover:scale-105"
+                  className=" w-3/12 md:w-4/12 rounded-3xl ml-2  object-cover duration-200 hover:scale-105"
                 ></Image>
                 <Image
                   src={"/clouds_yellow.jpg"}
                   width={100}
                   height={100}
                   alt="heart"
-                  className="w-1/12 rounded-full object-cover ml-2 md:ml-5 duration-200 hover:scale-105"
+                  className="w-1/12 rounded-full object-cover ml-2  duration-200 hover:scale-105"
                 ></Image>
                 <Image
                   src={"/clouds_pink.jpg"}
                   width={500}
                   height={500}
                   alt="heart"
-                  className="w-3/12 md:w-2/12 rounded-3xl object-cover ml-2 md:ml-5 duration-200 hover:scale-105"
+                  className="w-3/12 md:w-2/12 rounded-3xl object-cover ml-2  duration-200 hover:scale-105"
                 ></Image>
               </div>
             </div>

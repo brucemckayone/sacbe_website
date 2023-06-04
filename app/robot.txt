@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /portal/
+Crawl-delay: 5
+Sitemap: https://sacbe-ceremonial-cacao.com/sitemap.xml
+
+User-agent: BadBot
+Disallow: /
+
+Host: www.sacbe-ceremonial-cacao.com

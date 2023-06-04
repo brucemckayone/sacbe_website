@@ -16,17 +16,6 @@ export default function HomePageHeader() {
             objectFit: "contain",
           }}
         />
-        <span className="flex justify-between my-5 text-center w-full m-auto">
-          <p className=" text-sm md:text-lg border-r-2 px-1 md:pr-10">KETO</p>
-          <p className=" text-sm md:text-lg border-r-2 px-1 md:pr-10">VEGAN</p>
-          <p className=" text-sm md:text-lg border-r-2 px-1 md:pr-10">
-            ORGANIC
-          </p>
-          <p className=" text-sm md:text-lg border-r-2 px-1 md:pr-10">
-            SUGAR FREE
-          </p>
-          <p className="text-sm md:text-lg px-1 md:pr-10">FAIR TRADE</p>
-        </span>
       </div>
       <HeaderInformation />
     </div>

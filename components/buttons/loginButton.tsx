@@ -17,7 +17,7 @@ export default function LoginButton() {
   const isLoggedIn = data != null; //data?.user?.email != null;
   return (
     <div className="text-end mr-3 align-bottom flex-col justify-center">
-      <Popover>
+      <Popover position="left-start">
         <Popover.Target>
           <div className="m-3">
             <Avatar
@@ -30,7 +30,10 @@ export default function LoginButton() {
         </Popover.Target>
         <Popover.Dropdown>
           <div id="dropdown">
-            <ul className="text-start py-2 " aria-labelledby="dropdown-button">
+            <ul
+              className="text-start py-2 mx-5 "
+              aria-labelledby="dropdown-button"
+            >
               {isLoggedIn && (
                 <li
                   className="py-4 pr-5  border-b border-primaryContainer"

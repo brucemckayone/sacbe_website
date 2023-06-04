@@ -5,10 +5,8 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Link from "next/link";
 import { Popover } from "@mantine/core";
 import Image from "next/image";
-import {
-  formatTitleForFetch,
-  formatTitleForUrl,
-} from "../posts/[title]/formatTitleForFetch";
+import { formatTitleForUrl } from "@/app/(customer)/posts/[title]/formatTitleForFetch";
+
 export default function SearchBar(props: {
   toggleMenu: Dispatch<SetStateAction<boolean>>;
 }) {

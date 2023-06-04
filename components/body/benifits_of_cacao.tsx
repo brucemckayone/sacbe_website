@@ -9,8 +9,8 @@ import PrimaryButton from "../buttons/primaryButton";
 
 export default function BenifitsOfCacao() {
   return (
-    <div className="bg-gradient-to-b from-secondaryContainer to-primaryContainer py-14 md:p-10">
-      <div className="flex flex-col-reverse lg:flex-row">
+    <div className="bg-gradient-to-b from-secondaryContainer to-primaryContainer py-8 md:px-8 ">
+      <div className="flex flex-col-reverse lg:flex-row w-full md:w-10/12 m-auto">
         <Card hasColor={false} className="xl:basis-1/3 md:basis-1/3 ">
           <SlideInUp animiation="animate-slide_in_left_fade">
             <h3 className="mb-2 text-5xl md:text-4xl">
@@ -18,7 +18,7 @@ export default function BenifitsOfCacao() {
             </h3>
           </SlideInUp>
           <SlideInUp animiation="animate-slide_in_left_fade">
-            <blockquote className="text-lg">
+            <blockquote className="text-md md:text-sm">
               WOWWWZZAAAA!!!! Now, I have tried a few different Cacao’s but I
               have to say that SACBE is my new absolute fave! The texture &
               taste is soooo smooth, it foams up beautifully in a blender. The
@@ -29,7 +29,7 @@ export default function BenifitsOfCacao() {
               really can tell its made with love. This is some potent Cacao! It
               set me up amazingly for the day ahead, I just felt so energised
               and full of love & compassion. Honestly if I could give it more
-              than 5* I would! Thank you for introducing such a wonderful
+              than 5 stars I would! Thank you for introducing such a wonderful
               product. I can’t wait to continue using it on my healing journey
               <p className="text-end">- Mathilda Heenehan</p>
             </blockquote>
@@ -89,7 +89,6 @@ export default function BenifitsOfCacao() {
           </div>
         </Card>
       </div>
-      {/* </SlideInUp> */}
     </div>
   );
 }
