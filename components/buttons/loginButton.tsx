@@ -86,7 +86,7 @@ export default function LoginButton() {
     </div>
   );
 
-  async function goToAccountManagement() {
+  async function goToAccountManagement(): Promise<void> {
     setIsLoading(true);
     try {
       const customerId = await fetchPostJSON("api/users/get_user_id_by_email", {

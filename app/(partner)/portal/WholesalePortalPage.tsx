@@ -95,6 +95,10 @@ export function WholesalePortalPage() {
   if (!user.wholesale)
     return <WholeSalePortalSignUpForm></WholeSalePortalSignUpForm>;
 
+  function goToAccountManagement() {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div className="p-4 sm:ml-64">
       <Modal opened={opened} onClose={close} title="Enter Shipping Details">

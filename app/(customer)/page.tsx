@@ -18,6 +18,7 @@ import { VitiminPopovers } from "./VitiminPopovers";
 import { RiskApealCards } from "./RiskApealCards";
 import { TheHook } from "./TheHook";
 import { PurchaseOptions } from "./PurchaseOptions";
+
 export default async function Home() {
   const posts = await getFeaturedPosts();
   const recipes = await getFeaturedRecipes();
@@ -31,7 +32,7 @@ export default async function Home() {
 
   const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);
   return (
-    <main className="">
+    <main>
       <HomePageHeader />
       <NavMenuBottom />
       <TheHook />
