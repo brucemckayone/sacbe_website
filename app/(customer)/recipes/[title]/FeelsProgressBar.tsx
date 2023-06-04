@@ -8,7 +8,6 @@ export function FeelsProgressBar(props: any) {
       completed={props.percentage}
       customLabel={props.name}
       bgColor="#FF932F"
-      baseBgColor=""
       className="shadow-lg rounded-full"
     ></ProgressBar>
   );

@@ -1,8 +1,9 @@
 import React from "react";
 import NavMenuBottom from "@/components/menu/NavMenuBottom";
-import { PricingTable } from "./PricingTable";
+import { WholesalePricingTable } from "./PricingTable";
+import { WhyWorkWithUs } from "./WhyWorkWithUs";
 import { BottomWholeSaleForm } from "./BottomWholeSaleForm";
-import { AboutClouds } from "./AboutClouds";
+
 import { WholesaleHeader } from "./WholesaleHeader";
 import { AboutPackaging } from "./AboutPackaging";
 import Image from "next/image";
@@ -32,8 +33,8 @@ const SacbeCacaoWholesale = async () => {
     <div>
       <WholesaleHeader></WholesaleHeader>
       <NavMenuBottom />
-      <div className="flex flex-row items-center justify-center bg-secondaryContainer pt-20 ">
-        <div className="self-center w-11/12 md:w-8/12">
+      <div className="flex flex-row items-center justify-center bg-secondaryContainer pt-20">
+        <div className="self-center w-11/12 md:w-10/12">
           <h2 className=" text-3xl md:text-8xl text-center mb-10 mt-5">
             <strong className="text-stroke-3 text-3xl md:text-8xl text-sacbeBrandColor">
               WHOLESALE CACAO:
@@ -61,8 +62,10 @@ const SacbeCacaoWholesale = async () => {
               for your discerning customers.
             </p>
           </div>
-          <PricingTable></PricingTable>
-
+          <WhyWorkWithUs />
+          <div className="md:col-span-4 md:col-start-3 p-3 bg-surfaceVarient my-10 rounded-lg shadow-xl hover:shadow-2xl duration-200">
+            <WholesalePricingTable></WholesalePricingTable>
+          </div>
           <AboutPackaging></AboutPackaging>
 
           <BottomWholeSaleForm></BottomWholeSaleForm>

@@ -62,7 +62,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="md:w-5/12 md:mx-10">
-            <PurchaseOptions isHorizontal={false} />
+            <PurchaseOptions isHorizontal={false} compact={false} />
             <div className="sm:block m-auto md:hidden">
               <RiskApealCards isHorizontal={false} />
             </div>
@@ -72,7 +72,6 @@ export default async function Home() {
 
       <SimpleSlider reviews={reviews} />
 
-      <AboutClouds />
       <AboutSacbe />
       <BecomeAPractioner />
 

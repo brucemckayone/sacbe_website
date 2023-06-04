@@ -86,7 +86,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      className={`${raleway.variable} ${merriweather.variable} bg-surface w-[100%]`}
+      className={`${raleway.variable} ${merriweather.variable} bg-[white] w-[100%]`}
     >
       <AuthProvider>
         <UserProvider>

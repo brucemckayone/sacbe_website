@@ -1,14 +1,23 @@
 import React from "react";
 import { WholeSaleForm } from "./WholeSaleForm.1";
 import Link from "next/link";
-
+import Image from "next/image";
 export function BottomWholeSaleForm() {
   return (
-    <div className="flex flex-col md:flex-row my-20">
-      <div className="basis-1/2">
+    <div className="flex flex-col md:flex-row my-20 m-auto">
+      <div className="basis-1/3 md:mr-20">
+        <div className="flex flex-row justify-center">
+          <Image
+            src={"/wholesale_portal_mock_up.png"}
+            width={500}
+            height={800}
+            alt={"affiliate portal mock up "}
+            className=""
+          ></Image>
+        </div>
         <WholeSaleForm />
       </div>
-      <div className="basis-1/2 m-10">
+      <div className="basis-2/3 ">
         <div className="basis-1/2">
           <h3 className="mt-5">ORDERING:</h3>
           <p>

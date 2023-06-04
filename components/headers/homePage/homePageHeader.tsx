@@ -2,19 +2,18 @@ import Image from "next/image";
 import HeaderInformation from "./headerInformation";
 export default function HomePageHeader() {
   return (
-    <div className="flex flex-col md:flex-row w-full ">
-      <div className="basis-6/12 relative animate-zoom_in_fade md:animate-slide_in_left_fade hover:scale-105 duration-1000 px-4 md:mb-20 md:px-20">
+    <div className="flex flex-col self-center md:flex-row w-full md:items-center">
+      <div className="basis-6/12 px-4">
         <Image
-          src="/sacbe_shapes_background.png"
+          src="/sacbe_product_with_shapes.jpg"
           alt="branding shapes"
-          width="0"
-          height="0"
-          sizes="100vw"
-          className="w-full "
+          width={900}
+          height={500}
+          // placeholder="blur"
           priority
-          style={{
-            objectFit: "contain",
-          }}
+          // blurDataURL={`data:image/jpeg;base64,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`}
+          loading="eager"
+          className="rounded-md object-contain w-full md:h-[650px]"
         />
       </div>
       <HeaderInformation />

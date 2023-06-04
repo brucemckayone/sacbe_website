@@ -43,7 +43,7 @@ export function QuickPurchase() {
               }}
             ></Hamburger>
           </div>
-          <PurchaseOptions isHorizontal={true} />
+          <PurchaseOptions isHorizontal={true} compact={false} />
           <RiskApealCards isHorizontal={true}></RiskApealCards>
         </div>
       )}
