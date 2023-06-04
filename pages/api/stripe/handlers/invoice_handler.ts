@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import { buffer } from "micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
-import { firestore } from "firebase-admin";
+import { firestore, messaging } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
 import adminInit from "@/utils/firebase/admin_init";
 
@@ -100,6 +100,14 @@ export default async function handler(
         console.log(firebaseResponse);
         message =
           "Invoice payment_succeeded handled: email,notification and data saved";
+        messaging().send({
+          topic: "all",
+          notification: {
+            body: "new order from" + invoice.customer,
+            imageUrl: productList[0].image,
+            title: "new order from" + invoice.customer,
+          },
+        });
       default:
         console.log(`Unhandled event type ${event.type}`);
     }

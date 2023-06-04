@@ -12,23 +12,29 @@ export default async function handler(
   const db = firestore();
   const requestCol = db.collection("wholesale_requests");
   const userCol = db.collection("users");
-  let user: userType;
+  let user: any;
   let ref: firestore.DocumentReference<firestore.DocumentData>;
 
   const method = req.method as requestMethodType;
+  console.log("whole sale request made");
   switch (method) {
     case "POST":
+      console.log("1");
       user = req.body.user;
+      console.log("2");
       ref = requestCol.doc(user.email);
+      console.log("3");
       console.log(user);
 
       if (!user.uuid) {
         user.uuid = await addUuidToUser(user.email);
       }
+      console.log("4");
 
       if (!user.customerId) {
         await addCustomerIdToUser(user.uuid, user.email);
       }
+      console.log("5");
 
       await userCol.doc(user.uuid).set({ wholesale: false }, { merge: true });
 

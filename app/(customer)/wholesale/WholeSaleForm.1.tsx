@@ -6,6 +6,7 @@ import TextInput from "@/components/form/inputs/TextInput";
 import ButtonLoader from "@/components/loaders/ButtonLoader";
 import homeUrl from "@/lib/constants/urls";
 import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
+import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 
 import { signIn, useSession } from "next-auth/react";
 
@@ -74,7 +75,7 @@ export function WholeSaleForm(): JSX.Element {
         </div>
       );
     } else {
-      if (user.wholesale != null) {
+      if (user.wholesale != null || isSent) {
         return (
           <div className=" mb-10">
             <h3>Wholesale Request Status</h3>
@@ -86,7 +87,7 @@ export function WholeSaleForm(): JSX.Element {
             <div className="flex justify-between bg-recommendedGreen rounded-lg p-4 my-4 drop-shadow-lg">
               <div>
                 <h5>Request Status</h5>
-                <p>Your request has been sent</p>
+                <p className="mr-2">Your request has been sent</p>
               </div>
               <div className="bg-errorContainer p-4  rounded-lg drop-shadow-lg">
                 <p className="text-onErrorContainer">Pending</p>
@@ -126,7 +127,13 @@ export function WholeSaleForm(): JSX.Element {
                       onClicked={async () => {
                         if (!isSent) {
                           setIsSending(true);
-                          const response = await sendWholeSaleRequest(user);
+                          // = await sendWholeSaleRequest(user);
+                          const response = await fetchPostJSON(
+                            `api/wholesale/request`,
+                            {
+                              user: user,
+                            }
+                          );
                           console.log(response);
                           setIsSent(true);
                           setIsSending(false);
@@ -136,7 +143,6 @@ export function WholeSaleForm(): JSX.Element {
                   )}
                 </div>
               )}
-              )
             </div>
           )}
         </div>

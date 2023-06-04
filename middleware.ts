@@ -39,8 +39,6 @@ import { getToken } from "next-auth/jwt";
 export async function middleware(request: NextRequest) {
   const user = await checkAuthentication(request);
 
-  console.log(`is Authenticated: ${await checkAuthentication(request)} `);
-
   if (!user) {
     if (pathNameIncludes("/portal")) {
       return redirectTo("/auth/signin?");

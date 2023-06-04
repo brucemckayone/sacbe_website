@@ -28,15 +28,15 @@ export function PurchaseOptions(props: props) {
           One-Off-Purchase
         </h3>
         <div className="flex h-full align-middle bg-surface p-2">
-          {!props.compact && (
-            <Image
-              src={"/sacbe_logo_icon.png"}
-              alt={"Sacbe Cacao Image"}
-              height={100}
-              width={100}
-              className="object-contain w-2/12"
-            />
-          )}
+          {/* {!props.compact && ( */}
+          <Image
+            src={"/sacbe_logo_icon.png"}
+            alt={"Sacbe Cacao Image"}
+            height={100}
+            width={100}
+            className="object-contain w-2/12"
+          />
+          {/* )} */}
 
           <div className="flex-col justify-center ">
             <h5 className="text-onPrimaryContainer">Included</h5>
@@ -84,15 +84,15 @@ export function PurchaseOptions(props: props) {
           SUBSCRIPTION
         </h3>
         <div className="flex h-full align-middle bg-surface p-2">
-          {!props.compact && (
-            <Image
-              src={"/sacbe_shapes_background.png"}
-              alt={"Sacbe Cacao Image"}
-              height={100}
-              width={100}
-              className="object-contain w-2/12"
-            />
-          )}
+          {/* {!props.compact && ( */}
+          <Image
+            src={"/sacbe_shapes_background.png"}
+            alt={"Sacbe Cacao Image"}
+            height={100}
+            width={100}
+            className="object-contain w-2/12"
+          />
+          {/* )} */}
           <div className="flex-col justify-center ">
             <h5 className="text-onPrimaryContainer">Included</h5>
             <div className="ml-5 ">

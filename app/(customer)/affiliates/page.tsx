@@ -82,8 +82,8 @@ function ReasonToJoin({
 export default async function AffiliatePage() {
   return (
     <>
-      <AffiliateHeader></AffiliateHeader>
-      <NavMenuBottom></NavMenuBottom>
+      <AffiliateHeader />
+      <NavMenuBottom />
       <div className=" px-4 flex flex-row  w-full justify-center bg-tertiaryContainer">
         <div className=" w-fit lg:w-7/12 pt-20">
           <h2 className="text-7xl mt-10 mb-5">Spread The Medicine</h2>

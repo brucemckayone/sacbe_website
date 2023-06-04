@@ -68,7 +68,7 @@ const SacbeCacaoWholesale = async () => {
           </div>
           <AboutPackaging></AboutPackaging>
 
-          <BottomWholeSaleForm></BottomWholeSaleForm>
+          <BottomWholeSaleForm />
         </div>
       </div>
     </div>

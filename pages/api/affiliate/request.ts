@@ -93,6 +93,12 @@ async function sendAffiliateRequest(
   message: string
 ) {
   const db = firestore();
+  console.log("here");
+  console.log(user);
+  console.log("here");
+  console.log(marketingDetails);
+  console.log("here");
+  console.log(message);
 
   // save affiliate request
   db.collection("affiliate_requests")

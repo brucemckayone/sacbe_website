@@ -14,6 +14,7 @@ import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedir
 
 function AffiliateSignUpModal(props: {
   opened: boolean;
+  close: () => void;
   setSocial: (value: string) => void;
   social: string;
   setWebsite: (value: string) => void;
@@ -28,51 +29,50 @@ function AffiliateSignUpModal(props: {
     <Modal
       opened={props.opened}
       onClose={function (): void {
-        close();
+        props.close();
       }}
     >
-      <form action="">
-        <TextInput
-          placeHolder="Enter Your Social Media Account"
-          label="Social Media"
-          update={props.setSocial}
-          value={props.social}
-          type="text"
-          key="Social Media Form Input"
+      <TextInput
+        placeHolder="Enter Your Social Media Account"
+        label="Social Media"
+        update={props.setSocial}
+        value={props.social}
+        type="text"
+        key="Social Media Form Input"
+      />
+      <TextInput
+        placeHolder="Enter your website if you have one"
+        label="Website"
+        update={props.setWebsite}
+        value={props.website}
+        type="text"
+        key="website input form "
+      />
+      <TextArea
+        key={""}
+        placeHolder={"What Should We Know About You"}
+        value={props.message}
+        update={props.setMessage}
+        label="Message"
+      ></TextArea>
+      <div className=" flex justify-center">
+        <PrimaryButton
+          className="self-center"
+          text={"Make Request"}
+          onClicked={async () => {
+            props.setIsSending(true);
+            await fetchPostJSON(`/api/affiliate/request`, {
+              user: props.userData,
+              social: props.social,
+              website: props.website,
+              message: props.message,
+            });
+            props.setIsSent(true);
+            props.setIsSending(false);
+            props.close();
+          }}
         />
-        <TextInput
-          placeHolder="Enter your website if you have one"
-          label="Website"
-          update={props.setWebsite}
-          value={props.website}
-          type="text"
-          key="website input form "
-        />
-        <TextArea
-          key={""}
-          placeHolder={"What Should We Know About You"}
-          value={props.message}
-          update={props.setMessage}
-          label="Message"
-        ></TextArea>
-        <div className=" flex justify-center">
-          <PrimaryButton
-            className="self-center"
-            text={"Make Request"}
-            onClicked={async () => {
-              props.setIsSending(true);
-              await fetchPostJSON(`/api/affiliate/request`, {
-                user: props.userData,
-                social: props.social,
-                website: props.website,
-                message: props.message,
-              });
-              props.setIsSent(true);
-              props.setIsSending(false);
-            }}
-          />
-        </div>
-      </form>
+      </div>
     </Modal>
   );
 }
@@ -95,6 +95,7 @@ export function AffiliateHeader() {
         opened={opened}
         userData={userData}
         social={social}
+        close={close}
         setSocial={setSocial}
         website={website}
         setWebsite={setWebsite}
@@ -102,7 +103,7 @@ export function AffiliateHeader() {
         setMessage={setMessage}
         setIsSending={setIsSending}
         setIsSent={setIsSent}
-      ></AffiliateSignUpModal>{" "}
+      />
       <div className="relative w-full self-center">
         <Image
           src={"/cacao_in_leaf.png"}
