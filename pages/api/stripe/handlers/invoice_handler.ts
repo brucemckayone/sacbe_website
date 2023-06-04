@@ -103,9 +103,15 @@ export default async function handler(
         messaging().send({
           topic: "all",
           notification: {
-            body: "new order from" + invoice.customer,
-            imageUrl: productList[0].image,
-            title: "new order from" + invoice.customer,
+            body: `New Order ${invoice.customer_name} £${
+              productList.reduce((total, a) => a.cost + total, 0) / 100
+            }`,
+            imageUrl:
+              productList[0].image ??
+              "https://www.sacbe-ceremonial-cacao.com/logo.svg",
+            title: `${productList.map((e) => {
+              e.name + ", ";
+            })}`,
           },
         });
       default:
