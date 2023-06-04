@@ -9,10 +9,12 @@ import { Avatar, Popover } from "@mantine/core";
 import { usePathname } from "next/navigation";
 import { signInWithRedirect } from "firebase/auth";
 import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
+import { useUser } from "../auth/affiliate_auth_context";
+import { Divide } from "hamburger-react";
 export default function LoginButton() {
   const { data } = useSession();
   const [isLoading, setIsLoading] = useState(false);
-
+  const user = useUser();
   const pathname = usePathname();
   const isLoggedIn = data != null; //data?.user?.email != null;
   return (
@@ -34,6 +36,20 @@ export default function LoginButton() {
               className="text-start py-2 mx-5 "
               aria-labelledby="dropdown-button"
             >
+              {user.user.wholesale || user.user.affiliateStatus ? (
+                <div>
+                  <li
+                    className="py-4 pr-5  border-b border-primaryContainer"
+                    onClick={async () => {
+                      window.location.href = "/portal";
+                    }}
+                  >
+                    {isLoading ? "Loading..." : "Portal"}
+                  </li>
+                </div>
+              ) : (
+                <div></div>
+              )}
               {isLoggedIn && (
                 <li
                   className="py-4 pr-5  border-b border-primaryContainer"

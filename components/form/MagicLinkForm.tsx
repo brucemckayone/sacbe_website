@@ -33,7 +33,7 @@ export default function MagicLinkForm() {
       <p>An magic link will be sent to your email</p>
       <EmailStatus status={status} />
       <PrimaryButton
-        text="Sign In"
+        text="Get Link"
         isPrimary={true}
         key={"magic link sign in button :)"}
         onClicked={async () => {
