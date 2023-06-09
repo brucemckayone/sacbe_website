@@ -1,25 +1,13 @@
 "use client";
 import createCheckoutSession from "@/lib/stripe/createCheckoutSession";
 import { signIn, useSession } from "next-auth/react";
-import { useState } from "react";
 import PrimaryButton from "../buttons/primaryButton";
 import SlideInUp from "../animations/slide_in_up";
-import { toast } from "react-toastify";
-import Link from "next/link";
-import UserProvider from "../auth/affiliate_auth_context";
-import { Modal, Group, Button } from "@mantine/core";
+import { useState } from "react";
+import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useUser } from "../auth/affiliate_auth_context";
-
-import { getStripeCustomerIdByEmail } from "@/lib/firebase/getStripeCustomerId";
-import getCustomerShipping from "@/lib/stripe/getCustomerShipping";
-import TextInput from "../form/inputs/TextInput";
-import updateStripeCustomerShipping from "@/lib/stripe/updateStripeCustomerShipping";
-import Stripe from "stripe";
-import { showNotification } from "@mantine/notifications";
-import showToast from "@/lib/toast/showToast";
-import getOrSaveCustomerIdFromFirebase from "@/lib/stripe/getOrSaveStripeCustomerIdFromFirebase";
 import SmallButton from "../buttons/small_button";
+
 interface Props {
   headerText: string;
   listHeaderText: string;
@@ -40,7 +28,6 @@ const PurchaseOptionCard: React.FC<Props> = ({
   buttonText,
   list,
   bgColor,
-
   className,
   priceIds,
   paymentMode,

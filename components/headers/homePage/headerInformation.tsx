@@ -26,30 +26,32 @@ export default function HeaderInformation() {
       <ol key={0}>
         <li key={1} className="border-onSecondaryContainer border-b-2 my-2">
           <div className="flex flex-row align-bottom">
-            <h5>300g</h5>
-            <p className="self-end ml-2">- Organic Cacao</p>
+            <h5 className="text-md">300g</h5>
+            <p className="self-end ml-2 text-sm">- Organic Cacao</p>
           </div>
         </li>
         <li key={2} className="border-onSecondaryContainer border-b-2 my-2">
           <div className=" flex flex-row align-bottom ">
-            <h5>Notes:</h5>
-            <p className="ml-2 self-end whitespace-nowrap">
+            <h5 className="text-md">Notes:</h5>
+            <p className="ml-2 self-end whitespace-nowrap text-sm">
               Plum, Fudge, Caramel, Raison
             </p>
           </div>
         </li>
         <li key={3} className="border-onSecondaryContainer border-b-2 my-2">
           <div className="flex flex-row align-bottom">
-            <h5>Feels:</h5>
-            <p className="ml-2 self-start text-md ">
+            <h5 className="text-md">Feels:</h5>
+            <p className="ml-2 self-end whitespace-nowrap text-sm">
               Grounded, Loving, Creative, expansive
             </p>
           </div>
         </li>
         <li key={4} className="border-onSecondaryContainer border-b-2 my-2">
           <div className="flex flex-row align-bottom">
-            <h5>Buttons:</h5>
-            <p className="self-end ml-2">For easy and intuitive dosing</p>
+            <h5 className="text-md">Buttons:</h5>
+            <p className="self-end ml-2 text-sm">
+              For easy and intuitive dosing
+            </p>
           </div>
         </li>
       </ol>

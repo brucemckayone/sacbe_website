@@ -12,6 +12,7 @@ import { formatTitleForFetch } from "./formatTitleForFetch";
 import { MarkDown } from "./MarkDown";
 import { PostMetaData } from "./PostMetaData";
 import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
+import homeUrl from "@/lib/constants/urls";
 
 // or Dynamic metadata
 
@@ -57,38 +58,30 @@ export type blogPostType = {
   publisher: { name: string };
 };
 
+// export const metadata: Metadata = {
+//   title: "data",
+//   description: "data",
+
+// };
+
 export async function generateMetadata({
   params,
 }: {
   params: { id: string; title: string };
-}) {
+}): Promise<Metadata> {
   const data = (await getPost(params.title!)) as blogPostType;
   return {
     title: data.title.replaceAll("-", " "),
     description: data.excerpt,
-    abstract: data.excerpt,
-    category: data.categories[0],
-    robots: "index",
-    publisher: "Sacbe Ceremonial Cacao",
-    openGraph: {
-      images: [data.main_image],
-      title: data.title,
-      description: data.excerpt,
-      type: "article",
-      tags: data.tags,
-      siteName: "Sacbe Ceremonial Cacao",
-      countryName: "UK",
+    authors: {
+      name: data.publisher.name,
     },
-    twitter: {
-      images: data.main_image,
-      site: "https://sacbe-ceremonial-cacao.com",
-      title: data.title,
-      description: data.excerpt,
+    keywords: data.tags,
+    publisher: "Sacbe Cacao",
+    alternates: {
+      canonical: `${homeUrl}/posts/${data.title.replaceAll(" ", "-")}`,
     },
-    applicationName: "Sacbe Ceremonial Cacao",
-    authors: "Luzura Peralta",
-
-    colorScheme: "light",
+    creator: "Sacbe Cacao",
   } as Metadata;
 }
 export default async function Page({

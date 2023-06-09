@@ -107,7 +107,7 @@ export function WholeSaleForm(): JSX.Element {
           {isLoading ? (
             <ButtonLoader />
           ) : (
-            <div className="flex justify-start">
+            <div className="flex flex-col justify-start">
               {!session.data?.user?.name && (
                 <TextInput
                   key="first name"

@@ -8,7 +8,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const prices = req.body.prices as string[];
-
   const customerId = req.body.customerId as string | null | undefined;
   const mode = req.body.mode as Stripe.Checkout.SessionCreateParams.Mode;
 
@@ -30,6 +29,7 @@ export default async function handler(
     cancel_url: homeUrl,
     currency: "GBP",
     locale: "auto",
+    
     client_reference_id: customerId ? customerId : "guest checkout",
     // consent_collection: {
     //   terms_of_service: "required",
@@ -40,8 +40,8 @@ export default async function handler(
     shipping_address_collection: {
       allowed_countries: ["GB"],
     },
-
-    customer: customerId ?? undefined,
+    
+    // customer: customerId ?? undefined,
 
     customer_update: customerId
       ? {
@@ -58,13 +58,14 @@ export default async function handler(
     console.log(shippingRateIds);
     payload = {
       ...payload,
+      payment_method_types: ["card",  "afterpay_clearpay", "klarna",],
       shipping_options: shippingRateIds.map((id) => ({
         shipping_rate: id,
       })),
       shipping_address_collection: {
         allowed_countries: ["GB"],
       },
-      invoice_creation: { enabled: true },
+      // invoice_creation: { enabled: true },
     };
   }
 

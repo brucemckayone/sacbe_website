@@ -46,12 +46,19 @@ export default async function createCheckoutSession({ prices, mode }: params) {
   } else {
     console.log("session has no user");
   }
+
+  console.log(
+    prices,
+     mode,
+     
+  );
+  
   const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON(
     "/api/stripe/client/create_checkout_session",
     {
       prices: prices,
       mode: mode,
-      customerId: customerId,
+      
     }
   );
 

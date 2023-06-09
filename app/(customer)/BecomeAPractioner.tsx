@@ -15,20 +15,16 @@ export function BecomeAPractioner() {
 
           <Card className="flex basis-1/2" hasColor={false}>
             <SlideInUp animiation="animate-zoom_in">
-              <div className="absolute w-[400px] md:w-[500px] bg-primaryContainer rounded-full h-[500px] blur-md"></div>
-              <div className="relative w-[400px]  md:w-[500px] h-[500px]">
-                <div className="absolute top-0 right-0 left-0 w-full h-[500px]">
-                  <Image
-                    src={"/pouring_cacao_cup.png"}
-                    fill
-                    style={{
-                      objectFit: "contain",
-                    }}
-                    alt=""
-                    className="animate-pulse_scale"
-                  ></Image>
-                </div>
-              </div>
+              <Image
+                src={"/cacaofacilitator.png"}
+                width={400}
+                height={400}
+                style={{
+                  objectFit: "contain",
+                }}
+                alt="cacao facilitator training image certificate badge"
+                // className="w-full m-auto"
+              />
             </SlideInUp>
           </Card>
 

@@ -40,33 +40,17 @@ export function ImageLeftTextRight({
             <div className="absolute w-11/12 md:w-4/12 p-40 bg-primaryContainer rounded-full h-[500px] blur-md"></div>
             <SlideInUp animiation="animate-zoom_in_fade">
               <div className="relative w-full p-40 h-[500px]  ">
-                {shadow && (
-                  <div className="absolute bottom-0 left-0 h-[140px] w-full">
-                    <Image
-                      src={shadow}
-                      fill
-                      style={{
-                        objectFit: "contain",
-                      }}
-                      alt=""
-                      className="animate-scale_shadow"
-                    ></Image>
-                  </div>
-                )}
                 <div
                   className={`absolute top-10 right-0 left-0 w-full h-[400px]`}
                 >
                   <Image
                     src={image}
                     fill
-                    style={{
-                      objectFit: "contain",
-                    }}
-                    alt=""
+                    alt=" Floating cacao pod image"
                     className={
                       jiggle
-                        ? "animate-float hover:animate-bounce duration-700"
-                        : ""
+                        ? "animate-float z-10 object-contain "
+                        : " object-contain z-10"
                     }
                   ></Image>
                 </div>

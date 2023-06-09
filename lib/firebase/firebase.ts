@@ -6,6 +6,8 @@ import { getAuth } from "firebase/auth";
 
 import { getStorage } from "firebase/storage";
 
+import { getAnalytics } from "firebase/analytics";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBftZZHS0GpQ8ooSmrc63MsWweUPX3sZuI",
   authDomain: "sacbe-cacao.firebaseapp.com",
@@ -19,6 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
-
+// export const analytics = getAnalytics(app);
 export const storage = getStorage(app);
+
 export { firebaseConfig };

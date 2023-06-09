@@ -11,6 +11,9 @@ import Footer from "@/components/footer";
 import UserProvider from "@/components/auth/affiliate_auth_context";
 import { QuickPurchase } from "./QuickPurchase";
 import { Metadata } from "next";
+import AffiliateLinkProvider from "@/components/providers/AffiliatePaymentLinkProvider";
+import { Suspense } from "react";
+import Loading from "./Loading";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -32,6 +35,9 @@ export const metadata: Metadata = {
   applicationName: "Sacbe Cacao",
   metadataBase: new URL("https://sacbe-ceremonial-cacao.com"),
   category: "Cacao",
+  alternates: {
+    canonical: "https://sacbe-ceremonial-cacao.com",
+  },
   keywords: [
     "Ceremonial cacao",
     "Transformative experiences",
@@ -47,6 +53,7 @@ export const metadata: Metadata = {
     "Keto",
     "Super Food",
   ],
+
   viewport: {
     width: "device-width",
     initialScale: 1,
@@ -89,15 +96,16 @@ export default function RootLayout({
       className={`${raleway.variable} ${merriweather.variable} bg-[white] w-[100%]`}
     >
       <AuthProvider>
-        <UserProvider>
-          <head />
-          <body>
-            <Navbar />
-            {children}
-            <QuickPurchase />
-            <Footer />
-          </body>
-        </UserProvider>
+        <AffiliateLinkProvider>
+          <UserProvider>
+            <body>
+              <Navbar />
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+              <QuickPurchase />
+              <Footer />
+            </body>
+          </UserProvider>
+        </AffiliateLinkProvider>
       </AuthProvider>
       <Analytics />
     </html>

@@ -2,6 +2,7 @@
 import React from "react";
 import PrimaryButton from "./primaryButton";
 import Link from "next/link";
+import { logEvent } from "firebase/analytics";
 interface props {
   url: string;
   isPrimary: Boolean;

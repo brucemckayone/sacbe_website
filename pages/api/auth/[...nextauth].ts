@@ -119,7 +119,17 @@ const authOptions: AuthOptions = {
     //   // return baseUrl;
     // },
 
-    async signIn({ user }) {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log("SIGN IN CALLBACK");
+      console.log("profile is here");
+      console.log(profile);
+      console.log("account is here");
+      console.log(account);
+      console.log("cred is here");
+      console.log(credentials);
+      
+      console.log("USER ID IS HERE" + user.id);
+      
       return true;
     },
     async session({ session }) {

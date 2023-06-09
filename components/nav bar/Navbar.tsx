@@ -21,6 +21,7 @@ export default function Navbar() {
           width={300}
           height={80}
           priority
+          className="w-9/12 md:w-1/5 m-auto"
         ></Image>
       </Link>
       <LoginButton />
@@ -73,9 +74,9 @@ function Menu() {
                     href={item.link}
                     className="no-underline group"
                   >
-                    <h1 className="mt-10 underline group-hover:text-[white] duration-300">
+                    <h2 className="mt-10 underline group-hover:text-[white] duration-300">
                       {item.text}
-                    </h1>
+                    </h2>
                     <h4 className="no-underline text-xl group-hover:text-onPrimary">
                       {item.subTitle}
                     </h4>

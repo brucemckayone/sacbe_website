@@ -16,7 +16,7 @@ export function RiskApealCards(props: props) {
     >
       <div
         className={`flex flex-row ${
-          props.isHorizontal && "mr-5"
+          props.isHorizontal && "md:mr-5"
         } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
       >
         <Image
@@ -44,7 +44,7 @@ export function RiskApealCards(props: props) {
       </div>
       <div
         className={`flex flex-row ${
-          props.isHorizontal && "mr-5"
+          props.isHorizontal && "md:mr-5"
         } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
       >
         <Image
@@ -55,17 +55,37 @@ export function RiskApealCards(props: props) {
           className="mr-2 h-10 w-10 self-center"
         />
         <div>
-          <h4 className="text-xl">Flexible Payments</h4>
+          <div className="flex justify-between">
+            <h4 className="text-xl">Flexible Payments</h4>
+            <div className="flex">
+              <Image
+                src={"icons/payment/klarna.svg"}
+                width={100}
+                height={10}
+                alt="Icon Text "
+                className="mr-2 w-10  md:w-16 self-center"
+              />
+              <Image
+                src={"/icons/payment/afterpay.svg"}
+                width={70}
+                height={10}
+                alt="Icon Text "
+                className="mr-2  w-10 md:w-16 self-center"
+              />
+            </div>
+          </div>
           <p className="text-sm">
             <strong className="text-sm text-onPrimaryContainer">
               Buy Now Pay later
             </strong>
-            , or spread it out with
+            , or spread the cost with
             <strong className="text-sm text-onPrimaryContainer">
               {" "}
               small installments
             </strong>
-            , all with a
+            as low as{" "}
+            <strong className="text-sm text-onPrimaryContainer">£8.25</strong>,
+            all with a
             <strong className="text-sm text-onPrimaryContainer">
               {" "}
               100% money back garentee

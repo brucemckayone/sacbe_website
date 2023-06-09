@@ -56,36 +56,21 @@ export default async function handler(
         // Then define and call a function to handle the event customer.discount.updated
         break;
       case "customer.subscription.created":
-        console.log(`handling event type ${event.type}`);
-
+        
         const subscription = event.data.object as Stripe.Subscription;
-        console.log(subscription);
-
-        // subWebhooks.created(customerSubscriptionCreated as Stripe.Subscription);
-        console.log("customer");
-
         const customer = await stripe.customers.retrieve(
           subscription.customer as string
         );
-        console.log("billing");
-
-        const configuration = await stripe.billingPortal.configurations.list();
-
-        console.log("configuration");
-        console.log(configuration);
-
-        const billingPortal = await stripe.billingPortal.sessions.create({
-          customer: subscription.customer as string,
-          configuration: configuration.data[0].id,
-        });
-
+        
+       
         const { name, email } = customer as Stripe.Customer;
-
+        
         sendEmail.created({
           name: name!,
           email: email!,
-          portalLink: billingPortal.url,
+          portalLink: "https://portal.sacbe-ceremonial-cacao.com/p/login/test_dR629SgVlcYOdri000",
         });
+
         console.log(`handled event type ${event.type}`);
         // Then define and call a function to handle the event customer.subscription.created
         break;

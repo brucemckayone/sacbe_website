@@ -9,6 +9,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import TextInput from "@/components/form/inputs/TextInput";
 import { useDisclosure } from "@mantine/hooks";
 import Stripe from "stripe";
+import homeUrl from "@/lib/constants/urls";
 
 function WholeSalePortalSignUpForm() {
   return (
@@ -460,6 +461,26 @@ export function WholesalePortalPage() {
             }}
             isPrimary={true}
             key={"send invoice button "}
+          ></PrimaryButton>
+          <PrimaryButton
+            text="Pay in 4 Installments"
+            onClicked={async () => {
+              if (hasBulk || hasRetail) {
+                const url = await fetchGetJSON(
+                  `${homeUrl}/api/stripe/checkout/wholesale_pay_in_4?bulkQty=${
+                    hasBulk && bulkQty
+                  }&retailQty=${hasRetail && retailQty}&customerId=${
+                    user.customerId
+                  }`
+                );
+
+                console.log(url.url);
+
+                window.location.href = url.url;
+              }
+            }}
+            isPrimary={true}
+            key={"send pay in 4 button "}
           ></PrimaryButton>
         </div>
       </div>

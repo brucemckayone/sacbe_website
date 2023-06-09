@@ -22,7 +22,7 @@ function AffiliateStatusChecker() {
         </div>
       );
     } else {
-      const status = affiliate.user.affiliateStatus.status;
+      const status = affiliate.user?.affiliateStatus?.status ?? "";
       if (status == "active") {
         return <Portal />;
       }

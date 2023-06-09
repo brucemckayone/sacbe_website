@@ -8,6 +8,29 @@ import { PostMetaData } from "../../posts/[title]/PostMetaData";
 import { DocumentReference } from "firebase/firestore";
 import { RecipeCard } from "./RecipeCard.1";
 import { FeelsProgressBar } from "./FeelsProgressBar";
+import { Metadata } from "next";
+import homeUrl from "@/lib/constants/urls";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string; title: string };
+}): Promise<Metadata> {
+  const data = await getRecipe(params.title!);
+  return {
+    title: data.title.replaceAll("-", " "),
+    description: data.excerpt,
+    keywords: data.tags,
+    publisher: "Sacbe Cacao",
+    authors: {
+      name: data.publisher.name,
+    },
+    alternates: {
+      canonical: `${homeUrl}/posts/${data.title.replaceAll(" ", "-")}`,
+    },
+    creator: "Sacbe Cacao",
+  };
+}
 
 async function RercipePage({
   params,
@@ -32,15 +55,14 @@ async function RercipePage({
       <h1 className="text-4xl md:text-8xl w-10/12 m-auto md:text-center">
         {recipe.title}
       </h1>
-
-      <div className=" w-11/12 md:-10/12 lg:w-7/12 m-auto mt-20">
+      <article className=" w-11/12 md:-10/12 lg:w-7/12 m-auto mt-20">
         {/* meta Data */}
         <div className="mt-10">
           <PostMetaData
             categories={recipe.categories}
             tags={recipe.tags}
             publisherName={recipe.publisher.name}
-          ></PostMetaData>
+          />
         </div>
         {/* Intoduction */}
         <div className="mt-20">
@@ -123,7 +145,7 @@ async function RercipePage({
             })}
           </div>
         )}
-      </div>
+      </article>
     </main>
   );
 }

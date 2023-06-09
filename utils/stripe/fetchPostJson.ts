@@ -1,4 +1,7 @@
+import { log } from "console";
+
 export async function fetchGetJSON(url: string) {
+  console.log("fetchGetJson", url);
   try {
     const data = await fetch(url).then((res) => res.json());
     return data;
@@ -11,6 +14,8 @@ export async function fetchGetJSON(url: string) {
 }
 
 export async function fetchPostJSON(url: string, data?: {}) {
+  console.log("fetchPostJSON");
+  
   try {
     // Default options are marked with *
     const response = await fetch(url, {

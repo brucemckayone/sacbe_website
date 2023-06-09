@@ -38,9 +38,19 @@ type affiliateStatusType = {
   refId: string;
   status: "pending" | "active";
 };
+
 type authContextType = {
   user: userType;
   setUser: (user: userType) => void;
   isLoading: Boolean;
   isError: Boolean;
+};
+type affiliateLinksType = {
+  links:linksType;
+  setLinks:Dispatch<SetStateAction<undefined>>;
+};
+
+type linksType={
+  subscriptionLink: string,
+  oneOffLink:string
 };

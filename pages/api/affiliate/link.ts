@@ -4,10 +4,13 @@ import stripe from "@/lib/stripe/stripe";
 import Stripe from "stripe";
 
 import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
+import adminInit from "@/utils/firebase/admin_init";
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  adminInit()
   switch (req.method as requestMethodType) {
     case "POST":
       const { accountId, priceIds, uuid } = req.body;

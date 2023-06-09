@@ -21,11 +21,23 @@ export function TheHook() {
             <div className="font-extrabold">
               <h3 className="text-2xl mt-5">Embrace The Wonders Of Cacao</h3>
             </div>
+            <p className="ml-1 mb-2">
+              {" "}
+              If you could have a drink dense in essential minerals that
+              <strong> nourishes</strong> your body, supports your{" "}
+              <strong>immune system</strong>, gives you a feeling of
+              <strong> elevation and gratitude</strong>, provides{" "}
+              <strong>long-lasting joyful energy</strong>, and leaves you{" "}
+              <strong>free of anxiety and jitters</strong>, all while giving you
+              the opportunity to bring <strong>deep meaning and purpose</strong>{" "}
+              to your morning ritual, would you be interested?{" "}
+            </p>
             <p className="ml-1">
               Indulging in the ceremonial cacao of Sacbe is not only a
               <strong> soul-nourishing experience</strong> but also a gift to
               your overall well-being. Beyond its enchanting flavor, this sacred
               elixir holds a <strong> multitude of health benefits</strong>.
+              That can support you in your journey what ever it may be.
             </p>
             <h3 className="text-2xl mt-5 font-extrabold">
               Discover a Blissful Balance
@@ -39,7 +51,8 @@ export function TheHook() {
               Feel the gentle yet <strong> energizing</strong>, and{" "}
               <strong> boundless heart opening</strong> effects that sustain you{" "}
               <strong> throughout the day</strong>, empowering you to embrace
-              lifes adventures with <strong> renewed vitality</strong>.
+              lifes challenges, and adventures with{" "}
+              <strong> renewed vitality</strong>.
             </p>
           </div>
           <Card className="flex md:basis-1/2" hasColor={false}>
