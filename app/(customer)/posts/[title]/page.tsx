@@ -92,8 +92,8 @@ export default async function Page({
               {relatedPosts.map((relatedPosts) => {
                 return (
                   <BlogPostSuggestionCard
-                    post={post}
-                    key={post.title + "aeroijaregoi"}
+                    post={relatedPosts}
+                    key={relatedPosts.title + "aeroijaregoi"}
                   ></BlogPostSuggestionCard>
                 );
               })}
