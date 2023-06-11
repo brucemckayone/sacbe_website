@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Popover } from "@mantine/core";
 import Image from "next/image";
 import { formatTitleForUrl } from "@/utils/url/formater";
-
+import searchIcon from "@/public/icons/search_icon.svg";
 export default function SearchBar(props: {
   toggleMenu: Dispatch<SetStateAction<boolean>>;
 }) {
@@ -89,7 +89,7 @@ export default function SearchBar(props: {
                     type="text"
                   />
                   <Image
-                    src={"/icons/search_icon.svg"}
+                    src={searchIcon}
                     width={30}
                     height={30}
                     alt="search icon"

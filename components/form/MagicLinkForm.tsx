@@ -4,7 +4,7 @@ import { useState } from "react";
 import sendMagicLink from "@/utils/server/auth/send_magic_link";
 import PrimaryButton from "../buttons/primaryButton";
 import Image from "next/image";
-
+import sacbeLogo from "@/public/sacbe_logo_icon.png";
 export default function MagicLinkForm() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
@@ -14,11 +14,12 @@ export default function MagicLinkForm() {
     <div>
       <div className="flex flex-col justify-center items-center">
         <Image
-          src={"/sacbe_logo_icon.png"}
+          src={sacbeLogo}
           width={180}
           height={180}
           alt={"sacbe logo"}
           className="mb-5"
+          priority
         />
         <h3>Sign In</h3>
       </div>

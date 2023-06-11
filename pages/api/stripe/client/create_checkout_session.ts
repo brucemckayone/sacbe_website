@@ -19,9 +19,10 @@ export default async function handler(
       price: price,
     });
   });
+  
 
   let payload: Stripe.Checkout.SessionCreateParams = {
-    success_url: `${homeUrl}/complete/checkout`,
+    success_url: `${homeUrl}/complete/checkout?session_id={CHECKOUT_SESSION_ID}`,
     line_items: lineItems,
     mode: mode,
     billing_address_collection: "required",
@@ -42,7 +43,7 @@ export default async function handler(
     },
     
     // customer: customerId ?? undefined,
-
+    customer_creation: "if_required",
     customer_update: customerId
       ? {
           shipping: "auto",

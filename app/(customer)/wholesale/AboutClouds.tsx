@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
-
+import greenClouds from "@/public/clouds_green.jpg";
+import yellowClouds from "@/public/clouds_yellow.jpg";
+import pinkClouds from "@/public/clouds_pink.jpg";
 export function AboutClouds() {
   return (
     <div className="bg-gradient-to-b from-primaryContainer to-tertiaryContainer">
@@ -35,38 +37,43 @@ export function AboutClouds() {
             <div className="md:block md:basis-2/5 h-[300px] md:h-[500px] flex flex-col justify-center">
               <div className="flex flex-row justify-center h-full">
                 <Image
-                  src={"/clouds_green.jpg"}
+                  src={greenClouds}
                   width={100}
                   height={100}
-                  alt="heart"
+                  alt="green clouds representing the cloud forest in ecuador in the style of watercolor"
+                  placeholder="blur"
                   className="w-2/12 md:w-1/12 ml-2  rounded-2xl object-cover  duration-200 hover:scale-105"
                 ></Image>
                 <Image
-                  src={"/clouds_green.jpg"}
+                  src={greenClouds}
                   width={500}
                   height={500}
-                  alt="heart"
+                  alt="green clouds representing the cloud forest in ecuador in the style of watercolor"
+                  placeholder="blur"
                   className="w-1/12 md:w-3/12 rounded-3xl object-cover ml-2   duration-200 hover:scale-105"
                 ></Image>
                 <Image
-                  src={"/clouds_yellow.jpg"}
+                  src={yellowClouds}
                   width={200}
                   height={200}
-                  alt="heart"
+                  alt="yellow clouds representing the cloud forest in ecuador in the style of watercolor"
+                  placeholder="blur"
                   className=" w-3/12 md:w-4/12 rounded-3xl ml-2  object-cover duration-200 hover:scale-105"
                 ></Image>
                 <Image
-                  src={"/clouds_yellow.jpg"}
+                  src={yellowClouds}
                   width={100}
                   height={100}
-                  alt="heart"
+                  alt="yellow clouds representing the cloud forest in ecuador in the style of watercolor second one"
+                  placeholder="blur"
                   className="w-1/12 rounded-full object-cover ml-2  duration-200 hover:scale-105"
                 ></Image>
                 <Image
-                  src={"/clouds_pink.jpg"}
+                  src={pinkClouds}
                   width={500}
                   height={500}
-                  alt="heart"
+                  alt="green clouds representing the cloud forest in ecuador in the style of watercolor"
+                  placeholder="blur"
                   className="w-3/12 md:w-2/12 rounded-3xl object-cover ml-2  duration-200 hover:scale-105"
                 ></Image>
               </div>

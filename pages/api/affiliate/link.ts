@@ -5,6 +5,7 @@ import Stripe from "stripe";
 
 import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
 import adminInit from "@/utils/firebase/admin_init";
+import homeUrl from "@/lib/constants/urls";
 
 export default async function handler(
   req: NextApiRequest,
@@ -73,7 +74,12 @@ async function createPaymentLink({
     transfer_data: {
       destination: accountId,
     },
-
+    after_completion: {
+      type: "redirect",
+      redirect: {
+        url: `${homeUrl}/complete/checkout?session_id={CHECKOUT_SESSION_ID}`,
+      }
+     },
     shipping_address_collection: {
       allowed_countries: ["GB"],
     },

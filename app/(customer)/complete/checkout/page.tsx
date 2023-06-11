@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import PrimaryButton from "@/components/buttons/primaryButton";
 
 function CheckoutComplete() {
   const nav = useRouter();
+  const searchParams = useSearchParams();
+  const sessionId = searchParams!.get("session_id");
   return (
     <div className="w-full m-auto">
       <div className="w-11/12 md:w-6/12 m-auto">
@@ -36,7 +38,9 @@ function CheckoutComplete() {
 
         <PrimaryButton
           text={"Start your Journey"}
-          onClicked={() => {}}
+          onClicked={() => {
+            nav.push(`/bespoke/quiz?session_id=${sessionId}`);
+          }}
           className="w-full"
         ></PrimaryButton>
       </div>

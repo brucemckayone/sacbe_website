@@ -8,6 +8,7 @@ import { useUser } from "@/components/auth/affiliate_auth_context";
 import AffiliateStatusChecker from "@/components/buttons/getAffiliateLinkButton";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import dollarIcon from "@/public/icons/dollar_icon.svg";
 function Portal() {
   const { user: affiliate, isLoading: affiliateLoading } = useUser();
   const session = useSession();
@@ -50,7 +51,7 @@ function Portal() {
                   <p>
                     look for the
                     <Image
-                      src={"/icons/dollar_icon.svg"}
+                      src={dollarIcon}
                       alt="dollar icon for affiliate links"
                       height={20}
                       width={20}

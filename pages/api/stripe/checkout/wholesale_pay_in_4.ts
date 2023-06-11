@@ -19,7 +19,7 @@ export default async function handler(
             const bulkQty = parseInt(req.query.bulkQty as string);
             const retailQty = parseInt(req.query.retailQty as string);
             let payload: Stripe.Checkout.SessionCreateParams = {
-                success_url: homeUrl,
+                success_url: homeUrl+'/portal',
                 cancel_url: homeUrl,
                 payment_method_types: ["klarna", "afterpay_clearpay"],
                 mode: "payment",

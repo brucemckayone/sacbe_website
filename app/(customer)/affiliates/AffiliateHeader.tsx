@@ -11,7 +11,7 @@ import ButtonLoader from "@/components/loaders/ButtonLoader";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { useSession } from "next-auth/react";
 import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
-
+import cacaoInALeaf from "@/public/cacao_in_a_leaf.png";
 function AffiliateSignUpModal(props: {
   opened: boolean;
   close: () => void;
@@ -106,11 +106,12 @@ export function AffiliateHeader() {
       />
       <div className="relative w-full self-center">
         <Image
-          src={"/cacao_in_leaf.png"}
+          src={cacaoInALeaf}
           width={600}
           height={600}
-          alt={"header image"}
-          className="object-contain p-10 md:mx-0"
+          alt={"A cacao pod in a leaf with cacao beans spilling out of it"}
+          className="object-contain p-10 md:mx-0 rounded-lg"
+          placeholder="blur"
         ></Image>
       </div>
       <div className="md:basis-10/12 self-center  ">

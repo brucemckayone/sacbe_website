@@ -8,7 +8,7 @@ import { WholesaleHeader } from "./WholesaleHeader";
 import { AboutPackaging } from "./AboutPackaging";
 import Image from "next/image";
 import { Metadata } from "next";
-
+import wholesalePortalMockUp from "@/public/wholesale_portal_mock_up.png";
 const metaData: Metadata = {
   title: "Wholesale",
   description:
@@ -44,11 +44,11 @@ const SacbeCacaoWholesale = async () => {
           </h2>
           <div className="flex flex-row justify-center">
             <Image
-              src={"/wholesale_portal_mock_up.png"}
+              src={wholesalePortalMockUp}
               width={1080}
               height={800}
+              placeholder="blur"
               alt={"affiliate portal mock up "}
-              className=""
             ></Image>
           </div>
           <div>

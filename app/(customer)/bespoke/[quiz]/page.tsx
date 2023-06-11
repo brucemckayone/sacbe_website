@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import { QuizBody, QuizBodyProps } from "./QuizBody";
+import yellwocacaoPods from "@/public/yellow_cacao_pods.jpg";
+import stripe from "@/lib/stripe/stripe";
 function getQuiz() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -8,40 +10,182 @@ function getQuiz() {
         title: "Cacoa Quiz",
         questions: [
           {
-            question: "What is the name of the tree that produces cacao?",
-            type: "single",
+            question:
+              "What best discibes what you are looking for out of life, and cacoa?, select more than one",
+            type: "What Drives You, Multi-Select",
+          },
+          {
+            question: "How often do you drink cacao",
+            type: "Select-Single",
             awnsers: [
               {
-                text: "Cacao",
-                selected: false,
+                text: "Daily",
               },
               {
-                text: "Cocoa",
-                selected: false,
+                text: "A few times a week",
               },
               {
-                text: "Theobroma cacao",
-                selected: false,
+                text: "A few times a month",
+              },
+              {
+                text: "I have never tried cacao",
               },
             ],
           },
           {
-            question: "What is the name of the tree that produces cacao?",
-            type: "multi",
+            question:
+              "What gender do you identify as? (so we can use the correct pronouns)",
+            type: "Select-Single",
             awnsers: [
               {
-                text: "Cacao",
-                selected: false,
+                text: "Male",
               },
               {
-                text: "Cocoa",
-                selected: false,
+                text: "Female",
               },
               {
-                text: "Theobroma cacao",
-                selected: false,
+                text: "Non-binary",
+              },
+              {
+                text: "Trans female",
+              },
+              {
+                text: "Trans male",
+              },
+              {
+                text: "I prefer not to say",
               },
             ],
+          },
+          {
+            question:
+              "What are you passionate about? (select as many as you like)",
+            type: "Multi-Select",
+            awnsers: [
+              {
+                text: "Health",
+              },
+              {
+                text: "Fitness",
+              },
+              {
+                text: "Spirituality",
+              },
+              {
+                text: "Nature",
+              },
+              {
+                text: "Creativity",
+              },
+              {
+                text: "Community",
+              },
+              {
+                text: "Family",
+              },
+              {
+                text: "Travel",
+              },
+              {
+                text: "Adventure",
+              },
+              {
+                text: "Learning",
+              },
+              {
+                text: "Growth",
+              },
+              {
+                text: "I dont know",
+              },
+            ],
+          },
+          {
+            question:
+              "What is holding you back from living your best life? how can we support you? (select as many as you like)",
+            type: "Multi-Select",
+            awnsers: [
+              {
+                text: "I dont know",
+              },
+              {
+                text: "time",
+              },
+              {
+                text: "money",
+              },
+              {
+                text: "energy",
+              },
+              {
+                text: "motivation",
+              },
+              {
+                text: "support",
+              },
+              {
+                text: "knowledge",
+              },
+              {
+                text: "confidence",
+              },
+              {
+                text: "self love",
+              },
+              {
+                text: "self belief",
+              },
+              {
+                text: "self worth",
+              },
+              {
+                text: "self esteem",
+              },
+              {
+                text: "self respect",
+              },
+              {
+                text: "self care",
+              },
+              {
+                text: "self compassion",
+              },
+              {
+                text: "self acceptance",
+              },
+              {
+                text: "self forgiveness",
+              },
+              {
+                text: "self awareness",
+              },
+              {
+                text: "self discipline",
+              },
+              {
+                text: "self control",
+              },
+              {
+                text: "self regulation",
+              },
+              {
+                text: "self management",
+              },
+              {
+                text: "self expression",
+              },
+              {
+                text: "self actualization",
+              },
+              {
+                text: "I dont know what I want",
+              },
+            ],
+          },
+          {
+            question: "Who can we support you in becoming?",
+            type: "completion",
+            awnsers: [],
           },
         ],
       } as QuizBodyProps);
@@ -64,22 +208,27 @@ export type quiz = {
   questions: question[];
 };
 
-async function Quiz() {
+async function Quiz({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}) {
   const quiz = (await getQuiz()) as QuizBodyProps;
+  const session = await stripe.checkout.sessions.retrieve(
+    searchParams!.session_id as string
+  );
 
   return (
-    <div className="w-screen h-screen flex">
-      <div>
-        <Image
-          src={"/yellow_cacao_pods.jpg"}
-          height={500}
-          width={500}
-          alt="quiz image cacao pods"
-          className="w-full h-screen object-cover"
-        />
-      </div>
-      <QuizBody quiz={quiz}></QuizBody>
-    </div>
+    <body className="w-screen h-screen flex flex-col md:flex-row bg-sacbeBrandColor">
+      <Image
+        src={yellwocacaoPods}
+        alt="quiz image cacao pods"
+        className="w-full h-2/6 md:h-screen object-cover"
+      />
+      <QuizBody quiz={quiz} email={session.customer_details?.email}></QuizBody>
+    </body>
   );
 }
 

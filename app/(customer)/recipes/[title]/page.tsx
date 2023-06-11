@@ -17,19 +17,32 @@ export async function generateMetadata({
 }: {
   params: { id: string; title: string };
 }): Promise<Metadata> {
-  const data = await getRecipe(params.title!);
+  const { recipe, relatedRecipes } = await getRecipeData(params.title!);
   return {
-    title: data.title.replaceAll("-", " "),
-    description: data.excerpt,
-    keywords: data.tags,
+    title: recipe.title.replaceAll("-", " "),
+    description: recipe.excerpt,
+    keywords: recipe.tags,
     publisher: "Sacbe Cacao",
     authors: {
-      name: data.publisher.name,
+      name: recipe.publisher.name,
     },
     alternates: {
-      canonical: `${homeUrl}/posts/${data.title.replaceAll(" ", "-")}`,
+      canonical: `${homeUrl}/posts/${recipe.title.replaceAll(" ", "-")}`,
     },
     creator: "Sacbe Cacao",
+  };
+}
+
+async function getRecipeData(title: string) {
+  const response = await fetch(`${homeUrl}/api/recipes/${title}`, {
+    method: "GET",
+    next: {
+      tags: [formatTitleForFetch(title)], ///TODO: add revalidated webhook to call backs in sacbe admin
+    },
+  });
+  return (await response.json()) as {
+    recipe: any;
+    relatedRecipes: any[];
   };
 }
 
@@ -38,9 +51,7 @@ async function RercipePage({
 }: {
   params: { id: string; title: string };
 }) {
-  const recipe = await getRecipe(params.title!);
-
-  const related = await getRelatedRecipes(recipe.relatedRecipes);
+  const { recipe, relatedRecipes } = await getRecipeData(params.title!);
 
   return (
     <main className="w-full">
@@ -51,6 +62,9 @@ async function RercipePage({
           width={800}
           height={300}
           className=" w-11/12 md:w-10/12 h-[500px] drop-shadow-lg rounded-lg mb-10 mt-4 object-cover "
+          blurDataURL="LAM6Lo4m00?c0MNOVE4;00cG*0wq"
+          placeholder="blur"
+          priority
         />
       </div>
       <h1 className="text-4xl md:text-8xl w-10/12 m-auto md:text-center">
@@ -137,9 +151,9 @@ async function RercipePage({
         </div>
         <h4 className="mt-20">Why Not Try</h4>
         <h2>More Recipes</h2>
-        {related != undefined && (
+        {relatedRecipes != undefined && (
           <div>
-            {related.map((recipe) => {
+            {relatedRecipes.map((recipe) => {
               return (
                 <RecipeCard recipe={recipe} key={recipe.title}></RecipeCard>
               );
@@ -152,32 +166,3 @@ async function RercipePage({
 }
 
 export default RercipePage;
-
-async function getRecipe(title: string) {
-  adminInit();
-
-  const db = firestore();
-
-  const snap = await db
-    .collection("recipes")
-    .where("title", "==", formatTitleForFetch(title))
-    .limit(1)
-    .get();
-
-  if (snap.docs.length != 0) return snap.docs[0].data();
-  else return {};
-}
-
-async function getRelatedRecipes(relatedRecipes: DocumentReference[]) {
-  adminInit();
-  const db = firestore();
-  const snapshot = await db
-    .collection("recipes")
-    .where(
-      firestore.FieldPath.documentId(),
-      "in",
-      relatedRecipes.map((e) => e.id)
-    )
-    .get();
-  return snapshot.docs.map((e) => e.data());
-}

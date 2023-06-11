@@ -6,15 +6,15 @@ import { PostMetaData } from "./PostMetaData";
 import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
 import homeUrl from "@/lib/constants/urls";
 import { BlogPostType } from "@/types/blogPost";
+import { formatTitleForFetch } from "@/utils/url/formater";
 
 async function getPost(title: string) {
   const request = await fetch(`${homeUrl}/api/blog/posts/${title}`, {
     method: "GET",
     next: {
-      tags: [title], ///TODO: add revalidated webhook to call backs in sacbe admin
+      tags: [formatTitleForFetch(title)],
     },
   });
-
   return (await request.json()) as {
     post: BlogPostType;
     relatedPosts: BlogPostType[];
@@ -70,6 +70,9 @@ export default async function Page({
             fill
             alt={"blog header post "}
             className="rounded-lg object-cover mx-1 "
+            blurDataURL="LAM6Lo4m00?c0MNOVE4;00cG*0wq"
+            placeholder="blur"
+            priority
           />
         </div>
 

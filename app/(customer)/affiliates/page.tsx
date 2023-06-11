@@ -5,7 +5,7 @@ import { AffiliateHeader } from "./AffiliateHeader";
 import Image from "next/image";
 import SlideInUp from "@/components/animations/slide_in_up";
 import { Metadata } from "next";
-
+import affiliatePortalMockUp from "@/public/affiliate_portal_mock_up.png";
 const metaData: Metadata = {
   title: "Affiliate Program",
   description:
@@ -97,11 +97,11 @@ export default async function AffiliatePage() {
             worldwide.
           </p>
           <Image
-            src={"/affiliate_portal_mock_up.png"}
+            src={affiliatePortalMockUp}
             width={1080}
             height={800}
             alt={"affiliate portal mock up "}
-            className=" m-auto"
+            className=" m-auto rounded-lg"
           ></Image>
           <div>
             <h3 className="text-5xl mb-10 mt-5">

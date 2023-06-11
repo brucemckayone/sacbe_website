@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { RiskApealCards } from "../RiskApealCards";
-
+import wholesalePortalMockup from "@/public/wholesale_portal_mock_up.png";
+import cacaoInLoveHeart from "@/public/cacao_love_heart.png";
 const selectors = [
   {
     title: "Excellent Customer Service",
@@ -163,11 +164,12 @@ export function WhyWorkWithUs() {
             </p>
             <div className="flex flex-row justify-center">
               <Image
-                src={"/wholesale_portal_mock_up.png"}
+                src={wholesalePortalMockup}
                 width={1080}
                 height={800}
                 alt={"affiliate portal mock up "}
-                className=""
+                className="rounded-lg"
+                placeholder="blur"
               ></Image>
             </div>
           </div>
@@ -191,11 +193,12 @@ export function WhyWorkWithUs() {
             </span>
             <div className="flex flex-row justify-center">
               <Image
-                src={"/cacao_love_heart.png"}
+                src={cacaoInLoveHeart}
                 width={500}
                 height={500}
                 alt={"header image"}
-                className="object-contain"
+                className="object-contain rounded-lg"
+                placeholder="blur"
               />
             </div>
           </div>
