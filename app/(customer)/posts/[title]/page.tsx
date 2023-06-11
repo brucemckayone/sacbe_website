@@ -8,12 +8,10 @@ import homeUrl from "@/lib/constants/urls";
 import { BlogPostType } from "@/types/blogPost";
 
 async function getPost(title: string) {
-  console.log(title);
-
   const request = await fetch(`${homeUrl}/api/blog/posts/${title}`, {
     method: "GET",
     next: {
-      tags: ["blog"], ///TODO: add revalidated webhook to call backs in sacbe admin
+      tags: [title], ///TODO: add revalidated webhook to call backs in sacbe admin
     },
   });
 
@@ -59,7 +57,7 @@ async function getPost(title: string) {
 export default async function Page({
   params,
 }: {
-  params: { id: string; title: string };
+  params: { id: string; title: string; postId: string };
 }) {
   const { post, relatedPosts } = await getPost(params.title!);
 
@@ -94,7 +92,7 @@ export default async function Page({
                   <BlogPostSuggestionCard
                     post={relatedPosts}
                     key={relatedPosts.title + "aeroijaregoi"}
-                  ></BlogPostSuggestionCard>
+                  />
                 );
               })}
             </div>
