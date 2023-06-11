@@ -2,7 +2,7 @@ import Card from "@/components/cards/card";
 import Image from "next/image";
 import LinkButton from "@/components/buttons/LinkButton";
 import SlideInUp from "@/components/animations/slide_in_up";
-
+import cacaoFacilatorImage from "@/public/cacaofacilitator.png";
 export function BecomeAPractioner() {
   return (
     <div className=" bg-gradient-to-b to-primaryContainer from-tertiaryContainer py-10">
@@ -16,14 +16,10 @@ export function BecomeAPractioner() {
           <Card className="flex basis-1/2" hasColor={false}>
             <SlideInUp animiation="animate-zoom_in">
               <Image
-                src={"/cacaofacilitator.png"}
-                width={400}
-                height={400}
-                style={{
-                  objectFit: "contain",
-                }}
-                alt="cacao facilitator training image certificate badge"
-                // className="w-full m-auto"
+                src={cacaoFacilatorImage}
+                alt="cacao facilitator training image certificate badge object"
+                className="object-contain"
+                placeholder="blur"
               />
             </SlideInUp>
           </Card>

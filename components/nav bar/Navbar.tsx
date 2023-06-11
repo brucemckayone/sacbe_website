@@ -27,73 +27,73 @@ export default function Navbar() {
       <LoginButton />
     </header>
   );
-}
 
-function Menu() {
-  const session = useSession();
-  const [isDrawerOpen, setDrawerOpenState] = useState(false);
-  function toggleDrawer() {
-    setDrawerOpenState(!isDrawerOpen);
-  }
-  return (
-    <div className="flex m-3 rounded-lg shadow bg-surface ">
-      <Hamburger
-        toggled={isDrawerOpen}
-        onToggle={() => {
-          toggleDrawer();
-        }}
-      ></Hamburger>
-      {
-        <div
-          className={`absolute top-0 bottom-0 right-0 left-0 ${
-            isDrawerOpen
-              ? "animate-slide_in_left_fade "
-              : "animate-slide_out_left_fade hidden"
-          } `}
-        >
-          <div className="w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
-            <div className="flex justify-end mr-16 rounded-lg">
-              <div className="bg-surface drop-shadow-lg rounded-full mt-3 mr-5 opacity-80">
-                <Hamburger
-                  toggled={isDrawerOpen}
-                  onToggle={() => {
-                    toggleDrawer();
-                  }}
-                ></Hamburger>
-              </div>
-            </div>
-
-            <div className="ml-10 ">
-              {menuItems.map((item) => {
-                return (
-                  <Link
-                    onClick={() => {
+  function Menu() {
+    const session = useSession();
+    const [isDrawerOpen, setDrawerOpenState] = useState(false);
+    function toggleDrawer() {
+      setDrawerOpenState(!isDrawerOpen);
+    }
+    return (
+      <div className="flex m-3 rounded-lg shadow bg-surface ">
+        <Hamburger
+          toggled={isDrawerOpen}
+          onToggle={() => {
+            toggleDrawer();
+          }}
+        ></Hamburger>
+        {
+          <div
+            className={`absolute top-0 bottom-0 right-0 left-0 ${
+              isDrawerOpen
+                ? "animate-slide_in_left_fade "
+                : "animate-slide_out_left_fade hidden"
+            } `}
+          >
+            <div className="w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
+              <div className="flex justify-end mr-16 rounded-lg">
+                <div className="bg-surface drop-shadow-lg rounded-full mt-3 mr-5 opacity-80">
+                  <Hamburger
+                    toggled={isDrawerOpen}
+                    onToggle={() => {
                       toggleDrawer();
                     }}
-                    key={`drawerMenu ${item.link}+${item.text}`}
-                    href={item.link}
-                    className="no-underline group"
-                  >
-                    <h2 className="mt-10 underline group-hover:text-[white] duration-300">
-                      {item.text}
-                    </h2>
-                    <h4 className="no-underline text-xl group-hover:text-onPrimary">
-                      {item.subTitle}
-                    </h4>
-                  </Link>
-                );
-              })}
+                  ></Hamburger>
+                </div>
+              </div>
+
+              <div className="ml-10 ">
+                {menuItems.map((item) => {
+                  return (
+                    <Link
+                      onClick={() => {
+                        toggleDrawer();
+                      }}
+                      key={`drawerMenu ${item.link}+${item.text}`}
+                      href={item.link}
+                      className="no-underline group"
+                    >
+                      <h2 className="mt-10 underline group-hover:text-[white] duration-300">
+                        {item.text}
+                      </h2>
+                      <h4 className="no-underline text-xl group-hover:text-onPrimary">
+                        {item.subTitle}
+                      </h4>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <SearchBar toggleMenu={setDrawerOpenState} />
             </div>
 
-            <SearchBar toggleMenu={setDrawerOpenState} />
+            <div
+              className="w-2/3"
+              onClick={() => setDrawerOpenState(!isDrawerOpen)}
+            ></div>
           </div>
-
-          <div
-            className="w-2/3"
-            onClick={() => setDrawerOpenState(!isDrawerOpen)}
-          ></div>
-        </div>
-      }
-    </div>
-  );
+        }
+      </div>
+    );
+  }
 }

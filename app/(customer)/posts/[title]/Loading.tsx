@@ -1,7 +1,6 @@
 import ImageHeaderLoader from "@/components/loaders/ImageHeaderLoader";
 import TextLoader from "@/components/loaders/TextLoader";
-export default function Loading() {
-  // You can add any UI inside Loading, including a Skeleton.
+export default function PostLoader() {
   return (
     <div>
       <ImageHeaderLoader />

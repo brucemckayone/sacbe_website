@@ -1,5 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import dollarIcon from "@/public/icons/dollar_icon.svg";
+import klarnIcon from "@/public/icons/payment/klarna.svg";
+import afterpayIcon from "@/public/icons/payment/afterpay.svg";
+import climateIcon from "@/public/icons/stripe_climate_change_badge.svg";
+import fairTradeIcon from "@/public/icons/fair_trade_logo.svg";
 type props = {
   isHorizontal: boolean;
 } & typeof defaultProps;
@@ -20,11 +25,12 @@ export function RiskApealCards(props: props) {
         } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
       >
         <Image
-          src={"/icons/stripe_climate_change_badge.svg"}
+          src={climateIcon}
           width={70}
           height={70}
-          alt="Icon Text "
+          alt="Climate change badge a a partner with sacbe cacao and our climate change pledge"
           className="mr-2 h-10 w-10 self-center"
+          // placeholder="blur"
         />
         <div>
           <h4 className="text-xl">Earth Pledge</h4>
@@ -48,10 +54,10 @@ export function RiskApealCards(props: props) {
         } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
       >
         <Image
-          src={"/icons/dollar_icon_green.svg"}
+          src={dollarIcon}
           width={70}
           height={70}
-          alt="Icon Text "
+          alt="dollor icon a symbol of flexible payments"
           className="mr-2 h-10 w-10 self-center"
         />
         <div>
@@ -59,17 +65,17 @@ export function RiskApealCards(props: props) {
             <h4 className="text-xl">Flexible Payments</h4>
             <div className="flex">
               <Image
-                src={"icons/payment/klarna.svg"}
+                src={klarnIcon}
                 width={100}
                 height={10}
-                alt="Icon Text "
+                alt="Klarna icon showing that we accept klarna payments"
                 className="mr-2 w-10  md:w-16 self-center"
               />
               <Image
-                src={"/icons/payment/afterpay.svg"}
+                src={afterpayIcon}
                 width={70}
                 height={10}
-                alt="Icon Text "
+                alt="After pay icon showing that we accept after pay payments for instalments"
                 className="mr-2  w-10 md:w-16 self-center"
               />
             </div>
@@ -95,7 +101,7 @@ export function RiskApealCards(props: props) {
       </div>
       <div className="flex flex-row  p-2 rounded-xl drop-shadow-lg bg-surface mt-5 ">
         <Image
-          src={"/icons/fair_trade_logo.svg"}
+          src={fairTradeIcon}
           width={70}
           height={70}
           alt="Icon Text "

@@ -1,8 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { formatTitleForUrl } from "../posts/[title]/formatTitleForFetch";
-
+import { formatTitleForUrl } from "@/utils/url/formater";
 export function ArticleCards(props: { posts: any }) {
   return props.posts.map((post: any) => {
     return (
@@ -17,6 +16,7 @@ export function ArticleCards(props: { posts: any }) {
             width={500}
             height={500}
             className="rounded-xl h-64"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0"
           />
           <div className="p-5">
             <Link

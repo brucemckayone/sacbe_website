@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { blogPostType } from "@/app/(customer)/posts/[title]/page";
+
+import { BlogPostType } from "@/types/blogPost";
 import { RecipeType } from "@/types/recipieType";
 import adminInit from "@/utils/firebase/admin_init";
 import { firestore } from "firebase-admin";
@@ -25,7 +26,7 @@ async function getFeaturedPosts() {
     .where("featured", "==", true)
     .limit(2)
     .get();
-  return snap.docs.map((e) => e.data() as blogPostType);
+  return snap.docs.map((e) => e.data() as BlogPostType);
 }
 async function getFeaturedRecipes() {
   adminInit();

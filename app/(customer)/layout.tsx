@@ -13,7 +13,8 @@ import { QuickPurchase } from "./QuickPurchase";
 import { Metadata } from "next";
 import AffiliateLinkProvider from "@/components/providers/AffiliatePaymentLinkProvider";
 import { Suspense } from "react";
-import Loading from "./Loading";
+import SacbePodLoadingImage from "./Loading";
+import { Toaster } from "react-hot-toast";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -96,16 +97,19 @@ export default function RootLayout({
       className={`${raleway.variable} ${merriweather.variable} bg-[white] w-[100%]`}
     >
       <AuthProvider>
-        <AffiliateLinkProvider>
-          <UserProvider>
-            <body>
-              <Navbar />
-              <Suspense fallback={<Loading />}>{children}</Suspense>
-              <QuickPurchase />
-              <Footer />
-            </body>
-          </UserProvider>
-        </AffiliateLinkProvider>
+        <UserProvider>
+          <body>
+            <Navbar />
+            <Suspense fallback={<SacbePodLoadingImage />}>
+              <AffiliateLinkProvider>
+                {children}
+                <QuickPurchase />
+              </AffiliateLinkProvider>
+            </Suspense>
+            <Footer />
+            <Toaster />
+          </body>
+        </UserProvider>
       </AuthProvider>
       <Analytics />
     </html>

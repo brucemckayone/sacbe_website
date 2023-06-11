@@ -2,7 +2,7 @@ import React from "react";
 import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
 import Image from "next/image";
-import { formatTitleForFetch } from "../../posts/[title]/formatTitleForFetch";
+
 import { MarkDown } from "../../posts/[title]/MarkDown";
 import { PostMetaData } from "../../posts/[title]/PostMetaData";
 import { DocumentReference } from "firebase/firestore";
@@ -10,6 +10,7 @@ import { RecipeCard } from "./RecipeCard.1";
 import { FeelsProgressBar } from "./FeelsProgressBar";
 import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
+import { formatTitleForFetch } from "@/utils/url/formater";
 
 export async function generateMetadata({
   params,

@@ -1,144 +1,106 @@
 import React from "react";
 import Image from "next/image";
-
-import { firestore } from "firebase-admin";
-
-import adminInit from "@/utils/firebase/admin_init";
 import { Metadata } from "next";
-import { DocumentReference } from "@firebase/firestore";
-
-import console, { log } from "console";
-import { formatTitleForFetch } from "./formatTitleForFetch";
 import { MarkDown } from "./MarkDown";
 import { PostMetaData } from "./PostMetaData";
 import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
 import homeUrl from "@/lib/constants/urls";
-
-// or Dynamic metadata
-
-async function getRelatedPosts(relatedPosts: DocumentReference[]) {
-  adminInit();
-  const db = firestore();
-  const snapshot = await db
-    .collection("blog_posts")
-    .where(
-      firestore.FieldPath.documentId(),
-      "in",
-      relatedPosts.map((e) => e.id)
-    )
-    .get();
-  const posts = snapshot.docs.map((e) => e.data());
-  return posts;
-}
+import { BlogPostType } from "@/types/blogPost";
 
 async function getPost(title: string) {
-  adminInit();
-  try {
-    const snapshots = await firestore()
-      .collection("blog_posts")
-      .where("title", "==", formatTitleForFetch(title))
-      .get();
-    const data = snapshots.docs[0].data();
-    console.log(data);
-    return data;
-  } catch (e) {
-    return undefined;
-  }
+  console.log(title);
+
+  const request = await fetch(`${homeUrl}/api/blog/posts/${title}`, {
+    method: "GET",
+    next: {
+      tags: ["blog"], ///TODO: add revalidated webhook to call backs in sacbe admin
+    },
+  });
+
+  return (await request.json()) as {
+    post: BlogPostType;
+    relatedPosts: BlogPostType[];
+  };
 }
 
-export type blogPostType = {
-  content: string;
-  title: string;
-  readingTime: string;
-  main_image: string;
-  tags: string[];
-  categories: string[];
-  excerpt: string;
-  related_posts: DocumentReference[];
-  publisher: { name: string };
-};
+// export async function generateMetadata({
+//   params,
+// }: {
+//   params: { id: string; title: string };
+// }): Promise<Metadata> {
+//   const { post, relatedPosts } = await getPost(params.title!);
+//   return {
+//     title: post.title.replaceAll("-", " "),
+//     description: post.excerpt,
+//     authors: {
+//       name: post.publisher.name,
+//     },
+//     keywords: post.tags,
+//     publisher: "Sacbe Cacao",
+//     alternates: {
+//       canonical: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
+//     },
+//     creator: "Sacbe Cacao",
+//     openGraph: {
+//       title: post.title.replaceAll("-", " "),
+//       description: post.excerpt,
+//       url: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
+//       type: "article",
+//       article: {
+//         // publishedTime:data.dateCreated,
+//         // modifiedTime: data.lastUpdated),
+//         authors: [post.publisher.name],
+//         tags: post.tags,
+//       },
+//     },
+//   } as Metadata;
+// }
 
-// export const metadata: Metadata = {
-//   title: "data",
-//   description: "data",
-
-// };
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string; title: string };
-}): Promise<Metadata> {
-  const data = (await getPost(params.title!)) as blogPostType;
-  return {
-    title: data.title.replaceAll("-", " "),
-    description: data.excerpt,
-    authors: {
-      name: data.publisher.name,
-    },
-    keywords: data.tags,
-    publisher: "Sacbe Cacao",
-    alternates: {
-      canonical: `${homeUrl}/posts/${data.title.replaceAll(" ", "-")}`,
-    },
-    creator: "Sacbe Cacao",
-  } as Metadata;
-}
 export default async function Page({
   params,
 }: {
   params: { id: string; title: string };
 }) {
-  const data = (await getPost(params.title!)) as blogPostType;
+  const { post, relatedPosts } = await getPost(params.title!);
 
-  if (data == undefined) {
-    return <></>;
-  } else {
-    const relatedPosts = (await getRelatedPosts(
-      data.related_posts
-    )) as blogPostType[];
-
-    return (
-      <main className="flex flex-row justify-center mx-3">
-        <div className=" sm:mx-3 md:w-8/12 my-10 m-auto ">
-          <div className=" relative h-[500px] w-full px-5 shadow-xl">
-            <Image
-              src={data.main_image}
-              fill
-              alt={"blog header post "}
-              className="rounded-lg object-cover mx-1 "
-            />
-          </div>
-
-          <h1 className="my-10 text-5xl md:text-8xl text-center">
-            {data.title}
-          </h1>
-
-          <PostMetaData
-            categories={data.categories}
-            publisherName={data.publisher.name}
-            tags={data.tags}
+  return (
+    <main className="flex flex-row justify-center mx-3">
+      <div className=" sm:mx-3 md:w-8/12 my-10 m-auto ">
+        <div className=" relative h-[500px] w-full px-5 shadow-xl">
+          <Image
+            src={post.main_image}
+            fill
+            alt={"blog header post "}
+            className="rounded-lg object-cover mx-1 "
           />
-
-          <div className=" px-5  my-10 md:p-20">
-            <MarkDown content={data.content} />
-
-            {relatedPosts != undefined && (
-              <div className="my-20">
-                <h2 className="text-2xl md:text-7xl">Related Articles</h2>
-                {relatedPosts.map((post) => {
-                  return (
-                    <BlogPostSuggestionCard
-                      post={post}
-                      key={post.title + "aeroijaregoi"}
-                    ></BlogPostSuggestionCard>
-                  );
-                })}
-              </div>
-            )}
-          </div>
         </div>
-      </main>
-    );
-  }
+
+        <h1 className="my-10 text-5xl md:text-8xl text-center">{post.title}</h1>
+
+        <PostMetaData
+          categories={post.categories}
+          publisherName={post.publisher.name}
+          tags={post.tags}
+        />
+
+        <div className=" px-5  my-10 md:p-20">
+          <MarkDown content={post.content} />
+
+          {relatedPosts != undefined && (
+            <div className="my-20">
+              <h2 className="text-2xl md:text-7xl">Related Articles</h2>
+              {relatedPosts.map((relatedPosts) => {
+                return (
+                  <BlogPostSuggestionCard
+                    post={post}
+                    key={post.title + "aeroijaregoi"}
+                  ></BlogPostSuggestionCard>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </div>
+    </main>
+  );
 }

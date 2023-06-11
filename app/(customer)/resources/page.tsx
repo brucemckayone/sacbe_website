@@ -1,11 +1,12 @@
 import { firestore } from "firebase-admin";
 import React from "react";
-import { blogPostType } from "../posts/[title]/page";
+
 import { BlogPostSuggestionCard } from "../posts/[title]/BlogPostSuggestionCard";
 import { RecipeCard } from "../recipes/[title]/RecipeCard";
 import Link from "next/link";
 import adminInit from "@/utils/firebase/admin_init";
 import { RecipeType } from "@/types/recipieType";
+import { BlogPostType } from "@/types/blogPost";
 
 async function getFeaturedPosts(startAfter: string) {
   adminInit();
@@ -18,7 +19,7 @@ async function getFeaturedPosts(startAfter: string) {
     .get();
 
   return snap.docs.map((e) => {
-    return { id: e.id, data: e.data() as blogPostType };
+    return { id: e.id, data: e.data() as BlogPostType };
   });
 }
 async function getFeaturedRecipes(startAfter: string) {

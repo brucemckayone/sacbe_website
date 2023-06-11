@@ -3,14 +3,17 @@ import { useUser } from "@/components/auth/affiliate_auth_context";
 import SmallButton from "@/components/buttons/small_button";
 import ButtonLoader from "@/components/loaders/ButtonLoader";
 import { SearchContext } from "@/components/providers/AffiliatePaymentLinkProvider";
+import { analytics } from "@/lib/firebase/firebase";
 import createCheckoutSession from "@/lib/stripe/createCheckoutSession";
 import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { logEvent } from "firebase/analytics";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useContext, useState } from "react";
-
+import sacbeIconImage from "@/public/sacbe_logo_icon.png";
+import sacbeFloatingShapesImage from "@/public/sacbe_shapes_background.png";
 type props = {
   isHorizontal: boolean;
   compact: boolean;
@@ -47,11 +50,10 @@ export function PurchaseOptions(props: props) {
         <div className="flex flex-row-reverse justify-around h-full align-middle bg-surface p-2">
           {/* {!props.compact && ( */}
           <Image
-            src={"/sacbe_logo_icon.png"}
+            src={sacbeIconImage}
             alt={"Sacbe Cacao Image"}
-            height={100}
-            width={100}
             className="object-contain w-2/12"
+            placeholder="blur"
           />
 
           <div className="flex-col justify-center ">
@@ -81,6 +83,7 @@ export function PurchaseOptions(props: props) {
                         mode: "payment",
                         customerId: user.customerId ?? undefined,
                       });
+                      logEvent(analytics, "one-off-purchase", {});
                       setIsLoadingOne(false);
                     }}
                     text="Buy"
@@ -106,11 +109,10 @@ export function PurchaseOptions(props: props) {
         <div className="flex flex-row-reverse justify-around   h-full align-middle bg-surface p-2">
           {/* {!props.compact && ( */}
           <Image
-            src={"/sacbe_shapes_background.png"}
+            src={sacbeFloatingShapesImage}
             alt={"Sacbe Cacao Image"}
-            height={100}
-            width={100}
             className="object-contain w-2/12"
+            placeholder="blur"
           />
           {/* )} */}
           <div className="flex-col ">

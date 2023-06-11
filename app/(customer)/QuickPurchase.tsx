@@ -1,22 +1,19 @@
 "use client";
 import { useUser } from "@/components/auth/affiliate_auth_context";
-import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
+import { a, PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
 import getAffiliatePaymentLinks from "@/utils/client/stripe/links/getAffiliatePaymentLinks";
-import useSWR from "swr";
 import Hamburger from "hamburger-react";
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { PurchaseOptions } from "./PurchaseOptions";
 import { RiskApealCards } from "./RiskApealCards";
 import toast, { Toaster } from "react-hot-toast";
+import dollarIcon from "@/public/icons/dollar_icon.svg";
+import shoppingBag from "@/public/icons/shopping_bag_icon.svg";
+
 export function QuickPurchase() {
   const [open, setOpen] = useState(false);
-  const [openShare, setOpenShare] = useState(false);
   const { user: affiliate, isLoading: affiliateLoading } = useUser();
-  const [isGeneratingLinks, setIsGeneratingLinks] = useState(false);
-  const [hasSendLinkRequest, setHasSentLinkRequest] = useState(false);
-  const [hasGeneratedPaymentLinks, setHasGeneratedPaymentLinks] =
-    useState(false);
   const notify = () =>
     toast.success(
       "Your Link Has Been Copied To Your Clipboard! Now Share it with the world! Best of luck we love you <3"
@@ -25,15 +22,12 @@ export function QuickPurchase() {
   const [linksState, setLinks] = useState<PaymentLinkListType>();
 
   useEffect(() => {
-    console.log("calledheeeeeee hhhrrhheeh");
     if (affiliate.uuid && affiliate.accountId && affiliate.chargesEnabled)
       getAffiliatePaymentLinks(affiliate.uuid).then((res) => {
-        console.log("here");
-        console.log(res);
         return setLinks(res);
       });
     console.log(linksState);
-  }, [affiliateLoading, affiliate]);
+  }, [affiliate, affiliateLoading]);
 
   return (
     <div>
@@ -44,7 +38,7 @@ export function QuickPurchase() {
         }}
       >
         <Image
-          src={"icons/shopping_bag_icon.svg"}
+          src={shoppingBag}
           width={70}
           height={70}
           alt="Shopping bag Icon"
@@ -67,7 +61,7 @@ export function QuickPurchase() {
           }}
         >
           <Image
-            src={"icons/dollar_icon.svg"}
+            src={dollarIcon}
             width={50}
             height={50}
             alt="Shopping bag Icon"
@@ -95,7 +89,6 @@ export function QuickPurchase() {
           <RiskApealCards isHorizontal={true}></RiskApealCards>
         </div>
       </div>
-      <Toaster />
     </div>
   );
 }

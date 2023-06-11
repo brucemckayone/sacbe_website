@@ -2,6 +2,7 @@ import { RiskApealCards } from "./RiskApealCards";
 import Image from "next/image";
 import SlideInUp from "@/components/animations/slide_in_up";
 import Card from "@/components/cards/card";
+import chocolateButtonImage from "@/public/chocolate_buttons.png";
 export function TheHook() {
   return (
     <div className="bg-tertiaryContainer">
@@ -59,27 +60,14 @@ export function TheHook() {
             <div className="absolute w-11/12 md:w-4/12 p-40 bg-primaryContainer rounded-full h-[500px] blur-md"></div>
             <SlideInUp animiation="animate-zoom_in_fade">
               <div className="relative w-full p-40 h-[500px]  ">
-                <div className="absolute bottom-0 left-0 h-[140px] w-full">
-                  <Image
-                    src={"/drop_shadow.png"}
-                    fill
-                    style={{
-                      objectFit: "contain",
-                    }}
-                    alt=""
-                  ></Image>
-                </div>
-
                 <div
                   className={`absolute top-10 right-0 left-0 w-full h-[540px]`}
                 >
                   <Image
-                    src={"/chocolate_buttons.png"}
-                    fill
-                    style={{
-                      objectFit: "contain",
-                    }}
+                    src={chocolateButtonImage}
                     alt=" Chocolate Buttons"
+                    placeholder="blur"
+                    className="object-contain"
                   ></Image>
                 </div>
               </div>

@@ -6,18 +6,19 @@ import SimpleSlider from "@/components/carousels/testimonial_slider";
 import reviews from "@/lib/constants/reviews";
 import BenifitsOfCacao from "@/components/body/benifits_of_cacao";
 import AboutSacbe from "@/components/body/about_sacbe";
-import { AboutClouds } from "./wholesale/AboutClouds";
+
 import adminInit from "@/utils/firebase/admin_init";
 import { firestore } from "firebase-admin";
 import { BlogPostSuggestionCard } from "./posts/[title]/BlogPostSuggestionCard";
 import { RecipeCard } from "./recipes/[title]/RecipeCard";
 import { RecipeType } from "@/types/recipieType";
-import { blogPostType } from "./posts/[title]/page";
+
 import { BecomeAPractioner } from "./BecomeAPractioner";
 import { VitiminPopovers } from "./VitiminPopovers";
 import { RiskApealCards } from "./RiskApealCards";
 import { TheHook } from "./TheHook";
 import { PurchaseOptions } from "./PurchaseOptions";
+import { BlogPostType } from "@/types/blogPost";
 
 export default async function Home() {
   const posts = await getFeaturedPosts();
@@ -96,7 +97,7 @@ async function getFeaturedPosts() {
     .where("featured", "==", true)
     .limit(2)
     .get();
-  return snapshot.docs.map((e) => e.data() as blogPostType);
+  return snapshot.docs.map((e) => e.data() as BlogPostType);
 }
 
 async function getFeaturedRecipes() {

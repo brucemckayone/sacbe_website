@@ -57,7 +57,7 @@ function Portal() {
                       className="bg-sacbeBrandColor w-10 h-10 drop-shadow-lg rounded-full p-2 mx-3 inline-block "
                     />{" "}
                     at the bottom of an article and click it, then click
-                    generate link, now all you have too do is share it with the
+                    generate link, now all you have to do is share it with the
                     world
                   </p>
                 </span>

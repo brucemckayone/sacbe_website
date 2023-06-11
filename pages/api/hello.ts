@@ -10,6 +10,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const user = firestore().collection("affiliate_requests").limit(1).get();
+  const user = firestore().collection("blog_posts").limit(1).get();
   res.status(200).json((await user).docs[0].data());
 }

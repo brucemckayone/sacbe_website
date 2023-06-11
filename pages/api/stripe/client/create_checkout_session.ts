@@ -21,7 +21,7 @@ export default async function handler(
   });
 
   let payload: Stripe.Checkout.SessionCreateParams = {
-    success_url: homeUrl,
+    success_url: `${homeUrl}/complete/checkout`,
     line_items: lineItems,
     mode: mode,
     billing_address_collection: "required",

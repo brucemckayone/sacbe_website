@@ -2,9 +2,10 @@ import React from "react";
 import Image from "next/image";
 import Categorychip from "@/components/blog/categorychips";
 import Link from "next/link";
-import { blogPostType } from "./page";
 
-export function BlogPostSuggestionCard(props: { post: blogPostType }) {
+import { BlogPostType } from "@/types/blogPost";
+
+export function BlogPostSuggestionCard(props: { post: BlogPostType }) {
   const slug = props.post.title.replaceAll(" ", "-").replaceAll("%3A", ":");
 
   return (

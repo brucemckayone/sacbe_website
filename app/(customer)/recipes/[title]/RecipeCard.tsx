@@ -1,9 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { formatTitleForUrl } from "../../posts/[title]/formatTitleForFetch";
+
 import { FeelsProgressBar } from "./FeelsProgressBar";
 import Categorychip from "@/components/blog/categorychips";
 import Link from "next/link";
+import { formatTitleForUrl } from "@/utils/url/formater";
 
 export function RecipeCard(props: any) {
   return (
