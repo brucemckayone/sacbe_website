@@ -206,6 +206,7 @@ function EmailPreferences(props: { nextQuestion: () => void }) {
         {groups.map((group) => {
           return (
             <div
+              key={group}
               onClick={() => {
                 if (!selected.includes(group)) {
                   setSelected([...selected, group]);

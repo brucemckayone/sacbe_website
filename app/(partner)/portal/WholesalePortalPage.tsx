@@ -8,7 +8,7 @@ import { Checkbox, Modal, Button, Group } from "@mantine/core";
 import React, { useCallback, useEffect, useState } from "react";
 import TextInput from "@/components/form/inputs/TextInput";
 import { useDisclosure } from "@mantine/hooks";
-import Stripe from "stripe";
+
 import homeUrl from "@/lib/constants/urls";
 
 function WholeSalePortalSignUpForm() {
@@ -95,10 +95,6 @@ export function WholesalePortalPage() {
 
   if (!user.wholesale)
     return <WholeSalePortalSignUpForm></WholeSalePortalSignUpForm>;
-
-  function goToAccountManagement() {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <div className="p-4 sm:ml-64">
