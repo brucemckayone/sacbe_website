@@ -11,12 +11,14 @@ function getQuiz() {
         questions: [
           {
             question:
-              "What best discibes what you are looking for out of life, and cacoa?, select more than one",
+              "What best discribes what you are looking for out of life, and cacoa?, select more than one",
             type: "What Drives You, Multi-Select",
+            endpoint: "drives",
           },
           {
             question: "How often do you drink cacao",
             type: "Select-Single",
+            endpoint: "analytics/cacao/usage",
             awnsers: [
               {
                 text: "Daily",
@@ -36,6 +38,7 @@ function getQuiz() {
             question:
               "What gender do you identify as? (so we can use the correct pronouns)",
             type: "Select-Single",
+            endpoint: "analytics/user/gender",
             awnsers: [
               {
                 text: "Male",
@@ -61,6 +64,7 @@ function getQuiz() {
             question:
               "What are you passionate about? (select as many as you like)",
             type: "Multi-Select",
+            endpoint: "passions",
             awnsers: [
               {
                 text: "Health",
@@ -104,6 +108,7 @@ function getQuiz() {
             question:
               "What is holding you back from living your best life? how can we support you? (select as many as you like)",
             type: "Multi-Select",
+            endpoint: "problems",
             awnsers: [
               {
                 text: "I dont know",
@@ -183,9 +188,10 @@ function getQuiz() {
             ],
           },
           {
-            question: "Who can we support you in becoming?",
+            question: "How can we support you",
             type: "completion",
             awnsers: [],
+            endpoint: "analytics/user/identity",
           },
         ],
       } as QuizBodyProps);
@@ -219,6 +225,8 @@ async function Quiz({
   const session = await stripe.checkout.sessions.retrieve(
     searchParams!.session_id as string
   );
+  const { email, name, phone, address } = session.customer_details!;
+  console.log(session);
 
   return (
     <body className="w-screen h-screen flex flex-col md:flex-row bg-sacbeBrandColor">

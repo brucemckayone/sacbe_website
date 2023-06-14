@@ -16,9 +16,10 @@ interface params {
   customerEmail?: string;
   customerId?: string;
   mode: Stripe.Checkout.SessionCreateParams.Mode;
+  qty:number
 }
 
-export default async function createCheckoutSession({ prices, mode }: params) {
+export default async function createCheckoutSession({ prices, mode, qty }: params) {
   console.log(`create checkout session caalled with`);
   let email;
   let customerId;
@@ -47,20 +48,18 @@ export default async function createCheckoutSession({ prices, mode }: params) {
     console.log("session has no user");
   }
 
-  console.log(
-    prices,
-     mode,
-     
-  );
-  
+
   const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON(
     "/api/stripe/client/create_checkout_session",
     {
       prices: prices,
       mode: mode,
-      
+      qty: qty
     }
   );
+
+  console.log(checkoutSession);
+  
 
   if (checkoutSession.url) {
     location.href = checkoutSession.url;

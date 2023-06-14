@@ -7,15 +7,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  console.log(req.body);
   const prices = req.body.prices as string[];
+  const qty = req.body.qty;
   const customerId = req.body.customerId as string | null | undefined;
   const mode = req.body.mode as Stripe.Checkout.SessionCreateParams.Mode;
 
   let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   prices.forEach((price) => {
     lineItems.push({
-      adjustable_quantity: { enabled: true },
-      quantity: 1,
+      adjustable_quantity: { enabled: false },
+      quantity: qty,
       price: price,
     });
   });
@@ -32,9 +34,7 @@ export default async function handler(
     locale: "auto",
     
     client_reference_id: customerId ? customerId : "guest checkout",
-    // consent_collection: {
-    //   terms_of_service: "required",
-    // },
+    
     phone_number_collection: {
       enabled: true,
     },
@@ -42,8 +42,8 @@ export default async function handler(
       allowed_countries: ["GB"],
     },
     
-    // customer: customerId ?? undefined,
-    customer_creation: "if_required",
+    customer: customerId ?? undefined,
+    
     customer_update: customerId
       ? {
           shipping: "auto",
@@ -54,21 +54,86 @@ export default async function handler(
   };
 
   if (mode == "payment") {
-    const shippingRates = await stripe.shippingRates.list({ active: true });
-    const shippingRateIds = shippingRates.data.map((rate) => rate.id);
-    console.log(shippingRateIds);
     payload = {
       ...payload,
-      payment_method_types: ["card",  "afterpay_clearpay", "klarna",],
-      shipping_options: shippingRateIds.map((id) => ({
-        shipping_rate: id,
-      })),
+      // payment_method_types: ["card",  "afterpay_clearpay", "klarna"],
+      customer_creation:  "if_required",
+      shipping_options: [
+        {
+          shipping_rate_data: {
+
+            type: "fixed_amount",
+            fixed_amount: {
+              currency: "gbp",
+              amount: generateShippingCost(qty),
+            },
+            display_name: "1st Class ",
+            delivery_estimate: {
+              maximum: {
+                unit: "business_day",
+                value: 3,
+              },
+              minimum: {
+                unit: "business_day",
+                value: 1,
+              },
+            },
+          }
+        },
+        {
+          shipping_rate_data: {
+            type: "fixed_amount",
+            fixed_amount: {
+              currency: "gbp",
+              amount: generateSecondClassShipping(qty),
+            },
+            display_name: "2nd Class",
+            delivery_estimate: {
+              maximum: {
+                unit: "business_day",
+                value: 5,
+              },
+              minimum: {
+                unit: "business_day",
+                value: 2,
+              },
+            },
+            
+          }
+        }
+      ],
       shipping_address_collection: {
         allowed_countries: ["GB"],
       },
-      // invoice_creation: { enabled: true },
+      invoice_creation: { enabled: true },
     };
   }
 
   res.status(200).json(await stripe.checkout.sessions.create(payload));
+
+}
+
+
+function generateSecondClassShipping(qty: number) { 
+  const shippingCost = 395;
+  const shippingCostPertem = 195;
+  const shippingCostPerItemAfter = 95;
+  const shippingCostAfter = 2;
+  if (qty <= shippingCostAfter) {
+    return shippingCost;
+  }
+  return shippingCost + (qty - shippingCostAfter) * shippingCostPerItemAfter;
+}
+
+
+function generateShippingCost(qty: number) { 
+  const shippingCost = 495;
+  const shippingCostPerItem = 295;
+  const shippingCostPerItemAfter = 195;
+  const shippingCostAfter = 2;
+  if (qty <= shippingCostAfter) {
+    return shippingCost;
+  } else {
+    return shippingCost + (qty - shippingCostAfter) * shippingCostPerItemAfter;
+  }
 }

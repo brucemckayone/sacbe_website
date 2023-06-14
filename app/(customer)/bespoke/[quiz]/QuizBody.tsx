@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 
 export interface QuizBodyProps {
@@ -11,6 +12,7 @@ export interface QuizBodyProps {
       | "What Drives You, Multi-Select"
       | "completion";
     awnsers: MultiAwnser[];
+    endpoint: string;
   }[];
 }
 
@@ -55,19 +57,32 @@ export function QuizBody(props: {
         <SingleSelect
           awnsers={props.quiz.questions[currentindex].awnsers}
           nextQuestion={nextQuestion}
+          question={props.quiz.questions[currentindex].question}
+          email={props.email ?? "no email"}
+          endpoint={props.quiz.questions[currentindex].endpoint}
         />
       );
     } else if (
       props.quiz.questions[currentindex].type == "What Drives You, Multi-Select"
     ) {
-      return <EmailPreferences nextQuestion={nextQuestion} />;
+      return (
+        <EmailPreferences
+          nextQuestion={nextQuestion}
+          email={props.email ?? "No Email Given"}
+          question={props.quiz.questions[currentindex].question}
+          endpoint={props.quiz.questions[currentindex].endpoint}
+        />
+      );
     } else if (props.quiz.questions[currentindex].type == "completion") {
-      return <Completion email={props.email ?? ""}></Completion>;
+      return <Completion email={props.email ?? ""} />;
     } else {
       return (
         <MultiSelect
+          question={props.quiz.questions[currentindex].question}
           awnsers={props.quiz.questions[currentindex].awnsers}
           nextQuestion={nextQuestion}
+          email={props.email ?? "no email"}
+          endpoint={props.quiz.questions[currentindex].endpoint}
         />
       );
     }
@@ -77,20 +92,28 @@ export function QuizBody(props: {
 type MultiAwnser = {
   text: string;
   selected: boolean;
+  email?: string;
+  endpoint: string;
 };
 
 interface MutliSelectProps {
   awnsers: MultiAwnser[];
+  question: string;
   nextQuestion: () => void;
+  email?: string;
+  endpoint: string;
 }
 interface SingleSelectProps {
+  question: string;
   awnsers: MultiAwnser[];
   nextQuestion: () => void;
+  email?: string;
+  endpoint: string;
 }
 
 function SingleSelect(props: SingleSelectProps) {
   const [selected, setSelected] = useState("");
-
+  const [loading, setLoading] = useState(false);
   return (
     <div>
       <div className="flex flex-wrap animate-slide_in_right_fade">
@@ -120,9 +143,16 @@ function SingleSelect(props: SingleSelectProps) {
       </div>
       <button
         className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
-        onClick={() => {
-          if (selected != "") props.nextQuestion();
-          else toast.error("Please select at least one option");
+        onClick={async () => {
+          if (selected != "") {
+            setLoading(true);
+            await fetchPostJSON(`/api/${props.endpoint}`, {
+              question: props.question,
+              awnser: selected,
+            });
+            setLoading(false);
+            props.nextQuestion();
+          } else toast.error("Please select at least one option");
         }}
       >
         NEXT
@@ -171,6 +201,11 @@ function MultiSelect(props: MutliSelectProps) {
         className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
         onClick={() => {
           if (selectedList.length > 0) {
+            fetchPostJSON(`/api/analytics/multi`, {
+              question: props.question,
+              awnser: selectedList,
+              endpoint: props.endpoint,
+            });
             props.nextQuestion();
           } else toast.error("Please select at least one option");
         }}
@@ -180,7 +215,12 @@ function MultiSelect(props: MutliSelectProps) {
     </div>
   );
 }
-function EmailPreferences(props: { nextQuestion: () => void }) {
+function EmailPreferences(props: {
+  nextQuestion: () => void;
+  question: string;
+  email: string;
+  endpoint: string;
+}) {
   const [selected, setSelected] = useState([] as string[]);
 
   const groups = [
@@ -228,8 +268,13 @@ function EmailPreferences(props: { nextQuestion: () => void }) {
       <button
         className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
         onClick={() => {
-          if (selected.length > 0) props.nextQuestion();
-          else toast.error("Please select at least one option");
+          if (selected.length > 0) {
+            fetchPostJSON(`/api/analytics/multi`, {
+              awnser: selected,
+              endpoint: props.endpoint,
+            });
+            props.nextQuestion();
+          } else toast.error("Please select at least one option");
         }}
       >
         NEXT
@@ -267,7 +312,7 @@ function Completion(props: { email?: string | null }) {
       <button
         className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
         onClick={() => {
-          ///TODO: complete the sign up process and process all the information from the quiz
+          //TODO: complete the sign up process and process all the information from the quiz
           //TODO: redirect to the homepage
         }}
       >

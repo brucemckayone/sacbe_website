@@ -21,7 +21,7 @@ const SmallButton: React.FC<Props> = ({
       onClick={() => {
         onClicked();
       }}
-      className={`${className} duration-500 ${
+      className={`${className} duration-500  ${
         isPrimary ? "bg-sacbeBrandColor" : ""
       } py-1 px-3  my-2 rounded-md hover:bg-onPrimaryContainer hover:text-onPrimary border-2`}
     >
@@ -35,7 +35,7 @@ const SmallButton: React.FC<Props> = ({
             className="mx-2"
           />
         )}
-        <h4 className="uppercase text-lg">{text}</h4>
+        <h4 className="uppercase text-lg text-center">{text}</h4>
       </div>
     </button>
   );

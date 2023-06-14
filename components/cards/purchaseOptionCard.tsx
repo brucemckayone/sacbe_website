@@ -71,6 +71,7 @@ const PurchaseOptionCard: React.FC<Props> = ({
                     await createCheckoutSession({
                       mode: paymentMode,
                       prices: priceIds,
+                      qty: 1,
                     });
                     setIsLoading(false);
                   } else {
@@ -123,6 +124,7 @@ const PurchaseOptionCard: React.FC<Props> = ({
                   "price_1MqhygG859ZdyFmpZYxxL1aN",
                 ],
                 mode: "subscription",
+                qty: 1,
                 customerId: "",
               });
               setIsShippingLoading(false);
@@ -143,6 +145,7 @@ const PurchaseOptionCard: React.FC<Props> = ({
                 ],
                 mode: "payment",
                 customerId: "",
+                qty: 1,
               });
               setIsShippingLoading(false);
               setIsLoading(false);

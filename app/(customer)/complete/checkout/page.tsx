@@ -8,6 +8,7 @@ function CheckoutComplete() {
   const nav = useRouter();
   const searchParams = useSearchParams();
   const sessionId = searchParams!.get("session_id");
+
   return (
     <div className="w-full m-auto">
       <div className="w-11/12 md:w-6/12 m-auto">

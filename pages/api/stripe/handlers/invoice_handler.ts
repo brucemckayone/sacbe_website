@@ -64,7 +64,7 @@ export default async function handler(
           const product = {
             id: products.data[i].id ?? "no id",
             name: products.data[i].name ?? "no nake",
-            image: products.data[i].images[0] ?? "no image",
+            image: products.data[i].images[0] ?? "https://www.sacbe-ceremonial-cacao.com/logo.svg",
             quantity: invoice.lines.data[i].quantity ?? "non quantity",
             cost: invoice.lines.data[i].amount ?? 0,
             subscriptionId: invoice.lines.data[i].subscription ?? "no sub id",
@@ -100,14 +100,15 @@ export default async function handler(
         console.log(firebaseResponse);
         message =
           "Invoice payment_succeeded handled: email,notification and data saved";
+        
         messaging().send({
           topic: "all",
           notification: {
-            body: ` Fuck Yes! Another sale worth £${
+            body: `Fuck Yes! Another sale worth £${
               productList.reduce((total, a) => a.cost + total, 0) / 100
             } Smackaroonies`,
             imageUrl:
-              productList[0].image ??
+              productList[0]?.image ??
               "https://www.sacbe-ceremonial-cacao.com/logo.svg",
             title: `New Order: ${invoice.customer_name}`,
           },

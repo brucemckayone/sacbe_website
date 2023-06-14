@@ -14,6 +14,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useContext, useState } from "react";
 import sacbeIconImage from "@/public/sacbe_logo_icon.png";
 import sacbeFloatingShapesImage from "@/public/sacbe_shapes_background.png";
+
 type props = {
   isHorizontal: boolean;
   compact: boolean;
@@ -32,6 +33,9 @@ export function PurchaseOptions(props: props) {
   const [opened, { open, close }] = useDisclosure(false);
   const router = useRouter();
   const { oneofflink, sublink } = useContext(SearchContext);
+
+  const [oneoffQty, setOneoffQty] = useState(1);
+  const [subQty, setSubQty] = useState(1);
 
   return (
     <div
@@ -52,7 +56,7 @@ export function PurchaseOptions(props: props) {
           <Image
             src={sacbeIconImage}
             alt={"Sacbe Cacao Image"}
-            className="object-contain w-2/12"
+            className="object-contain w-3/12"
             placeholder="blur"
           />
 
@@ -61,7 +65,7 @@ export function PurchaseOptions(props: props) {
             <div className="ml-5 ">
               <ol
                 className={`list-disc ml-5 ${
-                  props.compact ? "md:text-lg" : "md:text-2xl"
+                  props.compact ? "md:text-md" : "md:text-2xl"
                 }`}
               >
                 <li>300g Organic Cacao Buttons</li>
@@ -71,7 +75,7 @@ export function PurchaseOptions(props: props) {
               {isLoadingOn ? (
                 <ButtonLoader />
               ) : (
-                <div className="ml-5">
+                <div className="ml-5 flex">
                   <SmallButton
                     onClicked={async () => {
                       if (oneofflink) {
@@ -79,9 +83,10 @@ export function PurchaseOptions(props: props) {
                       }
                       setIsLoadingOne(true);
                       await createCheckoutSession({
-                        prices: ["price_1Mb8slG859ZdyFmp0ttYsJAh"],
+                        prices: ["price_1NIqy6G859ZdyFmpEbQLnA5q"],
                         mode: "payment",
                         customerId: user.customerId ?? undefined,
+                        qty: oneoffQty,
                       });
                       logEvent(analytics, "one-off-purchase", {});
                       setIsLoadingOne(false);
@@ -89,6 +94,27 @@ export function PurchaseOptions(props: props) {
                     text="Buy"
                     className="text-onPrimaryContainer border-onPrimaryContainer"
                   />
+                  <div className="flex  text-[black] mx-2 h-10 items-center rounded-full p-2 bg-surface self-center border ">
+                    <button
+                      onClick={() => {
+                        if (oneoffQty > 1) {
+                          setOneoffQty(oneoffQty - 1);
+                        }
+                      }}
+                      className="p-1 rounded-full  bg-surface mx-1"
+                    >
+                      -
+                    </button>
+                    <p className="mx-1 self-center">{oneoffQty}</p>
+                    <button
+                      onClick={() => {
+                        oneoffQty < 10 && setOneoffQty(oneoffQty + 1);
+                      }}
+                      className="p-1 rounded-full bg-surface mx-1"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               )}
               <p className="text-xs text-onPrimaryContainer">
@@ -98,7 +124,9 @@ export function PurchaseOptions(props: props) {
           </div>
         </div>
         <div className="bg-[black] h-[50px]">
-          <h3 className="text-center py-1">£33.00</h3>
+          <h3 className="text-center py-1">{`£${(35.0 * oneoffQty).toFixed(
+            2
+          )}`}</h3>
         </div>
       </div>
       <div className=" md:h-[320px] flex flex-col justify-around text-onPrimary rounded-lg  border-2 border-[black] mt-2">
@@ -111,7 +139,7 @@ export function PurchaseOptions(props: props) {
           <Image
             src={sacbeFloatingShapesImage}
             alt={"Sacbe Cacao Image"}
-            className="object-contain w-2/12"
+            className="object-contain w-3/12"
             placeholder="blur"
           />
           {/* )} */}
@@ -120,7 +148,7 @@ export function PurchaseOptions(props: props) {
             <div className="ml-5 ">
               <ol
                 className={`list-disc ml-5 ${
-                  props.compact ? "md:text-lg" : "md:text-2xl"
+                  props.compact ? "md:text-md" : "md:text-2xl"
                 }`}
               >
                 <li>60% For The Third Eye App</li>
@@ -130,7 +158,7 @@ export function PurchaseOptions(props: props) {
               {isLoadingSub ? (
                 <ButtonLoader />
               ) : (
-                <div className="ml-5">
+                <div className="ml-5 flex ">
                   <SmallButton
                     onClicked={async () => {
                       if (sublink) {
@@ -138,9 +166,31 @@ export function PurchaseOptions(props: props) {
                       }
                       open();
                     }}
-                    text="Subscription"
+                    text="Subscribe"
                     className="text-onPrimaryContainer border-onPrimaryContainer"
                   />
+
+                  <div className="flex  text-[black] mx-2 h-10 items-center rounded-full p-2 bg-surface self-center border ">
+                    <button
+                      onClick={() => {
+                        if (subQty > 1) {
+                          setSubQty(subQty - 1);
+                        }
+                      }}
+                      className="p-1 rounded-full  bg-surface mx-1"
+                    >
+                      -
+                    </button>
+                    <p className="mx-1 self-center">{subQty}</p>
+                    <button
+                      onClick={() => {
+                        setSubQty(subQty + 1);
+                      }}
+                      className="p-1 rounded-full bg-surface mx-1"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               )}
               <p className="text-xs text-onPrimaryContainer">
@@ -150,7 +200,9 @@ export function PurchaseOptions(props: props) {
           </div>
         </div>
         <div className="bg-[black] h-[50px]">
-          <h3 className="text-center py-1">£28.00/month</h3>
+          <h3 className="text-center py-1">{`£${(28.0 * subQty).toFixed(
+            2
+          )}/month`}</h3>
         </div>
       </div>
 
@@ -177,10 +229,11 @@ export function PurchaseOptions(props: props) {
               setIsShippingLoading(true);
               await createCheckoutSession({
                 prices: [
-                  "price_1MpwvjG859ZdyFmp3xDUTY6Z",
-                  "price_1MqhygG859ZdyFmpZYxxL1aN",
+                  "price_1NIqy6G859ZdyFmpzaNNkSNu",
+                  "price_1NIsiYG859ZdyFmpLEjRmAAZ",
                 ],
                 mode: "subscription",
+                qty: subQty,
               });
               setIsShippingLoading(false);
               close();
@@ -194,10 +247,11 @@ export function PurchaseOptions(props: props) {
               setIsShippingLoading(true);
               await createCheckoutSession({
                 prices: [
-                  "price_1MpxuKG859ZdyFmpoIIVYaVt",
-                  "price_1MqhygG859ZdyFmpZYxxL1aN",
+                  "price_1NIqy6G859ZdyFmpzaNNkSNu",
+                  "price_1NIsjZG859ZdyFmpvMG66qkf",
                 ],
                 mode: "subscription",
+                qty: subQty,
               });
               setIsShippingLoading(false);
 

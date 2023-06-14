@@ -22,7 +22,7 @@ const PrimaryButton: React.FC<Props> = ({
         isPrimary ? "bg-sacbeBrandColor" : ""
       } py-1 px-8  my-3 rounded-md hover:bg-onPrimaryContainer hover:text-onPrimary border-2`}
     >
-      <h4 className="uppercase">{text}</h4>
+      <h4 className="uppercase text-lg md:text-2xl ">{text}</h4>
     </button>
   );
 };

@@ -1895,6 +1895,14 @@
   resolved "https://registry.npmjs.org/@magic-sdk/types/-/types-14.2.0.tgz"
   integrity sha512-6zts9JLdNLj03xCf4GNjpihkSxAoC6m+UzGpARHUBecSkwp6ixrAioMhIdy+vjXF4+f7Ntb2tWcrMExIfA7hFg==
 
+"@mailchimp/mailchimp_marketing@^3.0.80":
+  version "3.0.80"
+  resolved "https://registry.npmjs.org/@mailchimp/mailchimp_marketing/-/mailchimp_marketing-3.0.80.tgz"
+  integrity sha512-Cgz0xPb+1DUjmrl5whAsmqfAChBko+Wf4/PLQE4RvwfPlcq2agfHr1QFiXEhZ8e+GQwQ3hZQn9iLGXwIXwxUCg==
+  dependencies:
+    dotenv "^8.2.0"
+    superagent "3.8.1"
+
 "@mantine/carousel@^5.10.1":
   version "5.10.1"
   resolved "https://registry.npmjs.org/@mantine/carousel/-/carousel-5.10.1.tgz"
@@ -3498,6 +3506,11 @@ dotenv@^16.0.3:
   version "16.0.3"
   resolved "https://registry.npmjs.org/dotenv/-/dotenv-16.0.3.tgz"
   integrity sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==
+
+dotenv@^8.2.0:
+  version "8.6.0"
+  resolved "https://registry.npmjs.org/dotenv/-/dotenv-8.6.0.tgz"
+  integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
 duplexer2@^0.1.2:
   version "0.1.4"
@@ -7150,6 +7163,22 @@ superagent@3.7.0:
   version "3.7.0"
   resolved "https://registry.npmjs.org/superagent/-/superagent-3.7.0.tgz"
   integrity sha512-/8trxO6NbLx4YXb7IeeFTSmsQ35pQBiTBsLNvobZx7qBzBeHYvKCyIIhW2gNcWbLzYxPAjdgFbiepd8ypwC0Gw==
+  dependencies:
+    component-emitter "^1.2.0"
+    cookiejar "^2.1.0"
+    debug "^3.1.0"
+    extend "^3.0.0"
+    form-data "^2.3.1"
+    formidable "^1.1.1"
+    methods "^1.1.1"
+    mime "^1.4.1"
+    qs "^6.5.1"
+    readable-stream "^2.0.5"
+
+superagent@3.8.1:
+  version "3.8.1"
+  resolved "https://registry.npmjs.org/superagent/-/superagent-3.8.1.tgz"
+  integrity sha512-VMBFLYgFuRdfeNQSMLbxGSLfmXL/xc+OO+BZp41Za/NRDBet/BNbkRJrYzCUu0u4GU0i/ml2dtT8b9qgkw9z6Q==
   dependencies:
     component-emitter "^1.2.0"
     cookiejar "^2.1.0"
