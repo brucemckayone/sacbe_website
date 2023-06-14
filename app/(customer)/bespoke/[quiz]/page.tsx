@@ -238,7 +238,7 @@ async function Quiz({
       <QuizBody
         quiz={quiz}
         email={session.customer_details?.email}
-        customerDetails={session.customer_details}
+        customerDetails={session.customer_details!}
       ></QuizBody>
     </body>
   );
