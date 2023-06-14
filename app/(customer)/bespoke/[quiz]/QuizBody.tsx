@@ -2,6 +2,7 @@
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
+import Stripe from "stripe";
 
 export interface QuizBodyProps {
   questions: {
@@ -19,6 +20,7 @@ export interface QuizBodyProps {
 export function QuizBody(props: {
   quiz: QuizBodyProps;
   email?: string | null;
+  customerDetails?: Stripe.Checkout.Session.CustomerDetails;
 }) {
   const [currentindex, setCurrentIndex] = useState(0);
 
@@ -74,7 +76,14 @@ export function QuizBody(props: {
         />
       );
     } else if (props.quiz.questions[currentindex].type == "completion") {
-      return <Completion email={props.email ?? ""} />;
+      return (
+        <Completion
+          email={props.email ?? ""}
+          address={props.customerDetails?.address}
+          name={props.customerDetails?.name ?? ""}
+          phone={props.customerDetails?.phone ?? ""}
+        />
+      );
     } else {
       return (
         <MultiSelect
@@ -283,7 +292,12 @@ function EmailPreferences(props: {
   );
 }
 
-function Completion(props: { email?: string | null }) {
+function Completion(props: {
+  email?: string | null;
+  phone?: string;
+  name?: string;
+  address?: any;
+}) {
   const [formEmail, setEmail] = useState(props.email ?? "");
 
   return (
@@ -312,8 +326,12 @@ function Completion(props: { email?: string | null }) {
       <button
         className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
         onClick={() => {
-          //TODO: complete the sign up process and process all the information from the quiz
-          //TODO: redirect to the homepage
+          fetchPostJSON(`/api/mailing/signup`, {
+            name: props.name,
+            email: props.email,
+            address: props.address,
+            phone: props.phone,
+          });
         }}
       >
         Lets Start A Conversation

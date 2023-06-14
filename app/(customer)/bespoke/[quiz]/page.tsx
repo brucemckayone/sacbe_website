@@ -235,7 +235,11 @@ async function Quiz({
         alt="quiz image cacao pods"
         className="w-full h-2/6 md:h-screen object-cover"
       />
-      <QuizBody quiz={quiz} email={session.customer_details?.email}></QuizBody>
+      <QuizBody
+        quiz={quiz}
+        email={session.customer_details?.email}
+        customerDetails={session.customer_details}
+      ></QuizBody>
     </body>
   );
 }

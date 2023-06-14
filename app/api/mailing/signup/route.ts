@@ -17,10 +17,10 @@ export async function POST(request: NextRequest) {
         mailchimp.lists.createList
 
         const subscribingUser = {
-            firstName: name.split(" ")[0],
-            lastName: name.split(" ")[1],
+            firstName: name.split(" ")[0]??'',
+            lastName: name.split(" ")[1]??'',
             email: email,
-            phoneNumber: phoneNumber,
+            phoneNumber: phoneNumber?? 0,
             address: address,
         };
 
