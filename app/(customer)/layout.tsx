@@ -13,7 +13,7 @@ import { QuickPurchase } from "./QuickPurchase";
 import { Metadata } from "next";
 import AffiliateLinkProvider from "@/components/providers/AffiliatePaymentLinkProvider";
 import { Suspense } from "react";
-import SacbePodLoadingImage from "./Loading";
+
 import { Toaster } from "react-hot-toast";
 
 const raleway = displayFont({
@@ -100,12 +100,12 @@ export default function RootLayout({
         <UserProvider>
           <body>
             <Navbar />
-            <Suspense fallback={<SacbePodLoadingImage />}>
-              <AffiliateLinkProvider>
-                {children}
-                <QuickPurchase />
-              </AffiliateLinkProvider>
-            </Suspense>
+
+            <AffiliateLinkProvider>
+              {children}
+              <QuickPurchase />
+            </AffiliateLinkProvider>
+
             <Footer />
             <Toaster />
           </body>
