@@ -21,17 +21,17 @@ import { PurchaseOptions } from "./PurchaseOptions";
 import { BlogPostType } from "@/types/blogPost";
 
 export default async function Home() {
-  const posts = await getFeaturedPosts();
-  const recipes = await getFeaturedRecipes();
+  // const posts = await getFeaturedPosts();
+  // const recipes = await getFeaturedRecipes();
 
-  const postCards = posts.map((e) => {
-    return <BlogPostSuggestionCard post={e} key={e.title} />;
-  });
-  const recipeCards = recipes.map((e) => {
-    return <RecipeCard recipe={e} key={e.title} />;
-  });
+  // const postCards = posts.map((e) => {
+  //   return <BlogPostSuggestionCard post={e} key={e.title} />;
+  // });
+  // const recipeCards = recipes.map((e) => {
+  //   return <RecipeCard recipe={e} key={e.title} />;
+  // });
 
-  const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);
+  // const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);
   return (
     <main>
       <HomePageHeader />
@@ -77,13 +77,12 @@ export default async function Home() {
       <AboutSacbe />
       <BecomeAPractioner />
 
-      {/* <RecipeSlider /> */}
-      <div className="bg-gradient-to-b from-primaryContainer to-surface ">
+      {/* <div className="bg-gradient-to-b from-primaryContainer to-surface ">
         <h3 className="text-7xl text-center py-20">Recipes & Articles</h3>
         <div className=" w-11/12 md:w-7/12 mx-auto" key={"cards holder"}>
           {Cards}
         </div>
-      </div>
+      </div> */}
 
       <NavMenuBottom />
     </main>

@@ -12,9 +12,8 @@ import UserProvider from "@/components/auth/affiliate_auth_context";
 import { QuickPurchase } from "./QuickPurchase";
 import { Metadata } from "next";
 import AffiliateLinkProvider from "@/components/providers/AffiliatePaymentLinkProvider";
-import { Suspense } from "react";
 
-import { Toaster } from "react-hot-toast";
+// import { Toaster } from "react-hot-toast";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -101,13 +100,13 @@ export default function RootLayout({
           <body>
             <Navbar />
 
-            <AffiliateLinkProvider>
-              {children}
-              <QuickPurchase />
-            </AffiliateLinkProvider>
+            {/* <AffiliateLinkProvider> */}
+            {children}
+            <QuickPurchase />
+            {/* </AffiliateLinkProvider> */}
 
             <Footer />
-            <Toaster />
+            {/* <Toaster /> */}
           </body>
         </UserProvider>
       </AuthProvider>
