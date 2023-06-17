@@ -9,6 +9,7 @@ import { AskAQuestion } from "./AskAQuestion";
 import { BlogAndRecipes } from "./BlogAndRecipes";
 
 import dynamic from "next/dynamic";
+import { QuickQuestion } from "./QuickQuestion";
 
 export default function Home() {
   const TheHook = dynamic(() =>
@@ -37,6 +38,8 @@ export default function Home() {
       <HomePageHeader />
       <NavMenuBottom />
       <TheHook />
+      {/* component that has a yess or no awnser  */}
+      <QuickQuestion />
       <BenifitsOfCacao />
       <VitiminPopovers />
       <CallToActionBuyHomePage />

@@ -33,7 +33,7 @@ function PaymentLinks() {
 
   if (affiliateLoading || isGeneratingLinks) {
     return (
-      <div className="flex flex-row justify-around mx-5 md:mx-20">
+      <div className="flex flex-row justify-around md:mx-20">
         <CardLoader />
         <CardLoader />
       </div>
@@ -41,7 +41,7 @@ function PaymentLinks() {
   } else if (fetchedLinks) {
     const links = linksState?.links;
     return (
-      <div className=" w-11/12 m-auto">
+      <div className=" m-auto">
         <span className="flex justify-end ">
           <button
             className="rounded-lg bg-sacbeBrandColor border drop-shadow-lg px-2 py-1 text-white self-end "
@@ -132,11 +132,11 @@ function PaymentLinks() {
             </span>
           </div>
         </div>
-        <div className="flex justify-around flex-row">
-          {[1, 2, 3].map((e) => {
+        <div className="flex justify-around flex-row flex-wrap">
+          {/* {[1, 2, 3].map((e) => {
             return (
               <div
-                className="rounded-lg shadow bg-tertiaryContainer mx-10 w-96 my-10"
+                className="rounded-lg shadow bg-tertiaryContainer  w-96 my-10"
                 key={e.toString()}
               >
                 <Image
@@ -171,7 +171,7 @@ function PaymentLinks() {
                 </div>
               </div>
             );
-          })}
+          })} */}
         </div>
       </div>
     );

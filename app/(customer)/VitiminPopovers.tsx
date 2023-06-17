@@ -118,7 +118,7 @@ export function VitiminPopovers() {
             </h2>
             <p className="md:hidden my-8 ml-1">Tap the tabs for more info</p>
             <div className="md:hidden flex flex-wrap justify-center w-11/12 md:w-7/12 m-auto md:px-10 group my-28 duration-700">
-              <div className="absolute bg-tertiaryContainer rounded-full h-[500px] w-screen md:w-[800px] blur-2xl  "></div>
+              <div className="absolute bg-tertiaryContainer rounded-full h-[400px] w-screen md:w-[800px] blur-2xl z-0 "></div>
               {vits.map((e) => {
                 return (
                   <VitiminPill
@@ -129,10 +129,10 @@ export function VitiminPopovers() {
                 );
               })}
             </div>
-            <h5 className="text-xl md:text-2xl mt-3  font-extrabold">
+            <h5 className="text-xl md:text-2xl mt-3  font-extrabold z-10">
               Harness the Nutritional Marvel of Cacao
             </h5>
-            <p className="ml-1  mr-2">
+            <p className="ml-1 z-10 mr-2">
               Cacao is a <strong>nutritional powerhouse</strong>, packed with
               minerals like magnesium, iron, and zinc,{" "}
               <strong>essential for energy production</strong>,{" "}

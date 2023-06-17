@@ -173,7 +173,7 @@ function SingleSelect(props: SingleSelectProps) {
   );
 }
 
-function MultiAwnserCard(props: {
+export function MultiAwnserCard(props: {
   awnser: string;
   addToSelected: (awnser: string[]) => void;
   selected: string[];
@@ -182,7 +182,7 @@ function MultiAwnserCard(props: {
     <div
       className={`flex flex-row justify-between animate-slide_in_right_fade ${
         !props.selected.includes(props.awnser)
-          ? "bg-sacbeBrandColor border-2 drop-shadow-lg"
+          ? "bg-transparent border-2 drop-shadow-lg"
           : "bg-surface drop-shadow-md hover:bg-tertiaryContainer cursor-auto"
       } rounded-lg m-2 p-2`}
       onClick={() => {
