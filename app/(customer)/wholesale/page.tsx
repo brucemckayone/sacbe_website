@@ -1,15 +1,11 @@
 import React from "react";
 import NavMenuBottom from "@/components/menu/NavMenuBottom";
-import { WholesalePricingTable } from "./PricingTable";
-import { WhyWorkWithUs } from "./WhyWorkWithUs";
-import { BottomWholeSaleForm } from "./BottomWholeSaleForm";
-
-import { WholesaleHeader } from "./WholesaleHeader";
-import { AboutPackaging } from "./AboutPackaging";
 import Image from "next/image";
 import { Metadata } from "next";
 import wholesalePortalMockUp from "@/public/wholesale_portal_mock_up.png";
-const metaData: Metadata = {
+import dynamic from "next/dynamic";
+
+export const metadata: Metadata = {
   title: "Wholesale",
   description:
     "Revitalize Your Business with Wholesale Sacbe Cacao! Harness the Authentic Essence of Cacao and Offer Your Customers a Truly Enchanting Experience. Maximize Profits and Delight Your Clients With Our Premium Bulk Cacao Offerings. Take the Leap and Amplify Your Success with Wholesale Ceremonial Cacao Today!",
@@ -26,12 +22,40 @@ const metaData: Metadata = {
     "transformative experiences",
     "discerning customers",
   ],
+  twitter: {
+    card: "summary_large_image",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://sacbe-ceremonial-cacao.com/wholesale",
+    title: "Wholesale",
+    description:
+      "Revitalize Your Business with Wholesale Sacbe Cacao! Harness the Authentic Essence of Cacao and Offer Your Customers a Truly Enchanting Experience. Maximize Profits and Delight Your Clients With Our Premium Bulk Cacao Offerings. Take the Leap and Amplify Your Success with Wholesale Ceremonial Cacao Today!",
+    siteName: "Sacbe Cacao",
+  },
+  alternates: {
+    canonical: "https://sacbe-ceremonial-cacao.com/wholesale",
+  },
 };
 
 const SacbeCacaoWholesale = async () => {
+  const WholesalePricingTable = dynamic(() =>
+    import("./PricingTable").then((res) => res.WholesalePricingTable)
+  );
+  const WhyWorkWithUs = (await import("./WhyWorkWithUs")).WhyWorkWithUs;
+  const BottomWholeSaleForm = dynamic(() =>
+    import("./BottomWholeSaleForm").then((res) => res.BottomWholeSaleForm)
+  );
+  const WholesaleHeader = dynamic(() =>
+    import("./WholesaleHeader").then((res) => res.WholesaleHeader)
+  );
+  const AboutPackaging = dynamic(() =>
+    import("./AboutPackaging").then((res) => res.AboutPackaging)
+  );
+
   return (
     <div>
-      <WholesaleHeader></WholesaleHeader>
+      <WholesaleHeader />
       <NavMenuBottom />
       <div className="flex flex-row items-center justify-center bg-secondaryContainer pt-20">
         <div className="self-center w-11/12 md:w-10/12">
@@ -49,7 +73,7 @@ const SacbeCacaoWholesale = async () => {
               height={800}
               placeholder="blur"
               alt={"affiliate portal mock up "}
-            ></Image>
+            />
           </div>
           <div>
             <p className="lg:w-11/12 m-auto mb-20">
@@ -64,10 +88,9 @@ const SacbeCacaoWholesale = async () => {
           </div>
           <WhyWorkWithUs />
           <div className="md:col-span-4 md:col-start-3 p-3 bg-surfaceVarient my-10 rounded-lg shadow-xl hover:shadow-2xl duration-200">
-            <WholesalePricingTable></WholesalePricingTable>
+            <WholesalePricingTable />
           </div>
-          <AboutPackaging></AboutPackaging>
-
+          <AboutPackaging />
           <BottomWholeSaleForm />
         </div>
       </div>

@@ -8,10 +8,9 @@ import Image from "next/image";
 import { RxClipboardCopy } from "react-icons/rx";
 import CardLoader from "@/components/loaders/CardLoader";
 import generatePaymentLinks from "@/pages/api/affiliate/generatePaymentLinks";
-import showToast from "@/lib/toast/showToast";
 import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
-import { link } from "fs";
 import toast from "react-hot-toast";
+
 import homeUrl from "@/lib/constants/urls";
 import dollarIcon from "@/public/icons/dollar_icon.svg";
 function PaymentLinks() {

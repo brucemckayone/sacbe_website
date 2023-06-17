@@ -4,8 +4,8 @@ import { useUser } from "@/components/auth/affiliate_auth_context";
 import PrimaryButton from "@/components/buttons/primaryButton";
 import CardLoader from "@/components/loaders/CardLoader";
 import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
-import { Checkbox, Modal, Button, Group } from "@mantine/core";
-import React, { useCallback, useEffect, useState } from "react";
+import { Checkbox, Modal } from "@mantine/core";
+import React, { useEffect, useState } from "react";
 import TextInput from "@/components/form/inputs/TextInput";
 import { useDisclosure } from "@mantine/hooks";
 

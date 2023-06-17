@@ -2,11 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import PrimaryButton from "@/components/buttons/primaryButton";
-import dynamic from "next/dynamic";
-import { analytics } from "@/lib/firebase/firebase";
-import { logEvent } from "firebase/analytics";
 import Link from "next/link";
+import { Metadata } from "next";
 
 function CheckoutComplete() {
   const nav = useRouter();

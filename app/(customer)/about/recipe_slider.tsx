@@ -1,9 +1,6 @@
 import React, { Suspense } from "react";
 import { firestore } from "firebase-admin";
-
 import adminInit from "@/utils/firebase/admin_init";
-
-import CardLoader from "@/components/loaders/CardLoader";
 import { ArticleCards } from "./cards";
 
 async function getData() {

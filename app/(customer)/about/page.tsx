@@ -5,8 +5,46 @@ import SlideInUp from "@/components/animations/slide_in_up";
 
 import Link from "next/link";
 import { Section } from "./Section";
-import Head from "next/head";
+
 import { AboutClouds } from "../wholesale/AboutClouds";
+import { Metadata } from "next";
+
+const description =
+  "Learn about our mission, values, and the story behind our brand. Discover how we are dedicated to providing high-quality products, fostering sustainable practices, and promoting wellness. Explore our About page to understand our commitment to your well-being and the positive impact we strive to make in the world.";
+export const metadata: Metadata = {
+  title: "About",
+  description: description,
+  keywords: [
+    "Mission",
+    "Values",
+    "Brand story",
+    "High-quality",
+    "Sustainability",
+    "Wellness",
+    "Commitment",
+    "Vision",
+    "Expertise",
+    "Community",
+  ],
+  twitter: {
+    card: "summary_large_image",
+    site: "@SacbeCacao",
+    title: "About",
+    description: description,
+  },
+  openGraph: {
+    type: "website",
+    url: "https://sacbe-ceremonial-cacao.com/about",
+    title: "About",
+    description: description,
+    siteName: "Sacbe Cacao",
+  },
+
+  alternates: {
+    canonical: "https://sacbe-ceremonial-cacao.com/about",
+  },
+};
+
 export interface sectionProps {
   subHeader: string;
   header: string;

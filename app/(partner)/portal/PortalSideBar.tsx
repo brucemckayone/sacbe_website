@@ -1,14 +1,11 @@
 "use client";
-import Portal from "@/app/(customer)/affiliates/portal/page";
-import AfilliateSales from "@/components/affiliate/affiliate_sales";
 import { useUser } from "@/components/auth/affiliate_auth_context";
 import AffiliateStatusChecker from "@/components/buttons/getAffiliateLinkButton";
-import PrimaryButton from "@/components/buttons/primaryButton";
 import SmallButton from "@/components/buttons/small_button";
 import CardLoader from "@/components/loaders/CardLoader";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import Link from "next/link";
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import { DashboardSideBarListTile } from "./DashboardSideBarListTile";
 import { SideBarNotification } from "./SideBarNotification";
 import { WholesalePortalPage } from "./WholesalePortalPage";

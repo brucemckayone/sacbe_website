@@ -1,14 +1,11 @@
 "use client";
 
-import AfilliateSales from "@/components/affiliate/affiliate_sales";
 import SetUpAccountButton from "./SetUpAccountButton";
 import AccountBalanceTabs from "./AccountBalanceTabs";
 import PaymentLinks from "./paymentLinks";
 import { useUser } from "@/components/auth/affiliate_auth_context";
-import AffiliateStatusChecker from "@/components/buttons/getAffiliateLinkButton";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
-import dollarIcon from "@/public/icons/dollar_icon.svg";
+
 function Portal() {
   const { user: affiliate, isLoading: affiliateLoading } = useUser();
   const session = useSession();

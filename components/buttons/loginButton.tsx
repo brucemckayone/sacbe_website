@@ -1,11 +1,8 @@
 "use client";
-import { signIn, signOut, useSession } from "next-auth/react";
-import PrimaryButton from "./primaryButton";
-import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Avatar, Popover } from "@mantine/core";
 import { usePathname } from "next/navigation";
-import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
 import { useUser } from "../auth/affiliate_auth_context";
 
 export default function LoginButton() {
@@ -62,7 +59,10 @@ export default function LoginButton() {
                 {isLoggedIn && (
                   <li
                     className=" py-4 pr-5 text-start border-b border-primaryContainer"
-                    onClick={() => signOut()}
+                    onClick={async () => {
+                      const signOut = (await import("next-auth/react")).signOut;
+                      signOut();
+                    }}
                   >
                     Log Out
                   </li>
@@ -73,19 +73,24 @@ export default function LoginButton() {
         </Popover>
       ) : (
         <button
-          onClick={() => {
-            // signInAndRedirectTo(pathname!);
-            signIn();
+          onClick={async () => {
+            const signInAndRedirectTo = (
+              await import("@/utils/client/auth/redirect/signinAndRedirectTo")
+            ).signInAndRedirectTo;
+            signInAndRedirectTo(pathname!);
           }}
           className="bg-sacbeBrandColor hover:bg-onPrimaryContainer hover:text-surface hover:text-white border-2 mt-4 md:mt-2 p-1 px-3 md:p-2 md:px-4 rounded-md"
         >
-          <p className=" text-xl md:text-3xl font-display">Login</p>
+          <p className=" text-xl md:text-3xl font-display">LOGIN</p>
         </button>
       )}
     </div>
   );
 
   async function goToAccountManagement(): Promise<void> {
+    const fetchPostJSON = (await import("@/utils/stripe/fetchPostJson"))
+      .fetchPostJSON;
+
     setIsLoading(true);
     try {
       const customerId = await fetchPostJSON("api/users/get_user_id_by_email", {

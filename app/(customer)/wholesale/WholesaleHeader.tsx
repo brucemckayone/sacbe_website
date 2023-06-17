@@ -12,7 +12,6 @@ export function WholesaleHeader() {
           height={1000}
           alt={"header image"}
           className="object-contain rounded-lg"
-          placeholder="blur"
         ></Image>
       </div>
       <div className="md:basis-1/2 self-center  ">

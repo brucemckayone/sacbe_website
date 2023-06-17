@@ -1,7 +1,5 @@
 "use client";
-import Portal from "@/app/(customer)/affiliates/portal/page";
 import AfilliateSales from "@/components/affiliate/affiliate_sales";
-
 import UserProvider from "@/components/auth/affiliate_auth_context";
 import AuthProvider from "@/components/providers/SessionProvider";
 import React, { useState } from "react";

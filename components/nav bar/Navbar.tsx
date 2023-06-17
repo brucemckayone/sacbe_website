@@ -1,16 +1,19 @@
 "use client";
-import "../../app/globals.css";
+
 import Hamburger from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
-import PrimaryButton from "../buttons/primaryButton";
 import { useState } from "react";
-import LoginButton from "../buttons/loginButton";
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import menuItems from "@/lib/constants/menu";
-import SearchBar from "../search/searchbar";
+import dynamic from "next/dynamic";
+import LoginButton from "../buttons/loginButton";
 
 export default function Navbar() {
+  const SearchBar = dynamic(() =>
+    import("../search/searchbar").then((res) => res.default)
+  );
+
   return (
     <header className="sticky top-0 z-50 flex flex-row  justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
       <Menu />
@@ -35,13 +38,13 @@ export default function Navbar() {
       setDrawerOpenState(!isDrawerOpen);
     }
     return (
-      <div className="flex m-3 rounded-lg shadow bg-surface ">
+      <div className="flex m-3  ">
         <Hamburger
           toggled={isDrawerOpen}
           onToggle={() => {
             toggleDrawer();
           }}
-        ></Hamburger>
+        />
         {
           <div
             className={`absolute top-0 bottom-0 right-0 left-0 ${
@@ -58,7 +61,7 @@ export default function Navbar() {
                     onToggle={() => {
                       toggleDrawer();
                     }}
-                  ></Hamburger>
+                  />
                 </div>
               </div>
 

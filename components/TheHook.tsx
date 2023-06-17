@@ -1,4 +1,4 @@
-import { RiskApealCards } from "./RiskApealCards";
+import { RiskApealCards } from "../app/(customer)/RiskApealCards";
 import Image from "next/image";
 import SlideInUp from "@/components/animations/slide_in_up";
 import Card from "@/components/cards/card";

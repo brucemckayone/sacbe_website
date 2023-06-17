@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import PrimaryButton from "@/components/buttons/primaryButton";
@@ -12,6 +13,7 @@ import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { useSession } from "next-auth/react";
 import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
 import cacaoInALeaf from "@/public/cacao_in_a_leaf.png";
+
 function AffiliateSignUpModal(props: {
   opened: boolean;
   close: () => void;
@@ -89,6 +91,7 @@ export function AffiliateHeader() {
 
   const [isSending, setIsSending] = useState(false);
   const [isSent, setIsSent] = useState(false);
+
   return (
     <div className="flex flex-col md:flex-row justify-between mx-5 md:mx-56 md:py-5">
       <AffiliateSignUpModal
@@ -111,8 +114,7 @@ export function AffiliateHeader() {
           height={600}
           alt={"A cacao pod in a leaf with cacao beans spilling out of it"}
           className="object-contain p-10 md:mx-0 rounded-lg"
-          placeholder="blur"
-        ></Image>
+        />
       </div>
       <div className="md:basis-10/12 self-center  ">
         <div className="flex flex-wrap md:w-12/12">
@@ -128,12 +130,12 @@ export function AffiliateHeader() {
           profound benefits of ceremonial cacao with others. Join now in the
           abundant opportunities that await you!
         </p>
-        {generateButton()}
+        <GenerateButton />
       </div>
     </div>
   );
 
-  function generateButton(): JSX.Element {
+  function GenerateButton(): JSX.Element {
     const pending = (
       <div className=" flex justify-start">
         <div className="flex justify-between bg-recommendedGreen p-3 my-3  rounded drop-shadow-md">

@@ -1,16 +1,8 @@
 import React from "react";
-import { firestore } from "firebase-admin";
-import adminInit from "@/utils/firebase/admin_init";
 import Image from "next/image";
-
-import { MarkDown } from "../../posts/[title]/MarkDown";
 import { PostMetaData } from "../../posts/[title]/PostMetaData";
-import { DocumentReference } from "firebase/firestore";
-import { RecipeCard } from "./RecipeCard.1";
-import { FeelsProgressBar } from "./FeelsProgressBar";
 import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
-import { formatTitleForFetch } from "@/utils/url/formater";
 
 export async function generateMetadata({
   params,
@@ -26,14 +18,30 @@ export async function generateMetadata({
     authors: {
       name: recipe.publisher.name,
     },
+    image: recipe.main_image,
     alternates: {
       canonical: `${homeUrl}/posts/${recipe.title.replaceAll(" ", "-")}`,
     },
     creator: "Sacbe Cacao",
-  };
+    twitter: {
+      card: "summary_large_image",
+      description: recipe.excerpt,
+      title: recipe.title.replaceAll("-", " "),
+      images: recipe.main_image,
+    },
+    openGraph: {
+      title: recipe.title.replaceAll("-", " "),
+      description: recipe.excerpt,
+      url: `${homeUrl}/posts/${recipe.title.replaceAll(" ", "-")}`,
+      type: "article",
+      images: recipe.main_image,
+    },
+  } as Metadata;
 }
 
 async function getRecipeData(title: string) {
+  const formatTitleForFetch = (await import("@/utils/url/formater"))
+    .formatTitleForFetch;
   const response = await fetch(`${homeUrl}/api/recipes/${title}`, {
     method: "GET",
     next: {
@@ -52,7 +60,10 @@ async function RercipePage({
   params: { id: string; title: string };
 }) {
   const { recipe, relatedRecipes } = await getRecipeData(params.title!);
-
+  const MarkDown = (await import("../../posts/[title]/MarkDown")).MarkDown;
+  const RecipeCard = (await import("./RecipeCard.1")).RecipeCard;
+  const FeelsProgressBar = (await import("./FeelsProgressBar"))
+    .FeelsProgressBar;
   return (
     <main className="w-full">
       <div className=" flex justify-center">
@@ -62,8 +73,6 @@ async function RercipePage({
           width={800}
           height={300}
           className=" w-11/12 md:w-10/12 h-[500px] drop-shadow-lg rounded-lg mb-10 mt-4 object-cover "
-          blurDataURL="LAM6Lo4m00?c0MNOVE4;00cG*0wq"
-          placeholder="blur"
           priority
         />
       </div>
@@ -138,7 +147,6 @@ async function RercipePage({
                       })}
                   </div>
                 </div>
-
                 <div className="my-10">
                   <MarkDown content={e.content}></MarkDown>
                 </div>

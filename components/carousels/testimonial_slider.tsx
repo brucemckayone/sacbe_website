@@ -1,15 +1,11 @@
 "use client";
-import { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import FiveStars from "../ratings/five_stars";
+import reviews from "@/lib/constants/reviews";
 
-interface Props {
-  reviews: Review[];
-}
-const SimpleSlider: React.FC<Props> = ({ reviews }) => {
+const SimpleSlider = () => {
   return (
-    <div className=" bg-primaryContainer py-10 ">
+    <div className="bg-primaryContainer py-10 ">
       <Carousel
         height={380}
         draggable

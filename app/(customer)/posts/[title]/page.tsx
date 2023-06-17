@@ -1,66 +1,75 @@
 import React from "react";
 import Image from "next/image";
 import { Metadata } from "next";
-import { MarkDown } from "./MarkDown";
-import { PostMetaData } from "./PostMetaData";
-import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
 import homeUrl from "@/lib/constants/urls";
 import { BlogPostType } from "@/types/blogPost";
-import { formatTitleForFetch } from "@/utils/url/formater";
 
 async function getPost(title: string) {
+  const formatTitleForFetch = (await import("@/utils/url/formater"))
+    .formatTitleForFetch;
   const request = await fetch(`${homeUrl}/api/blog/posts/${title}`, {
     method: "GET",
     next: {
       tags: [formatTitleForFetch(title)],
     },
   });
+
   return (await request.json()) as {
     post: BlogPostType;
     relatedPosts: BlogPostType[];
   };
 }
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { id: string; title: string };
-// }): Promise<Metadata> {
-//   const { post, relatedPosts } = await getPost(params.title!);
-//   return {
-//     title: post.title.replaceAll("-", " "),
-//     description: post.excerpt,
-//     authors: {
-//       name: post.publisher.name,
-//     },
-//     keywords: post.tags,
-//     publisher: "Sacbe Cacao",
-//     alternates: {
-//       canonical: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
-//     },
-//     creator: "Sacbe Cacao",
-//     openGraph: {
-//       title: post.title.replaceAll("-", " "),
-//       description: post.excerpt,
-//       url: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
-//       type: "article",
-//       article: {
-//         // publishedTime:data.dateCreated,
-//         // modifiedTime: data.lastUpdated),
-//         authors: [post.publisher.name],
-//         tags: post.tags,
-//       },
-//     },
-//   } as Metadata;
-// }
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string; title: string };
+}): Promise<Metadata> {
+  const { post, relatedPosts } = await getPost(params.title!);
+  return {
+    title: post.title.replaceAll("-", " "),
+    description: post.excerpt,
+    authors: {
+      name: post.publisher.name,
+    },
+    keywords: post.tags,
+    publisher: "Sacbe Cacao",
+    alternates: {
+      canonical: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
+    },
+    creator: "Sacbe Cacao",
+    twitter: {
+      card: "summary_large_image",
+      description: post.excerpt,
+      title: post.title.replaceAll("-", " "),
+    },
+    openGraph: {
+      title: post.title.replaceAll("-", " "),
+      description: post.excerpt,
+      url: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
+      type: "article",
+      article: {
+        // publishedTime:data.dateCreated,
+        // modifiedTime: data.lastUpdated),
+        authors: [post.publisher.name],
+        tags: post.tags,
+      },
+    },
+  } as Metadata;
+}
 
 export default async function Page({
   params,
 }: {
   params: { id: string; title: string; postId: string };
 }) {
-  const { post, relatedPosts } = await getPost(params.title!);
+  const BlogPostSuggestionCard = (await import("./BlogPostSuggestionCard"))
+    .BlogPostSuggestionCard;
+  const MarkDown = (await import("./MarkDown")).MarkDown;
 
+  const PostMetaData = (await import("./PostMetaData")).PostMetaData;
+
+  const { post, relatedPosts } = await getPost(params.title!);
   return (
     <main className="flex flex-row justify-center mx-3">
       <div className=" sm:mx-3 md:w-8/12 my-10 m-auto ">

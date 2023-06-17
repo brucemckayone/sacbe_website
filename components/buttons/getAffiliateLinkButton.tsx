@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 import AffiliateRequestButton from "./AffiliateRequestButton";
 import { useUser } from "../auth/affiliate_auth_context";
-import Portal from "@/app/(customer)/affiliates/portal/page";
+import Portal from "../affiliate/portal";
 
 function AffiliateStatusChecker() {
   const session = useSession();

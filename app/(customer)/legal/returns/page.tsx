@@ -36,6 +36,26 @@ We want you to be completely satisfied with your purchase from our website. In t
 Please note that this return policy is subject to change without prior notice. It is your responsibility to review the policy before making a purchase. If you have any further questions or require clarification, please don't hesitate to reach out to our customer support team.
 `;
 
+const metadata = {
+  title: "Return Policy",
+  description: "Return Policy",
+  keywords: ["Return Policy"],
+  twitter: {
+    card: "summary_large_image",
+    site: "@SacbeCacao",
+    title: "Return Policy",
+    description: "Return Policy",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://sacbe-ceremonial-cacao.com/legal/returns",
+
+    title: "Return Policy",
+    description: "Return Policy",
+    siteName: "Sacbe Cacao",
+  },
+};
+
 function ReturnPolicy() {
   return (
     <div className="w-11/12 md:w-6/12 m-auto">

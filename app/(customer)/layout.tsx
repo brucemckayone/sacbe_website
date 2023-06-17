@@ -1,20 +1,18 @@
 import Navbar from "@/components/nav bar/Navbar";
 import "../../app/globals.css";
 import AuthProvider from "@/components/providers/SessionProvider";
-
 import { Analytics } from "@vercel/analytics/react";
 import {
   Marcellus as displayFont,
   Marcellus as bodyFont,
-} from "@next/font/google";
-import Footer from "@/components/footer";
+} from "next/font/google";
 import UserProvider from "@/components/auth/affiliate_auth_context";
 import { QuickPurchase } from "./QuickPurchase";
 import { Metadata } from "next";
 import AffiliateLinkProvider from "@/components/providers/AffiliatePaymentLinkProvider";
 import { Toaster } from "react-hot-toast";
-
-// import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -39,6 +37,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://sacbe-ceremonial-cacao.com",
   },
+
   keywords: [
     "Ceremonial cacao",
     "Transformative experiences",
@@ -92,6 +91,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const PostLoader = dynamic(() => import("./posts/[title]/Loading"));
+  const Footer = dynamic(() => import("@/components/footer"));
+
   return (
     <html
       className={`${raleway.variable} ${merriweather.variable} bg-[white] w-[100%]`}
@@ -100,14 +102,14 @@ export default function RootLayout({
         <UserProvider>
           <body>
             <Navbar />
-
-            <AffiliateLinkProvider>
-              {children}
-              <QuickPurchase />
-            </AffiliateLinkProvider>
-
-            <Footer />
-            <Toaster />
+            <Suspense fallback={<PostLoader />}>
+              <AffiliateLinkProvider>
+                {children}
+                <QuickPurchase />
+              </AffiliateLinkProvider>
+              <Footer />
+              <Toaster />
+            </Suspense>
           </body>
         </UserProvider>
       </AuthProvider>
