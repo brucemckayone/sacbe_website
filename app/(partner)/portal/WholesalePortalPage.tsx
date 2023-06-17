@@ -34,7 +34,7 @@ export function WholesalePortalPage() {
   const [postcode, setPostcode] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
-  const [saveShipping, setSaveShipping] = useState(false);
+
   const [shippingCost, setshippingGost] = useState(0);
   const [totalCost, setTotalCost] = useState(0);
   const [cacaoCost, setCacaoCost] = useState(0);
@@ -42,7 +42,7 @@ export function WholesalePortalPage() {
   const [email, setEmail] = useState("");
   const [isSendingOrder, setIsSendingOrder] = useState(false);
 
-  const { isError, isLoading, setUser, user } = useUser();
+  const { isLoading, user } = useUser();
 
   let shipping = {
     line1: line1,

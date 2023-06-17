@@ -5,8 +5,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 
 import adminInit from "@/utils/firebase/admin_init";
-import { firestore } from "firebase-admin";
-import updateStripeCustomerShipping from "@/lib/stripe/updateStripeCustomerShipping";
+import { analytics } from "@/lib/firebase/firebase";
+import { logEvent } from "firebase/analytics";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -38,6 +38,7 @@ export default async function handler(
       case "checkout.session.async_payment_failed":
         const checkoutSessionAsyncPaymentFailed = event.data.object;
         // Then define and call a function to handle the event checkout.session.async_payment_failed
+        logEvent(analytics, "checkoutsession failed ", {}); 
         break;
       case "checkout.session.async_payment_succeeded":
         const checkoutSessionAsyncPaymentSucceeded = event.data.object;
@@ -51,35 +52,38 @@ export default async function handler(
           { expand: ["line_items", "customer"] }
         );
 
-        const db = firestore();
+        let hasLoggedOneOff = false;
+        let hasloggedsubscription = false;
+        checkoutSession.line_items?.data.forEach(e => {
+          if (e.price?.type == "one_time" && !hasLoggedOneOff) {
+            hasLoggedOneOff = true;
+            logEvent(analytics, "Purchase-Complete", {
+              items: [
+                {
+                  item_id: e.price?.id,
+                  item_name: e.price?.product,
+                  quantity: e.quantity,
+                  price: e.price?.unit_amount,
+                },
+              ],
+            }); 
+          }
+          if (!hasloggedsubscription && e.price?.type == "recurring") {
+            hasloggedsubscription = true;
+            logEvent(analytics, "Subscription-Started", {
+              items: [
+                {
+                  item_id: e.price?.id,
+                  item_name: e.price?.product,
+                  quantity: e.quantity,
+                  price: e.price?.unit_amount,
+                },
+              ],
+            }); 
+          }
+        }) 
 
-        db.collection("orderShippingDetails")
-          .doc(checkoutSession.invoice as string)
-          .set(
-            { shipping_details: checkoutSession.shipping_details },
-            { merge: true }
-          );
 
-        let customer = checkoutSession.customer as Stripe.Customer;
-
-        console.log(checkoutSession);
-
-      // if (!customer.shipping) {
-      //   updateStripeCustomerShipping({
-      //     address: {
-      //       city: checkoutSession.shipping_details?.address?.city as string,
-      //       country: checkoutSession.shipping_details?.address
-      //         ?.country as string,
-      //       line1: checkoutSession.shipping_details?.address?.line1 as string,
-      //       line2: checkoutSession.shipping_details?.address?.line2 as string,
-      //       postal_code: checkoutSession.shipping_details?.address
-      //         ?.postal_code as string,
-      //       state: checkoutSession.shipping_details?.address?.state as string,
-      //     },
-      //     id: customer.id,
-      //     name: customer.name ?? "",
-      //   });
-      // }
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object;
         // Then define and call a function to handle the event checkout.session.expired

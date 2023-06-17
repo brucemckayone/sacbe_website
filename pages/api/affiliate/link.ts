@@ -54,8 +54,8 @@ async function createPaymentLink({
   accountId,
   uuid,
   priceIds = [
-    "price_1Mb8slG859ZdyFmp0ttYsJAh",
-    "price_1Mk4bEG859ZdyFmpFBoMuhFx",
+    "price_1NIqy6G859ZdyFmpzaNNkSNu",
+    "price_1NIqy6G859ZdyFmpEbQLnA5q",
   ],
   promoShippingId,
 }: createPaymentLinkParams) {
@@ -84,16 +84,15 @@ async function createPaymentLink({
       allowed_countries: ["GB"],
     },
     billing_address_collection: "required",
-
     currency: "GBP",
     allow_promotion_codes: true,
-
     shipping_options: [
       {
-        shipping_rate: "shr_1Mca6JG859ZdyFmpEcTB0xXj",
+        shipping_rate: "shr_1NJkibG859ZdyFmpn31XJnFC",
+      
       },
       {
-        shipping_rate: "shr_1Mca5iG859ZdyFmpCplzBHJK",
+        shipping_rate: "shr_1NIr2PG859ZdyFmpt5qaCSej",
       },
     ],
   };
@@ -122,7 +121,7 @@ async function createPaymentLink({
       clone.line_items = [
         ...clone.line_items,
         {
-          price: "price_1MpwvjG859ZdyFmp3xDUTY6Z",
+          price: "price_1NIsiYG859ZdyFmpLEjRmAAZ",
           quantity: 1,
         },
       ];

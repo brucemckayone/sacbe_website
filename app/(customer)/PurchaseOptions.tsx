@@ -88,7 +88,9 @@ export function PurchaseOptions(props: props) {
                         customerId: user.customerId ?? undefined,
                         qty: oneoffQty,
                       });
-                      logEvent(analytics, "one-off-purchase", {});
+                      logEvent(analytics, "one-off-purchase-checkout-started", {
+                        quantity: oneoffQty,
+                      });
                       setIsLoadingOne(false);
                     }}
                     text="Buy"
@@ -235,6 +237,9 @@ export function PurchaseOptions(props: props) {
                 mode: "subscription",
                 qty: subQty,
               });
+              logEvent(analytics, "subscription-checkout-started", {
+                quantity: oneoffQty,
+              });
               setIsShippingLoading(false);
               close();
             }}
@@ -253,8 +258,10 @@ export function PurchaseOptions(props: props) {
                 mode: "subscription",
                 qty: subQty,
               });
+              logEvent(analytics, "subscription-checkout-started", {
+                quantity: oneoffQty,
+              });
               setIsShippingLoading(false);
-
               close();
             }}
             text={isShippingLoading ? "Loading" : "1st Class (£4.95)"}

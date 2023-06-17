@@ -19,12 +19,14 @@ function AccountBalanceTabs() {
         let available = 0;
 
         let pending = 0;
-        for (let i = 0; i < res!.available.length; i++) {
-          available = available + res!.available[i].amount;
-        }
-        for (let i = 0; i < res!.pending.length; i++) {
-          pending = pending + res!.pending[i].amount;
-        }
+        if (res.available)
+          for (let i = 0; i < res!.available.length; i++) {
+            available = available + res!.available[i].amount;
+          }
+        if (res.pending)
+          for (let i = 0; i < res!.pending.length; i++) {
+            pending = pending + res!.pending[i].amount;
+          }
 
         console.log(pending);
         console.log(available);
@@ -40,18 +42,13 @@ function AccountBalanceTabs() {
   } else
     return (
       <div className="my-10">
-        <h4>My Balances</h4>
-        <p>
-          How much money is waiting in your account. Payouts will occur
-          automaticly
-        </p>
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-1 animate-slide_in_up_fade my-1 ">
-          <div className="p-2 bg-secondaryContainer rounded-lg  shadow-lg">
-            <h5 className="text-base">Avialable Balance</h5>
+          <div className="p-2 border rounded-lg  drop-shadow-lg">
+            <h4 className="text-lg">Available Balance</h4>
             <p>£{totalAvailable.toFixed(2)}</p>
           </div>
-          <div className="p-2 bg-secondaryContainer rounded-lg  shadow-lg">
-            <h5 className="text-base">Pending Balance</h5>
+          <div className="p-2 border rounded-lg  drop-shadow-lg">
+            <h4 className="text-lg">Pending Balance</h4>
             <p>£{totalPending.toFixed(2)}</p>
           </div>
         </div>

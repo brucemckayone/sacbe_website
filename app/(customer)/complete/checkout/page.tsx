@@ -3,6 +3,10 @@ import React from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import PrimaryButton from "@/components/buttons/primaryButton";
+import dynamic from "next/dynamic";
+import { analytics } from "@/lib/firebase/firebase";
+import { logEvent } from "firebase/analytics";
+import Link from "next/link";
 
 function CheckoutComplete() {
   const nav = useRouter();
@@ -10,7 +14,7 @@ function CheckoutComplete() {
   const sessionId = searchParams!.get("session_id");
 
   return (
-    <div className="w-full m-auto">
+    <div className="w-full m-auto h-screen">
       <div className="w-11/12 md:w-6/12 m-auto">
         <Image
           src={"/celebration.gif"}
@@ -37,13 +41,16 @@ function CheckoutComplete() {
           little something else in it for you too... its a surprise 🥳.
         </p>
 
-        <PrimaryButton
-          text={"Start your Journey"}
-          onClicked={() => {
-            nav.push(`/bespoke/quiz?session_id=${sessionId}`);
-          }}
-          className="w-full"
-        ></PrimaryButton>
+        <div className="">
+          <Link
+            href={`/bespoke/quiz?session_id=${sessionId}`}
+            className="no-underline"
+          >
+            <div className="rounded-lg border hover:text-onPrimary hover:bg-onPrimaryContainer bg-sacbeBrandColor drop-shadow-md p-2 text-center w-11/12 duration-300 no-underline m-3">
+              <p>Start your Journey</p>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

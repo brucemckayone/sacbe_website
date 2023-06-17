@@ -1,18 +1,15 @@
-import Navbar from "@/components/nav bar/Navbar";
 import "../../app/globals.css";
-import AuthProvider from "@/components/providers/SessionProvider";
-
 import { Analytics } from "@vercel/analytics/react";
 import {
   Marcellus as displayFont,
   Marcellus as bodyFont,
 } from "@next/font/google";
-import Footer from "@/components/footer";
-import UserProvider from "@/components/auth/affiliate_auth_context";
-import { QuickPurchase } from "./QuickPurchase";
+
 import { Metadata } from "next";
-import AffiliateLinkProvider from "@/components/providers/AffiliatePaymentLinkProvider";
+
 import { Toaster } from "react-hot-toast";
+import UserProvider from "@/components/auth/affiliate_auth_context";
+import AuthProvider from "@/components/providers/SessionProvider";
 
 // import { Toaster } from "react-hot-toast";
 
@@ -99,14 +96,7 @@ export default function RootLayout({
       <AuthProvider>
         <UserProvider>
           <body>
-            <Navbar />
-
-            <AffiliateLinkProvider>
-              {children}
-              <QuickPurchase />
-            </AffiliateLinkProvider>
-
-            <Footer />
+            {children}
             <Toaster />
           </body>
         </UserProvider>

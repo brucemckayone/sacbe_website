@@ -7,6 +7,7 @@ import {
   Marcellus as bodyFont,
 } from "@next/font/google";
 import Footer from "@/components/footer";
+import { Toaster } from "react-hot-toast";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <AuthProvider>
         <head />
         <body>{children}</body>
+        <Toaster />
       </AuthProvider>
     </html>
   );

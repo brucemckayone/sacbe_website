@@ -1,7 +1,9 @@
 "use client";
+import { analytics } from "@/lib/firebase/firebase";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import { logEvent } from "firebase/analytics";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import Stripe from "stripe";
 
 export interface QuizBodyProps {
@@ -12,7 +14,7 @@ export interface QuizBodyProps {
       | "Select-Single"
       | "What Drives You, Multi-Select"
       | "completion";
-    awnsers: MultiAwnser[];
+    awnsers: string[];
     endpoint: string;
   }[];
 }
@@ -23,12 +25,17 @@ export function QuizBody(props: {
   customerDetails?: Stripe.Checkout.Session.CustomerDetails;
 }) {
   const [currentindex, setCurrentIndex] = useState(0);
+  logEvent(analytics, "quiz_start", {
+    ...props.customerDetails,
+    email: props.email,
+  });
 
   function nextQuestion() {
     if (currentindex != props.quiz.questions.length - 1) {
       setCurrentIndex(currentindex + 1);
     }
   }
+
   return (
     <div className="px-4 m-auto md:w-6/12  md:h-screen bg-sacbeBrandColor flex-col justify-center items-center md:p-20">
       {props.quiz.questions[currentindex].type != "completion" && (
@@ -98,15 +105,8 @@ export function QuizBody(props: {
   }
 }
 
-type MultiAwnser = {
-  text: string;
-  selected: boolean;
-  email?: string;
-  endpoint: string;
-};
-
 interface MutliSelectProps {
-  awnsers: MultiAwnser[];
+  awnsers: string[];
   question: string;
   nextQuestion: () => void;
   email?: string;
@@ -114,7 +114,7 @@ interface MutliSelectProps {
 }
 interface SingleSelectProps {
   question: string;
-  awnsers: MultiAwnser[];
+  awnsers: string[];
   nextQuestion: () => void;
   email?: string;
   endpoint: string;
@@ -130,22 +130,22 @@ function SingleSelect(props: SingleSelectProps) {
           <div
             onClick={() => {
               console.log("called");
-              setSelected(awnser.text);
+              setSelected(awnser);
             }}
             className={`flex flex-row justify-betwee ${
-              selected != awnser.text
+              selected != awnser
                 ? "bg-sacbeBrandColor border-2 drop-shadow-lg"
                 : "bg-surface drop-shadow-md hover:bg-tertiaryContainer cursor-auto"
             } rounded-lg m-2 p-2`}
-            key={awnser.text}
+            key={awnser}
           >
             <p
               onClick={() => {
                 console.log("called");
-                setSelected(awnser.text);
+                setSelected(awnser);
               }}
             >
-              {awnser.text}
+              {awnser}
             </p>
           </div>
         ))}
@@ -158,6 +158,7 @@ function SingleSelect(props: SingleSelectProps) {
             await fetchPostJSON(`/api/${props.endpoint}`, {
               question: props.question,
               awnser: selected,
+              email: props.email,
             });
             setLoading(false);
             props.nextQuestion();
@@ -196,14 +197,14 @@ function MultiSelect(props: MutliSelectProps) {
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-wrap animate-slide_in_right_fade overflow-scroll h-72 ">
+      <div className="flex flex-wrap animate-slide_in_right_fade overflow-scroll h-72 md:h-fit ">
         {props.awnsers.map((awnser) => (
           <MultiAwnserCard
-            awnser={awnser.text}
+            awnser={awnser}
             addToSelected={setSelectedList}
             selected={selectedList}
-            key={awnser.text}
-          ></MultiAwnserCard>
+            key={awnser}
+          />
         ))}
       </div>
       <button
@@ -214,6 +215,7 @@ function MultiSelect(props: MutliSelectProps) {
               question: props.question,
               awnser: selectedList,
               endpoint: props.endpoint,
+              email: props.email,
             });
             props.nextQuestion();
           } else toast.error("Please select at least one option");
@@ -281,6 +283,7 @@ function EmailPreferences(props: {
             fetchPostJSON(`/api/analytics/multi`, {
               awnser: selected,
               endpoint: props.endpoint,
+              email: props.email,
             });
             props.nextQuestion();
           } else toast.error("Please select at least one option");
@@ -300,6 +303,8 @@ function Completion(props: {
 }) {
   const [formEmail, setEmail] = useState(props.email ?? "");
 
+  const [selected, setSelected] = useState([] as string[]);
+  const [loading, setLoading] = useState(false);
   return (
     <div className="animate-slide_in_right_fade">
       <h5>Where should we send your gift...🎁</h5>
@@ -313,7 +318,7 @@ function Completion(props: {
         itemType="email"
         value={formEmail}
       />
-      <h6></h6>
+
       <p>
         We want to help however we can really be it, financially, creativity, or
         emotionally. By completing this quiz we are opening up a two way
@@ -325,16 +330,30 @@ function Completion(props: {
       </p>
       <button
         className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
-        onClick={() => {
-          fetchPostJSON(`/api/mailing/signup`, {
+        onClick={async () => {
+          setLoading(true);
+          const response = await fetchPostJSON(`/api/mailing/signup`, {
             name: props.name,
             email: props.email,
             address: props.address,
             phone: props.phone,
           });
+          setLoading(false);
+          if (response.success == true)
+            toast.success(
+              response.message ?? "Thanks for signing up for our mailing list"
+            );
+          else {
+            const json = JSON.parse(response.message.response.text);
+
+            toast.error(
+              `${json["title"] ?? ""} There was some error signing you up`
+            );
+            window.location.href = "/";
+          }
         }}
       >
-        Lets Start A Conversation
+        {loading ? "Loading..." : "Lets Start A Conversation"}
       </button>
     </div>
   );

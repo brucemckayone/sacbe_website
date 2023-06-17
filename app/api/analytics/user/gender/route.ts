@@ -2,6 +2,7 @@ import { r } from '@/types/affiliatePaymentLinkType';
 import adminInit from '@/utils/firebase/admin_init'
 import { firestore } from 'firebase-admin'
 import { NextRequest, NextResponse } from 'next/server'
+import { saveUserAwnsersForEmailSignup } from '../../multi/route';
 adminInit();
 const db = firestore()
 export async function GET(request: NextRequest) {
@@ -13,16 +14,12 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
     
-   const body = await request.json();
+    const body = await request.json();
     const awnsers = body.awnser as string;
-    console.log(body);
-    
+    const email = body.email as string | null | undefined;
 
-    const prev = await db.collection("analytics").doc('gender').get();
-    
-    
+    const prev = await db.collection("analytics").doc('gender').get();    
     const data = prev.data() as any;
-    
 
     if (awnsers.toLowerCase() === "male") {
         data.male += 1;
@@ -38,7 +35,8 @@ export async function POST(request: NextRequest) {
         data.preferNotToSay += 1;
     }
 
-    const probs = await db.collection("analytics").doc('gender').set(data, { merge: true });
+    db.collection("analytics").doc('gender').set(data, { merge: true });
+    if(email)
+        saveUserAwnsersForEmailSignup(body.email, [awnsers], 'gender');
     return NextResponse.json({success: true});
-    
-}; 
+};

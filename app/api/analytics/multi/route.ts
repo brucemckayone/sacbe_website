@@ -15,13 +15,28 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const awnser = body.awnser as string[];
     const docId = body.endpoint as string;
-    const prev = await db.collection("analytics").doc(docId).get();
-    const data = prev.data() as any;
-    
-    for (let i = 0; i < awnser.length; i++)
-        data[awnser[i]] += 1;
+    const email = body.email as string | null | undefined;
 
+    const prev = await db.collection("analytics").doc(docId).get();
+    let data = prev.data() as any;
+    
+    if (!data)
+        data = {};
+    for (let i = 0; i < awnser.length; i++) {
+        if (!(awnser[i] in data)) 
+            data[awnser[i]] = 0;
+        else 
+            data[awnser[i]] += 1;
+        
+    }
     await db.collection("analytics").doc(docId).set(data);
 
+    if (email)
+        saveUserAwnsersForEmailSignup(email, awnser, docId);
     return NextResponse.json({success: true});
 }; 
+
+
+export function saveUserAwnsersForEmailSignup(email: string, awnsers: string[], listName: string) { 
+    db.collection('segmentation').doc(email).set({[listName]: awnsers}, {merge: true});
+}

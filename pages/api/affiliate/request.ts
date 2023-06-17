@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { firestore } from "firebase-admin";
+import { firestore, messaging } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
 import AffiliateSender from "@/utils/email/senders/affiliateSender";
 import affiliate_update_status from "@/utils/email/templates/affiliate_update_status";
+
 
 export const affiliateRequestEndpoint = `/api/affiliate/request`;
 
@@ -30,7 +31,17 @@ export default async function handler(
               { social: social, website: website },
               message
             )
-          );
+        );
+
+        messaging().send({
+          notification: {
+            title: "New Affiliate Request",
+            body: `${user.name} has requested an affiliate account`,
+            imageUrl:"https://www.sacbe-ceremonial-cacao.com/logo.svg",
+          },
+          topic: "all",
+        });
+        
       } else {
         res.status(200).json({ message: "user has already sent a request" });
       }

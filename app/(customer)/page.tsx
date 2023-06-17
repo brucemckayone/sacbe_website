@@ -19,6 +19,7 @@ import { RiskApealCards } from "./RiskApealCards";
 import { TheHook } from "./TheHook";
 import { PurchaseOptions } from "./PurchaseOptions";
 import { BlogPostType } from "@/types/blogPost";
+import { AskAQuestion } from "./AskAQuestion";
 
 export default async function Home() {
   // const posts = await getFeaturedPosts();
@@ -71,6 +72,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
+      <AskAQuestion />
 
       <SimpleSlider reviews={reviews} />
 

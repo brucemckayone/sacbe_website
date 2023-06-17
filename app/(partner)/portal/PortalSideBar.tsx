@@ -49,12 +49,7 @@ function SideBarToggle(props: {
 
 export function PortalSideBar(props: any) {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoading, user, isError } = useUser();
-
-  if (isError)
-    return (
-      <h1>There was an error fetching your account sign in and out again</h1>
-    );
+  const { isLoading, user } = useUser();
 
   if (isLoading) return <CardLoader />;
 

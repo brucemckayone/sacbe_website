@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { firestore } from "firebase-admin";
+import { firestore, messaging } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
 import stripe from "@/lib/stripe/stripe";
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -52,6 +53,15 @@ export default async function handler(
           await ref.set(request);
 
           userCol.doc(user.uuid).set({ wholesale: false }, { merge: true });
+
+           messaging().send({
+            notification: {
+              title: "New Wholesale Request",
+              body: `${user.email} has requested a wholesale account`,
+              imageUrl:"https://www.sacbe-ceremonial-cacao.com/logo.svg",
+            },
+            topic: "all",
+          });
 
           return res.status(200).json({
             message: "A new request for wholesale has been sent",
