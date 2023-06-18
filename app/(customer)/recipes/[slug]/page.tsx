@@ -3,11 +3,15 @@ import Image from "next/image";
 import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
 import dynamic from "next/dynamic";
+import { PostMetaData } from "../../posts/[slug]/PostMetaData";
+import { MarkDown } from "../../posts/[slug]/MarkDown";
+import { FeelsProgressBar } from "./FeelsProgressBar";
+import { RecipeCard } from "./RecipeCard.1";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string; slug: string };
+  params: { slug: string };
 }): Promise<Metadata> {
   const { recipe, relatedRecipes } = await getRecipeData(params.slug!);
   return {
@@ -40,8 +44,8 @@ export async function generateMetadata({
 }
 
 async function getRecipeData(slug: string) {
-  const formatTitleForFetch = (await import("@/utils/url/formater"))
-    .formatTitleForFetch;
+  console.log(slug);
+
   const response = await fetch(`${homeUrl}/api/recipes/${slug}`, {
     method: "GET",
     next: {
@@ -61,19 +65,19 @@ async function RercipePage({
 }) {
   const { recipe, relatedRecipes } = await getRecipeData(params.slug!);
 
-  const MarkDown = dynamic(() =>
-    import("../../posts/[slug]/MarkDown").then((mod) => mod.MarkDown)
-  );
-  const PostMetaData = dynamic(() =>
-    import("../../posts/[slug]/PostMetaData").then((mod) => mod.PostMetaData)
-  );
+  // const MarkDown = dynamic(() =>
+  //   import("../../posts/[slug]/MarkDown").then((mod) => mod.MarkDown)
+  // );
+  // const PostMetaData = dynamic(() =>
+  //   import("../../posts/[slug]/PostMetaData").then((mod) => mod.PostMetaData)
+  // );
 
-  const RecipeCard = dynamic(() =>
-    import("./RecipeCard.1").then((mod) => mod.RecipeCard)
-  );
-  const FeelsProgressBar = dynamic(() =>
-    import("./FeelsProgressBar").then((mod) => mod.FeelsProgressBar)
-  );
+  // const RecipeCard = dynamic(() =>
+  //   import("./RecipeCard.1").then((mod) => mod.RecipeCard)
+  // );
+  // const FeelsProgressBar = dynamic(() =>
+  //   import("./FeelsProgressBar").then((mod) => mod.FeelsProgressBar)
+  // );
   return (
     <main className="w-full">
       <div className=" flex justify-center">
@@ -101,7 +105,7 @@ async function RercipePage({
         {/* Intoduction */}
         <div className="mt-20">
           <h2 className="my-5">Introduction:</h2>
-          <MarkDown content={recipe.introduction}></MarkDown>
+          <MarkDown content={recipe.introduction} />
         </div>
         {/* Feels & Instructions */}
         <div className="flex md:flex-row flex-col md:drop-shadow-xl bg-surface rounded-lg mt-20">
@@ -111,9 +115,7 @@ async function RercipePage({
               return (
                 <div className="my-4" key={`${e.name + e.percentage}`}>
                   <p>{e.name}</p>
-                  <FeelsProgressBar
-                    percentage={e.percentage}
-                  ></FeelsProgressBar>
+                  <FeelsProgressBar percentage={e.percentage} />
                 </div>
               );
             })}
@@ -172,9 +174,7 @@ async function RercipePage({
         {relatedRecipes != undefined && (
           <div>
             {relatedRecipes.map((recipe) => {
-              return (
-                <RecipeCard recipe={recipe} key={recipe.title}></RecipeCard>
-              );
+              return <RecipeCard recipe={recipe} key={recipe.title} />;
             })}
           </div>
         )}

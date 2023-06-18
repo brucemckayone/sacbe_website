@@ -1,6 +1,6 @@
 import React from "react";
 import { BlogPostSuggestionCard } from "../posts/[slug]/BlogPostSuggestionCard";
-import { RecipeCard } from "../recipes/[title]/RecipeCard";
+import { RecipeCard } from "../recipes/[slug]/RecipeCard";
 import Link from "next/link";
 import { RecipeType } from "@/types/recipieType";
 import { BlogPostType } from "@/types/blogPost";

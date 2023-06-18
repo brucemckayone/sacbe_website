@@ -5,6 +5,8 @@ import { formatTitleForFetch } from '@/utils/url/formater';
 import { DocumentReference } from 'firebase/firestore';
 
 export async function GET(request: NextRequest) {
+  console.log(request.nextUrl.pathname.split('/').pop()!);
+  
     try {
         const recipe = await getRecipe(request.nextUrl.pathname.split('/').pop()!);
         const relatedRecipes = await getRelatedRecipes(recipe.relatedRecipes);
@@ -15,14 +17,14 @@ export async function GET(request: NextRequest) {
     }
 }
 
-async function getRecipe(title: string) {
+async function getRecipe(slug: string) {
   adminInit();
 
   const db = firestore();
 
   const snap = await db
     .collection("recipes")
-    .where("title", "==", formatTitleForFetch(title))
+    .where("slug", "==", slug)
     .limit(1)
     .get();
 
