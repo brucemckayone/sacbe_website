@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MarkDown } from "../../posts/[title]/MarkDown";
+import { MarkDown } from "../../posts/[slug]/MarkDown";
 
 const markdown = `**Return Policy**
 

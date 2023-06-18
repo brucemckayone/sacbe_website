@@ -1,12 +1,10 @@
-import { getProviders, useSession } from "next-auth/react";
+import { getProviders } from "next-auth/react";
 import MagicLinkForm from "@/components/form/MagicLinkForm";
 import ProviderSigninButton from "@/components/buttons/ProviderSigninButton";
-
 import SlideInUp from "@/components/animations/slide_in_up";
 
-export default async function SignIn() {
+async function SignIn() {
   const providers = await getProviders();
-
   return (
     <div>
       <div className="flex flex-col items-center justify-around bg-gradient-to-br pt-10 from-sacbeBrandColor to-primaryContainer">
@@ -15,7 +13,7 @@ export default async function SignIn() {
             <div className="text-center border-b-2 pb-6 mb-3">
               <MagicLinkForm />
             </div>
-            <div key={providers!.google.name}>
+            <div key={"GOogle"}>
               <ProviderSigninButton
                 id={providers!.google.id}
                 name={providers!.google.name}
@@ -30,3 +28,5 @@ export default async function SignIn() {
     </div>
   );
 }
+
+export default SignIn;

@@ -6,15 +6,13 @@ import Link from "next/link";
 import { BlogPostType } from "@/types/blogPost";
 
 export function BlogPostSuggestionCard(props: { post: BlogPostType }) {
-  const slug = props.post.title.replaceAll(" ", "-").replaceAll("%3A", ":");
-
   return (
     <div className="py-5 border-b border-primaryContainer">
       <Link
         style={{
           textDecoration: "none",
         }}
-        href={`posts/${slug}`}
+        href={`posts/${props.post.slug}`}
       >
         <div
           className="flex flex-col md:flex-row rounded-lg   bg-surface duration-500 hover:rounded-lg hover:shadow-lg hover:border-none "

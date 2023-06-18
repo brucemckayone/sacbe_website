@@ -54,25 +54,34 @@ export default function UserProvider({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<userType>({} as userType);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
   const setUserDetails = (updatedUser: userType) => {
     setUser(updatedUser);
   };
-
   const session = useSession();
-  const data = useUserSWR({
-    email: session.data?.user?.email ?? "", //"brucemckayone@gmail.com",
-  });
   useEffect(() => {
-    if (data.user) {
-      setUserDetails(data.user);
-    }
-  }, [data.user]);
+    const fetchUser = async () => {
+      setIsError(false);
+      if (session.data?.user) {
+        const user = await fetchGetJSON(
+          `/api/affiliate/user?email=${session.data.user.email}`
+        ).catch((err) => {
+          setIsError(true);
+          setIsLoading(false);
+        });
+        setIsLoading(false);
+        setUserDetails(user.user);
+      }
+    };
+    fetchUser();
+  }, []);
 
   const value: authContextType = {
     user: user,
     setUser: setUserDetails,
-    isLoading: data.isLoading,
-    isError: data.isError,
+    isLoading: isLoading,
+    isError: isError,
   };
 
   return (

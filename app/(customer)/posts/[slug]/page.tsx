@@ -4,30 +4,34 @@ import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
 import { BlogPostType } from "@/types/blogPost";
 
-async function getPost(title: string) {
-  const formatTitleForFetch = (await import("@/utils/url/formater"))
-    .formatTitleForFetch;
-  const request = await fetch(`${homeUrl}/api/blog/posts/${title}`, {
+import dynamic from "next/dynamic";
+
+import { PostMetaData } from "./PostMetaData";
+import { MarkDown } from "./MarkDown";
+import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
+
+async function getPost(slug: string) {
+  console.log("slug is here: " + slug);
+  const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {
     method: "GET",
     next: {
-      tags: [formatTitleForFetch(title)],
+      tags: [slug],
     },
+    cache: "no-cache",
   });
-
-  return (await request.json()) as {
-    post: BlogPostType;
-    relatedPosts: BlogPostType[];
-  };
+  return await request.json();
 }
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
-  params: { id: string; title: string };
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<Metadata> {
-  const { post, relatedPosts } = await getPost(params.title!);
+  const { post, relatedPosts } = await getPost(params.slug as string);
   return {
-    title: post.title.replaceAll("-", " "),
+    title: post.title,
     description: post.excerpt,
     authors: {
       name: post.publisher.name,
@@ -49,8 +53,6 @@ export async function generateMetadata({
       url: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
       type: "article",
       article: {
-        // publishedTime:data.dateCreated,
-        // modifiedTime: data.lastUpdated),
         authors: [post.publisher.name],
         tags: post.tags,
       },
@@ -60,16 +62,28 @@ export async function generateMetadata({
 
 export default async function Page({
   params,
+  searchParams,
 }: {
-  params: { id: string; title: string; postId: string };
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const BlogPostSuggestionCard = (await import("./BlogPostSuggestionCard"))
-    .BlogPostSuggestionCard;
-  const MarkDown = (await import("./MarkDown")).MarkDown;
+  const BlogPostSuggestionCard = dynamic(() =>
+    import("./BlogPostSuggestionCard").then((mod) => mod.BlogPostSuggestionCard)
+  );
 
-  const PostMetaData = (await import("./PostMetaData")).PostMetaData;
+  const MarkDown = dynamic(() =>
+    import("./MarkDown").then((mod) => mod.MarkDown)
+  );
 
-  const { post, relatedPosts } = await getPost(params.title!);
+  const PostMetaData = dynamic(() =>
+    import("./PostMetaData").then((mod) => mod.PostMetaData)
+  );
+
+  const { post, relatedPosts } = await getPost(params.slug as string);
+
+  console.log("post type is: " + typeof post);
+  console.log("related type is: " + typeof relatedPosts);
+
   return (
     <main className="flex flex-row justify-center mx-3">
       <div className=" sm:mx-3 md:w-8/12 my-10 m-auto ">
@@ -99,14 +113,12 @@ export default async function Page({
           {relatedPosts != undefined && (
             <div className="my-20">
               <h2 className="text-2xl md:text-7xl">Related Articles</h2>
-              {relatedPosts.map((relatedPosts) => {
-                return (
-                  <BlogPostSuggestionCard
-                    post={relatedPosts}
-                    key={relatedPosts.title + "aeroijaregoi"}
-                  />
-                );
-              })}
+              {relatedPosts.map((relatedPosts: BlogPostType) => (
+                <BlogPostSuggestionCard
+                  post={relatedPosts}
+                  key={relatedPosts.slug + "related posts"}
+                />
+              ))}
             </div>
           )}
         </div>

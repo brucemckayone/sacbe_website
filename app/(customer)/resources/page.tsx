@@ -1,5 +1,5 @@
 import React from "react";
-import { BlogPostSuggestionCard } from "../posts/[title]/BlogPostSuggestionCard";
+import { BlogPostSuggestionCard } from "../posts/[slug]/BlogPostSuggestionCard";
 import { RecipeCard } from "../recipes/[title]/RecipeCard";
 import Link from "next/link";
 import { RecipeType } from "@/types/recipieType";

@@ -5,5 +5,6 @@ export function formatTitleForFetch(title: string) {
     .replaceAll("%20", "-");
 }
 export function formatTitleForUrl(title: string) {
-  return title.replaceAll(" ", "-");
+  
+  return title.replaceAll(" ", "-").toLocaleLowerCase();
 }

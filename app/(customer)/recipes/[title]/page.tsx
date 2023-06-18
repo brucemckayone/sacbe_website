@@ -1,15 +1,15 @@
 import React from "react";
 import Image from "next/image";
-import { PostMetaData } from "../../posts/[title]/PostMetaData";
 import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
+import dynamic from "next/dynamic";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { id: string; title: string };
+  params: { id: string; slug: string };
 }): Promise<Metadata> {
-  const { recipe, relatedRecipes } = await getRecipeData(params.title!);
+  const { recipe, relatedRecipes } = await getRecipeData(params.slug!);
   return {
     title: recipe.title.replaceAll("-", " "),
     description: recipe.excerpt,
@@ -39,13 +39,13 @@ export async function generateMetadata({
   } as Metadata;
 }
 
-async function getRecipeData(title: string) {
+async function getRecipeData(slug: string) {
   const formatTitleForFetch = (await import("@/utils/url/formater"))
     .formatTitleForFetch;
-  const response = await fetch(`${homeUrl}/api/recipes/${title}`, {
+  const response = await fetch(`${homeUrl}/api/recipes/${slug}`, {
     method: "GET",
     next: {
-      tags: [formatTitleForFetch(title)], ///TODO: add revalidated webhook to call backs in sacbe admin
+      tags: [slug], ///TODO: add revalidated webhook to call backs in sacbe admin
     },
   });
   return (await response.json()) as {
@@ -57,13 +57,23 @@ async function getRecipeData(title: string) {
 async function RercipePage({
   params,
 }: {
-  params: { id: string; title: string };
+  params: { id: string; slug: string };
 }) {
-  const { recipe, relatedRecipes } = await getRecipeData(params.title!);
-  const MarkDown = (await import("../../posts/[title]/MarkDown")).MarkDown;
-  const RecipeCard = (await import("./RecipeCard.1")).RecipeCard;
-  const FeelsProgressBar = (await import("./FeelsProgressBar"))
-    .FeelsProgressBar;
+  const { recipe, relatedRecipes } = await getRecipeData(params.slug!);
+
+  const MarkDown = dynamic(() =>
+    import("../../posts/[slug]/MarkDown").then((mod) => mod.MarkDown)
+  );
+  const PostMetaData = dynamic(() =>
+    import("../../posts/[slug]/PostMetaData").then((mod) => mod.PostMetaData)
+  );
+
+  const RecipeCard = dynamic(() =>
+    import("./RecipeCard.1").then((mod) => mod.RecipeCard)
+  );
+  const FeelsProgressBar = dynamic(() =>
+    import("./FeelsProgressBar").then((mod) => mod.FeelsProgressBar)
+  );
   return (
     <main className="w-full">
       <div className=" flex justify-center">

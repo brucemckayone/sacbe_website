@@ -18,7 +18,8 @@ export interface BlogPostType {
     relate_posts:  any[];
     dateCreated:   DateCreated;
     status:        string;
-    lastModified:  DateCreated;
+    lastModified: DateCreated;
+    slug:          string;
 }
 
 export interface DateCreated {

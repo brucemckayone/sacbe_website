@@ -107,28 +107,16 @@ const authOptions: AuthOptions = {
     logo: "/sacbe_logo_icon.png",
   },
   callbacks: {
-    // async redirect({ url, baseUrl }) {
-    //   // if (url.startsWith(baseUrl) && url != undefined) {
-    //   //   const params = getSearchParams(url);
-    //   //   const redirect = params.get("callbackUrl");
-    //   //   console.log(redirect);
-
-    //   //   return redirect!;
-    //   // }
-
-    //   // return baseUrl;
-    // },
-
     async signIn({ user, account, profile, email, credentials }) {
-      console.log("SIGN IN CALLBACK");
-      console.log("profile is here");
-      console.log(profile);
-      console.log("account is here");
-      console.log(account);
-      console.log("cred is here");
-      console.log(credentials);
+      // console.log("SIGN IN CALLBACK");
+      // console.log("profile is here");
+      // console.log(profile);
+      // console.log("account is here");
+      // console.log(account);
+      // console.log("cred is here");
+      // console.log(credentials);
       
-      console.log("USER ID IS HERE" + user.id);
+      // console.log("USER ID IS HERE" + user.id);
       
       return true;
     },

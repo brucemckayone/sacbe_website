@@ -4,13 +4,12 @@ import Image from "next/image";
 import { FeelsProgressBar } from "./FeelsProgressBar";
 import Categorychip from "@/components/blog/categorychips";
 import Link from "next/link";
-import { formatTitleForUrl } from "@/utils/url/formater";
 
 export function RecipeCard(props: any) {
   return (
     <div className="py-5 border-primaryContainer border-b">
       <div className="drop-shadow-lg bg-surface duration-500 rounded-lg hover:shadow-lg ">
-        <div className="">
+        <div>
           <div
             className="flex flex-col justify-between md:flex-row  "
             key={props.recipe.title + "related posts"}
@@ -28,7 +27,7 @@ export function RecipeCard(props: any) {
                 style={{
                   textDecoration: "none",
                 }}
-                href={`recipes/${formatTitleForUrl(props.recipe.title)}`}
+                href={`recipes/${props.recipe.slug}`}
                 key={props.recipe.title}
               >
                 <h3>{props.recipe.title}</h3>
@@ -49,9 +48,7 @@ export function RecipeCard(props: any) {
                       key={`${e.name} + ${e.percentage}`}
                     >
                       <p>{e.name}</p>
-                      <FeelsProgressBar
-                        percentage={e.percentage}
-                      ></FeelsProgressBar>
+                      <FeelsProgressBar percentage={e.percentage} />
                     </div>
                   );
                 })}

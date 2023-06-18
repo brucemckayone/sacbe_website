@@ -91,7 +91,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const PostLoader = dynamic(() => import("./posts/[title]/Loading"));
+  const PostLoader = dynamic(() => import("./posts/[slug]/Loading"));
   const Footer = dynamic(() => import("@/components/footer"));
 
   return (

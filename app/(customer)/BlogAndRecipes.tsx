@@ -2,7 +2,7 @@ import { BlogPostType } from "@/types/blogPost";
 import { RecipeType } from "@/types/recipieType";
 import adminInit from "@/utils/firebase/admin_init";
 import { firestore } from "firebase-admin";
-import { BlogPostSuggestionCard } from "./posts/[title]/BlogPostSuggestionCard";
+import { BlogPostSuggestionCard } from "./posts/[slug]/BlogPostSuggestionCard";
 import { RecipeCard } from "./recipes/[title]/RecipeCard";
 
 export async function BlogAndRecipes() {

@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import homeUrl from "@/lib/constants/urls";
 import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
+import { formatTitleForUrl } from "@/utils/url/formater";
 
 async function getAllBlogPosts() {
   adminInit();
@@ -23,15 +24,15 @@ async function getAllRecipes() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = (await getAllBlogPosts()).map((e) => {
     return {
-      url: `${homeUrl}/posts/${e.title.replaceAll(" ", "-")}`,
-      lastModified: e.dateCreated,
+      url: `${homeUrl}/posts/${formatTitleForUrl(e.title)}`,
+      lastModified: e.dateCreated.toDate(),
     };
   });
 
   const recipes = (await getAllRecipes()).map((e) => {
     return {
-      url: `${homeUrl}/recipes/${e.title.replaceAll(" ", "-")}`,
-      lastModified: e.dateCreated,
+      url: `${homeUrl}/recipes/${formatTitleForUrl(e.title)}`,
+      lastModified: e.dateCreated.toDate(),
     };
   });
 
@@ -42,19 +43,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${homeUrl}/about`,
-      lastModified: new Date(),
+      lastModified: new Date('2023-06-01'),
     },
     {
       url: `${homeUrl}/affiliates`,
-      lastModified: new Date(),
+      lastModified: new Date('2023-06-01'),
     },
     {
       url: `${homeUrl}/wholesale`,
-      lastModified: new Date(),
+      lastModified: new Date('2023-06-01'),
     },
     {
       url: `${homeUrl}/resources`,
-      lastModified: new Date(),
+      lastModified: new Date('2023-06-01'),
     },
     ...blogPosts,
     ...recipes,
