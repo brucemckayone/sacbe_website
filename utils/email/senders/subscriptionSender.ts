@@ -20,7 +20,6 @@ export default class SubscriptionSender {
     });
   }
 
-
   async updateAdmin({
     name, 
     status,
@@ -32,7 +31,7 @@ export default class SubscriptionSender {
     try {
       this.send({
         bodyMessage: `${name} subscription status has been updated to ${status}`,
-        htmlContent: "<p>Hi Bruce, </p><p> This is an automated message to let you know that the subscription status of one of your affiliates has been updated. </p><p> Please check the admin portal for more details.</p>",
+        htmlContent: `<p>Hi Bruce, </p><p> This is an automated message to let you know that the subscription status of one of your affiliates has been updated to ${status}. </p><p> Please check the admin portal for more details.</p>`,
         subject: `${name} Subscription status updated`,
         to: "brucemckayone@gmail.com"
       });

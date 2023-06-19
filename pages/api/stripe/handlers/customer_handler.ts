@@ -126,7 +126,9 @@ export default async function handler(
         break;
       case "customer.subscription.updated":
         console.log(`handled event type ${event.type}`);
+
         const customerSubscriptionUpdated = event.data.object as Stripe.Subscription;
+        
         const customer = await stripe.customers.retrieve(
           customerSubscriptionUpdated.customer as string
         ) as Stripe.Customer;
@@ -135,13 +137,10 @@ export default async function handler(
         sendEmail.updateAdmin(
           { email: customer.email as string, name: customer.name as string, status: customerSubscriptionUpdated.status })
         
-        
         //update the subscription in firestore with the new status 
         firestore().collection("subscriptions").doc(customerSubscriptionUpdated.id).update({
           status: customerSubscriptionUpdated.status,
         });
-
-        // Then define and call a function to handle the event customer.subscription.updated
         break;
 
       default:

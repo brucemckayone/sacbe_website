@@ -53,9 +53,12 @@ export default async function handler(
         console.log(`handled event type ${event.type}`);
 
         break;
-      case "invoice.payment_succeeded":
-        const invoice = event.data.object as Stripe.Invoice;
-        ({ data, message } = await handlePayment_succeeded(invoice, data, message));
+      
+      case "invoice.paid":
+        const invoicePaid = event.data.object as Stripe.Invoice;
+        ({ data, message } = await handleInvoicePaid(invoicePaid, data, message));
+        break;
+
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
@@ -72,7 +75,7 @@ export default async function handler(
 
 
 
-async function handlePayment_succeeded(invoice: Stripe.Invoice, data: {}, message: string) {
+async function handleInvoicePaid(invoice: Stripe.Invoice, data: {}, message: string) {
   const productIds = invoice.lines.data.map(
     (line) => line.price!.product as string
   );
