@@ -18,6 +18,7 @@ export default async function handler(
         case "GET":
             const bulkQty = parseInt(req.query.bulkQty as string);
             const retailQty = parseInt(req.query.retailQty as string);
+            const shippingCost = parseInt(req.query.shippingCost as string);
             let payload: Stripe.Checkout.SessionCreateParams = {
                 success_url: homeUrl+'/portal',
                 cancel_url: homeUrl,
@@ -32,13 +33,40 @@ export default async function handler(
                 phone_number_collection: {
                     enabled: true,
                 },
+                invoice_creation: {
+                    invoice_data: {
+                        footer: "Thank you for your purchase!",
+                        rendering_options: {
+                            amount_tax_display: "exclude_tax",
+                    
+                        }
+                    },
+                    enabled: true,
+                },
+                shipping_options: [
+                    {   
+                        shipping_rate_data: {
+                            display_name: "Standard Shipping",
+                            fixed_amount: {
+                                currency: "gbp",
+                                amount: shippingCost,
+                            },
+                            type: "fixed_amount",                            
+                        },
+
+                    },
+                    
+                ]
+                    
+
+                
             };
             let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
             if (bulkQty>=5) {
-                lineItems.push({ price: "price_1NGcUGG859ZdyFmpvDONUHlR", quantity: bulkQty });
+                lineItems.push({ price: "price_1NKgOcG859ZdyFmp6kByICxt", quantity: bulkQty });
             };
             if (retailQty>=5) {
-                lineItems.push({ price: "price_1NFIoTG859ZdyFmpLRWnJOth", quantity: retailQty });
+                lineItems.push({ price: "price_1NKgPfG859ZdyFmpAxmrilk2", quantity: retailQty });
             };
             console.log(lineItems);
             

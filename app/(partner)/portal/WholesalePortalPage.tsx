@@ -10,6 +10,7 @@ import TextInput from "@/components/form/inputs/TextInput";
 import { useDisclosure } from "@mantine/hooks";
 
 import homeUrl from "@/lib/constants/urls";
+import toast from "react-hot-toast";
 
 function WholeSalePortalSignUpForm() {
   return (
@@ -449,7 +450,9 @@ export function WholesalePortalPage() {
           </table>
         </div>
 
-        <div className={`${!hasBulk && !hasRetail && "opacity-10"}`}>
+        <div
+          className={`${!hasBulk && !hasRetail && "opacity-10"} flex flex-col`}
+        >
           <PrimaryButton
             text="Place Order"
             onClicked={async () => {
@@ -457,27 +460,29 @@ export function WholesalePortalPage() {
             }}
             isPrimary={true}
             key={"send invoice button "}
-          ></PrimaryButton>
+          />
           <PrimaryButton
             text="Pay in 4 Installments"
+            className={`${totalCost <= 1000 && "opacity-20"}`}
             onClicked={async () => {
-              if (hasBulk || hasRetail) {
+              if (hasBulk || (hasRetail && totalCost <= 1000)) {
                 const url = await fetchGetJSON(
                   `${homeUrl}/api/stripe/checkout/wholesale_pay_in_4?bulkQty=${
                     hasBulk && bulkQty
                   }&retailQty=${hasRetail && retailQty}&customerId=${
                     user.customerId
-                  }`
+                  }&shippingCost=${shippingCost}`
                 );
-
-                console.log(url.url);
-
                 window.location.href = url.url;
+              } else {
+                toast.error(
+                  "You can only use installements for orders £1000 and under"
+                );
               }
             }}
-            isPrimary={true}
+            isPrimary={totalCost <= 1000 ? true : false}
             key={"send pay in 4 button "}
-          ></PrimaryButton>
+          />
         </div>
       </div>
     </div>

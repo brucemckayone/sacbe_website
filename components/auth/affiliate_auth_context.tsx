@@ -34,8 +34,10 @@ const fetcher = (path: string) =>
 
 interface getAffiliateInterface {
   email: string;
+  status: string;
 }
-function useUserSWR({ email }: getAffiliateInterface) {
+function useUserSWR({ email, status }: getAffiliateInterface) {
+  // if (status == "authenticated") {
   const { data, error, isLoading } = useSWR(
     `/api/affiliate/user?email=${email}`,
     fetcher
@@ -46,6 +48,14 @@ function useUserSWR({ email }: getAffiliateInterface) {
     isLoading,
     isError: error,
   };
+
+  // } else {
+  //   return {
+  //     user: authContextDefaultValues.user,
+  //     isLoading: false,
+  //     isError: false,
+  //   };
+  // }
 }
 
 export default function UserProvider({
@@ -54,34 +64,30 @@ export default function UserProvider({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<userType>({} as userType);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
   const setUserDetails = (updatedUser: userType) => {
     setUser(updatedUser);
   };
+
   const session = useSession();
+
+  const data = useUserSWR({
+    email: session.data?.user?.email ?? "", //"brucemckayone@gmail.com",
+    status: session.status,
+  });
+
   useEffect(() => {
-    const fetchUser = async () => {
-      setIsError(false);
-      if (session.data?.user) {
-        const user = await fetchGetJSON(
-          `/api/affiliate/user?email=${session.data.user.email}`
-        ).catch((err) => {
-          setIsError(true);
-          setIsLoading(false);
-        });
-        setIsLoading(false);
-        setUserDetails(user.user);
+    if (session.data?.user?.email) {
+      if (data.user) {
+        setUserDetails(data.user);
       }
-    };
-    fetchUser();
-  }, []);
+    }
+  }, [data.user]);
 
   const value: authContextType = {
     user: user,
     setUser: setUserDetails,
-    isLoading: isLoading,
-    isError: isError,
+    isLoading: data.isLoading,
+    isError: data.isError,
   };
 
   return (

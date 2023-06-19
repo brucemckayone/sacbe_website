@@ -5,6 +5,7 @@ import { envConfig } from "@/lib/webhooks/envConfig";
 import SubscriptionWebHooks from "@/utils/server/webhooks/subscriptions";
 import SubscriptionSender from "@/utils/email/senders/subscriptionSender";
 import stripe from "@/lib/stripe/stripe";
+import { firestore } from "firebase-admin";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -58,35 +59,54 @@ export default async function handler(
       case "customer.subscription.created":
         
         const subscription = event.data.object as Stripe.Subscription;
-        const customer = await stripe.customers.retrieve(
+ 
+        const { name, email, shipping,phone, } = await stripe.customers.retrieve(
           subscription.customer as string
-        );
-        
-       
-        const { name, email } = customer as Stripe.Customer;
-        
+        ) as Stripe.Customer;
+                
         sendEmail.created({
           name: name!,
           email: email!,
-          portalLink: "https://portal.sacbe-ceremonial-cacao.com/p/login/test_dR629SgVlcYOdri000",
+          portalLink: "https://portal.sacbe-ceremonial-cacao.com/p/login/eVacNMfG0fw69l66oo",
         });
+
+
+        firestore().collection("subscriptions").doc(subscription.id).set({
+          id: subscription.id,
+          customer: subscription.customer,
+          status: subscription.status,
+          items: subscription.items.data,
+         });
+         
 
         console.log(`handled event type ${event.type}`);
         // Then define and call a function to handle the event customer.subscription.created
         break;
       case "customer.subscription.deleted":
-        const customerSubscriptionDeleted = event.data.object;
+        const customerSubscriptionDeleted = event.data.object as Stripe.Subscription;
+
+        //update firestore subscription status to canceled and add the date it ended
+        firestore().collection("subscriptions").doc(customerSubscriptionDeleted.id).update({
+          status: customerSubscriptionDeleted.status,
+          canceled_at: customerSubscriptionDeleted.canceled_at,
+        });
         console.log(`handled event type ${event.type}`);
         // Then define and call a function to handle the event customer.subscription.deleted
         break;
       case "customer.subscription.paused":
         console.log(`handled event type ${event.type}`);
-        const customerSubscriptionPaused = event.data.object;
+        const customerSubscriptionPaused = event.data.object as Stripe.Subscription;
+
+        
+        firestore().collection("subscriptions").doc(customerSubscriptionPaused.id).update({
+          status: customerSubscriptionPaused.status,
+          resumesAt: customerSubscriptionPaused.pause_collection?.resumes_at,
+        });
         // Then define and call a function to handle the event customer.subscription.paused
         break;
       case "customer.subscription.pending_update_applied":
         console.log(`handled event type ${event.type}`);
-        const customerSubscriptionPendingUpdateApplied = event.data.object;
+        const customerSubscriptionPendingUpdateApplied = event.data.object as Stripe.Subscription;
         // Then define and call a function to handle the event customer.subscription.pending_update_applied
         break;
       case "customer.subscription.pending_update_expired":
@@ -106,7 +126,21 @@ export default async function handler(
         break;
       case "customer.subscription.updated":
         console.log(`handled event type ${event.type}`);
-        const customerSubscriptionUpdated = event.data.object;
+        const customerSubscriptionUpdated = event.data.object as Stripe.Subscription;
+        const customer = await stripe.customers.retrieve(
+          customerSubscriptionUpdated.customer as string
+        ) as Stripe.Customer;
+                
+        //update firestore subscription status to paused and add the date it paused
+        sendEmail.updateAdmin(
+          { email: customer.email as string, name: customer.name as string, status: customerSubscriptionUpdated.status })
+        
+        
+        //update the subscription in firestore with the new status 
+        firestore().collection("subscriptions").doc(customerSubscriptionUpdated.id).update({
+          status: customerSubscriptionUpdated.status,
+        });
+
         // Then define and call a function to handle the event customer.subscription.updated
         break;
 

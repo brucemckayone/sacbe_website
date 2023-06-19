@@ -20,6 +20,29 @@ export default class SubscriptionSender {
     });
   }
 
+
+  async updateAdmin({
+    name, 
+    status,
+  }: {
+    name: string;
+    email: string;
+    status: string;
+  }) {
+    try {
+      this.send({
+        bodyMessage: `${name} subscription status has been updated to ${status}`,
+        htmlContent: "<p>Hi Bruce, </p><p> This is an automated message to let you know that the subscription status of one of your affiliates has been updated. </p><p> Please check the admin portal for more details.</p>",
+        subject: `${name} Subscription status updated`,
+        to: "brucemckayone@gmail.com"
+      });
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+
   async created({
     email,
     name,
@@ -38,6 +61,12 @@ export default class SubscriptionSender {
         }),
         subject: `Welcome ${name} to the Sacbe Cacao Community`,
         to: email ?? "brucemckayone@gmail.com",
+      });
+      this.send({
+        bodyMessage: `${name} has joined the Sacbe Community, email: ${email} they are the news subscriber`, 
+        htmlContent: `Woop woop baby thats a new subscriber ${name} to the Sacbe Community` ,
+        subject: `we have a new subscriber ${name} to the Sacbe Community`,
+        to: "brucemckayone@gmail.com",
       });
     } catch (e) {
       console.log(e);
