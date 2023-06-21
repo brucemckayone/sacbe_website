@@ -41,13 +41,14 @@ export default async function handler(
     shipping_address_collection: {
       allowed_countries: ["GB"],
     },
-    customer: customerId!,
-    customer_update: {
+    customer: customerId ?? undefined,
+    customer_update: customerId
+      ? {
           shipping: "auto",
           name: "auto",
           address: "auto",
         }
-      
+      : undefined,
   };
 
   if (mode == "payment") {

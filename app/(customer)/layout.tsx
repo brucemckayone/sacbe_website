@@ -13,6 +13,9 @@ import AffiliateLinkProvider from "@/components/providers/AffiliatePaymentLinkPr
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
+import Head from "next/head";
+import Script from "next/script";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 const raleway = displayFont({
   variable: "--display-font",
@@ -109,6 +112,7 @@ export default function RootLayout({
               </AffiliateLinkProvider>
               <Footer />
               <Toaster />
+              <GoogleAnalytics />
             </Suspense>
           </body>
         </UserProvider>

@@ -29,6 +29,7 @@ export default async function handler(
       case "customer.created":
         const customerCreated = event.data.object;
         console.log(`handled event type ${event.type}`);
+        
         // Then define and call a function to handle the event customer.created
         break;
       case "customer.deleted":
@@ -86,22 +87,22 @@ export default async function handler(
         const customerSubscriptionDeleted = event.data.object as Stripe.Subscription;
 
         //update firestore subscription status to canceled and add the date it ended
-        firestore().collection("subscriptions").doc(customerSubscriptionDeleted.id).update({
-          status: customerSubscriptionDeleted.status,
-          canceled_at: customerSubscriptionDeleted.canceled_at,
-        });
+        // firestore().collection("subscriptions").doc(customerSubscriptionDeleted.id).update({
+        //   status: customerSubscriptionDeleted.status,
+        //   canceled_at: customerSubscriptionDeleted.canceled_at,
+        // });
         console.log(`handled event type ${event.type}`);
         // Then define and call a function to handle the event customer.subscription.deleted
         break;
       case "customer.subscription.paused":
-        console.log(`handled event type ${event.type}`);
-        const customerSubscriptionPaused = event.data.object as Stripe.Subscription;
+        // console.log(`handled event type ${event.type}`);
+        // const customerSubscriptionPaused = event.data.object as Stripe.Subscription;
 
         
-        firestore().collection("subscriptions").doc(customerSubscriptionPaused.id).update({
-          status: customerSubscriptionPaused.status,
-          resumesAt: customerSubscriptionPaused.pause_collection?.resumes_at,
-        });
+        // firestore().collection("subscriptions").doc(customerSubscriptionPaused.id).update({
+        //   status: customerSubscriptionPaused.status,
+        //   resumesAt: customerSubscriptionPaused.pause_collection?.resumes_at,
+        // });
         // Then define and call a function to handle the event customer.subscription.paused
         break;
       case "customer.subscription.pending_update_applied":
@@ -125,22 +126,22 @@ export default async function handler(
         // Then define and call a function to handle the event customer.subscription.trial_will_end
         break;
       case "customer.subscription.updated":
-        console.log(`handled event type ${event.type}`);
+        // console.log(`handled event type ${event.type}`);
 
-        const customerSubscriptionUpdated = event.data.object as Stripe.Subscription;
+        // const customerSubscriptionUpdated = event.data.object as Stripe.Subscription;
         
-        const customer = await stripe.customers.retrieve(
-          customerSubscriptionUpdated.customer as string
-        ) as Stripe.Customer;
+        // const customer = await stripe.customers.retrieve(
+        //   customerSubscriptionUpdated.customer as string
+        // ) as Stripe.Customer;
                 
         //update firestore subscription status to paused and add the date it paused
-        sendEmail.updateAdmin(
-          { email: customer.email as string, name: customer.name as string, status: customerSubscriptionUpdated.status })
+        // sendEmail.updateAdmin(
+        //   { email: customer.email as string, name: customer.name as string, status: customerSubscriptionUpdated.status })
         
-        //update the subscription in firestore with the new status 
-        firestore().collection("subscriptions").doc(customerSubscriptionUpdated.id).update({
-          status: customerSubscriptionUpdated.status,
-        });
+        // //update the subscription in firestore with the new status 
+        // firestore().collection("subscriptions").doc(customerSubscriptionUpdated.id).update({
+        //   status: customerSubscriptionUpdated.status,
+        // });
         break;
 
       default:

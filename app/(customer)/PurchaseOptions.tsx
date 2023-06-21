@@ -239,6 +239,7 @@ export function PurchaseOptions(props: props) {
                   "price_1NIsiYG859ZdyFmpLEjRmAAZ",
                 ],
                 mode: "subscription",
+                customerId: user.customerId ?? undefined,
                 qty: subQty,
               });
               logEvent(analytics, "subscription-checkout-started", {
@@ -260,6 +261,7 @@ export function PurchaseOptions(props: props) {
                   "price_1NIsjZG859ZdyFmpvMG66qkf",
                 ],
                 mode: "subscription",
+                customerId: user.customerId ?? undefined,
                 qty: subQty,
               });
               logEvent(analytics, "subscription-checkout-started", {
