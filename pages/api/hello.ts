@@ -16,6 +16,6 @@ export default async function handler(
       .collection("orders")
       .limit(1)
       .get();
-  // const user = firestore().collection("blog_posts").limit(1).get();
+  
   res.status(200).json((await snapshots.docs[0].data()) as Data );
 }
