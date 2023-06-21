@@ -1,16 +1,14 @@
 import Stripe from "stripe";
 import { buffer } from "micro";
-import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
-
-import adminInit from "@/utils/firebase/admin_init";
 import { analytics } from "@/lib/firebase/firebase";
 import { logEvent } from "firebase/analytics";
 import { createCheckoutSessionParams } from "../client/create_checkout_session";
 import emailSender from "@/utils/email/nodemailer";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
+
 
 export const config = { api: { bodyParser: false } };
 export default async function handler(
@@ -24,7 +22,7 @@ export default async function handler(
   const reqBuffer = await buffer(req);
   let event: Stripe.Event;
 
-  adminInit();
+  
   let status = 200;
   let message = "unhandeld webhook";
   let data = { message: "no message" };
