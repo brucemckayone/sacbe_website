@@ -10,9 +10,9 @@ import dynamic from "next/dynamic";
 import LoginButton from "../buttons/loginButton";
 
 export default function Navbar() {
-  const SearchBar = dynamic(() =>
-    import("../search/searchbar").then((res) => res.default)
-  );
+  // const SearchBar = dynamic(() =>
+  //   import("../search/searchbar").then((res) => res.default)
+  // );
 
   return (
     <header className="sticky top-0 z-50 flex flex-row  justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
@@ -64,7 +64,6 @@ export default function Navbar() {
                   />
                 </div>
               </div>
-
               <div className="ml-10 ">
                 {menuItems.map((item) => {
                   return (
@@ -86,10 +85,7 @@ export default function Navbar() {
                   );
                 })}
               </div>
-
-              <SearchBar toggleMenu={setDrawerOpenState} />
             </div>
-
             <div
               className="w-2/3"
               onClick={() => setDrawerOpenState(!isDrawerOpen)}

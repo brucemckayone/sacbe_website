@@ -1,8 +1,5 @@
-import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config();
 import HomePageHeader from "@/components/headers/homePage/homePageHeader";
 import NavMenuBottom from "@/components/menu/NavMenuBottom";
-
 import SimpleSlider from "@/components/carousels/testimonial_slider";
 import { VitiminPopovers } from "./VitiminPopovers";
 import { AskAQuestion } from "./AskAQuestion";

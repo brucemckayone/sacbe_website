@@ -16,7 +16,7 @@ export function WholesaleHeader() {
       </div>
       <div className="md:basis-1/2 self-center  ">
         <div className="flex flex-wrap md:w-10/12">
-          <h1 className="mt-10 sm:text-center md:text-start  text-6xl md:text-7xl">
+          <h1 className="mt-10 sm:text-center md:text-start  text-5xl md:text-7xl">
             WHOLESALE CEREMONIAL CACAO
           </h1>
         </div>

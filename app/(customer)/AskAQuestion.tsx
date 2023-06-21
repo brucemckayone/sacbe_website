@@ -1,6 +1,8 @@
 "use client";
 import { useUser } from "@/components/auth/affiliate_auth_context";
 import TextInput from "@/components/form/inputs/TextInput";
+import { analytics } from "@/lib/firebase/firebase";
+import { logEvent } from "@firebase/analytics";
 
 import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -85,6 +87,8 @@ async function askQuestion(email: string, question: string) {
     email: email,
     question: question,
   });
+
+  logEvent(analytics, "Question has been asked", {});
 
   if (response.success) {
     toast.success("Question Sent");

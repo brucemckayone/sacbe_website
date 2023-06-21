@@ -1,4 +1,5 @@
 "use client";
+import { type } from "os";
 import React from "react";
 
 interface Props {
@@ -14,7 +15,7 @@ function TextInput({
   value,
   placeHolder,
   update,
-
+  type,
   label,
   className,
 }: Props) {
@@ -28,9 +29,10 @@ function TextInput({
       <input
         key={`input key ${label + placeHolder}`}
         className={`bg-gray-50 border text-gray-900 text-sm rounded-lg focus:outline-sacbeBrandColor focus:border-sacbeBrandColor block w-full p-2.5 hover:scale-105 duration-200 font-body ${className}`}
-        type=""
+        type={type}
         value={value}
         placeholder={placeHolder}
+        autoComplete={type}
         onChange={(event) => {
           console.log(event.target.value);
           update(event.target.value);

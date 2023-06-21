@@ -2,7 +2,7 @@
 import { analytics } from "@/lib/firebase/firebase";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { logEvent } from "firebase/analytics";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Stripe from "stripe";
 
@@ -25,10 +25,12 @@ export function QuizBody(props: {
   customerDetails?: Stripe.Checkout.Session.CustomerDetails;
 }) {
   const [currentindex, setCurrentIndex] = useState(0);
-  logEvent(analytics, "quiz_start", {
-    ...props.customerDetails,
-    email: props.email,
-  });
+  useEffect(() => {
+    logEvent(analytics, "quiz_start", {
+      ...props.customerDetails,
+      email: props.email,
+    });
+  }, []);
 
   function nextQuestion() {
     if (currentindex != props.quiz.questions.length - 1) {
@@ -177,6 +179,7 @@ export function MultiAwnserCard(props: {
   awnser: string;
   addToSelected: (awnser: string[]) => void;
   selected: string[];
+  compact?: boolean;
 }) {
   return (
     <div
@@ -184,12 +187,12 @@ export function MultiAwnserCard(props: {
         !props.selected.includes(props.awnser)
           ? "bg-transparent border-2 drop-shadow-lg"
           : "bg-surface drop-shadow-md hover:bg-tertiaryContainer cursor-auto"
-      } rounded-lg m-2 p-2`}
+      } rounded-lg m-2 ${!props.compact ? "p-1" : "p-2"}`}
       onClick={() => {
         props.addToSelected([...props.selected, props.awnser]);
       }}
     >
-      <p>{props.awnser}</p>
+      <p className={"" + !props.compact && "text-sm"}>{props.awnser}</p>
     </div>
   );
 }
@@ -340,12 +343,15 @@ function Completion(props: {
             address: props.address,
             phone: props.phone,
           });
+
           setLoading(false);
-          if (response.success == true)
+          if (response.success == true) {
             toast.success(
               response.message ?? "Thanks for signing up for our mailing list"
             );
-          else {
+
+            logEvent(analytics, "newsletter_signup");
+          } else {
             const json = JSON.parse(response.message.response.text);
             toast.error(
               `${json["title"] ?? ""} There was some error signing you up`

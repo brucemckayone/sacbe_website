@@ -134,7 +134,7 @@ export function PurchaseOptions(props: props) {
       <div className=" md:h-[320px] flex flex-col justify-around text-onPrimary rounded-lg  border-2 border-[black] mt-2">
         <span className="bg-[black] flex justify-around">
           <div className="w-20"></div>
-          <h3 className=" text-2xl text-center py-1 md:h-[50px]">
+          <h3 className=" text-2xl text-center py-1 md:h-[40px]">
             SUBSCRIPTION
           </h3>
           <p className="w-30  self-center text-recommendedGreen">save 21%</p>

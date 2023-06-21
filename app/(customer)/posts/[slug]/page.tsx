@@ -9,6 +9,7 @@ import dynamic from "next/dynamic";
 import { PostMetaData } from "./PostMetaData";
 import { MarkDown } from "./MarkDown";
 import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
+import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
 
 async function getPost(slug: string) {
   console.log("slug is here: " + slug);
@@ -109,7 +110,7 @@ export default async function Page({
 
         <div className=" px-5  my-10 md:p-20">
           <MarkDown content={post.content} />
-
+          <NewsletterSignup />
           {relatedPosts != undefined && (
             <div className="my-20">
               <h2 className="text-2xl md:text-7xl">Related Articles</h2>

@@ -3,7 +3,7 @@ import { analytics } from "@/lib/firebase/firebase";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { logEvent } from "firebase/analytics";
 import React, { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import Stripe from "stripe";
 
 export interface QuizBodyProps {

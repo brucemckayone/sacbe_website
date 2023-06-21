@@ -5,7 +5,6 @@ import { Dispatch, SetStateAction, useState } from "react";
 import Link from "next/link";
 import { Popover } from "@mantine/core";
 import Image from "next/image";
-import { formatTitleForUrl } from "@/utils/url/formater";
 import searchIcon from "@/public/icons/search_icon.svg";
 export default function SearchBar(props: {
   toggleMenu: Dispatch<SetStateAction<boolean>>;
@@ -100,10 +99,10 @@ export default function SearchBar(props: {
               <div className="absolute top-[60px] left-0 w-11/12 m-3 rounded-lg drop-shadow-xl bg-surface overflow-y-auto">
                 {results.length != 0 && query != "" && (
                   <div className="rounded-b-lg shadow-xl p-5 border-b border-primaryContainer">
-                    {results.map((title: { title: string; type: string }) => {
+                    {results.map((title: { slug: string; type: string }) => {
                       return (
                         <div
-                          key={title.title}
+                          key={title.slug}
                           className="py-5 hover:bg-tertiaryContainer hover:shadow-sm hover:rounded-lg hover:mt-3 hover:pb-3 duration-200 px-2"
                         >
                           <Link
@@ -116,7 +115,7 @@ export default function SearchBar(props: {
                           >
                             <div className="flex">
                               <div className="w-10/12">
-                                <p>{title.title}</p>
+                                <p>{title.slug}</p>
                               </div>
                               <div
                                 className={`w-2/12 p-1 h-7 drop-shadow-md rounded ml-2 group-hover:text-onSecondaryContainer ${getTypeColor(
@@ -144,9 +143,9 @@ export default function SearchBar(props: {
     </main>
   );
 
-  function generateLink(result: { title: string; type: string }) {
+  function generateLink(result: { slug: string; type: string }) {
     const subPath = generateSubPath(result.type);
-    const path = subPath + formatTitleForUrl(result.title);
+    const path = subPath + result.slug;
 
     return path;
   }
