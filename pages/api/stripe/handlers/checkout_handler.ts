@@ -7,6 +7,8 @@ import { envConfig } from "@/lib/webhooks/envConfig";
 import adminInit from "@/utils/firebase/admin_init";
 import { analytics } from "@/lib/firebase/firebase";
 import { logEvent } from "firebase/analytics";
+import { createCheckoutSessionParams } from "../client/create_checkout_session";
+import emailSender from "@/utils/email/nodemailer";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -47,48 +49,52 @@ export default async function handler(
       case "checkout.session.completed":
         const csCompleted = event.data.object as Stripe.Checkout.Session;
         // get expanded customerSession
-        const checkoutSession = await stripe.checkout.sessions.retrieve(
+        let checkoutSession = await stripe.checkout.sessions.retrieve(
           csCompleted.id,
           { expand: ["line_items", "customer"] }
         );
+        if (checkoutSession.mode == "payment") {
+          logEvent(analytics, "Single Payment Checkout Complete", {
+            total: checkoutSession.amount_total,
+            customer: checkoutSession.customer_details?.name,
+            customerEmail: checkoutSession.customer_details?.email
+          });
+        } else if (checkoutSession.mode == "subscription") {
+            logEvent(analytics, "Single Payment Checkout Complete", {
+              total: checkoutSession.amount_total,
+              customer: checkoutSession.customer_details?.name,
+              customerEmail: checkoutSession.customer_details?.email
+            });
+        }
 
-        let hasLoggedOneOff = false;
-        let hasloggedsubscription = false;
-        checkoutSession.line_items?.data.forEach(e => {
-          if (e.price?.type == "one_time" && !hasLoggedOneOff) {
-            hasLoggedOneOff = true;
-            logEvent(analytics, "Purchase-Complete", {
-              items: [
-                {
-                  item_id: e.price?.id,
-                  item_name: e.price?.product,
-                  quantity: e.quantity,
-                  price: e.price?.unit_amount,
-                },
-              ],
-            }); 
-          }
-          if (!hasloggedsubscription && e.price?.type == "recurring") {
-            hasloggedsubscription = true;
-            logEvent(analytics, "Subscription-Started", {
-              items: [
-                {
-                  item_id: e.price?.id,
-                  item_name: e.price?.product,
-                  quantity: e.quantity,
-                  price: e.price?.unit_amount,
-                },
-              ],
-            }); 
-          }
-        }) 
+        if (checkoutSession.payment_status == "unpaid")  {
+          // The checkout session was canceled
+          // Perform your desired actions here
+          const customer = checkoutSession.customer as Stripe.Customer;
+          const newSession = await stripe.checkout.sessions.create(createCheckoutSessionParams(checkoutSession.line_items!.data.map((item) => item!.price!.id), checkoutSession!.line_items!.data[0].quantity, checkoutSession.mode, customer?.id ));
 
+          new emailSender().send({
+            to: customer.email!,
+            subject: "How can we help?",
+            bodyMessage: 'A little gift for you!',
+            htmlContent: `<p>Hi ${customer.name},</p> <p> We noticed that you did not complete your purchase, so we attached 10% discount to your account to help make your decision for positive change easier.</p> <p>Here is a link with your coupon code: <a href="${newSession.url}">link</a></p> <p><a href="https://sacbe-ceremonial-cacao.com">Sacbe Cacao</a></p>`, 
+            replayTo: 'no-replay@sacbe-ceremonial-cacao.com',
+            sender:'Sacbe Cacao',
+          });
+        }
 
       case "checkout.session.expired":
-        const checkoutSessionExpired = event.data.object;
+        const checkoutSessionExpired = event.data.object as Stripe.Checkout.Session;
         // Then define and call a function to handle the event checkout.session.expired
+        checkoutSession = await stripe.checkout.sessions.retrieve(
+          checkoutSessionExpired.id,
+          { expand: ["line_items", "customer"] }
+        );
+        
+        
+          
         break;
-      // ... handle other event types
+      
       default:
         console.log(`Unhandled event type ${event.type}`);
     }

@@ -9,6 +9,6 @@ export function FeelsProgressBar(props: any) {
       customLabel={props.name}
       bgColor="#FF932F"
       className="shadow-lg rounded-full"
-    ></ProgressBar>
+    />
   );
 }

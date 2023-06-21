@@ -13,6 +13,14 @@ export default async function handler(
   const customerId = req.body.customerId as string | null | undefined;
   const mode = req.body.mode as Stripe.Checkout.SessionCreateParams.Mode;
 
+  let payload: Stripe.Checkout.SessionCreateParams = createCheckoutSessionParams(prices, qty, mode, customerId);
+
+  res.status(200).json(await stripe.checkout.sessions.create(payload));
+
+}
+
+
+export function createCheckoutSessionParams(prices: string[], qty: any, mode: Stripe.Checkout.SessionCreateParams.Mode, customerId: string | null | undefined) {
   let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   prices.forEach((price) => {
     lineItems.push({
@@ -21,7 +29,7 @@ export default async function handler(
       price: price,
     });
   });
-  
+
 
   let payload: Stripe.Checkout.SessionCreateParams = {
     success_url: `${homeUrl}/complete/checkout?session_id={CHECKOUT_SESSION_ID}`,
@@ -32,9 +40,9 @@ export default async function handler(
     cancel_url: homeUrl,
     currency: "GBP",
     locale: "auto",
-    
+
     client_reference_id: customerId ? customerId : "guest checkout",
-    
+
     phone_number_collection: {
       enabled: true,
     },
@@ -44,10 +52,10 @@ export default async function handler(
     customer: customerId ?? undefined,
     customer_update: customerId
       ? {
-          shipping: "auto",
-          name: "auto",
-          address: "auto",
-        }
+        shipping: "auto",
+        name: "auto",
+        address: "auto",
+      }
       : undefined,
   };
 
@@ -55,11 +63,10 @@ export default async function handler(
     payload = {
       ...payload,
       // payment_method_types: ["card",  "afterpay_clearpay", "klarna"],
-      customer_creation:  "if_required",
+      customer_creation: "if_required",
       shipping_options: [
         {
           shipping_rate_data: {
-
             type: "fixed_amount",
             fixed_amount: {
               currency: "gbp",
@@ -96,7 +103,6 @@ export default async function handler(
                 value: 2,
               },
             },
-            
           }
         }
       ],
@@ -106,11 +112,8 @@ export default async function handler(
       invoice_creation: { enabled: true },
     };
   }
-
-  res.status(200).json(await stripe.checkout.sessions.create(payload));
-
+  return payload;
 }
-
 
 function generateSecondClassShipping(qty: number) { 
   const shippingCost = 395;
