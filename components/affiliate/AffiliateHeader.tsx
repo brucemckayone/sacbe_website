@@ -12,7 +12,7 @@ import ButtonLoader from "@/components/loaders/ButtonLoader";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { useSession } from "next-auth/react";
 import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
-import cacaoInALeaf from "@/public/cacao_in_a_leaf.png";
+import cacaoInALeaf from "@/public/cacao_in_leaf.png";
 
 function AffiliateSignUpModal(props: {
   opened: boolean;

@@ -10,10 +10,10 @@ import { useDisclosure } from "@mantine/hooks";
 import { logEvent } from "firebase/analytics";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import sacbeIconImage from "@/public/sacbe_logo_icon.png";
-import sacbeFloatingShapesImage from "@/public/sacbe_shapes_background.png";
+import sacbeFloatingShapesImage from "@/public/sacbe_product_with_shapes.webp";
 
 type props = {
   isHorizontal: boolean;

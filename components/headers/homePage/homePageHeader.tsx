@@ -1,6 +1,6 @@
 import Image from "next/image";
 import HeaderInformation from "./headerInformation";
-import image from "@/public/sacbe_product_with_shapes.jpg";
+import image from "@/public/sacbe_product_with_shapes.webp";
 export default function HomePageHeader() {
   return (
     <div className="flex flex-col self-center md:flex-row w-full md:items-center">

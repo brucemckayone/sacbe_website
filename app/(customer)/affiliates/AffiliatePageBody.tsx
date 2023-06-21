@@ -47,7 +47,7 @@ export function AffiliatePageBody() {
         <h2 className="text-7xl my-10">Why Join Our Affiliate Program?</h2>
         <ReasonToJoin
           header={"A Sacred Partnership"}
-          imageUrl={"/cacao_beans_in_hand.png"}
+          imageUrl={"/cacao_beans_in_hand.webp"}
           body={`Join our affiliate program and become a valued partner in
                 spreading the transformative magic of ceremonial cacao
                 worldwide. Together, we elevate consciousness, foster deep
@@ -77,7 +77,7 @@ export function AffiliatePageBody() {
         />
         <ReasonToJoin
           header={"Lucrative Commission Rates"}
-          imageUrl={"/cacao_beans_in_hand.png"}
+          imageUrl={"/cacao_beans_in_hand.webp"}
           body={` We deeply value your commitment and dedication as an affiliate
                 partner. Your outstanding efforts are recognized and rewarded
                 through our generous commission rates. Each sale you generate is
@@ -109,7 +109,7 @@ export function AffiliatePageBody() {
         />
         <ReasonToJoin
           header={"Access to Exclusive Offers"}
-          imageUrl={"/cacao_beans_in_hand.png"}
+          imageUrl={"/cacao_beans_in_hand.webp"}
           body={` Elevate your affiliate game with our exclusive offers and promotions available solely to our valued affiliates. Gain a competitive edge and captivate your audience with unique deals and incentives that cannot be found elsewhere. By partnering with us, you unlock a world of exclusive opportunities that set you apart from the crowd. These special offers allow you to offer added value to your customers, enticing them to choose our ceremonial cacao products. Be the first to share exciting promotions, limited-time discounts, and captivating campaigns that create a buzz in the market. Stand out as an affiliate by delivering unparalleled benefits and captivating your audience with exclusive opportunities.`}
         />
         <ReasonToJoin
