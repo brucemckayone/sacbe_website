@@ -36,7 +36,7 @@
     "encoding": "^0.1.13",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.4",
-    "firebase": "^9.17.1",
+    "firebase": "^9.22.2",
     "firebase-admin": "^11.5.0",
     "hamburger-react": "^2.5.0",
     "magic-sdk": "^16.2.0",

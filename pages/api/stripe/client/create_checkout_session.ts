@@ -37,7 +37,7 @@ export function createCheckoutSessionParams(prices: string[], qty: any, mode: St
     mode: mode,
     billing_address_collection: "required",
     allow_promotion_codes: true,
-    cancel_url: homeUrl,
+    cancel_url: `${homeUrl}/cancelled/checkout?session_id={CHECKOUT_SESSION_ID}`,
     currency: "GBP",
     locale: "auto",
 

@@ -31,10 +31,8 @@ export default function RootLayout({
     >
       <AuthProvider>
         <UserProvider>
-          <body>
-            {children}
-            <Toaster />
-          </body>
+          {children}
+          <Toaster />
         </UserProvider>
       </AuthProvider>
       <Analytics />

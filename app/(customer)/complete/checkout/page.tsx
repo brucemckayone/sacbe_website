@@ -1,15 +1,20 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Metadata } from "next";
+import { logEvent } from "firebase/analytics";
+import { analytics } from "@/lib/firebase/firebase";
 
 function CheckoutComplete() {
-  const nav = useRouter();
   const searchParams = useSearchParams();
   const sessionId = searchParams!.get("session_id");
 
+  useEffect(() => {
+    logEvent(analytics, "order_completed", {
+      checkout_session: sessionId,
+    });
+  }, []);
   return (
     <div className="w-full m-auto h-screen">
       <div className="w-11/12 md:w-6/12 m-auto">

@@ -21,11 +21,11 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 let analytics: Analytics;
 export const auth = getAuth(app);
- if (app.name && typeof window !== 'undefined') {
+if (typeof window !== 'undefined') {
     analytics = getAnalytics(app);
  }
   
 
 export const storage = getStorage(app);
 
-export { firebaseConfig, analytics };
+export { firebaseConfig, analytics, app };
