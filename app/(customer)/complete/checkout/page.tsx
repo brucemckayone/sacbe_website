@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "@/lib/firebase/firebase";
+import ConfettiExplosion from "react-confetti-explosion";
 
 function CheckoutComplete() {
   const searchParams = useSearchParams();
@@ -18,6 +19,10 @@ function CheckoutComplete() {
   return (
     <div className="w-full m-auto h-screen">
       <div className="w-11/12 md:w-6/12 m-auto">
+        <div className="flex justify-between">
+          <ConfettiExplosion />
+          <ConfettiExplosion />
+        </div>
         <Image
           src={"/celebration.gif"}
           width={300}
@@ -26,9 +31,17 @@ function CheckoutComplete() {
           alt="congradulations image for completing the checkout "
           className="object-contain p-10 md:mx-0  w-full h-[300px] m-auto"
         />
+        <div className="flex justify-between">
+          <ConfettiExplosion />
+          <ConfettiExplosion />
+        </div>
         <h1 className="text-center mt-1 mb-3 text-3xl">
           You are the best!<br></br> Thank you for your purchase !
         </h1>
+        <div className="flex justify-between">
+          <ConfettiExplosion />
+          <ConfettiExplosion />
+        </div>
         <p className="text-sm text-center mb-10">
           You just did you bit for the planet by removing co2 from the
           atmosphere

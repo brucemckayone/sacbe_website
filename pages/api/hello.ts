@@ -13,8 +13,8 @@ export default async function handler(
 ) {
   adminInit();  
    const snapshots = await firestore()
-      .collection("blog_posts")
-      .where("slug", "==", "how-ceremonial-cacao-can-help-with-depression").limit(1)
+      .collection("orders")
+      .limit(1)
       .get();
   // const user = firestore().collection("blog_posts").limit(1).get();
   res.status(200).json((await snapshots.docs[0].data()) as Data );
