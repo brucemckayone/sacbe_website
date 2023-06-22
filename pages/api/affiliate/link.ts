@@ -54,8 +54,8 @@ async function createPaymentLink({
   accountId,
   uuid,
   priceIds = [
-    "price_1NIqy6G859ZdyFmpzaNNkSNu",
-    "price_1NIqy6G859ZdyFmpEbQLnA5q",
+    "price_1NLYCcG859ZdyFmpgkHOXIUZ",
+    "price_1NLYCcG859ZdyFmpa95GIeSb",
   ],
   promoShippingId,
 }: createPaymentLinkParams) {
@@ -66,8 +66,6 @@ async function createPaymentLink({
         quantity: 1,
         adjustable_quantity: {
           enabled: false,
-          //   maximum: 100,
-          //   minimum: 0,
         },
       },
     ],
@@ -88,11 +86,11 @@ async function createPaymentLink({
     allow_promotion_codes: true,
     shipping_options: [
       {
-        shipping_rate: "shr_1NJkibG859ZdyFmpn31XJnFC",
+        shipping_rate: "shr_1NLYCuG859ZdyFmpLUaJkA6R",
       
       },
       {
-        shipping_rate: "shr_1NIr2PG859ZdyFmpt5qaCSej",
+        shipping_rate: "shr_1NLYCrG859ZdyFmp11reCjT7",
       },
     ],
   };
@@ -121,7 +119,7 @@ async function createPaymentLink({
       clone.line_items = [
         ...clone.line_items,
         {
-          price: "price_1NIsiYG859ZdyFmpLEjRmAAZ",
+          price: "price_1NLYCaG859ZdyFmprZcXvCYg",
           quantity: 1,
         },
       ];
@@ -146,9 +144,7 @@ async function createPaymentLink({
       link: createdLinks[i],
     });
   }
-
-  // const db = firestore();
-
+  
   const db = firestore();
   db.collection("paymentLinks")
     .doc(uuid)

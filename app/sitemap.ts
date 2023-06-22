@@ -2,7 +2,6 @@ import { MetadataRoute } from "next";
 import homeUrl from "@/lib/constants/urls";
 import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
-import { formatTitleForUrl } from "@/utils/url/formater";
 
 async function getAllBlogPosts() {
   adminInit();
@@ -24,14 +23,14 @@ async function getAllRecipes() {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = (await getAllBlogPosts()).map((e) => {
     return {
-      url: `${homeUrl}/posts/${formatTitleForUrl(e.title)}`,
+      url: `${homeUrl}/posts/${e.slug}`,
       lastModified: e.dateCreated.toDate(),
     };
   });
 
   const recipes = (await getAllRecipes()).map((e) => {
     return {
-      url: `${homeUrl}/recipes/${formatTitleForUrl(e.title)}`,
+      url: `${homeUrl}/recipes/${e.slug}`,
       lastModified: e.dateCreated.toDate(),
     };
   });

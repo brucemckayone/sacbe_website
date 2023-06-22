@@ -83,7 +83,7 @@ export function PurchaseOptions(props: props) {
                       }
                       setIsLoadingOne(true);
                       await createCheckoutSession({
-                        prices: ["price_1NIqy6G859ZdyFmpEbQLnA5q"],
+                        prices: ["price_1NLYCcG859ZdyFmpgkHOXIUZ"],
                         mode: "payment",
                         customerId: user.customerId ?? undefined,
                         qty: oneoffQty,
@@ -235,8 +235,8 @@ export function PurchaseOptions(props: props) {
               setIsShippingLoading(true);
               await createCheckoutSession({
                 prices: [
-                  "price_1NIqy6G859ZdyFmpzaNNkSNu",
-                  "price_1NIsiYG859ZdyFmpLEjRmAAZ",
+                  "price_1NLYCcG859ZdyFmpa95GIeSb",
+                  "price_1NLYCaG859ZdyFmprZcXvCYg",
                 ],
                 mode: "subscription",
                 customerId: user.customerId ?? undefined,
@@ -257,8 +257,8 @@ export function PurchaseOptions(props: props) {
               setIsShippingLoading(true);
               await createCheckoutSession({
                 prices: [
-                  "price_1NIqy6G859ZdyFmpzaNNkSNu",
-                  "price_1NIsjZG859ZdyFmpvMG66qkf",
+                  "price_1NLYCcG859ZdyFmpa95GIeSb",
+                  "price_1NLYCTG859ZdyFmpJCrCATal",
                 ],
                 mode: "subscription",
                 customerId: user.customerId ?? undefined,

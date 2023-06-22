@@ -1,4 +1,3 @@
-import homeUrl from "@/lib/constants/urls";
 import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
 import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 
