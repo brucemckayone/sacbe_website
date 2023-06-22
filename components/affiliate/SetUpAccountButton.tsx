@@ -4,12 +4,13 @@ import setUpAffiliateAccount from "@/utils/server/stripe/setUpAffiliateAccount";
 import { useUser } from "@/components/auth/affiliate_auth_context";
 import createOnBoardingLink from "@/utils/server/stripe/createOnboardingLink";
 import ButtonLoader from "@/components/loaders/ButtonLoader";
+import { useRouter } from "next/navigation";
 
 function SetUpAccountButton() {
   const { user: affiliate, isLoading: isloading } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [hasPressed, setHasPressed] = useState(false);
-
+  const router = useRouter();
   if (isLoading || isloading) {
     return <ButtonLoader />;
   } else if (!affiliate.accountId || isloading) {
@@ -20,7 +21,7 @@ function SetUpAccountButton() {
           onClicked={async () => {
             setIsLoading(true);
             const accountLink = await setUpAffiliateAccount(affiliate.email);
-            window.location.href = accountLink.url;
+            router.push(accountLink.url);
             setIsLoading(false);
           }}
         />
