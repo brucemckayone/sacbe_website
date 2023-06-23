@@ -16,10 +16,10 @@ export default function HeaderInformation() {
         </span>
       </div>
       <p className="italic text-sm font-bold p-0">
-        'This cacao is absolutely delicious and very nourishing! The energy
+        &quot;This cacao is absolutely delicious and very nourishing! The energy
         behind the cacao production, its origins and the reverence for the
         medicine from the indigenous cultures that harvest the beans can be
-        deeply felt.'
+        deeply felt.&quot;
       </p>
       <ul>
         <li className="border-onSecondaryContainer border-b-2 my-2">
