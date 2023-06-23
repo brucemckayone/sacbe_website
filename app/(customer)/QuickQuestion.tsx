@@ -1,56 +1,20 @@
 "use client";
-import { toast } from "react-hot-toast";
 import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { useDisclosure } from "@mantine/hooks";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 import { generateSlug } from "@/utils/url/formater";
 import dynamic from "next/dynamic";
 
-type QuickQuestionProps = {
+export function QuickQuestion(props: {
   endpoint?: string;
   question?: string;
   answers?: string[];
-};
-
-export function QuickQuestion(props: QuickQuestionProps) {
-  const [data, setData] = useState<{
-    question: string;
-    answers: string[];
-    endpoint: string;
-  }>({
-    question: "",
-    answers: [],
-    endpoint: "",
-  });
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  const [isSending, setIsSending] = useState(false);
-  const [email, setEmail] = useState("");
-
-  const [selectedAnswer, setAnswer] = useState("");
-
-  const [total, setTotal] = useState(0);
-  const [results, setResults] = useState<{ [key: string]: number }>({});
-
-  const tags = [
-    "Ceremony",
-    "Cacao",
-    "Recipes",
-    "Health",
-    "Spirituality",
-    "fitness",
-    "Preforance",
-    "Focus",
-  ];
-
-  const [selectedTags, setSelectedTags] = useState<string[]>([
-    "Interested in cacao points",
-  ]);
-
-  const [opened, { open, close }] = useDisclosure(false);
-  const session = useSession();
+}) {
+  const [data, setData] = useState(
+    {} as { question: string; answers: string[]; endpoint: string }
+  );
 
   const ProgressBar = dynamic(() =>
     import("@ramonak/react-progress-bar").then((res) => res.default)
@@ -78,20 +42,46 @@ export function QuickQuestion(props: QuickQuestionProps) {
 
   const Modal = dynamic(() => import("@mantine/core").then((res) => res.Modal));
 
+  const [opened, { open, close }] = useDisclosure(false);
+  const session = useSession();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [isSending, setIsSending] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const [selectedAwnser, setAwnser] = useState("");
+
+  const [total, setTotal] = useState(0);
+  const [results, setResults] = useState({} as { [key: string]: number });
+
+  const tags = [
+    "Ceremony",
+    "Cacao",
+    "Recipes",
+    "Health",
+    "Spirituality",
+    "fitness",
+    "Preforance",
+    "Focus",
+  ];
+
+  const [selectedTags, setSelectedTags] = useState([
+    "Interested in cacao points",
+  ] as string[]);
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      if (!props.answers || !props.question || !props.endpoint) {
+      if (!data.answers || !data.question || !data.endpoint)
         if (!props.question) {
           setData(await fetchGetJSON("/api/analytics/quick_question"));
         } else {
           setData({
             answers: props.answers!,
             question: props.question,
-            endpoint: generateSlug(props.endpoint!),
+            endpoint: generateSlug(props.endpoint!)!,
           });
         }
-      }
       setIsLoading(false);
     };
     fetchData();
@@ -103,7 +93,7 @@ export function QuickQuestion(props: QuickQuestionProps) {
       total += value;
     }
     setTotal(total);
-  }, [results]);
+  }, [results, props.answers, props.question, props.endpoint]);
 
   if (isLoading)
     return (
@@ -114,7 +104,7 @@ export function QuickQuestion(props: QuickQuestionProps) {
 
   return (
     <div className={!props.question ? `bg-tertiaryContainer` : ""}>
-      {selectedAnswer ? (
+      {selectedAwnser ? (
         <div>
           <div className="flex flex-col items-center justify-center">
             <h5>Thank you for your feedback!</h5>
@@ -126,7 +116,7 @@ export function QuickQuestion(props: QuickQuestionProps) {
             <PrimaryButton
               onClicked={async () => {
                 if (session.data?.user?.email) {
-                  await signUp(session.data.user.email);
+                  await signUp(session.data?.user?.email);
                 } else {
                   open();
                 }
@@ -165,22 +155,24 @@ export function QuickQuestion(props: QuickQuestionProps) {
               />
             </Modal>
           </div>
-          <div>
+          <div className="flex flex-wrap">
             {results &&
-              Object.entries(results).map(([answer, value]) => {
+              !isLoading &&
+              data.answers.map((answer: string) => {
                 return (
                   <div
                     key={answer + "progress bar"}
-                    className="p-2 m-2 animate-zoom_in"
+                    className="p-5 animate-zoom_in w-[400px] m-auto  drop-shadow-md  shadow-md rounded-lg"
                   >
                     <ProgressBar
-                      completed={(value / total) * 100 * 1.3}
-                      customLabel={`${answer} ${value}`}
-                      labelAlignment="right"
-                      labelColor="white"
+                      completed={(results[answer] / total) * 100 * 1.3}
+                      customLabel={`${answer} ${results[answer]}`}
+                      labelAlignment="outside"
+                      labelColor="black"
+                      labelSize="12px"
                       bgColor="#FF932F"
-                      height="30px"
-                      className="shadow-lg rounded-full"
+                      height="25px"
+                      className="rounded-full"
                     />
                   </div>
                 );
@@ -197,18 +189,18 @@ export function QuickQuestion(props: QuickQuestionProps) {
                   <div
                     key={answer}
                     onClick={async () => {
-                      if (selectedAnswer !== answer) {
+                      if (selectedAwnser != answer) {
                         setIsLoading(true);
-                        setAnswer(answer);
+                        setAwnser(answer);
                         await fetchPostJSON("/api/analytics/single", {
                           answer: answer,
-                          endpoint: generateSlug(data.endpoint),
-                          email: session.data?.user?.email || null,
+                          endpoint: generateSlug(data.endpoint!),
+                          email: session.data?.user?.email ?? null,
                         });
                         setResults(
                           await fetchGetJSON(
                             `/api/analytics/single/${generateSlug(
-                              data.endpoint
+                              data.endpoint!
                             )}`
                           )
                         );
@@ -218,11 +210,8 @@ export function QuickQuestion(props: QuickQuestionProps) {
                       }
                     }}
                     className={`${
-                      selectedAnswer === answer ? "bg-sacbeBrandColor" : ""
+                      selectedAwnser == answer && "bg-sacbeBrandColor"
                     } rounded-md border-2 px-2 py-1 m-0.5 md:m-2 cursor-pointer`}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={answer}
                   >
                     <p className="text-sm md:text-lg">{answer}</p>
                   </div>
@@ -241,12 +230,12 @@ export function QuickQuestion(props: QuickQuestionProps) {
     setIsSending(true);
     const resp = await fetchPostJSON("api/mailing/signup", {
       email: givenEmail,
-      tags: [...selectedTags, selectedAnswer],
+      tags: [...selectedTags, selectedAwnser],
     });
     console.log(resp);
 
     setIsSending(false);
-    if (resp.success === true) {
+    if (resp.success == true) {
       toast.success(
         `${resp.message} - Thanks for signing up, we will notify you when this feature is available`
       );

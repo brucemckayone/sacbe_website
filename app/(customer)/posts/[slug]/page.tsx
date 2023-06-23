@@ -79,13 +79,13 @@ export default async function Page({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  // const BlogPostSuggestionCard = dynamic(() =>
-  //   import("./BlogPostSuggestionCard").then((mod) => mod.BlogPostSuggestionCard)
-  // );
+  const BlogPostSuggestionCard = dynamic(() =>
+    import("./BlogPostSuggestionCard").then((mod) => mod.BlogPostSuggestionCard)
+  );
 
-  // const PostMetaData = dynamic(() =>
-  //   import("./PostMetaData").then((mod) => mod.PostMetaData)
-  // );
+  const PostMetaData = dynamic(() =>
+    import("./PostMetaData").then((mod) => mod.PostMetaData)
+  );
 
   const { post, relatedPosts } = await getPost(params.slug as string);
 
@@ -115,8 +115,6 @@ export default async function Page({
         />
 
         <div className=" my-10 md:p-20">
-          {/* <MarkDown content={post.content} /> */}
-
           <TestMarkdown testContent={post.testContent} />
 
           <NewsletterSignup />
