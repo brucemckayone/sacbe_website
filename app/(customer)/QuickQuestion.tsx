@@ -50,7 +50,7 @@ export function QuickQuestion(props: {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      if (!data)
+      if (!data.answers || !data.question || !data.endpoint)
         if (!props.question) {
           setData(await fetchGetJSON("/api/analytics/quick_question"));
         } else {
@@ -152,39 +152,40 @@ export function QuickQuestion(props: {
         <div className="flex flex-col items-center justify-center">
           <h5>{data.question}</h5>
           <div className="flex flex-wrap mt-1 mx-5">
-            {data.answers.map((answer) => {
-              return (
-                <div
-                  key={answer}
-                  onClick={async () => {
-                    if (selectedAwnser != answer) {
-                      setIsLoading(true);
-                      setAwnser(answer);
-                      await fetchPostJSON("/api/analytics/single", {
-                        answer: answer,
-                        endpoint: generateSlug(data.endpoint!),
-                        email: session.data?.user?.email ?? null,
-                      });
-                      setResults(
-                        await fetchGetJSON(
-                          `/api/analytics/single/${generateSlug(
-                            data.endpoint!
-                          )}`
-                        )
-                      );
+            {data.answers &&
+              data.answers.map((answer) => {
+                return (
+                  <div
+                    key={answer}
+                    onClick={async () => {
+                      if (selectedAwnser != answer) {
+                        setIsLoading(true);
+                        setAwnser(answer);
+                        await fetchPostJSON("/api/analytics/single", {
+                          answer: answer,
+                          endpoint: generateSlug(data.endpoint!),
+                          email: session.data?.user?.email ?? null,
+                        });
+                        setResults(
+                          await fetchGetJSON(
+                            `/api/analytics/single/${generateSlug(
+                              data.endpoint!
+                            )}`
+                          )
+                        );
 
-                      toast.success("Thank you for your feedback!");
-                      setIsLoading(false);
-                    }
-                  }}
-                  className={`${
-                    selectedAwnser == answer && "bg-sacbeBrandColor"
-                  } rounded-md border-2 px-2 py-1 m-0.5 md:m-2 cursor-pointer`}
-                >
-                  <p className="text-sm md:text-lg">{answer}</p>
-                </div>
-              );
-            })}
+                        toast.success("Thank you for your feedback!");
+                        setIsLoading(false);
+                      }
+                    }}
+                    className={`${
+                      selectedAwnser == answer && "bg-sacbeBrandColor"
+                    } rounded-md border-2 px-2 py-1 m-0.5 md:m-2 cursor-pointer`}
+                  >
+                    <p className="text-sm md:text-lg">{answer}</p>
+                  </div>
+                );
+              })}
           </div>
         </div>
       )}
