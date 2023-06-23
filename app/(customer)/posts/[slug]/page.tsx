@@ -47,12 +47,18 @@ export async function generateMetadata({
       card: "summary_large_image",
       description: post.excerpt,
       title: post.title,
+      image: post.main_image,
     },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       url: `${homeUrl}/posts/${post.slug}`,
       type: "article",
+      images: [
+        {
+          url: post.main_image,
+        },
+      ],
       article: {
         authors: [post.publisher?.name ?? ""],
         tags: post.tags,
