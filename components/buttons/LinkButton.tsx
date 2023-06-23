@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import PrimaryButton from "./primaryButton";
 
 interface props {
   url: string;
@@ -10,19 +10,9 @@ interface props {
 }
 
 function LinkButton({ url, text, isPrimary = false }: props) {
-  const PrimaryButton = dynamic(() =>
-    import("./primaryButton").then((res) => res.default)
-  );
-
   return (
     <Link href={url}>
-      <PrimaryButton
-        text={text}
-        onClicked={() => {
-          window.location.href = url;
-        }}
-        isPrimary={isPrimary}
-      />
+      <PrimaryButton text={text} onClicked={() => {}} isPrimary={isPrimary} />
     </Link>
   );
 }

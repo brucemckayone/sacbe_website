@@ -6,13 +6,6 @@ import BenifitsCard from "../cards/benifits_card";
 import Card from "../cards/card";
 
 export default function BenifitsOfCacao() {
-  const Card = dynamic(() =>
-    import("../cards/card").then((res) => res.default)
-  );
-  const SlideInUp = dynamic(() =>
-    import("../animations/slide_in_up").then((res) => res.default)
-  );
-
   const BenifitsCard = dynamic(() =>
     import("../cards/benifits_card").then((res) => res.default)
   );

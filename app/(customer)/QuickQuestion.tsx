@@ -6,6 +6,10 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { generateSlug } from "@/utils/url/formater";
 import dynamic from "next/dynamic";
+import PrimaryButton from "@/components/buttons/primaryButton";
+import TextInput from "@/components/form/inputs/TextInput";
+import { MultiAwnserCard } from "../(quiz)/[quiz]/QuizBody";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 export function QuickQuestion(props: {
   endpoint?: string;
@@ -16,24 +20,8 @@ export function QuickQuestion(props: {
     {} as { question: string; answers: string[]; endpoint: string }
   );
 
-  const ProgressBar = dynamic(() =>
-    import("@ramonak/react-progress-bar").then((res) => res.default)
-  );
-
   const ConfettiExplosion = dynamic(() =>
     import("react-confetti-explosion").then((res) => res.default)
-  );
-
-  const PrimaryButton = dynamic(() =>
-    import("@/components/buttons/primaryButton").then((res) => res.default)
-  );
-
-  const TextInput = dynamic(() =>
-    import("@/components/form/inputs/TextInput").then((res) => res.default)
-  );
-
-  const MultiAwnserCard = dynamic(() =>
-    import("../(quiz)/[quiz]/QuizBody").then((res) => res.MultiAwnserCard)
   );
 
   const TextLoader = dynamic(() =>

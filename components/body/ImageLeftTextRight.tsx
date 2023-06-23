@@ -2,7 +2,8 @@ import React from "react";
 import Image from "next/image";
 import SlideInUp from "../animations/slide_in_up";
 import LinkButton from "../buttons/LinkButton";
-import dynamic from "next/dynamic";
+
+import Card from "../cards/card";
 
 interface IImageLeftTextRight {
   title: string;
@@ -28,10 +29,6 @@ export function ImageLeftTextRight({
 
   jiggle,
 }: IImageLeftTextRight): JSX.Element {
-  const Card = dynamic(() =>
-    import("../cards/card").then((res) => res.default)
-  );
-
   return (
     <div className="bg-tertiaryContainer pb-28">
       <h2 className="py-20 mx-5 md:mx-10 text-center text-7xl lg:text-8xl md:text-7xl">

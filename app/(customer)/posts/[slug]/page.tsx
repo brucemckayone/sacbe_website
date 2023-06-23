@@ -10,8 +10,6 @@ import { TestMarkdown } from "./MarkDown";
 
 import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
 import { notFound } from "next/navigation";
-import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
-import { PostMetaData } from "./PostMetaData";
 
 async function getPost(slug: string) {
   const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {

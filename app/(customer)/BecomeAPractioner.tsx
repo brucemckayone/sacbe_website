@@ -3,12 +3,8 @@ import Image from "next/image";
 import LinkButton from "@/components/buttons/LinkButton";
 import SlideInUp from "@/components/animations/slide_in_up";
 import cacaoFacilatorImage from "@/public/cacaofacilitator.png";
-import dynamic from "next/dynamic";
-export function BecomeAPractioner() {
-  const Card = dynamic(() =>
-    import("@/components/cards/card").then((res) => res.default)
-  );
 
+export function BecomeAPractioner() {
   return (
     <div className=" bg-gradient-to-b to-primaryContainer from-tertiaryContainer py-10">
       <div className="flex flex-col justify-center align-middle">

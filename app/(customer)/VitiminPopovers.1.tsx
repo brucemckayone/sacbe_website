@@ -1,6 +1,5 @@
 "use client";
-
-import dynamic from "next/dynamic";
+import PrimaryButton from "@/components/buttons/primaryButton";
 import { VitiminPill } from "./VitiminPopovers";
 const vits = [
   {
@@ -75,13 +74,6 @@ const vits = [
 ];
 
 export function VitiminPopovers() {
-  const PrimaryButton = dynamic(() =>
-    import("@/components/buttons/primaryButton").then((res) => res.default)
-  );
-
-  const VitiminPill = dynamic(() =>
-    import("./VitiminPopovers").then((res) => res.VitiminPill)
-  );
   return (
     <div className="bg-primaryContainer pb-44 pt-36">
       <div className=" w-11/12 md:w-10/12 m-auto pt-32">
