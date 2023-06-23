@@ -93,11 +93,7 @@ export function PortalSideBar(props: any) {
             <DashboardSideBarListTile
               toggleBar={setIsOpen}
               update={props.setMainBody}
-              mainBody={
-                <WholesalePortalPage
-                  key={"wholesale portal page"}
-                ></WholesalePortalPage>
-              }
+              mainBody={<WholesalePortalPage key={"wholesale portal page"} />}
               text="Wholesale"
               iconUrl=""
               key={"Wholesale list tiem"}

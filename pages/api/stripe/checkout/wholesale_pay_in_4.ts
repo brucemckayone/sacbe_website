@@ -49,24 +49,20 @@ export default async function handler(
                             display_name: "Standard Shipping",
                             fixed_amount: {
                                 currency: "gbp",
-                                amount: shippingCost,
+                                amount: shippingCost*100,
                             },
                             type: "fixed_amount",                            
                         },
 
                     },
-                    
                 ]
-                    
-
-                
             };
             let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
             if (bulkQty>=5) {
-                lineItems.push({ price: "price_1NKgOcG859ZdyFmp6kByICxt", quantity: bulkQty });
+                lineItems.push({ price: "price_1NLYCPG859ZdyFmpUm8QEV1k", quantity: bulkQty });
             };
             if (retailQty>=5) {
-                lineItems.push({ price: "price_1NKgPfG859ZdyFmpAxmrilk2", quantity: retailQty });
+                lineItems.push({ price: "price_1NLYCAG859ZdyFmpdYI5HGd1", quantity: retailQty });
             };
             console.log(lineItems);
             

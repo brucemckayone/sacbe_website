@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
 async function getRecipe(slug: string) {
   adminInit();
   const db = firestore();  
+  
   return  await db
     .collection("recipes")
     .doc(slug)

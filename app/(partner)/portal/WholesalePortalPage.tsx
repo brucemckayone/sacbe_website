@@ -106,7 +106,7 @@ export function WholesalePortalPage() {
               placeHolder="line 1"
               value={line1}
               update={setLine1}
-              type="address"
+              type="address-line1"
               label="Address Line 1"
               key={"eg. Flat A"}
             />
@@ -114,7 +114,7 @@ export function WholesalePortalPage() {
               placeHolder="line 2"
               value={line2}
               update={setLine2}
-              type="address"
+              type="address-line2"
               label="Address Line 1"
               key={"eg. Cacao Road"}
             />
@@ -123,7 +123,7 @@ export function WholesalePortalPage() {
             placeHolder="eg. Cacao Town"
             value={city}
             update={setCity}
-            type="address"
+            type="city"
             key={"city"}
             label={"City"}
           />
@@ -132,23 +132,23 @@ export function WholesalePortalPage() {
             label="State/County"
             value={state}
             update={setState}
-            type="address"
+            type="state"
             placeHolder={"Cacaoshire"}
-            key={"postcode"}
+            key={"state"}
           />
           <TextInput
             label="Country"
             value={country}
             update={setCountry}
-            type="address"
+            type="country"
             placeHolder={"United Cacaoingdom"}
-            key={"postcode"}
+            key={"Country"}
           />
           <TextInput
             label="Postcode"
             value={postcode}
             update={setPostcode}
-            type="address"
+            type="postal-code"
             placeHolder={"CAC70 2A"}
             key={"postcode"}
           />
@@ -171,15 +171,6 @@ export function WholesalePortalPage() {
           )}
         </form>
         <div>
-          {/* <PrimaryButton
-              onClicked={() => {
-                close();
-              }}
-              text="cancel"
-              isPrimary={false}
-              key={"cancel order button"}
-            ></PrimaryButton> */}
-
           <PrimaryButton
             onClicked={async () => {
               setIsSendingOrder(true);
@@ -463,9 +454,9 @@ export function WholesalePortalPage() {
           />
           <PrimaryButton
             text="Pay in 4 Installments"
-            className={`${totalCost <= 1000 && "opacity-20"}`}
+            className={`${totalCost >= 1000 && "opacity-20"}`}
             onClicked={async () => {
-              if (hasBulk || (hasRetail && totalCost <= 1000)) {
+              if ((hasBulk || hasRetail) && totalCost <= 1000) {
                 const url = await fetchGetJSON(
                   `${homeUrl}/api/stripe/checkout/wholesale_pay_in_4?bulkQty=${
                     hasBulk && bulkQty
@@ -519,27 +510,31 @@ export function WholesalePortalPage() {
     let bulkShipping = 0;
     if (hasBulk) {
       console.log("has bulk shippping cost");
-      if (bulkQty == 5) {
+      if (bulkQty >= 5 && bulkQty <= 7) {
         bulkShipping = 35;
-      } else if (bulkQty > 5 && bulkQty < 7) {
+      } else if (bulkQty > 7 && bulkQty <= 10) {
         bulkShipping = 43;
-      } else if (bulkQty > 7 && bulkQty < 9) {
+      } else if (bulkQty > 10 && bulkQty <= 15) {
         bulkShipping = 53;
-      } else if (bulkQty > 9 && bulkQty < 12) {
-        bulkShipping = 70;
+      } else if (bulkQty > 15 && bulkQty <= 20) {
+        bulkShipping = 100;
+      } else {
+        bulkCost = 110;
       }
     }
     let retailShipping = 0;
     if (hasRetail) {
       console.log("has retail shipping cost");
-      if (retailQty == 5) {
+      if (retailQty >= 5 && retailQty <= 7) {
         retailShipping = 35;
-      } else if (retailQty > 5 && retailQty < 7) {
+      } else if (retailQty > 7 && retailQty <= 10) {
         retailShipping = 43;
-      } else if (retailQty > 7 && retailQty < 9) {
+      } else if (retailQty > 10 && retailQty <= 15) {
         retailShipping = 53;
-      } else if (retailQty > 9 && retailQty < 12) {
+      } else if (retailQty > 15 && retailQty <= 20) {
         retailShipping = 70;
+      } else {
+        retailShipping = 110;
       }
     }
     setshippingGost(bulkShipping + retailShipping);
