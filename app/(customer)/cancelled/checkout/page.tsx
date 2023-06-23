@@ -15,7 +15,7 @@ function OrderCancelledPage() {
       checkout_session: sessionId,
     });
     window.location.href = "/";
-  }, []);
+  }, [sessionId]);
 
   //   window.location.href = "/";
   return (

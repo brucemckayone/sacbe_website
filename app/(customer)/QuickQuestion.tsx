@@ -50,19 +50,20 @@ export function QuickQuestion(props: {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      if (!props.question) {
-        setData(await fetchGetJSON("/api/analytics/quick_question"));
-      } else {
-        setData({
-          answers: props.answers!,
-          question: props.question,
-          endpoint: generateSlug(props.endpoint!)!,
-        });
-      }
+      if (!data)
+        if (!props.question) {
+          setData(await fetchGetJSON("/api/analytics/quick_question"));
+        } else {
+          setData({
+            answers: props.answers!,
+            question: props.question,
+            endpoint: generateSlug(props.endpoint!)!,
+          });
+        }
       setIsLoading(false);
     };
     fetchData();
-  }, []);
+  }, [props.answers, props.question, props.endpoint]);
   const [total, setTotal] = useState(0);
   const [results, setResults] = useState({} as { [key: string]: number });
 
@@ -72,7 +73,7 @@ export function QuickQuestion(props: {
       total += value;
     }
     setTotal(total);
-  }, [results]);
+  }, [results, props.answers, props.question, props.endpoint]);
 
   if (isLoading) return <></>;
 
@@ -133,7 +134,7 @@ export function QuickQuestion(props: {
               !isLoading &&
               data.answers.map((answer: string) => {
                 return (
-                  <div className="p-2 m-2">
+                  <div key={answer + "progress bar"} className="p-2 m-2">
                     <ProgressBar
                       completed={(results[answer] / total) * 100 * 1.3}
                       customLabel={answer}

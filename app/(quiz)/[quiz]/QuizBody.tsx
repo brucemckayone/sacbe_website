@@ -30,7 +30,7 @@ export function QuizBody(props: {
       ...props.customerDetails,
       email: props.email,
     });
-  }, []);
+  }, [props.customerDetails, props.email]);
 
   function nextQuestion() {
     if (currentindex != props.quiz.questions.length - 1) {

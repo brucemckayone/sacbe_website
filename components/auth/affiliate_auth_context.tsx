@@ -81,7 +81,7 @@ export default function UserProvider({
         setUserDetails(data.user);
       }
     }
-  }, [data.user]);
+  }, [data.user ?? "", session.data?.user?.email]);
 
   const value: authContextType = {
     user: user,

@@ -15,7 +15,7 @@ function CheckoutComplete() {
     logEvent(analytics, "order_completed", {
       checkout_session: sessionId,
     });
-  }, []);
+  }, [sessionId]);
   return (
     <div className="w-full m-auto h-screen">
       <div className="w-11/12 md:w-6/12 m-auto">
