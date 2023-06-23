@@ -3,12 +3,16 @@ import PrimaryButton from "@/components/buttons/primaryButton";
 import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { log } from "console";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { MultiAwnserCard } from "../(quiz)/[quiz]/QuizBody";
 import TextInput from "@/components/form/inputs/TextInput";
+import ConfettiExplosion from "react-confetti-explosion";
+import { generateSlug } from "@/utils/url/formater";
+import ProgressBar from "@ramonak/react-progress-bar";
+
 export function QuickQuestion(props: {
   endpoint?: string;
   question?: string;
@@ -38,6 +42,7 @@ export function QuickQuestion(props: {
     "Preforance",
     "Focus",
   ];
+
   const [selectedTags, setSelectedTags] = useState([
     "Interested in cacao points",
   ] as string[]);
@@ -51,64 +56,96 @@ export function QuickQuestion(props: {
         setData({
           answers: props.answers!,
           question: props.question,
-          endpoint: props.endpoint!,
+          endpoint: generateSlug(props.endpoint!)!,
         });
       }
       setIsLoading(false);
     };
     fetchData();
   }, []);
+  const [total, setTotal] = useState(0);
+  const [results, setResults] = useState({} as { [key: string]: number });
+
+  useEffect(() => {
+    let total = 0;
+    for (const [key, value] of Object.entries(results)) {
+      total += value;
+    }
+    setTotal(total);
+  }, [results]);
 
   if (isLoading) return <></>;
 
   return (
     <div className={!props.question ? `bg-tertiaryContainer` : ""}>
       {selectedAwnser ? (
-        <div className="flex flex-col items-center justify-center">
-          <h5>Thank you for your feedback!</h5>
-          <p className="text-sm text-center">
-            Soon you will be able earn cacao points for your feedback? get
-            notified when this feature is available.
-          </p>
-          <PrimaryButton
-            onClicked={async () => {
-              if (session.data?.user?.email) {
-                await signUp(session.data?.user?.email);
-              } else {
-                open();
-              }
-            }}
-            text={isSending ? "Loading" : "Get Notified"}
-            isPrimary={false}
-          />
-          <Modal opened={opened} onClose={close} title="Get Notified">
-            <TextInput
-              placeHolder="Enter Email..."
-              update={setEmail}
-              value={email}
-              type="email"
-              key="email"
-            ></TextInput>
-            <div className="flex flex-wrap">
-              {tags.map((tag) => {
-                return (
-                  <MultiAwnserCard
-                    key={tag}
-                    addToSelected={setSelectedTags}
-                    awnser={tag}
-                    selected={selectedTags}
-                  />
-                );
-              })}
-            </div>
+        <div>
+          <div className="flex flex-col items-center justify-center">
+            <h5>Thank you for your feedback!</h5>
+            <ConfettiExplosion />
+            <p className="text-sm text-center">
+              Soon you will be able earn cacao points for your feedback? get
+              notified when this feature is available.
+            </p>
             <PrimaryButton
               onClicked={async () => {
-                await signUp(email);
+                if (session.data?.user?.email) {
+                  await signUp(session.data?.user?.email);
+                } else {
+                  open();
+                }
               }}
               text={isSending ? "Loading" : "Get Notified"}
               isPrimary={false}
             />
-          </Modal>
+
+            <Modal opened={opened} onClose={close} title="Get Notified">
+              <TextInput
+                placeHolder="Enter Email..."
+                update={setEmail}
+                value={email}
+                type="email"
+                key="email"
+              ></TextInput>
+              <div className="flex flex-wrap">
+                {tags.map((tag) => {
+                  return (
+                    <MultiAwnserCard
+                      key={tag}
+                      addToSelected={setSelectedTags}
+                      awnser={tag}
+                      selected={selectedTags}
+                    />
+                  );
+                })}
+              </div>
+              <PrimaryButton
+                onClicked={async () => {
+                  await signUp(email);
+                }}
+                text={isSending ? "Loading" : "Get Notified"}
+                isPrimary={false}
+              />
+            </Modal>
+          </div>
+          <div>
+            {results &&
+              !isLoading &&
+              data.answers.map((answer: string) => {
+                return (
+                  <div className="p-2 m-2">
+                    <ProgressBar
+                      completed={(results[answer] / total) * 100 * 1.3}
+                      customLabel={answer}
+                      labelAlignment="right"
+                      labelColor="black"
+                      bgColor="#FF932F"
+                      className="shadow-lg rounded-full"
+                    />
+                  </div>
+                );
+              })}
+          </div>
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
@@ -120,13 +157,21 @@ export function QuickQuestion(props: {
                   key={answer}
                   onClick={async () => {
                     if (selectedAwnser != answer) {
+                      setIsLoading(true);
                       setAwnser(answer);
-
                       await fetchPostJSON("/api/analytics/single", {
                         answer: answer,
-                        endpoint: data.endpoint,
+                        endpoint: generateSlug(data.endpoint!),
                         email: session.data?.user?.email ?? null,
                       });
+                      setResults(
+                        await fetchGetJSON(
+                          `/api/analytics/single/${generateSlug(
+                            data.endpoint!
+                          )}`
+                        )
+                      );
+
                       toast.success("Thank you for your feedback!");
                       setIsLoading(false);
                     }
