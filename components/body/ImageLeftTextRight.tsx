@@ -1,13 +1,13 @@
 import React from "react";
 import Image from "next/image";
-import Card from "../cards/card";
 import SlideInUp from "../animations/slide_in_up";
 import LinkButton from "../buttons/LinkButton";
+import dynamic from "next/dynamic";
 
 interface IImageLeftTextRight {
   title: string;
   image: string;
-  shadow?: string;
+
   textHeaderSmall: string;
   textHeaderLarge: string;
   text: string;
@@ -19,7 +19,7 @@ interface IImageLeftTextRight {
 export function ImageLeftTextRight({
   title,
   image,
-  shadow,
+
   text,
   textHeaderLarge,
   textHeaderSmall,
@@ -28,6 +28,10 @@ export function ImageLeftTextRight({
 
   jiggle,
 }: IImageLeftTextRight): JSX.Element {
+  const Card = dynamic(() =>
+    import("../cards/card").then((res) => res.default)
+  );
+
   return (
     <div className="bg-tertiaryContainer pb-28">
       <h2 className="py-20 mx-5 md:mx-10 text-center text-7xl lg:text-8xl md:text-7xl">
@@ -52,7 +56,7 @@ export function ImageLeftTextRight({
                         ? "animate-float z-10 object-contain "
                         : " object-contain z-10"
                     }
-                  ></Image>
+                  />
                 </div>
               </div>
             </SlideInUp>
@@ -62,12 +66,10 @@ export function ImageLeftTextRight({
             hasColor={false}
           >
             <div className="basis-1/2">
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <h5 className="flex md:w-1/2 underline">{textHeaderSmall}</h5>
-              </SlideInUp>
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <h3 className="flex md:w-3/4"> {textHeaderLarge}</h3>
-              </SlideInUp>
+              <h5 className="flex md:w-1/2 underline">{textHeaderSmall}</h5>
+
+              <h3 className="flex md:w-3/4"> {textHeaderLarge}</h3>
+
               <SlideInUp animiation="animate-slide_in_left_blur">
                 <p className="flex md:w-3/4 text-xl">{text}</p>
               </SlideInUp>

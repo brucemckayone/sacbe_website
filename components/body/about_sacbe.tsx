@@ -6,7 +6,6 @@ const AboutSacbe: React.FC = () => {
     <ImageLeftTextRight
       title="OUR JOURNEY"
       image="/cacao_pod_floating.png"
-      shadow="/drop_shadow.png"
       text="Sacbe Cacao is sourced from Arriba Nacional beans. Organically
                   and sustainably grown in Esmeraldas, placed in the north west
                   Andean Mountain range and situated at 2000 meters altitude,
@@ -17,7 +16,7 @@ const AboutSacbe: React.FC = () => {
       buttonLink="\about"
       buttonText="Learn More"
       jiggle={true}
-    ></ImageLeftTextRight>
+    />
   );
 };
 

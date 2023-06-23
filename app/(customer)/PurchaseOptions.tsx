@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 import sacbeIconImage from "@/public/sacbe_logo_icon.png";
 import sacbeFloatingShapesImage from "@/public/sacbe_product_with_shapes.webp";
+import dynamic from "next/dynamic";
 
 type props = {
   isHorizontal: boolean;
@@ -24,7 +25,7 @@ const defaultProps = {
   compact: false,
 };
 
-export function PurchaseOptions(props: props) {
+export default function PurchaseOptions(props: props) {
   const { data: session } = useSession();
   const { user } = useUser();
   const [isLoadingSub, setIsLoadingSub] = useState(false);
@@ -36,6 +37,12 @@ export function PurchaseOptions(props: props) {
 
   const [oneoffQty, setOneoffQty] = useState(1);
   const [subQty, setSubQty] = useState(1);
+
+  const SmallButtonLoader = dynamic(() =>
+    import("@/components/loaders/ButtonLoader").then(
+      (res) => res.SmallButtonLoader
+    )
+  );
 
   return (
     <div

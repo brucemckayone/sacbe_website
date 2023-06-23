@@ -1,7 +1,14 @@
-import { RiskApealCards } from "./RiskApealCards";
-import { PurchaseOptions } from "./PurchaseOptions";
+import dynamic from "next/dynamic";
 
 export function CallToActionBuyHomePage() {
+  const RiskApealCards = dynamic(() =>
+    import("./RiskApealCards").then((res) => res.RiskApealCards)
+  );
+
+  const PurchaseOptions = dynamic(() =>
+    import("./PurchaseOptions").then((res) => res.default)
+  );
+
   return (
     <div className="bg-primaryContainer m-auto pt-20 md:pt-40  ">
       <div className="flex flex-col md:flex-row w-11/12 md:w-9/12 m-auto">

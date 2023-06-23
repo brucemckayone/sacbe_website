@@ -10,6 +10,8 @@ import { TestMarkdown } from "./MarkDown";
 
 import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
 import { notFound } from "next/navigation";
+import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
+import { PostMetaData } from "./PostMetaData";
 
 async function getPost(slug: string) {
   const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {
@@ -77,13 +79,13 @@ export default async function Page({
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const BlogPostSuggestionCard = dynamic(() =>
-    import("./BlogPostSuggestionCard").then((mod) => mod.BlogPostSuggestionCard)
-  );
+  // const BlogPostSuggestionCard = dynamic(() =>
+  //   import("./BlogPostSuggestionCard").then((mod) => mod.BlogPostSuggestionCard)
+  // );
 
-  const PostMetaData = dynamic(() =>
-    import("./PostMetaData").then((mod) => mod.PostMetaData)
-  );
+  // const PostMetaData = dynamic(() =>
+  //   import("./PostMetaData").then((mod) => mod.PostMetaData)
+  // );
 
   const { post, relatedPosts } = await getPost(params.slug as string);
 

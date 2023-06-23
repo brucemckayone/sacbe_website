@@ -1,36 +1,38 @@
 "use client";
-import PrimaryButton from "@/components/buttons/primaryButton";
-import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
-import { log } from "console";
-import { useSession } from "next-auth/react";
-import React, { useCallback, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Modal } from "@mantine/core";
+import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { useDisclosure } from "@mantine/hooks";
-import { MultiAwnserCard } from "../(quiz)/[quiz]/QuizBody";
-import TextInput from "@/components/form/inputs/TextInput";
-import ConfettiExplosion from "react-confetti-explosion";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
 import { generateSlug } from "@/utils/url/formater";
-import ProgressBar from "@ramonak/react-progress-bar";
+import dynamic from "next/dynamic";
 
-export function QuickQuestion(props: {
+type QuickQuestionProps = {
   endpoint?: string;
   question?: string;
   answers?: string[];
-}) {
-  //fetch data from api
-  const [data, setData] = useState(
-    {} as { question: string; answers: string[]; endpoint: string }
-  );
+};
 
-  const [opened, { open, close }] = useDisclosure(false);
-  const session = useSession();
+export function QuickQuestion(props: QuickQuestionProps) {
+  const [data, setData] = useState<{
+    question: string;
+    answers: string[];
+    endpoint: string;
+  }>({
+    question: "",
+    answers: [],
+    endpoint: "",
+  });
+
   const [isLoading, setIsLoading] = useState(true);
 
   const [isSending, setIsSending] = useState(false);
   const [email, setEmail] = useState("");
 
-  const [selectedAwnser, setAwnser] = useState("");
+  const [selectedAnswer, setAnswer] = useState("");
+
+  const [total, setTotal] = useState(0);
+  const [results, setResults] = useState<{ [key: string]: number }>({});
 
   const tags = [
     "Ceremony",
@@ -43,29 +45,57 @@ export function QuickQuestion(props: {
     "Focus",
   ];
 
-  const [selectedTags, setSelectedTags] = useState([
+  const [selectedTags, setSelectedTags] = useState<string[]>([
     "Interested in cacao points",
-  ] as string[]);
+  ]);
+
+  const [opened, { open, close }] = useDisclosure(false);
+  const session = useSession();
+
+  const ProgressBar = dynamic(() =>
+    import("@ramonak/react-progress-bar").then((res) => res.default)
+  );
+
+  const ConfettiExplosion = dynamic(() =>
+    import("react-confetti-explosion").then((res) => res.default)
+  );
+
+  const PrimaryButton = dynamic(() =>
+    import("@/components/buttons/primaryButton").then((res) => res.default)
+  );
+
+  const TextInput = dynamic(() =>
+    import("@/components/form/inputs/TextInput").then((res) => res.default)
+  );
+
+  const MultiAwnserCard = dynamic(() =>
+    import("../(quiz)/[quiz]/QuizBody").then((res) => res.MultiAwnserCard)
+  );
+
+  const TextLoader = dynamic(() =>
+    import("@/components/loaders/TextLoader").then((res) => res.default)
+  );
+
+  const Modal = dynamic(() => import("@mantine/core").then((res) => res.Modal));
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      if (!data.answers || !data.question || !data.endpoint)
+      if (!props.answers || !props.question || !props.endpoint) {
         if (!props.question) {
           setData(await fetchGetJSON("/api/analytics/quick_question"));
         } else {
           setData({
             answers: props.answers!,
             question: props.question,
-            endpoint: generateSlug(props.endpoint!)!,
+            endpoint: generateSlug(props.endpoint!),
           });
         }
+      }
       setIsLoading(false);
     };
     fetchData();
   }, [props.answers, props.question, props.endpoint]);
-  const [total, setTotal] = useState(0);
-  const [results, setResults] = useState({} as { [key: string]: number });
 
   useEffect(() => {
     let total = 0;
@@ -73,13 +103,18 @@ export function QuickQuestion(props: {
       total += value;
     }
     setTotal(total);
-  }, [results, props.answers, props.question, props.endpoint]);
+  }, [results]);
 
-  if (isLoading) return <></>;
+  if (isLoading)
+    return (
+      <div className="flex justify-center">
+        <TextLoader />
+      </div>
+    );
 
   return (
     <div className={!props.question ? `bg-tertiaryContainer` : ""}>
-      {selectedAwnser ? (
+      {selectedAnswer ? (
         <div>
           <div className="flex flex-col items-center justify-center">
             <h5>Thank you for your feedback!</h5>
@@ -91,7 +126,7 @@ export function QuickQuestion(props: {
             <PrimaryButton
               onClicked={async () => {
                 if (session.data?.user?.email) {
-                  await signUp(session.data?.user?.email);
+                  await signUp(session.data.user.email);
                 } else {
                   open();
                 }
@@ -107,7 +142,7 @@ export function QuickQuestion(props: {
                 value={email}
                 type="email"
                 key="email"
-              ></TextInput>
+              />
               <div className="flex flex-wrap">
                 {tags.map((tag) => {
                   return (
@@ -120,6 +155,7 @@ export function QuickQuestion(props: {
                   );
                 })}
               </div>
+
               <PrimaryButton
                 onClicked={async () => {
                   await signUp(email);
@@ -131,16 +167,19 @@ export function QuickQuestion(props: {
           </div>
           <div>
             {results &&
-              !isLoading &&
-              data.answers.map((answer: string) => {
+              Object.entries(results).map(([answer, value]) => {
                 return (
-                  <div key={answer + "progress bar"} className="p-2 m-2">
+                  <div
+                    key={answer + "progress bar"}
+                    className="p-2 m-2 animate-zoom_in"
+                  >
                     <ProgressBar
-                      completed={(results[answer] / total) * 100 * 1.3}
-                      customLabel={answer}
+                      completed={(value / total) * 100 * 1.3}
+                      customLabel={`${answer} ${value}`}
                       labelAlignment="right"
-                      labelColor="black"
+                      labelColor="white"
                       bgColor="#FF932F"
+                      height="30px"
                       className="shadow-lg rounded-full"
                     />
                   </div>
@@ -150,7 +189,7 @@ export function QuickQuestion(props: {
         </div>
       ) : (
         <div className="flex flex-col items-center justify-center">
-          <h5>{data.question}</h5>
+          <h5 className="text-center text-xl">{data.question}</h5>
           <div className="flex flex-wrap mt-1 mx-5">
             {data.answers &&
               data.answers.map((answer) => {
@@ -158,18 +197,18 @@ export function QuickQuestion(props: {
                   <div
                     key={answer}
                     onClick={async () => {
-                      if (selectedAwnser != answer) {
+                      if (selectedAnswer !== answer) {
                         setIsLoading(true);
-                        setAwnser(answer);
+                        setAnswer(answer);
                         await fetchPostJSON("/api/analytics/single", {
                           answer: answer,
-                          endpoint: generateSlug(data.endpoint!),
-                          email: session.data?.user?.email ?? null,
+                          endpoint: generateSlug(data.endpoint),
+                          email: session.data?.user?.email || null,
                         });
                         setResults(
                           await fetchGetJSON(
                             `/api/analytics/single/${generateSlug(
-                              data.endpoint!
+                              data.endpoint
                             )}`
                           )
                         );
@@ -179,14 +218,20 @@ export function QuickQuestion(props: {
                       }
                     }}
                     className={`${
-                      selectedAwnser == answer && "bg-sacbeBrandColor"
+                      selectedAnswer === answer ? "bg-sacbeBrandColor" : ""
                     } rounded-md border-2 px-2 py-1 m-0.5 md:m-2 cursor-pointer`}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={answer}
                   >
                     <p className="text-sm md:text-lg">{answer}</p>
                   </div>
                 );
               })}
           </div>
+          <p className="text-sm">
+            Make a choice to see what other readers think...
+          </p>
         </div>
       )}
     </div>
@@ -196,12 +241,12 @@ export function QuickQuestion(props: {
     setIsSending(true);
     const resp = await fetchPostJSON("api/mailing/signup", {
       email: givenEmail,
-      tags: [...selectedTags, selectedAwnser],
+      tags: [...selectedTags, selectedAnswer],
     });
     console.log(resp);
 
     setIsSending(false);
-    if (resp.success == true) {
+    if (resp.success === true) {
       toast.success(
         `${resp.message} - Thanks for signing up, we will notify you when this feature is available`
       );

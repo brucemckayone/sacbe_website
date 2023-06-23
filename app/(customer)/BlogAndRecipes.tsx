@@ -2,12 +2,24 @@ import { BlogPostType } from "@/types/blogPost";
 import { RecipeType } from "@/types/recipieType";
 import adminInit from "@/utils/firebase/admin_init";
 import { firestore } from "firebase-admin";
-import { BlogPostSuggestionCard } from "./posts/[slug]/BlogPostSuggestionCard";
-import { RecipeCard } from "./recipes/[slug]/RecipeCard";
+import dynamic from "next/dynamic";
+
+adminInit();
+const db = firestore();
 
 export async function BlogAndRecipes() {
+  const BlogPostSuggestionCard = dynamic(() =>
+    import("./posts/[slug]/BlogPostSuggestionCard").then(
+      (res) => res.BlogPostSuggestionCard
+    )
+  );
+  const RecipeCard = dynamic(() =>
+    import("./recipes/[slug]/RecipeCard").then((res) => res.RecipeCard)
+  );
+
   const posts = await getFeaturedPosts();
   const recipes = await getFeaturedRecipes();
+
   const postCards = posts.map((e) => {
     return <BlogPostSuggestionCard post={e} key={e.title} />;
   });
@@ -26,23 +38,19 @@ export async function BlogAndRecipes() {
 }
 
 async function getFeaturedPosts() {
-  adminInit();
-  const db = firestore();
   const snapshot = await db
     .collection("blog_posts")
     .where("featured", "==", true)
-    .limit(2)
+    .limit(4)
     .get();
   return snapshot.docs.map((e) => e.data() as BlogPostType);
 }
 
 async function getFeaturedRecipes() {
-  adminInit();
-  const db = firestore();
   const snapshot = await db
     .collection("recipes")
     .where("featured", "==", true)
-    .limit(2)
+    .limit(4)
     .get();
   return snapshot.docs.map((e) => e.data() as RecipeType);
 }

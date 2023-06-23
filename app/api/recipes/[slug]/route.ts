@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { firestore } from 'firebase-admin';
 import adminInit from '@/utils/firebase/admin_init';
-import { formatTitleForFetch } from '@/utils/url/formater';
 import { DocumentReference } from 'firebase/firestore';
 
 export async function GET(request: NextRequest) {
@@ -12,9 +11,9 @@ export async function GET(request: NextRequest) {
       const recipe = snap.data() as any;
       if (!snap.exists) 
         return NextResponse.json({ recipe: {}, relatedRecipes: [] });
-
-        const relatedRecipes = await getRelatedRecipes(recipe.relatedRecipes);
-        return NextResponse.json({ recipe: recipe, relatedRecipes: relatedRecipes });
+      console.log(recipe);
+      
+      return NextResponse.json({ recipe: recipe, relatedRecipes: await getRelatedRecipes(recipe.relatedRecipes) });
     } catch (e) {
         console.error(e);
         return NextResponse.error();

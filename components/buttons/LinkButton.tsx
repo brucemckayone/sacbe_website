@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import PrimaryButton from "./primaryButton";
 import Link from "next/link";
-import { logEvent } from "firebase/analytics";
+import dynamic from "next/dynamic";
+
 interface props {
   url: string;
   isPrimary: Boolean;
@@ -10,6 +10,10 @@ interface props {
 }
 
 function LinkButton({ url, text, isPrimary = false }: props) {
+  const PrimaryButton = dynamic(() =>
+    import("./primaryButton").then((res) => res.default)
+  );
+
   return (
     <Link href={url}>
       <PrimaryButton

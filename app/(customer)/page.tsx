@@ -1,12 +1,13 @@
 import HomePageHeader from "@/components/headers/homePage/homePageHeader";
 import NavMenuBottom from "@/components/menu/NavMenuBottom";
 import SimpleSlider from "@/components/carousels/testimonial_slider";
-import { VitiminPopovers } from "./VitiminPopovers";
+
 import { AskAQuestion } from "./AskAQuestion";
 import { BlogAndRecipes } from "./BlogAndRecipes";
 
 import dynamic from "next/dynamic";
 import { QuickQuestion } from "./QuickQuestion";
+import { VitiminPopovers } from "./VitiminPopovers.1";
 
 export default function Home() {
   const TheHook = dynamic(() =>

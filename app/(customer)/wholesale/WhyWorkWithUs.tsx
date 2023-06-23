@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { RiskApealCards } from "../RiskApealCards";
 import wholesalePortalMockup from "@/public/wholesale_portal_mock_up.png";
 import cacaoInLoveHeart from "@/public/cacao_love_heart.png";
+import dynamic from "next/dynamic";
+
 const selectors = [
   {
     title: "Excellent Customer Service",
@@ -33,6 +34,11 @@ const selectors = [
 ];
 
 export type selected = "customer" | "pricing" | "portal" | "supply";
+
+const RiskApealCards = dynamic(() =>
+  import("../RiskApealCards").then((res) => res.RiskApealCards)
+);
+
 export function WhyWorkWithUs() {
   const [selected, setSelected] = useState<selected>("pricing");
   return (
@@ -75,12 +81,12 @@ export function WhyWorkWithUs() {
         </ol>
       </div>
       <div className="w-full bg-surface rounded-xl p-3 drop-shadow-md ">
-        {generateExtraDetails()}
+        <GenerateExtraDetails />
       </div>
     </div>
   );
 
-  function generateExtraDetails() {
+  function GenerateExtraDetails() {
     switch (selected) {
       case "customer":
         return (

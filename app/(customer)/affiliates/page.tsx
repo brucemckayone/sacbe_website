@@ -54,6 +54,7 @@ export default async function AffiliatePage() {
   const AffiliatePageBody = dynamic(() =>
     import("./AffiliatePageBody").then((res) => res.AffiliatePageBody)
   );
+
   return (
     <>
       <AffiliateHeader />

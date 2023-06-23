@@ -1,12 +1,13 @@
 import React from "react";
-import { BlogPostSuggestionCard } from "../posts/[slug]/BlogPostSuggestionCard";
-import { RecipeCard } from "../recipes/[slug]/RecipeCard";
 import Link from "next/link";
+
 import { RecipeType } from "@/types/recipieType";
 import { BlogPostType } from "@/types/blogPost";
+
 import { Metadata } from "next";
 import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
+import dynamic from "next/dynamic";
 
 export const metadata: Metadata = {
   title: "Resources",
@@ -80,6 +81,16 @@ async function ResourcesPage({
     getFeaturedRecipes(recipeAfter),
   ]);
 
+  const BlogPostSuggestionCard = dynamic(() =>
+    import("../posts/[slug]/BlogPostSuggestionCard").then(
+      (res) => res.BlogPostSuggestionCard
+    )
+  );
+
+  const RecipeCard = dynamic(() =>
+    import("../recipes/[slug]/RecipeCard").then((res) => res.RecipeCard)
+  );
+
   const postCards = posts.map((e) => {
     return <BlogPostSuggestionCard post={e.data} key={e.data.title} />;
   });
@@ -89,6 +100,7 @@ async function ResourcesPage({
   });
 
   const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);
+
   return (
     <div>
       <div className="text-center">

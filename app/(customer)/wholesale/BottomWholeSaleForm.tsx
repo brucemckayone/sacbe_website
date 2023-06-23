@@ -1,8 +1,10 @@
 import React from "react";
-import { WholeSaleForm } from "./WholeSaleForm.1";
 import Link from "next/link";
 import Image from "next/image";
 import wholsaleMockup from "@/public/wholesale_portal_mock_up.png";
+
+import { WholeSaleForm } from "./WholeSaleForm.1";
+
 export function BottomWholeSaleForm() {
   return (
     <div className="flex flex-col md:flex-row my-20 m-auto">

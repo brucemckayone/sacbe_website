@@ -3,13 +3,12 @@ import Image from "next/image";
 import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
 import dynamic from "next/dynamic";
-import { PostMetaData } from "../../posts/[slug]/PostMetaData";
-import { MarkDown } from "../../posts/[slug]/MarkDown";
-import { FeelsProgressBar } from "./FeelsProgressBar";
-import { RecipeCard } from "./RecipeCard.1";
 import { NewsletterSignup } from "./NewsletterSignup";
 import { notFound } from "next/navigation";
-
+import { MarkDown } from "../../posts/[slug]/MarkDown.1";
+import { PostMetaData } from "../../posts/[slug]/PostMetaData";
+import { FeelsProgressBar } from "./FeelsProgressBar";
+import { RecipeCard } from "./RecipeCard";
 export async function generateMetadata({
   params,
 }: {
@@ -73,7 +72,7 @@ async function RercipePage({
   if (!recipe?.title) return notFound();
 
   const MarkDown = dynamic(() =>
-    import("../../posts/[slug]/MarkDown").then((mod) => mod.MarkDown)
+    import("../../posts/[slug]/MarkDown.1").then((mod) => mod.MarkDown)
   );
   const PostMetaData = dynamic(() =>
     import("../../posts/[slug]/PostMetaData").then((mod) => mod.PostMetaData)
@@ -82,9 +81,7 @@ async function RercipePage({
   const RecipeCard = dynamic(() =>
     import("./RecipeCard.1").then((mod) => mod.RecipeCard)
   );
-  const FeelsProgressBar = dynamic(() =>
-    import("./FeelsProgressBar").then((mod) => mod.FeelsProgressBar)
-  );
+
   return (
     <main className="w-full">
       <div className=" flex justify-center">

@@ -20,7 +20,7 @@ function TextInput({
   className,
 }: Props) {
   return (
-    <div className="mb-3" key={label + placeHolder}>
+    <div className="mb-3" key={label + placeHolder} id={type}>
       {label && (
         <label className="">
           <h6 className="">{label}</h6>

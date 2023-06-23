@@ -1,13 +1,22 @@
 "use client";
+
+import dynamic from "next/dynamic";
 import SlideInUp from "../animations/slide_in_up";
-import SectionHeader from "../titleHeader";
-import Card from "../cards/card";
 import BenifitsCard from "../cards/benifits_card";
-import reviews from "@/lib/constants/reviews";
-import SimpleSlider from "../carousels/testimonial_slider";
-import PrimaryButton from "../buttons/primaryButton";
+import Card from "../cards/card";
 
 export default function BenifitsOfCacao() {
+  const Card = dynamic(() =>
+    import("../cards/card").then((res) => res.default)
+  );
+  const SlideInUp = dynamic(() =>
+    import("../animations/slide_in_up").then((res) => res.default)
+  );
+
+  const BenifitsCard = dynamic(() =>
+    import("../cards/benifits_card").then((res) => res.default)
+  );
+
   return (
     <div className="bg-gradient-to-b from-secondaryContainer to-primaryContainer py-8 md:px-8 ">
       <div className="flex flex-col-reverse lg:flex-row w-full md:w-10/12 m-auto">
@@ -50,42 +59,42 @@ export default function BenifitsOfCacao() {
               headerText="Sustained Energy"
               imagePath="icons/energy_icon.svg"
               text="Long lasting without the jitters"
-            ></BenifitsCard>
+            />
             <BenifitsCard
               imagePath="icons/mood_icon.svg"
               headerText="Enhanced Mood"
               text="See the world through fresh eyes"
-            ></BenifitsCard>
+            />
             <BenifitsCard
               imagePath="icons/hammock_icon.svg"
               headerText="Relaxation"
               text="Deep nervous system relaxation"
-            ></BenifitsCard>{" "}
+            />
             <BenifitsCard
               imagePath="icons/heart_open_icon.svg"
               headerText="Heart Opening"
               text="Presences you to the love that surrounds you"
-            ></BenifitsCard>
+            />
             <BenifitsCard
               imagePath="icons/focus_icon.svg"
               headerText="Improved Focus"
               text="Sharp content mindful focus"
-            ></BenifitsCard>{" "}
+            />
             <BenifitsCard
               imagePath="icons/emotional_body_icon.svg"
               headerText="Emotional Body"
               text="Support your emotional body"
-            ></BenifitsCard>
+            />
             <BenifitsCard
               imagePath="icons/mind_body_icon.svg"
               headerText="Mind & Body "
               text="Deepen your mind body connection"
-            ></BenifitsCard>{" "}
+            />{" "}
             <BenifitsCard
               imagePath="icons/creativity_icon.svg"
               headerText="Creativity"
               text="Helps drop you into sustained a flowstate"
-            ></BenifitsCard>
+            />
           </div>
         </Card>
       </div>

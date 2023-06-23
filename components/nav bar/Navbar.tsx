@@ -55,12 +55,17 @@ export default function Navbar() {
           >
             <div className="w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
               <div className="flex justify-end mr-16 rounded-lg">
-                <div className="bg-surface drop-shadow-lg rounded-full mt-3 mr-5 opacity-80">
+                <div
+                  className="bg-surface drop-shadow-lg rounded-full mt-3 mr-5 opacity-80"
+                  aria-labelledby="open-menu"
+                  role="menu"
+                >
                   <Hamburger
                     toggled={isDrawerOpen}
                     onToggle={() => {
                       toggleDrawer();
                     }}
+                    label="Show menu"
                   />
                 </div>
               </div>

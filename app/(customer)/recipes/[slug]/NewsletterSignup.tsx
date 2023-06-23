@@ -1,16 +1,18 @@
 "use client";
 import { MultiAwnserCard } from "@/app/(quiz)/[quiz]/QuizBody";
-import { useUser } from "@/components/auth/affiliate_auth_context";
-import { analytics } from "@/lib/firebase/firebase";
 import { logEvent } from "@firebase/analytics";
+import dynamic from "next/dynamic";
 import { useState } from "react";
-import ConfettiExplosion from "react-confetti-explosion";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [intrestList, setIntrestList] = useState(["newsletter"]);
   const [signedUp, setSignedUp] = useState(false);
+
+  const ConfettiExplosion = dynamic(() =>
+    import("react-confetti-explosion").then((res) => res.default)
+  );
 
   const intrests = [
     "Newsletter",
@@ -24,7 +26,7 @@ export function NewsletterSignup() {
   ];
 
   if (signedUp)
-    //confgetti animation
+    //confetti animation
     return (
       <div className="w-full bg-primaryContainer m-auto flex justify-center pb-10 mt-10 p-5 rounded drop-shadow-lg">
         <div className=" w-11/12 md:w-8/12">
@@ -42,8 +44,12 @@ export function NewsletterSignup() {
   return (
     <div className="w-full bg-primaryContainer m-auto flex justify-center pb-10 mt-10 rounded drop-shadow-lg">
       <div className=" w-11/12 md:w-8/12">
+        <label htmlFor="email" className="hidden">
+          Email
+        </label>
         <input
           type="email"
+          id="email"
           autoComplete="email"
           value={email}
           onChange={(event) => {
@@ -53,7 +59,7 @@ export function NewsletterSignup() {
           className="text-onPrimaryContainer focus:outline-none text-4xl placeholder:text-3xl md:text-5xl border-b-2 font-display placeholder:text-onPrimaryContainer self-center w-full  bg-transparent m-auto  pt-2 mt-10"
         />
         <div className="flex justify-between mt-2">
-          <p className="text-sm mt-2">Choose what you want to hear about?</p>
+          <h3 className="text-sm mt-2">Choose what you want to hear about?</h3>
           <button
             onClick={async () => {
               setLoading(true);
@@ -64,9 +70,9 @@ export function NewsletterSignup() {
             type="button"
             className="self-end rounded-md px-2 py-1 border-2 font-display"
           >
-            <p className="text-lg self-end">
-              {loading ? "Loading.." : "SUBMIT"}
-            </p>
+            <span className="text-lg self-end">
+              {loading ? "Loading..." : "Submit Newsletter Signup"}
+            </span>
           </button>
         </div>
 
@@ -90,6 +96,8 @@ export function NewsletterSignup() {
     const fetchPostJSON = (await import("@/utils/stripe/fetchPostJson"))
       .fetchPostJSON;
     const toast = (await import("react-hot-toast")).toast;
+
+    const analytics = (await import("@/lib/firebase/firebase")).analytics;
 
     const response = await fetchPostJSON("/api/mailing/signup", {
       email: email,

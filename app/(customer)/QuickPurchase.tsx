@@ -5,7 +5,7 @@ import getAffiliatePaymentLinks from "@/utils/client/stripe/links/getAffiliatePa
 import Hamburger from "hamburger-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { PurchaseOptions } from "./PurchaseOptions";
+import PurchaseOptions from "./PurchaseOptions";
 import { RiskApealCards } from "./RiskApealCards";
 import toast, { Toaster } from "react-hot-toast";
 import dollarIcon from "@/public/icons/dollar_icon.svg";

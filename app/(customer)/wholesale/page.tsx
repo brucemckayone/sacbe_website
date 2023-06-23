@@ -1,5 +1,5 @@
 import React from "react";
-import NavMenuBottom from "@/components/menu/NavMenuBottom";
+
 import Image from "next/image";
 import { Metadata } from "next";
 import wholesalePortalMockUp from "@/public/wholesale_portal_mock_up.png";
@@ -53,6 +53,10 @@ const SacbeCacaoWholesale = async () => {
     import("./AboutPackaging").then((res) => res.AboutPackaging)
   );
 
+  const NavMenuBottom = dynamic(
+    () => import("@/components/menu/NavMenuBottom")
+  );
+
   return (
     <div>
       <WholesaleHeader />
@@ -87,7 +91,7 @@ const SacbeCacaoWholesale = async () => {
             </p>
           </div>
           <WhyWorkWithUs />
-          <div className="md:col-span-4 md:col-start-3 p-3 bg-surfaceVarient my-10 rounded-lg shadow-xl hover:shadow-2xl duration-200">
+          <div className="md:col-span-4 md:col-start-3 p-3 bg-surfaceVarient my-20 rounded-lg shadow-xl hover:shadow-2xl duration-200">
             <WholesalePricingTable />
           </div>
           <AboutPackaging />

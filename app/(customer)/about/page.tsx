@@ -1,13 +1,8 @@
 import React from "react";
-
-import Image from "next/image";
-import SlideInUp from "@/components/animations/slide_in_up";
-
 import Link from "next/link";
-import { Section } from "./Section";
-
 import { AboutClouds } from "../wholesale/AboutClouds";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 const description =
   "Learn about our mission, values, and the story behind our brand. Discover how we are dedicated to providing high-quality products, fostering sustainable practices, and promoting wellness. Explore our About page to understand our commitment to your well-being and the positive impact we strive to make in the world.";
@@ -34,12 +29,11 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    url: "https://sacbe-ceremonial-cacao.com/about",
+    url: "https://www.sacbe-ceremonial-cacao.com/about",
     title: "About",
     description: description,
     siteName: "Sacbe Cacao",
   },
-
   alternates: {
     canonical: "https://www.sacbe-ceremonial-cacao.com/about",
   },
@@ -54,6 +48,12 @@ export interface sectionProps {
 }
 
 async function About() {
+  const TextSection = dynamic(() =>
+    import("./TextSection").then((res) => res.default)
+  );
+
+  const Section = dynamic(() => import("./Section").then((res) => res.Section));
+
   return (
     <div>
       <AboutClouds />
@@ -74,7 +74,7 @@ async function About() {
               imageUrl="/cacao_pods_orgins.jpg"
               paragraph="Our cacao is organically and sustainably grown in Esmeraldas, a land known for its bio-diversity and rich flavor profile. We source our cacao from Arriba Nacional beans grown at an altitude of 2000 meters, contributing to its unique flavor and strong spirit."
               subHeader="Andean-sourced Arriba Nacional beans"
-            ></Section>
+            />
             {/*
             <h2 className="self-start text-6xl md:text-9xl w-11/12 md:w-7/12  md:mx-20 mt-10 ">
               More than just Chocolate
@@ -133,20 +133,3 @@ async function About() {
   );
 }
 export default About;
-function TextSection({
-  body,
-  smallHeader,
-  largeHeader,
-}: {
-  body: string;
-  smallHeader: string;
-  largeHeader: string;
-}) {
-  return (
-    <SlideInUp animiation="animate-slide_in_left_fade">
-      <h5 className=" text-2xl underline">{smallHeader}</h5>
-      <h3 className=" text-4xl mb-5">{largeHeader}</h3>
-      <p className="text-xl">{body}</p>
-    </SlideInUp>
-  );
-}

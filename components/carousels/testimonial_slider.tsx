@@ -1,9 +1,13 @@
 "use client";
-import { Carousel } from "@mantine/carousel";
-import FiveStars from "../ratings/five_stars";
 import reviews from "@/lib/constants/reviews";
+import { Carousel } from "@mantine/carousel";
+import dynamic from "next/dynamic";
 
 const SimpleSlider = () => {
+  const FiveStars = dynamic(() =>
+    import("../ratings/five_stars").then((res) => res.default)
+  );
+
   return (
     <div className="bg-primaryContainer py-10 ">
       <Carousel

@@ -1,9 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import affiliatePortalMockUp from "@/public/affiliate_portal_mock_up.png";
-import { ReasonToJoin } from "../../../components/affiliate/ReasonToJoin";
+import dynamic from "next/dynamic";
 
 export function AffiliatePageBody() {
+  const ReasonToJoin = dynamic(() =>
+    import("../../../components/affiliate/ReasonToJoin").then(
+      (res) => res.ReasonToJoin
+    )
+  );
   return (
     <div className=" px-4 flex flex-row  w-full justify-center bg-tertiaryContainer">
       <div className=" w-fit lg:w-7/12 pt-20">
@@ -23,7 +28,7 @@ export function AffiliatePageBody() {
           height={800}
           alt={"affiliate portal mock up "}
           className=" m-auto rounded-lg"
-        ></Image>
+        />
         <div>
           <h3 className="text-5xl mb-10 mt-5">
             Embrace the Spiritual Connection: Enter our Cacao Affiliate Portal
