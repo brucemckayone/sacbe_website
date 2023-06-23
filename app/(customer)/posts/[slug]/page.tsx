@@ -7,12 +7,11 @@ import { BlogPostType } from "@/types/blogPost";
 import dynamic from "next/dynamic";
 
 import { PostMetaData } from "./PostMetaData";
-import { MarkDown } from "./MarkDown";
+import { MarkDown, TestMarkdown } from "./MarkDown";
 import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
 import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
 
 async function getPost(slug: string) {
-  console.log("slug is here: " + slug);
   const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {
     method: "GET",
     next: {
@@ -31,30 +30,31 @@ export async function generateMetadata({
   searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<Metadata> {
   const { post, relatedPosts } = await getPost(params.slug as string);
+
   return {
     title: post.title,
     description: post.excerpt,
     authors: {
-      name: post.publisher.name,
+      name: post.publisher?.name ?? "",
     },
     keywords: post.tags,
     publisher: "Sacbe Cacao",
     alternates: {
-      canonical: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
+      canonical: `${homeUrl}/posts/${post.slug}`,
     },
     creator: "Sacbe Cacao",
     twitter: {
       card: "summary_large_image",
       description: post.excerpt,
-      title: post.title.replaceAll("-", " "),
+      title: post.title,
     },
     openGraph: {
-      title: post.title.replaceAll("-", " "),
+      title: post.title,
       description: post.excerpt,
-      url: `${homeUrl}/posts/${post.title.replaceAll(" ", "-")}`,
+      url: `${homeUrl}/posts/${post.slug}`,
       type: "article",
       article: {
-        authors: [post.publisher.name],
+        authors: [post.publisher?.name ?? ""],
         tags: post.tags,
       },
     },
@@ -82,8 +82,7 @@ export default async function Page({
 
   const { post, relatedPosts } = await getPost(params.slug as string);
 
-  console.log("post type is: " + typeof post);
-  console.log("related type is: " + typeof relatedPosts);
+  if (!post.publisher) return <div>404</div>;
 
   return (
     <main className="flex flex-row justify-center mx-3">
@@ -108,8 +107,11 @@ export default async function Page({
           tags={post.tags}
         />
 
-        <div className=" px-5  my-10 md:p-20">
-          <MarkDown content={post.content} />
+        <div className=" my-10 md:p-20">
+          {/* <MarkDown content={post.content} /> */}
+
+          <TestMarkdown testContent={post.testContent} />
+
           <NewsletterSignup />
           {relatedPosts != undefined && (
             <div className="my-20">

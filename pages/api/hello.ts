@@ -11,11 +11,13 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  const slug = req.query.slug as string;
   adminInit();  
    const snapshots = await firestore()
-      .collection("orders")
-      .limit(1)
+      .collection("blog_posts")
+      .doc(slug)
       .get();
   
-  res.status(200).json((await snapshots.docs[0].data()) as Data );
+  res.status(200).json(( snapshots.data()) as Data );
 }

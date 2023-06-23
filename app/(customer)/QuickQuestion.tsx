@@ -9,7 +9,11 @@ import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { MultiAwnserCard } from "../(quiz)/[quiz]/QuizBody";
 import TextInput from "@/components/form/inputs/TextInput";
-export function QuickQuestion() {
+export function QuickQuestion(props: {
+  endpoint?: string;
+  question?: string;
+  answers?: string[];
+}) {
   //fetch data from api
   const [data, setData] = useState(
     {} as { question: string; answers: string[]; endpoint: string }
@@ -41,7 +45,15 @@ export function QuickQuestion() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      setData(await fetchGetJSON("/api/analytics/quick_question"));
+      if (!props.question) {
+        setData(await fetchGetJSON("/api/analytics/quick_question"));
+      } else {
+        setData({
+          answers: props.answers!,
+          question: props.question,
+          endpoint: props.endpoint!,
+        });
+      }
       setIsLoading(false);
     };
     fetchData();
@@ -50,7 +62,7 @@ export function QuickQuestion() {
   if (isLoading) return <></>;
 
   return (
-    <div className="bg-tertiaryContainer">
+    <div className={!props.question ? `bg-tertiaryContainer` : ""}>
       {selectedAwnser ? (
         <div className="flex flex-col items-center justify-center">
           <h5>Thank you for your feedback!</h5>
@@ -69,11 +81,7 @@ export function QuickQuestion() {
             text={isSending ? "Loading" : "Get Notified"}
             isPrimary={false}
           />
-          <Modal
-            opened={opened}
-            onClose={close}
-            title="Please Select a shipping option"
-          >
+          <Modal opened={opened} onClose={close} title="Get Notified">
             <TextInput
               placeHolder="Enter Email..."
               update={setEmail}

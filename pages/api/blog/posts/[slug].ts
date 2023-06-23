@@ -13,13 +13,13 @@ export default async function handler(
   switch (req.method) {
     case "GET":
       try {
-
-        const slug = req.query.slug as string
-        console.log("server side slug = " + slug);
-          
-        const data = (await getPost(slug)) as BlogPostType;
-        const relatedPosts  = (await getRelatedPosts(data["related_posts"])) as BlogPostType[];
-        return res.status(200).json({ post: data, relatedPosts: relatedPosts });
+        const data = await getPost(req.query.slug as string) as BlogPostType;
+        
+        let related_posts = [] as any[];
+        if (data['relate_posts'] == null) 
+          related_posts = (await getRelatedPosts(data["relate_posts"])) as BlogPostType[];
+        
+        return res.status(200).json({ post: data, relatedPosts: related_posts ?? [] });
       } catch (e) {
         return res.status(500).json({ post: {} , relatedPosts: [], error: e });
       }
@@ -42,15 +42,9 @@ async function getRelatedPosts(relatedPosts: any[]) {
 }
 
 async function getPost(slug: string) {
-  
-  try {
     const snapshots = await db
       .collection("blog_posts")
-      .where("slug", "==", slug).limit(1)
+      .doc(slug)
       .get();
-    
-    return snapshots.docs[0].data();
-  } catch (e) {
-    return undefined;
-  }
+    return snapshots.data() as BlogPostType;
 }
