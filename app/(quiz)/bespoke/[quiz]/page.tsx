@@ -3,7 +3,7 @@ import Image from "next/image";
 import { QuizBody, QuizBodyProps } from "./QuizBody";
 import quizPods from "@/public/quiz_cacao_pods.png";
 import stripe from "@/lib/stripe/stripe";
-import { Toaster } from "react-hot-toast";
+
 function getQuiz() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {

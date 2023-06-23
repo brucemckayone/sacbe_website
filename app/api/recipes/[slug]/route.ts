@@ -8,7 +8,11 @@ export async function GET(request: NextRequest) {
   console.log(request.nextUrl.pathname.split('/').pop()!);
   
     try {
-        const recipe = await getRecipe(request.nextUrl.pathname.split('/').pop()!);
+      const snap = await getRecipe(request.nextUrl.pathname.split('/').pop()!);
+      const recipe = snap.data() as any;
+      if (!snap.exists) 
+        return NextResponse.json({ recipe: {}, relatedRecipes: [] });
+
         const relatedRecipes = await getRelatedRecipes(recipe.relatedRecipes);
         return NextResponse.json({ recipe: recipe, relatedRecipes: relatedRecipes });
     } catch (e) {
@@ -19,17 +23,11 @@ export async function GET(request: NextRequest) {
 
 async function getRecipe(slug: string) {
   adminInit();
-
-  const db = firestore();
-
-  const snap = await db
+  const db = firestore();  
+  return  await db
     .collection("recipes")
-    .where("slug", "==", slug)
-    .limit(1)
+    .doc(slug)
     .get();
-
-  if (snap.docs.length != 0) return snap.docs[0].data();
-  else return {};
 }
 
 async function getRelatedRecipes(relatedRecipes: DocumentReference[]) {

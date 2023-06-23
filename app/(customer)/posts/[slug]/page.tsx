@@ -6,10 +6,10 @@ import { BlogPostType } from "@/types/blogPost";
 
 import dynamic from "next/dynamic";
 
-import { PostMetaData } from "./PostMetaData";
-import { MarkDown, TestMarkdown } from "./MarkDown";
-import { BlogPostSuggestionCard } from "./BlogPostSuggestionCard";
+import { TestMarkdown } from "./MarkDown";
+
 import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
+import { notFound } from "next/navigation";
 
 async function getPost(slug: string) {
   const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {
@@ -19,6 +19,7 @@ async function getPost(slug: string) {
     },
     cache: "no-cache",
   });
+  if (request.status == 404) return {};
   return await request.json();
 }
 
@@ -30,6 +31,8 @@ export async function generateMetadata({
   searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<Metadata> {
   const { post, relatedPosts } = await getPost(params.slug as string);
+
+  if (!post) return {};
 
   return {
     title: post.title,
@@ -47,7 +50,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       description: post.excerpt,
       title: post.title,
-      image: post.main_image,
+      images: post.main_image,
     },
     openGraph: {
       title: post.title,
@@ -78,17 +81,13 @@ export default async function Page({
     import("./BlogPostSuggestionCard").then((mod) => mod.BlogPostSuggestionCard)
   );
 
-  const MarkDown = dynamic(() =>
-    import("./MarkDown").then((mod) => mod.MarkDown)
-  );
-
   const PostMetaData = dynamic(() =>
     import("./PostMetaData").then((mod) => mod.PostMetaData)
   );
 
   const { post, relatedPosts } = await getPost(params.slug as string);
 
-  if (!post.publisher) return <div>404</div>;
+  if (!post) return notFound();
 
   return (
     <main className="flex flex-row justify-center mx-3">

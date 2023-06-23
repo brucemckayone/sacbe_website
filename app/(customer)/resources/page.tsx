@@ -33,7 +33,7 @@ export const metadata: Metadata = {
       "Explore our blog and recipe collection to learn more about cacao and discover new ways to enjoy it. From delicious recipes to informative articles, our resources will help you make the most of your cacao experience.",
   },
   alternates: {
-    canonical: "https://sacbe-ceremonial-cacao.com/resources",
+    canonical: "https://www.sacbe-ceremonial-cacao.com/resources",
   },
 };
 

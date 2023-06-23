@@ -39,7 +39,7 @@ interface getAffiliateInterface {
 function useUserSWR({ email, status }: getAffiliateInterface) {
   // if (status == "authenticated") {
   const { data, error, isLoading } = useSWR(
-    `/api/affiliate/user?email=${email}`,
+    email && status == "authenticated" && `/api/affiliate/user?email=${email}`,
     fetcher
   );
 

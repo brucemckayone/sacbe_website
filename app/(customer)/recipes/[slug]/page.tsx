@@ -8,6 +8,7 @@ import { MarkDown } from "../../posts/[slug]/MarkDown";
 import { FeelsProgressBar } from "./FeelsProgressBar";
 import { RecipeCard } from "./RecipeCard.1";
 import { NewsletterSignup } from "./NewsletterSignup";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({
   params,
@@ -15,6 +16,8 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const { recipe, relatedRecipes } = await getRecipeData(params.slug!);
+
+  if (recipe) return {};
   return {
     title: recipe.title.replaceAll("-", " "),
     description: recipe.excerpt,
@@ -53,6 +56,7 @@ async function getRecipeData(slug: string) {
       tags: [slug], ///TODO: add revalidated webhook to call backs in sacbe admin
     },
   });
+
   return (await response.json()) as {
     recipe: any;
     relatedRecipes: any[];
@@ -66,19 +70,21 @@ async function RercipePage({
 }) {
   const { recipe, relatedRecipes } = await getRecipeData(params.slug!);
 
-  // const MarkDown = dynamic(() =>
-  //   import("../../posts/[slug]/MarkDown").then((mod) => mod.MarkDown)
-  // );
-  // const PostMetaData = dynamic(() =>
-  //   import("../../posts/[slug]/PostMetaData").then((mod) => mod.PostMetaData)
-  // );
+  if (!recipe?.title) return notFound();
 
-  // const RecipeCard = dynamic(() =>
-  //   import("./RecipeCard.1").then((mod) => mod.RecipeCard)
-  // );
-  // const FeelsProgressBar = dynamic(() =>
-  //   import("./FeelsProgressBar").then((mod) => mod.FeelsProgressBar)
-  // );
+  const MarkDown = dynamic(() =>
+    import("../../posts/[slug]/MarkDown").then((mod) => mod.MarkDown)
+  );
+  const PostMetaData = dynamic(() =>
+    import("../../posts/[slug]/PostMetaData").then((mod) => mod.PostMetaData)
+  );
+
+  const RecipeCard = dynamic(() =>
+    import("./RecipeCard.1").then((mod) => mod.RecipeCard)
+  );
+  const FeelsProgressBar = dynamic(() =>
+    import("./FeelsProgressBar").then((mod) => mod.FeelsProgressBar)
+  );
   return (
     <main className="w-full">
       <div className=" flex justify-center">

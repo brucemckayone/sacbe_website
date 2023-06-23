@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://sacbe-ceremonial-cacao.com/about",
+    canonical: "https://www.sacbe-ceremonial-cacao.com/about",
   },
 };
 

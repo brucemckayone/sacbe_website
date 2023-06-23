@@ -18,7 +18,7 @@ export function BlogPostSuggestionCard(props: { post: BlogPostType }) {
           className="flex flex-col md:flex-row rounded-lg   bg-surface duration-500 hover:rounded-lg hover:shadow-lg hover:border-none "
           key={props.post.title + "related posts"}
         >
-          <div className="w-full h-[220px]  md:basis-3/12 relative mr-10  ">
+          <div className="w-full h-[270px]  md:basis-3/12 relative mr-10  ">
             <Image
               src={props.post.main_image}
               fill

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "Sacbe Cacao",
   },
   alternates: {
-    canonical: "https://sacbe-ceremonial-cacao.com/wholesale",
+    canonical: "https://www.sacbe-ceremonial-cacao.com/wholesale",
   },
 };
 

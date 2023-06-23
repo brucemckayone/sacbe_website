@@ -13,7 +13,14 @@ export default async function handler(
   switch (req.method) {
     case "GET":
       try {
-        const data = await getPost(req.query.slug as string) as BlogPostType;
+        const snapshot = await getPost(req.query.slug as string);
+        if (!snapshot.exists) {
+          
+          return res.status(404).json({
+            posts: {}, related_posts: []
+          });
+        }
+        const data = snapshot.data() as BlogPostType;
         
         let related_posts = [] as any[];
         if (data['relate_posts'] == null) 
@@ -46,5 +53,5 @@ async function getPost(slug: string) {
       .collection("blog_posts")
       .doc(slug)
       .get();
-    return snapshots.data() as BlogPostType;
+  return snapshots;
 }

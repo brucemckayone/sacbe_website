@@ -1,7 +1,7 @@
 "use client";
 import { useUser } from "@/components/auth/affiliate_auth_context";
 import SmallButton from "@/components/buttons/small_button";
-import ButtonLoader from "@/components/loaders/ButtonLoader";
+import { SmallButtonLoader } from "@/components/loaders/ButtonLoader";
 import { SearchContext } from "@/components/providers/AffiliatePaymentLinkProvider";
 import { analytics } from "@/lib/firebase/firebase";
 import createCheckoutSession from "@/lib/stripe/createCheckoutSession";
@@ -73,7 +73,7 @@ export function PurchaseOptions(props: props) {
                 <li>Recipes & Articles</li>
               </ol>
               {isLoadingOn ? (
-                <ButtonLoader />
+                <SmallButtonLoader />
               ) : (
                 <div className="ml-5 flex">
                   <SmallButton
@@ -162,7 +162,7 @@ export function PurchaseOptions(props: props) {
                 <li>Save 21% every month</li>
               </ol>
               {isLoadingSub ? (
-                <ButtonLoader />
+                <SmallButtonLoader />
               ) : (
                 <div className="ml-5 flex ">
                   <SmallButton

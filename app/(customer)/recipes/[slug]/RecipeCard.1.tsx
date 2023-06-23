@@ -13,7 +13,7 @@ export function RecipeCard(props: any) {
         style={{
           textDecoration: "none",
         }}
-        href={`recipes/${formatTitleForUrl(props.recipe.title)}`}
+        href={`recipes/${props.recipe.slug}`}
         key={props.recipe.title}
         className=""
       >

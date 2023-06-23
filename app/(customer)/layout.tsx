@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://sacbe-ceremonial-cacao.com"),
   category: "Cacao",
   alternates: {
-    canonical: "https://sacbe-ceremonial-cacao.com",
+    canonical: "https://www.sacbe-ceremonial-cacao.com",
   },
 
   keywords: [
