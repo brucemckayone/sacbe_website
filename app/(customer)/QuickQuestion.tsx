@@ -150,7 +150,7 @@ export function QuickQuestion(props: {
                 return (
                   <div
                     key={answer + "progress bar"}
-                    className="p-5 animate-zoom_in w-[400px] m-auto  drop-shadow-md  shadow-md rounded-lg"
+                    className="p-5 animate-zoom_in w-[340px] md:w-[400px] m-auto  drop-shadow-md  rounded-lg"
                   >
                     <ProgressBar
                       completed={(results[answer] / total) * 100 * 1.3}

@@ -91,15 +91,13 @@ export default async function Page({
 
   return (
     <main className="flex flex-row justify-center mx-3">
-      <div className=" sm:mx-3 md:w-8/12 my-10 m-auto ">
-        <div className=" relative h-[500px] w-full px-5 shadow-xl">
+      <div className=" md:w-8/12 my-10 m-auto ">
+        <div className=" relative h-[500px] w-full shadow-xl rounded-lg">
           <Image
             src={post.main_image}
             fill
             alt={"blog header post "}
-            className="rounded-lg object-cover mx-1 "
-            blurDataURL="LAM6Lo4m00?c0MNOVE4;00cG*0wq"
-            placeholder="blur"
+            className="rounded-lg object-cover "
             priority
           />
         </div>
