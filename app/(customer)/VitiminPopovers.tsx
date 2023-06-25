@@ -1,13 +1,9 @@
 "use client";
+import SlideInUp from "@/components/animations/slide_in_up";
 import { Popover } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import dynamic from "next/dynamic";
 
 export function VitiminPill(props: { name: string; popover: string }) {
-  const SlideInUp = dynamic(() =>
-    import("@/components/animations/slide_in_up").then((res) => res.default)
-  );
-
   const [opened, { close, open }] = useDisclosure(false);
 
   return (

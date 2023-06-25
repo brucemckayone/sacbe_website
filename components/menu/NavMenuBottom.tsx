@@ -3,7 +3,7 @@ import menuItems from "@/lib/constants/menu";
 import Link from "next/link";
 function NavMenuBottom() {
   return (
-    <div>
+    <nav>
       <menu>
         <div className="flex justify-around border-onSecondaryContainer border-b-4 border-t-4 py-2">
           {menuItems.map((item) => (
@@ -17,7 +17,7 @@ function NavMenuBottom() {
           ))}
         </div>
       </menu>
-    </div>
+    </nav>
   );
 }
 

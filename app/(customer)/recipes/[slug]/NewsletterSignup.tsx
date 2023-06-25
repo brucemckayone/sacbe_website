@@ -71,7 +71,7 @@ export function NewsletterSignup() {
             className="self-end rounded-md px-2 py-1 border-2 font-display"
           >
             <span className="text-lg self-end">
-              {loading ? "Loading..." : "Submit Newsletter Signup"}
+              {loading ? "Loading..." : "Submit"}
             </span>
           </button>
         </div>

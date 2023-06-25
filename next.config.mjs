@@ -14,6 +14,7 @@ const nextConfig = {
       "firebasestorage.googleapis.com",
       "localhost",
       "upload.wikimedia.org",
+      "sacbe-ceremonial-cacao.com"
     ],
   },
 
