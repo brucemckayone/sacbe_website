@@ -7,7 +7,7 @@ export function ProductImageSelector(props: { images: string[] }) {
   const [currentImage, setCurrentImage] = React.useState(images[0]);
 
   return (
-    <div className="flex flex-col ">
+    <div className="md:px-24 pt-5">
       <Image
         src={currentImage}
         alt={""}
@@ -19,6 +19,7 @@ export function ProductImageSelector(props: { images: string[] }) {
         {images.map((image) => {
           return (
             <div
+              key={image}
               className="relative flex flex-col mt-5"
               onClick={() => {
                 setCurrentImage(image);

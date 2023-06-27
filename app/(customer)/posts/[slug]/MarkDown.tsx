@@ -44,7 +44,7 @@ export function TestMarkdown(props: { testContent: any }) {
           <ImageWithContent
             content={e.value.content}
             image={e.value.image}
-            imageOnLeft={e.value.imageOnLeft}
+            isImageLeft={e.value.isImageLeft}
           />
         );
       case "Image":

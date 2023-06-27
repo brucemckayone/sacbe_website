@@ -10,6 +10,7 @@ import { TestMarkdown } from "./MarkDown";
 
 import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
 import { notFound } from "next/navigation";
+import PurchaseOptions from "../../PurchaseOptions";
 
 async function getPost(slug: string) {
   const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {
@@ -114,6 +115,10 @@ export default async function Page({
           <TestMarkdown testContent={post.testContent} />
 
           <NewsletterSignup />
+
+          <div className="my-20">
+            <PurchaseOptions isHorizontal={true} compact={true} />
+          </div>
           {relatedPosts != undefined && (
             <div className="my-20">
               <h2 className="text-2xl md:text-7xl">Related Articles</h2>

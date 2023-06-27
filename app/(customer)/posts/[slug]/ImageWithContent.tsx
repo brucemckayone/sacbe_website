@@ -5,12 +5,12 @@ import { MarkDown } from "./MarkDown.1";
 export function ImageWithContent(props: {
   image: string;
   content: string;
-  imageOnLeft?: boolean;
+  isImageLeft?: boolean;
 }) {
   return (
     <div
       className={`flex flex-col ${
-        !props.imageOnLeft ? "md:flex-row" : "md:flex-row-reverse"
+        !props.isImageLeft ? "md:flex-row" : "md:flex-row-reverse"
       } justify-items-stretch  my-10`}
     >
       <div className="w-full md:w-1/2 flex flex-col ">

@@ -56,7 +56,7 @@ export default function PurchaseOptions(props: props) {
         } `}
       >
         <h3 className="bg-[black] text-2xl text-center py-1 md:h-[50px]">
-          One-Off-Purchase
+          ONE-TIME
         </h3>
         <div className="flex flex-row-reverse justify-around h-full align-middle bg-surface p-2">
           {/* {!props.compact && ( */}

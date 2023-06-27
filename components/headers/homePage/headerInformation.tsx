@@ -1,19 +1,23 @@
 import PurchaseOptions from "@/app/(customer)/PurchaseOptions";
 
+export function FeaturesHorizontalList() {
+  return (
+    <span className="flex justify-between my-2 text-center w-full m-auto">
+      <p className="text-xs md:text-lg border-r-2 pr-2 md:pr-5">KETO</p>
+      <p className="text-xs md:text-lg border-r-2 pr-2 md:px-5">VEGAN</p>
+      <p className="text-xs md:text-lg border-r-2 pr-2 md:px-5">ORGANIC</p>
+      <p className="text-xs md:text-lg border-r-2 pr-2 md:px-5">SUGAR FREE</p>
+      <p className="text-xs md:text-lg pr-2 md:pr-10">FAIR TRADE</p>
+    </span>
+  );
+}
+
 export default function HeaderInformation() {
   return (
     <div className="basis-5/12 py-5 px-5 md:px-0 lg:w-1/3">
       <div className="relative w-auto pb-2">
         <h2 className="text-5xl mt-5">DISCOVER YOUR HEART</h2>
-        <span className="flex justify-between my-2 text-center w-full m-auto">
-          <p className="text-xs md:text-lg border-r-2 pr-2 md:pr-5">KETO</p>
-          <p className="text-xs md:text-lg border-r-2 pr-2 md:px-5">VEGAN</p>
-          <p className="text-xs md:text-lg border-r-2 pr-2 md:px-5">ORGANIC</p>
-          <p className="text-xs md:text-lg border-r-2 pr-2 md:px-5">
-            SUGAR FREE
-          </p>
-          <p className="text-xs md:text-lg pr-2 md:pr-10">FAIR TRADE</p>
-        </span>
+        <FeaturesHorizontalList></FeaturesHorizontalList>
       </div>
       <p className="italic text-sm font-bold p-0">
         &quot;This cacao is absolutely delicious and very nourishing! The energy

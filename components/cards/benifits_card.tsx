@@ -17,22 +17,21 @@ const BenifitsCard: React.FC<Props> = ({
   return (
     <SlideInUp animiation="animate-zoom_in_fade">
       <div
-        className={`${className} flex flex-row m-1 border-2 rounded-md group`}
+        className={`${className} flex flex-row md:h-[100px] border-2 rounded-md group`}
       >
-        <div>
-          <Image
-            src={imagePath}
-            width={100}
-            height={100}
-            alt=""
-            className="basis-1/4 bg-primaryContainer p-2 rounded-tl-md rounded-bl-md group-hover:bg-tertiaryContainer duration-300 "
-          ></Image>
-        </div>
+        <Image
+          src={imagePath}
+          width={70}
+          height={70}
+          alt=""
+          className="basis-1/4 h-20 w-20 md:h-[95px] bg-primaryContainer p-2 rounded-tl-md rounded-bl-md group-hover:bg-tertiaryContainer duration-300"
+        />
+
         <div className="basis-3/4 bg-tertiaryContainer p-1 rounded-tr-md rounded-br-md grow group-hover:bg-onPrimary duration-300 ">
-          <h4 className="text-xl md:text-lg lg:text-xl">
+          <h4 className=" ">
             <strong>{headerText}</strong>
           </h4>
-          <p>{text}</p>
+          <p className="text-sm md:text-lg">{text}</p>
         </div>
       </div>
     </SlideInUp>
