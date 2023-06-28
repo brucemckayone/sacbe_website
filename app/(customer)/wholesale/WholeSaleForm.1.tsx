@@ -41,21 +41,20 @@ export function WholeSaleForm(): JSX.Element {
     <div className="flex flex-col">
       {session.status == "unauthenticated" ? (
         <div>
-          <h2>How To Order</h2>
-          <h3>Request a wholesale account</h3>
-          <p className="mb-3">
+          <h3 className="text-xl font-bold md:text-3xl">
+            Request a wholesale account
+          </h3>
+          <p className="mb-3 ml-1">
             Simpily enter your details and hit send. When your request is
             approved we will contact you with the next steps.
           </p>
 
-          <div className="flex justify-center">
-            <PrimaryButton
-              text={"Join Now"}
-              onClicked={async () => {
-                signInAndRedirectTo("/wholesale");
-              }}
-            />
-          </div>
+          <PrimaryButton
+            text={"Join Now"}
+            onClicked={async () => {
+              signInAndRedirectTo("/wholesale");
+            }}
+          />
         </div>
       ) : (
         generateSignedIn()

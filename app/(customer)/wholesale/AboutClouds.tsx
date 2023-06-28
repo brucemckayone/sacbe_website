@@ -6,13 +6,13 @@ import pinkClouds from "@/public/clouds_pink.jpg";
 export function AboutClouds() {
   return (
     <div className="bg-gradient-to-b from-primaryContainer to-tertiaryContainer">
-      <div className="flex flex-col md:flex-row pt-20 w-11/12 md:w-10/12 m-auto">
+      <div className="flex flex-col lg:flex-row pt-20 w-11/12 md:w-10/12 m-auto">
         <div className="col-span-3 rounded-xl">
           <h2 className="text-6xl md:text-8xl text-center mb-10 ">
             Grown In The Heart of The Ecuadorian Cloud Forests
           </h2>
-          <div className="flex flex-col-reverse md:flex-row pt-0 md:pt-32">
-            <div className="md:basis-2/5 md:mx-20 w-11/12 m-auto">
+          <div className="flex flex-col-reverse lg:flex-row pt-0 md:pt-32">
+            <div className="md:basis-2/5 lg:mx-20 w-11/12 m-auto">
               <h3 className="mt-10">Small-Scale Family Farms </h3>
               <p className="">
                 Sacbe Ceremonial Cacao is sourced from small-scale family farms
@@ -34,7 +34,7 @@ export function AboutClouds() {
                 the wisdom passed down from their ancestors.
               </p>
             </div>
-            <div className="md:block md:basis-2/5 h-[300px] md:h-[500px] flex flex-col justify-center">
+            <div className="md:block md:basis-2/5 h-[300px] md:h-[500px] lg:h-[550px] flex flex-col justify-center">
               <div className="flex flex-row justify-center h-full">
                 <Image
                   src={greenClouds}

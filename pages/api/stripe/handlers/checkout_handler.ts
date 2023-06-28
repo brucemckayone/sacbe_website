@@ -7,6 +7,9 @@ import { logEvent } from "firebase/analytics";
 import { createCheckoutSessionParams } from "../client/create_checkout_session";
 import emailSender from "@/utils/email/nodemailer";
 
+import getRawBody from "raw-body";
+
+
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 
@@ -19,7 +22,8 @@ export default async function handler(
     apiVersion: "2022-11-15",
   });
   const sig: string = req.headers["stripe-signature"] as string;
-  const reqBuffer = await buffer(req);
+  const rawBody = await getRawBody(req);
+  
   let event: Stripe.Event;
 
   
@@ -28,7 +32,7 @@ export default async function handler(
   let data = { message: "no message" };
   try {
     event = stripe.webhooks.constructEvent(
-      reqBuffer,
+      rawBody,
       sig,
       envConfig.STRIPE_CHECKOUT_WEBHOOK
     );

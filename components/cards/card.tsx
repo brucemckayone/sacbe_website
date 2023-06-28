@@ -10,7 +10,7 @@ interface Props {
 const Card: React.FC<Props> = ({ children, hasColor = true, className }) => {
   return (
     <div
-      className={` ${className}  md:mx-20 lg:m-5 p-5 flex-1 justify-center ${
+      className={` ${className}   lg:m-5 p-5 flex-1 justify-center ${
         hasColor && "bg-tertiaryContainer rounded-md border-2"
       }`}
     >

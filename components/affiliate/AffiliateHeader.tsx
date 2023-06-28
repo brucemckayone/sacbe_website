@@ -93,7 +93,7 @@ export function AffiliateHeader() {
   const [isSent, setIsSent] = useState(false);
 
   return (
-    <div className="flex flex-col md:flex-row justify-between mx-5 md:mx-56 md:py-5">
+    <div className="flex flex-col md:flex-row justify-around mx-2 md:py-5">
       <AffiliateSignUpModal
         opened={opened}
         userData={userData}
@@ -113,17 +113,19 @@ export function AffiliateHeader() {
           width={600}
           height={600}
           alt={"A cacao pod in a leaf with cacao beans spilling out of it"}
-          className="object-contain p-10 md:mx-0 rounded-lg"
+          className="object-contain p-10 lg:mx-20 rounded-lg"
         />
       </div>
       <div className="md:basis-10/12 self-center  ">
         <div className="flex flex-wrap md:w-12/12">
-          <h1 className="mt-10 sm:text-center md:text-start  text-5xl md:text-7xl">
+          <h1 className="mt-10 sm:text-center md:text-start  text-4xl lg:text-6xl">
             SACBE AMBASSADOR PROGRAM
           </h1>
-          <h2 className="text-3xl">Join in the abundance of cacao</h2>
         </div>
-        <p className="md:w-8/12 mt-5">
+        <h2 className="text-xl font-bold mt-5">
+          Join in the abundance of cacao
+        </h2>
+        <p className="md:w-8/12 ml-1 ">
           Join Our Affiliate Program Today! Unlock the power of ceremonial cacao
           and embark on a journey of spiritual awakening while earning enticing
           rewards. Become a part of our affiliate community and share the

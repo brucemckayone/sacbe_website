@@ -29,8 +29,8 @@ export async function BlogAndRecipes() {
   const Cards = postCards.flatMap((e, idx) => [e, recipeCards[idx]]);
   return (
     <div className="bg-gradient-to-b from-primaryContainer to-surface ">
-      <h3 className="text-7xl text-center py-20">Recipes & Articles</h3>
-      <div className=" w-11/12 md:w-7/12 mx-auto" key={"cards holder"}>
+      <h3 className="text-4xl text-center pt-20 pb-5">Recipes & Articles</h3>
+      <div className=" w-11/12 lg:w-7/12 mx-auto" key={"cards holder"}>
         {Cards}
       </div>
     </div>

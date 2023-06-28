@@ -6,6 +6,7 @@ import SubscriptionWebHooks from "@/utils/server/webhooks/subscriptions";
 import SubscriptionSender from "@/utils/email/senders/subscriptionSender";
 import stripe from "@/lib/stripe/stripe";
 import { firestore } from "firebase-admin";
+import getRawBody from "raw-body";
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
@@ -15,13 +16,13 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const sig: string = req.headers["stripe-signature"] as string;
-  const reqBuffer = await buffer(req);
+  const rawBody = await getRawBody(req);
   let event: Stripe.Event;
   const subWebhooks = new SubscriptionWebHooks();
   const sendEmail = new SubscriptionSender();
   try {
     event = stripe.webhooks.constructEvent(
-      reqBuffer,
+      rawBody,
       sig,
       envConfig.STRIPE_CUSTOMER_WEBHOOK
     );

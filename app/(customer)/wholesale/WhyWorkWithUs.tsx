@@ -42,7 +42,7 @@ const RiskApealCards = dynamic(() =>
 export function WhyWorkWithUs() {
   const [selected, setSelected] = useState<selected>("pricing");
   return (
-    <div className="flex flex-col md:flex-row   md:w-10/12 m-auto">
+    <div className="flex flex-col md:flex-row w-full lg:w-10/12 m-auto">
       <div className="md:w-1/2 flex flex-col justify-center md:mr-10">
         <h2 className="text-4xl">Why Work With Us?</h2>
         <p className="text-sm">
@@ -80,7 +80,7 @@ export function WhyWorkWithUs() {
           })}
         </ol>
       </div>
-      <div className="w-full bg-surface rounded-xl p-3 drop-shadow-md ">
+      <div className="w-full md:w-1/2 bg-surface rounded-xl p-3 drop-shadow-md ">
         <GenerateExtraDetails />
       </div>
     </div>

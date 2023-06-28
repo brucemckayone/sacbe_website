@@ -13,9 +13,9 @@ export function VitiminPill(props: { name: string; popover: string }) {
           <div
             onMouseEnter={open}
             onMouseLeave={close}
-            className=" my-2 mx-1 px-3 py-2 rounded-full drop-shadow-md bg-surface hover:scale-105 hover:bg-primaryContainer hover:drop-shadow-2xl duration-700"
+            className="my-2 mx-1 px-2 py-1 md:px-3 md:py-2  rounded-xl border drop-shadow-md bg-surface hover:scale-105 hover:bg-primaryContainer hover:drop-shadow-2xl duration-700"
           >
-            <p>{props.name}</p>
+            <p className="text-sm md:text-">{props.name}</p>
           </div>
         </Popover.Target>
         <Popover.Dropdown

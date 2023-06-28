@@ -11,7 +11,7 @@ export default function BenifitsOfCacao() {
   );
 
   return (
-    <div className="bg-gradient-to-b from-secondaryContainer to-primaryContainer py-8 md:px-8 ">
+    <div className="bg-gradient-to-b from-secondaryContainer to-primaryContainer py-8  ">
       <div className="flex flex-col-reverse lg:flex-row w-full md:w-10/12 m-auto">
         <Card hasColor={false} className="xl:basis-1/3 md:basis-1/3 ">
           <SlideInUp animiation="animate-slide_in_left_fade">
@@ -45,7 +45,10 @@ export default function BenifitsOfCacao() {
             </p>
           </SlideInUp>
         </Card>
-        <Card hasColor={false} className=" xl:basis-2/3 md:basis-2/4 m-0">
+        <Card
+          hasColor={false}
+          className=" w-full xl:basis-2/3 md:basis-2/4 m-0"
+        >
           <h3 className="text-6xl my-10 md:my-0">
             Indulge in the Blissful Benefits of Cacao
           </h3>

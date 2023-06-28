@@ -1,12 +1,12 @@
 import Stripe from "stripe";
-import { buffer } from "micro";
+
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 import { firestore, messaging } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
 import adminInit from "@/utils/firebase/admin_init";
 import emailSender from "@/utils/email/nodemailer";
-
+import getRawBody from "raw-body";
 // import { InvoiceHandler } from "@/utils/server/webhooks/invoices";
 
 // import emailTemplateSender from "@/utils/email/templates/templateSender";
@@ -19,7 +19,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const sig: string = req.headers["stripe-signature"] as string;
-  const reqBuffer = await buffer(req);
+  
+  const rawBody = await getRawBody(req);
+
+
 
   let event: Stripe.Event;
 
@@ -29,7 +32,7 @@ export default async function handler(
   try {
     adminInit();
     event = stripe.webhooks.constructEvent(
-      reqBuffer,
+      rawBody,
       sig,
       envConfig.STRIPE_INVOICE_WEBHOOK
     );

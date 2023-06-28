@@ -47,7 +47,7 @@ export default function PurchaseOptions(props: props) {
   return (
     <div
       className={`flex ${
-        props.isHorizontal ? "md:flex-row flex-col" : "flex-col"
+        props.isHorizontal ? "xl:flex-row flex-col" : "flex-col"
       } justify-around md:mx-0`}
     >
       <div
@@ -144,19 +144,20 @@ export default function PurchaseOptions(props: props) {
           <h3 className=" text-2xl text-center py-1 md:h-[40px]">
             SUBSCRIPTION
           </h3>
-          <p className="w-30  self-center text-recommendedGreen">save 21%</p>
+          <p className="w-30  self-center text-recommendedGreen text-center">
+            save 21%
+          </p>
         </span>
 
-        <div className="flex flex-row-reverse justify-around   h-full align-middle bg-surface p-2">
-          {/* {!props.compact && ( */}
+        <div className="flex flex-row-reverse justify-around  h-full align-middle bg-surface p-2">
           <Image
             src={sacbeFloatingShapesImage}
             alt={"Sacbe Cacao Image"}
-            className="object-contain w-3/12"
+            className="object-contain w-3/12 z-0"
             placeholder="blur"
           />
           {/* )} */}
-          <div className="flex-col ">
+          <div className="flex-col justify-center w-9/12">
             <h5 className="text-onPrimaryContainer">Included</h5>
             <div className="ml-5 ">
               <ol
@@ -183,7 +184,7 @@ export default function PurchaseOptions(props: props) {
                     className="text-onPrimaryContainer border-onPrimaryContainer"
                   />
 
-                  <div className="flex  text-[black] mx-2 h-10 items-center rounded-full p-2 bg-surface self-center border ">
+                  <div className="flex z-10 text-[black] mx-2 h-10 items-center rounded-full p-2 bg-surface self-center border ">
                     <button
                       onClick={() => {
                         if (subQty > 1) {

@@ -75,10 +75,6 @@ async function About() {
               paragraph="Our cacao is organically and sustainably grown in Esmeraldas, a land known for its bio-diversity and rich flavor profile. We source our cacao from Arriba Nacional beans grown at an altitude of 2000 meters, contributing to its unique flavor and strong spirit."
               subHeader="Andean-sourced Arriba Nacional beans"
             />
-            {/*
-            <h2 className="self-start text-6xl md:text-9xl w-11/12 md:w-7/12  md:mx-20 mt-10 ">
-              More than just Chocolate
-            </h2> */}
             <TextSection
               largeHeader="Heart opening, heightened creativity"
               smallHeader="Mood upliftment, emotional support"

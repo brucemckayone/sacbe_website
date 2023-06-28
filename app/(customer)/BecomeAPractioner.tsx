@@ -7,8 +7,8 @@ import cacaoFacilatorImage from "@/public/cacaofacilitator.png";
 export function BecomeAPractioner() {
   return (
     <div className=" bg-gradient-to-b to-primaryContainer from-tertiaryContainer py-10">
-      <div className="flex flex-col justify-center align-middle">
-        <h2 className="flex justify-center text-center pt-32 pb-20 text-6xl md:text-7xl">
+      <div className="flex flex-col justify-center align-middle ">
+        <h2 className="flex  text-center pt-32 pb-20 text-5xl md:text-7xl">
           CACAO FACILITATION TRAINING
         </h2>
         <div className="flex flex-col md:flex-row ">
@@ -29,9 +29,9 @@ export function BecomeAPractioner() {
             className="basis-2/5 flex flex-col justify-center items-center align-middle"
             hasColor={false}
           >
-            <div className="basis-1/2">
+            <div className="basis-1/2 md:basis-2/3">
               <SlideInUp animiation="animate-slide_in_left_blur">
-                <h5 className="flex md:w-1/2 underline">
+                <h5 className="flex md:w-7//12 underline">
                   Become A Practitioner
                 </h5>
               </SlideInUp>

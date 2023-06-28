@@ -12,7 +12,7 @@ function NavMenuBottom() {
               className="my-3"
               href={item.link}
             >
-              <h4 className="text-lg md:text-xl">{item.text.toUpperCase()}</h4>
+              <h4 className="text-sm md:text-xl">{item.text.toUpperCase()}</h4>
             </Link>
           ))}
         </div>

@@ -7,18 +7,18 @@ export function TheHook() {
   return (
     <div className="bg-tertiaryContainer">
       <div className="">
-        <h2 className="w-11/12 md:w-7/12 text-center text-5xl md:text-8xl m-auto pt-20">
+        <h2 className="w-11/12 md:w-8/12 text-center  text-4xl md:text-6xl lg:text-8xl m-auto pt-20">
           Seeking Inner Bliss and Vitality? Embrace the
-          <strong className="md:text-sacbeBrandColor font-thin text-onPrimaryContainer md:text-stroke-3 text-5xl md:text-8xl">
-            {" "}
+          <strong className="md:text-sacbeBrandColor font-thin text-onPrimaryContainer md:text-stroke-3 text-4xl md:text-6xl lg:text-8xl">
+            <br></br>
             Transformative Power of {""} <br></br>
-            <strong className="text-sacbeBrandColor text-stroke-3 text-7xl md:text-8xl ">
+            <strong className="text-sacbeBrandColor text-stroke-3 text-7xl md:text-8xl lg:text-8xl ">
               SACBE CACAO
             </strong>
           </strong>
         </h2>
-        <div className="flex flex-col-reverse md:flex-row w-11/12 md:w-9/12 m-auto py-20 md:py-36">
-          <div className="  md:w-5/12 m-auto">
+        <div className="flex flex-col-reverse lg:flex-row w-11/12 md:w-9/12 m-auto py-20 md:py-36">
+          <div className="md:w-10/12 lg:w-5/12 m-auto">
             <div className="font-extrabold">
               <h3 className="text-2xl mt-5">Embrace The Wonders Of Cacao</h3>
             </div>

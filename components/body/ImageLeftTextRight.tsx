@@ -31,7 +31,7 @@ export function ImageLeftTextRight({
 }: IImageLeftTextRight): JSX.Element {
   return (
     <div className="bg-tertiaryContainer pb-28">
-      <h2 className="py-20 mx-5 md:mx-10 text-center text-7xl lg:text-8xl md:text-7xl">
+      <h2 className="py-20 mx-5 md:mx-10 text-center text-5xl lg:text-8xl md:text-7xl">
         {title}
       </h2>
 
@@ -42,7 +42,7 @@ export function ImageLeftTextRight({
             <SlideInUp animiation="animate-zoom_in_fade">
               <div className="relative w-full p-40 h-[500px]  ">
                 <div
-                  className={`absolute top-10 right-0 left-0 w-full h-[400px]`}
+                  className={`absolute top-10 right-0 left-0 w-11/12 h-[400px]`}
                 >
                   <Image
                     src={image}

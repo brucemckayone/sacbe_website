@@ -11,10 +11,11 @@ export function CallToActionBuyHomePage() {
 
   return (
     <div className="bg-primaryContainer m-auto pt-20 md:pt-40  ">
-      <div className="flex flex-col md:flex-row w-11/12 md:w-9/12 m-auto">
-        <div className=" md:w-5/12  md:mx-10 self-center md:mr-20">
+      <div className="flex flex-col lg:flex-row w-11/12 lg:w-9/12 m-auto">
+        <div className="lg:w-5/12  md:mx-10 self-center lg:mr-20">
           <h2>
-            Awaken Your Senses,{" "}
+            Awaken Your Senses,
+            <br />
             <strong className="text-5xl text-sacbeBrandColor stroke-onPrimaryContainer text-stroke-3 `">
               Embrace the Journey
             </strong>
@@ -32,8 +33,8 @@ export function CallToActionBuyHomePage() {
             <RiskApealCards isHorizontal={false} />
           </div>
         </div>
-        <div className="md:w-5/12 md:mx-10">
-          <PurchaseOptions isHorizontal={false} compact={false} />
+        <div className="lg:w-5/12 mt-10 ">
+          <PurchaseOptions isHorizontal={true} compact={true} />
           <div className="sm:block m-auto md:hidden">
             <RiskApealCards isHorizontal={false} />
           </div>

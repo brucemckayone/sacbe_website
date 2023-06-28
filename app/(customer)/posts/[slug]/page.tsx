@@ -92,7 +92,7 @@ export default async function Page({
 
   return (
     <main className="flex flex-row justify-center mx-3">
-      <div className=" md:w-8/12 my-10 m-auto ">
+      <div className=" lg:w-8/12 my-10 m-auto ">
         <div className=" relative h-[500px] w-full shadow-xl rounded-lg">
           <Image
             src={post.main_image}
@@ -111,7 +111,7 @@ export default async function Page({
           tags={post.tags}
         />
 
-        <div className=" my-10 md:p-20">
+        <div className=" my-10 md:p-10 lg:p-20">
           <TestMarkdown testContent={post.testContent} />
 
           <NewsletterSignup />

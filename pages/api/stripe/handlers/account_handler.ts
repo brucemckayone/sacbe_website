@@ -1,9 +1,9 @@
 import Stripe from "stripe";
-import { buffer } from "micro";
-import checkoutSessionCompleteHandler from "@/lib/webhooks/checkout_session_completed";
+
+
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
-
+import getRawBody from "raw-body";
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
 
 export const config = { api: { bodyParser: false } };
@@ -15,12 +15,12 @@ export default async function handler(
     apiVersion: "2022-11-15",
   });
   const sig: string = req.headers["stripe-signature"] as string;
-  const reqBuffer = await buffer(req);
+  const rawBody = await getRawBody(req);
   let event: Stripe.Event;
 
   try {
     event = stripe.webhooks.constructEvent(
-      reqBuffer,
+      rawBody,
       sig,
       envConfig.STRIPE_ACCOUNT_WEBHOOK
     );

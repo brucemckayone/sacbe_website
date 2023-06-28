@@ -63,8 +63,8 @@ const SacbeCacaoWholesale = async () => {
       <NavMenuBottom />
       <div className="flex flex-row items-center justify-center bg-secondaryContainer pt-20">
         <div className="self-center w-11/12 md:w-10/12">
-          <h2 className=" text-3xl md:text-8xl text-center mb-10 mt-5">
-            <strong className="text-stroke-3 text-3xl md:text-8xl text-sacbeBrandColor">
+          <h2 className=" text-3xl md:text-6xl lg:text-8xl text-center mb-10 mt-5">
+            <strong className="text-stroke-3 text-3xl md:text-6xl lg:text-8xl text-sacbeBrandColor">
               WHOLESALE CACAO:
             </strong>{" "}
             AUTHENTIC AND SUSTAINABLE BULK CACAO FOR SPIRITUAL & HEALTH &

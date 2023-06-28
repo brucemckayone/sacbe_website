@@ -4,7 +4,7 @@ import Image from "next/image";
 import cacaoInLoveHeart from "@/public/cacao_love_heart.png";
 export function WholesaleHeader() {
   return (
-    <div className="flex flex-col md:flex-row justify-between h-full py-24 px-5 md:px-0">
+    <div className="flex flex-col lg:flex-row justify-between h-full py-24 px-5 md:px-0">
       <div className="relative w-full h-full basis-1/2 self-center">
         <Image
           src={cacaoInLoveHeart}
@@ -14,13 +14,12 @@ export function WholesaleHeader() {
           className="object-contain rounded-lg"
         ></Image>
       </div>
-      <div className="md:basis-1/2 self-center  ">
-        <div className="flex flex-wrap md:w-10/12">
-          <h1 className="mt-10 sm:text-center md:text-start  text-5xl md:text-7xl">
-            WHOLESALE CEREMONIAL CACAO
-          </h1>
-        </div>
-        <p className="md:w-8/12 mt-5">
+      <div className="lg:basis-1/2 self-center  ">
+        <h1 className="mt-10 sm:text-center md:text-start  text-5xl md:text-5xl w-11/12 md:w-10/12 m-auto lg:w-8/12">
+          WHOLESALE CEREMONIAL CACAO
+        </h1>
+
+        <p className="w-11/12 md:w-10/12 m-auto lg:w-8/12 mt-5">
           Revitalize Your Business with Wholesale Sacbe Cacao! Harness the
           Authentic Essence of Cacao and Offer Your Customers a Truly Enchanting
           Experience. Maximize Profits and Delight Your Clients With Our Premium
@@ -28,7 +27,7 @@ export function WholesaleHeader() {
           Wholesale Ceremonial Cacao Today!
         </p>
 
-        <div className="md:w-8/12">
+        <div className=" w-11/12 md:w-10/12 lg:w-8/12 m-auto">
           <div className="mt-5 ">
             <WholeSaleForm />
           </div>

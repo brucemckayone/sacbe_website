@@ -108,8 +108,8 @@ async function ResourcesPage({
           Resources for your Cacao Journey
         </h1>
       </div>
-      <div className="w-11/12 md:w-7/12 m-auto">{Cards}</div>
-      <div className="text-center my-20 bg-sacbeBrandColor hover:bg-surface m-auto w-6/12 md:w-2/12 hover:w-6/12 rounded-lg py-3 px-10 drop-shadow-lg border-2 hover:drop-shadow-2xl duration-500">
+      <div className="w-11/12 lg:w-7/12 m-auto">{Cards}</div>
+      <div className="text-center my-20 bg-sacbeBrandColor hover:bg-surface m-auto w-6/12 lg:w-2/12 hover:w-6/12 rounded-lg py-3 px-10 drop-shadow-lg border-2 hover:drop-shadow-2xl duration-500">
         <Link
           className=" text-onPrimaryContainer no-underline bg font-display "
           href={{

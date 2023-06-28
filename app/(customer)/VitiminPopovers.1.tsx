@@ -75,10 +75,10 @@ const vits = [
 
 export function VitiminPopovers() {
   return (
-    <div className="bg-primaryContainer pb-44 pt-36">
-      <div className=" w-11/12 md:w-10/12 m-auto pt-32">
-        <div className="flex md:flex-row flex-col md:mt-20 md:p-10">
-          <div className="md:w-1/2 md:pr-10">
+    <div className="bg-primaryContainer  ">
+      <div className=" w-11/12 md:w-10/12 m-auto md:pt-32">
+        <div className="flex lg:flex-row flex-col md:mt-20 md:p-10">
+          <div className="lg:w-1/2 md:pr-10">
             <h2 className="text-6xl  ">
               Oh, and Its Nutrient Dense{" "}
               <strong className="text-sacbeBrandColor stroke-onPrimaryContainer text-stroke-3 text-6xl">
@@ -86,8 +86,8 @@ export function VitiminPopovers() {
               </strong>
             </h2>
             <p className="md:hidden my-8 ml-1">Tap the tabs for more info</p>
-            <div className="md:hidden flex flex-wrap justify-center w-11/12 md:w-7/12 m-auto md:px-10 group my-28 duration-700">
-              <div className="absolute bg-tertiaryContainer rounded-full h-[400px] w-screen md:w-[800px] blur-2xl z-0 "></div>
+            <div className="lg:hidden flex flex-wrap justify-center my-5 w-11/12 lg:w-7/12 m-auto lg:px-10 group md:my-28 duration-700">
+              <div className="absolute bg-tertiaryContainer rounded-full h-[200px] w-screen md:h-[300px] md:w-[600px] lg:w-[800px] blur-2xl z-0 " />
               {vits.map((e) => {
                 return (
                   <VitiminPill
@@ -98,8 +98,8 @@ export function VitiminPopovers() {
                 );
               })}
             </div>
-            <h5 className="text-xl md:text-2xl mt-3  font-extrabold z-10">
-              Harness the Nutritional Marvel of Cacao
+            <h5 className="text-2xl  mt-3  font-extrabold z-10">
+              Harness this Nutritional Marvel
             </h5>
             <p className="ml-1 z-10 mr-2">
               Cacao is a <strong>nutritional powerhouse</strong>, packed with
@@ -121,7 +121,7 @@ export function VitiminPopovers() {
               className=""
             />
           </div>
-          <div className="hidden md:flex flex-wrap justify-center w-11/12 md:w-7/12 m-auto md:px-10 md:py-24 py-16 group duration-700">
+          <div className="hidden lg:flex flex-wrap justify-center w-11/12 md:w-7/12 m-auto md:px-10 md:py-24 py-16 group duration-700">
             <div className="absolute  bg-tertiaryContainer rounded-full h-[500px] w-[700px] -mt-36 blur-2xl group "></div>
             {vits.map((e) => {
               return (

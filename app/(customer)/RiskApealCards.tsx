@@ -63,7 +63,7 @@ export function RiskApealCards(props: props) {
         <div>
           <div className="flex justify-between">
             <h4 className="text-xl">Flexible Payments</h4>
-            <div className="flex">
+            <div className="flex flex-wrap">
               <Image
                 src={klarnIcon}
                 width={100}
