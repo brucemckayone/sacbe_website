@@ -1,8 +1,6 @@
-import React from "react";
 import Image from "next/image";
 import SlideInUp from "../animations/slide_in_up";
 import LinkButton from "../buttons/LinkButton";
-
 import Card from "../cards/card";
 
 interface IImageLeftTextRight {
@@ -64,26 +62,19 @@ export function ImageLeftTextRight({
           >
             <div className="basis-1/2">
               <h5 className="flex md:w-1/2 underline">{textHeaderSmall}</h5>
-
               <h3 className="flex md:w-3/4"> {textHeaderLarge}</h3>
-
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <p className="flex md:w-3/4 text-xl">{text}</p>
-              </SlideInUp>
+              <p className="flex md:w-3/4 text-xl">{text}</p>
               {buttonLink && buttonText && (
-                <SlideInUp animiation="animate-slide_in_left_blur">
-                  <LinkButton
-                    url={buttonLink}
-                    isPrimary={false}
-                    text={buttonText}
-                  ></LinkButton>
-                </SlideInUp>
+                <LinkButton
+                  url={buttonLink}
+                  isPrimary={false}
+                  text={buttonText}
+                />
               )}
             </div>
           </Card>
         </div>
       </div>
-      {/* </SlideInUp> */}
     </div>
   );
 }

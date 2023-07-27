@@ -8,7 +8,7 @@ export function BecomeAPractioner() {
   return (
     <div className=" bg-gradient-to-b to-primaryContainer from-tertiaryContainer py-10">
       <div className="flex flex-col justify-center align-middle ">
-        <h2 className="flex  text-center pt-32 pb-20 text-5xl md:text-7xl">
+        <h2 className="m-auto w-full text-center pt-32 pb-20 text-5xl md:text-7xl">
           CACAO FACILITATION TRAINING
         </h2>
         <div className="flex flex-col md:flex-row ">
@@ -30,33 +30,25 @@ export function BecomeAPractioner() {
             hasColor={false}
           >
             <div className="basis-1/2 md:basis-2/3">
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <h5 className="flex md:w-7//12 underline">
-                  Become A Practitioner
-                </h5>
-              </SlideInUp>
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <h3 className="flex md:w-3/4">Cacao Facilitation Training</h3>
-              </SlideInUp>
-              <SlideInUp animiation="animate-slide_in_left_blur">
-                <p className="flex md:w-3/5 text-xl">
-                  We welcome those wishing to work with for cacao to join us in
-                  an 6 night emmersive training in the wild depths of the
-                  scottish highlands where you will develope your skills as a
-                  space holder & gaurdian of cacao.
-                </p>
-              </SlideInUp>
-              <SlideInUp
-                key={"sky on eart slidy"}
-                animiation="animate-slide_in_left_blur"
-              >
-                <LinkButton
-                  key={"sky on on earth thingy"}
-                  url="https://skyeonearth.com/cacaofacilitation"
-                  isPrimary={false}
-                  text="Learn More"
-                ></LinkButton>
-              </SlideInUp>
+              <h5 className="flex md:w-7//12 underline">
+                Become A Practitioner
+              </h5>
+
+              <h3 className="flex md:w-3/4">Cacao Facilitation Training</h3>
+
+              <p className="flex md:w-3/5 text-xl">
+                We welcome those wishing to work with for cacao to join us in an
+                6 night emmersive training in the wild depths of the scottish
+                highlands where you will develope your skills as a space holder
+                & gaurdian of cacao.
+              </p>
+
+              <LinkButton
+                key={"sky on on earth thingy"}
+                url="https://skyeonearth.com/cacaofacilitation"
+                isPrimary={false}
+                text="Learn More"
+              />
             </div>
           </Card>
         </div>

@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { envConfig } from "@/lib/webhooks/envConfig";
+import stripe from "@/lib/stripe/stripe";
 
 // this function creates a customer if email does not exist in stripe
 // if it does it fetches a customer
@@ -9,9 +9,7 @@ interface params {
   name?: string | undefined;
 }
 const getOrCreateCustomer = async function ({ email, name }: params) {
-  const stripe = new Stripe(envConfig.STRIPE_SECRET, {
-    apiVersion: "2022-11-15",
-  });
+  
   let customer: Stripe.Customer;
   if (email) {
     console.log(`email provided: ${email}`);

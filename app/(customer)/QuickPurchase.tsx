@@ -1,32 +1,37 @@
 "use client";
 import { useUser } from "@/components/auth/affiliate_auth_context";
-import { a, PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
+import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
 import getAffiliatePaymentLinks from "@/utils/client/stripe/links/getAffiliatePaymentLinks";
 import Hamburger from "hamburger-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import PurchaseOptions from "./PurchaseOptions";
-import { RiskApealCards } from "./RiskApealCards";
-import toast, { Toaster } from "react-hot-toast";
 import dollarIcon from "@/public/icons/dollar_icon.svg";
 import shoppingBag from "@/public/icons/shopping_bag_icon.svg";
+import dynamic from "next/dynamic";
 
-export function QuickPurchase() {
+export const QuickPurchase = () => {
   const [open, setOpen] = useState(false);
   const { user: affiliate, isLoading: affiliateLoading } = useUser();
-  const notify = () =>
-    toast.success(
-      "Your Link Has Been Copied To Your Clipboard! Now Share it with the world! Best of luck we love you <3"
-    );
 
-  const [linksState, setLinks] = useState<PaymentLinkListType>();
+  const [linksState, setLinksState] = useState<PaymentLinkListType>();
+
+  const RiskApealCards = dynamic(() =>
+    import("./RiskApealCards").then((res) => res.RiskApealCards)
+  );
 
   useEffect(() => {
-    if (affiliate.uuid && affiliate.accountId && affiliate.chargesEnabled)
+    let isMounted = true;
+    if (affiliate.uuid && affiliate.accountId && affiliate.chargesEnabled) {
       getAffiliatePaymentLinks(affiliate.uuid).then((res) => {
-        return setLinks(res);
+        if (isMounted) {
+          setLinksState(res);
+        }
       });
-    console.log(linksState);
+    }
+    return () => {
+      isMounted = false;
+    };
   }, [affiliate, affiliateLoading]);
 
   return (
@@ -48,10 +53,12 @@ export function QuickPurchase() {
       {!affiliateLoading && linksState && (
         <button
           className={`fixed bottom-5 right-24 bg-sacbeBrandColor rounded-full drop-shadow-2xl animate-float p-2 animate-zoom_in }`}
-          onClick={() => {
+          onClick={async () => {
             const url = window.location.href;
-            notify();
-
+            const toast = await (await import("react-hot-toast")).toast;
+            toast.success(
+              "Your Link Has Been Copied To Your Clipboard! Now Share it with the world! Best of luck we love you <3"
+            );
             // copy text to clipboard current url
             navigator.clipboard.writeText(
               `${url}?sublink=${linksState!.links[0].link.url}&oneofflink=${
@@ -70,7 +77,7 @@ export function QuickPurchase() {
       )}
 
       <div
-        className={`shadow-lg border-t-2 border-r-2 duration-700 border-l-2 rounded-md p-5 h-[80vh] overflow-scroll z-10 md:h-3/5 fixed bottom-0 z-100 bg-surface w-screen m-auto ${
+        className={`shadow-lg border-t-2 border-r-2 duration-700 border-l-2 rounded-md p-1 h-[80vh] overflow-scroll z-10 md:h-3/5 fixed bottom-0 z-100 bg-surface w-screen m-auto ${
           open ? "translate-y-0" : "translate-y-[2000px]"
         } `}
       >
@@ -85,10 +92,10 @@ export function QuickPurchase() {
           ></Hamburger>
         </div>
         <div className="flex flex-col justify-around md:h-full">
-          <PurchaseOptions isHorizontal={true} compact={false} />
+          <PurchaseOptions isHorizontal={true} compact={true} />
           <RiskApealCards isHorizontal={true}></RiskApealCards>
         </div>
       </div>
     </div>
   );
-}
+};

@@ -1,6 +1,7 @@
 "use client";
 import PrimaryButton from "@/components/buttons/primaryButton";
 import { VitiminPill } from "./VitiminPopovers";
+
 const vits = [
   {
     name: "Magnesium",
@@ -75,65 +76,57 @@ const vits = [
 
 export function VitiminPopovers() {
   return (
-    <div className="bg-primaryContainer  ">
-      <div className=" w-11/12 md:w-10/12 m-auto md:pt-32">
-        <div className="flex lg:flex-row flex-col md:mt-20 md:p-10">
-          <div className="lg:w-1/2 md:pr-10">
-            <h2 className="text-6xl  ">
-              Oh, and Its Nutrient Dense{" "}
-              <strong className="text-sacbeBrandColor stroke-onPrimaryContainer text-stroke-3 text-6xl">
-                Super Food
-              </strong>
-            </h2>
-            <p className="md:hidden my-8 ml-1">Tap the tabs for more info</p>
-            <div className="lg:hidden flex flex-wrap justify-center my-5 w-11/12 lg:w-7/12 m-auto lg:px-10 group md:my-28 duration-700">
-              <div className="absolute bg-tertiaryContainer rounded-full h-[200px] w-screen md:h-[300px] md:w-[600px] lg:w-[800px] blur-2xl z-0 " />
-              {vits.map((e) => {
-                return (
-                  <VitiminPill
-                    key={e.popover + e.name}
-                    name={e.name}
-                    popover={e.popover}
-                  />
-                );
-              })}
-            </div>
-            <h5 className="text-2xl  mt-3  font-extrabold z-10">
-              Harness this Nutritional Marvel
-            </h5>
-            <p className="ml-1 z-10 mr-2">
-              Cacao is a <strong>nutritional powerhouse</strong>, packed with
-              minerals like magnesium, iron, and zinc,{" "}
-              <strong>essential for energy production</strong>,{" "}
-              <strong> immune function</strong>, and
-              <strong> healthy growth</strong>. It iss a good source of vitamins
-              B1, B2, B3, B5, and B9,
-              <strong> supporting metabolism</strong> and{" "}
-              <strong> cell growth</strong>. Cacaos flavonoids provide
-              <strong> antioxidant</strong> benefits, while theobromine and PEA
-              contribute to mood
-              <strong> enhancement</strong>.
-            </p>
-            <PrimaryButton
-              onClicked={() => {}}
-              text="Learn More"
-              isPrimary={false}
-              className=""
-            />
-          </div>
-          <div className="hidden lg:flex flex-wrap justify-center w-11/12 md:w-7/12 m-auto md:px-10 md:py-24 py-16 group duration-700">
-            <div className="absolute  bg-tertiaryContainer rounded-full h-[500px] w-[700px] -mt-36 blur-2xl group "></div>
-            {vits.map((e) => {
-              return (
-                <VitiminPill
-                  key={e.popover}
-                  name={e.name}
-                  popover={e.popover}
-                />
-              );
-            })}
-          </div>
+    <div className="w-[95%] md:w-10/12 m-auto backdrop-blur-lg flex lg:flex-row flex-col  bg-tertiaryContainer/40 rounded-3xl my-20 py-20 px-3 md:px-10 ">
+      <div className="lg:w-1/2 md:pr-10">
+        <h2 className="text-6xl  ">
+          Oh, and Its Nutrient Dense{" "}
+          <strong className="text-sacbeBrandColor stroke-onPrimaryContainer text-stroke-3 text-6xl">
+            Super Food
+          </strong>
+        </h2>
+        <p className="md:hidden my-8 ml-1">Tap the tabs for more info</p>
+        <div className="lg:hidden flex flex-wrap justify-center my-5 w-11/12 lg:w-7/12 m-auto lg:px-10 group md:my-28 duration-700">
+          {vits.map((e) => {
+            return (
+              <VitiminPill
+                key={e.popover + e.name}
+                name={e.name}
+                popover={e.popover}
+              />
+            );
+          })}
         </div>
+        <h5 className="text-2xl  mt-3  font-extrabold z-10">
+          Harness this Nutritional Marvel
+        </h5>
+        <p className="ml-1 z-10 mr-2">
+          Cacao is a <strong>nutritional powerhouse</strong>, packed with
+          minerals like magnesium, iron, and zinc,{" "}
+          <strong>essential for energy production</strong>,{" "}
+          <strong> immune function</strong>, and
+          <strong> healthy growth</strong>. It iss a good source of vitamins B1,
+          B2, B3, B5, and B9,
+          <strong> supporting metabolism</strong> and{" "}
+          <strong> cell growth</strong>. Cacaos flavonoids provide
+          <strong> antioxidant</strong> benefits, while theobromine and PEA
+          contribute to mood
+          <strong> enhancement</strong>.
+        </p>
+        <PrimaryButton
+          onClicked={() => {}}
+          text="Learn More"
+          isPrimary={false}
+          className=""
+        />
+      </div>
+      <div className="hidden lg:flex flex-wrap justify-center w-11/12 md:w-7/12 m-auto md:px-10 md:py-24 py-16 group duration-700">
+        {/* <div className="absolute  bg-tertiaryContainer rounded-full h-[500px] w-[700px] -mt-36 blur-2xl group "></div> */}
+
+        {vits.map((e) => {
+          return (
+            <VitiminPill key={e.popover} name={e.name} popover={e.popover} />
+          );
+        })}
       </div>
     </div>
   );

@@ -24,8 +24,10 @@ export function VitiminPill(props: { name: string; popover: string }) {
           }}
           className="m-10"
         >
-          <div id="dropdown">
-            <p className="w-72">{props.popover}</p>
+          <div id="dropdown border ">
+            <p className="w-72 text-sm border-onPrimaryContainer">
+              {props.popover}
+            </p>
           </div>
         </Popover.Dropdown>
       </Popover>

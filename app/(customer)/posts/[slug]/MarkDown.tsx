@@ -2,6 +2,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { CallToAction } from "./CallToAction";
 import { QuickQuestion } from "../../QuickQuestion";
+import { BuyCacaoLink } from "./BuyCacaoLink";
 
 export function TestMarkdown(props: { testContent: any }) {
   const MarkDown = dynamic(() =>
@@ -49,6 +50,11 @@ export function TestMarkdown(props: { testContent: any }) {
         );
       case "Image":
         return <LargeImage image={e.value} />;
+
+      case "buySacbeCallToAction":
+        return (
+          <BuyCacaoLink isSubscription={e.isSubscription} text={e.value.text} />
+        );
       default:
         return <div></div>;
     }

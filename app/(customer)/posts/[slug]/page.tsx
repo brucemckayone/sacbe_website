@@ -11,6 +11,7 @@ import { TestMarkdown } from "./MarkDown";
 import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
 import { notFound } from "next/navigation";
 import PurchaseOptions from "../../PurchaseOptions";
+import { log } from "console";
 
 async function getPost(slug: string) {
   const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {
@@ -87,7 +88,7 @@ export default async function Page({
   );
 
   const { post, relatedPosts } = await getPost(params.slug as string);
-
+  console.log(relatedPosts);
   if (!post) return notFound();
 
   return (
@@ -103,7 +104,7 @@ export default async function Page({
           />
         </div>
 
-        <h1 className="my-10 text-5xl md:text-8xl text-center">{post.title}</h1>
+        <h1 className="my-10 text-4xl md:text-8xl text-center">{post.title}</h1>
 
         <PostMetaData
           categories={post.categories}

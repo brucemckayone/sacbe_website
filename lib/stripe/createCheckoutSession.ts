@@ -16,50 +16,44 @@ interface params {
   customerEmail?: string;
   customerId?: string;
   mode: Stripe.Checkout.SessionCreateParams.Mode;
-  qty:number
+  qty: number
+  discountCode?: string
 }
 
-export default async function createCheckoutSession({ prices, mode, qty }: params) {
-  console.log(`create checkout session caalled with`);
+export default async function createCheckoutSession({ prices, mode, qty, discountCode, customerId  }: params) {
+  
   let email;
-  let customerId;
   const session = await getSession();
-  console.log(`got session ${session}`);
+  
 
   if (session?.user) {
-    console.log(`session: for user ${session?.user}`);
+  
     email = session?.user?.email;
     try {
       customerId = await getStripeCustomerIdByEmail(email);
-      console.log("called get stripe customerid by email");
-      console.log(customerId);
     } catch (e) {
       console.log(e);
     }
 
     let customer: Stripe.Customer | undefined;
     if (!customerId) {
-      console.log("no id");
       customer = await createCustomerClient({ email: email ?? "", name: "" });
-      console.log("get or create customer client side");
       customerId = customer!.id!;
     }
+
   } else {
     console.log("session has no user");
   }
-
 
   const checkoutSession: Stripe.Checkout.Session = await fetchPostJSON(
     "/api/stripe/client/create_checkout_session",
     {
       prices: prices,
       mode: mode,
-      qty: qty
+      qty: qty,
+      // discount: discountCode ??'',
     }
   );
-
-  console.log(checkoutSession);
-  
 
   if (checkoutSession.url) {
     location.href = checkoutSession.url;

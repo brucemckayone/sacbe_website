@@ -10,8 +10,6 @@ import CardLoader from "@/components/loaders/CardLoader";
 import generatePaymentLinks from "@/pages/api/affiliate/generatePaymentLinks";
 import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
 import toast from "react-hot-toast";
-
-import homeUrl from "@/lib/constants/urls";
 import dollarIcon from "@/public/icons/dollar_icon.svg";
 function PaymentLinks() {
   const { user: affiliate, isLoading: affiliateLoading } = useUser();

@@ -26,7 +26,7 @@
     @apply text-xl;
   }
   li {
-    @apply font-body text-onBackground;
+    @apply font-body text-onSecondaryContainer;
   }
   a {
     @apply underline  hover:text-sacbeBrandColor text-onBackground;

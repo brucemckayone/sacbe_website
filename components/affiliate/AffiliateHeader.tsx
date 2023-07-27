@@ -5,7 +5,6 @@ import Image from "next/image";
 import PrimaryButton from "@/components/buttons/primaryButton";
 import { useDisclosure } from "@mantine/hooks";
 import TextInput from "@/components/form/inputs/TextInput";
-import { Modal } from "@mantine/core";
 import TextArea from "@/components/form/inputs/TextArea";
 import { useUser } from "@/components/auth/affiliate_auth_context";
 import ButtonLoader from "@/components/loaders/ButtonLoader";
@@ -13,6 +12,7 @@ import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { useSession } from "next-auth/react";
 import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
 import cacaoInALeaf from "@/public/cacao_in_leaf.png";
+import dynamic from "next/dynamic";
 
 function AffiliateSignUpModal(props: {
   opened: boolean;
@@ -27,6 +27,8 @@ function AffiliateSignUpModal(props: {
   userData: any;
   setIsSent: (arg0: boolean) => void;
 }) {
+  const Modal = dynamic(() => import("@mantine/core").then((res) => res.Modal));
+
   return (
     <Modal
       opened={props.opened}
@@ -81,6 +83,7 @@ function AffiliateSignUpModal(props: {
 
 export function AffiliateHeader() {
   const [opened, { open, close }] = useDisclosure(false);
+
   const session = useSession();
   const user = useUser();
   const userData = user.user;
@@ -117,11 +120,10 @@ export function AffiliateHeader() {
         />
       </div>
       <div className="md:basis-10/12 self-center  ">
-        <div className="flex flex-wrap md:w-12/12">
-          <h1 className="mt-10 sm:text-center md:text-start  text-4xl lg:text-6xl">
-            SACBE AMBASSADOR PROGRAM
-          </h1>
-        </div>
+        <h1 className="mt-10 sm:text-center md:text-start  text-4xl lg:text-6xl flex flex-wrap md:w-12/12">
+          SACBE AMBASSADOR PROGRAM
+        </h1>
+
         <h2 className="text-xl font-bold mt-5">
           Join in the abundance of cacao
         </h2>
@@ -138,6 +140,8 @@ export function AffiliateHeader() {
   );
 
   function GenerateButton(): JSX.Element {
+    console.log(session, user, isSending);
+
     const pending = (
       <div className=" flex justify-start">
         <div className="flex justify-between bg-recommendedGreen p-3 my-3  rounded drop-shadow-md">
@@ -152,10 +156,7 @@ export function AffiliateHeader() {
       </div>
     );
 
-    if (user.isLoading || isSending || session.status == "loading")
-      return <ButtonLoader />;
-
-    if (user.isError && session.status == "unauthenticated")
+    if (session.status == "unauthenticated")
       return (
         <PrimaryButton
           text={"Join Now"}
@@ -173,6 +174,9 @@ export function AffiliateHeader() {
       );
 
     if (isSent) return pending;
+
+    if (user.isLoading || isSending || session.status == "loading")
+      return <ButtonLoader />;
 
     if (!userData.affiliateStatus) {
       return (

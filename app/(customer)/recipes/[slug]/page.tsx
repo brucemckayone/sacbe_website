@@ -1,14 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
 import dynamic from "next/dynamic";
 import { NewsletterSignup } from "./NewsletterSignup";
 import { notFound } from "next/navigation";
-import { MarkDown } from "../../posts/[slug]/MarkDown.1";
-import { PostMetaData } from "../../posts/[slug]/PostMetaData";
 import { FeelsProgressBar } from "./FeelsProgressBar";
-import { RecipeCard } from "./RecipeCard";
+
 export async function generateMetadata({
   params,
 }: {
@@ -174,7 +172,9 @@ async function RercipePage({
           <MarkDown content={recipe.story}></MarkDown>
         </div>
 
-        <NewsletterSignup />
+        <Suspense>
+          <NewsletterSignup />
+        </Suspense>
         <h4 className="mt-20">Why Not Try</h4>
         <h2>More Recipes</h2>
         {relatedRecipes != undefined && (

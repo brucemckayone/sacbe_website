@@ -42,8 +42,8 @@ export function NewsletterSignup() {
     );
 
   return (
-    <div className="w-full bg-primaryContainer m-auto flex justify-center pb-10 mt-10 rounded drop-shadow-lg">
-      <div className=" w-11/12 md:w-8/12">
+    <div className="w-full bg-tertiaryContainer border m-auto flex justify-center pb-10 mt-10 rounded-lg drop-shadow-lg">
+      <div className=" w-11/12 md:w-11/12">
         <label htmlFor="email" className="hidden">
           Email
         </label>

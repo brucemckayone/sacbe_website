@@ -16,6 +16,7 @@ type Flavours = {
 };
 
 type userType = {
+  user: any;
   accountId: string;
   affiliateStatus: affiliateStatusType;
   email: string;

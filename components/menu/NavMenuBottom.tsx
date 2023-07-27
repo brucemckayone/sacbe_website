@@ -5,7 +5,7 @@ function NavMenuBottom() {
   return (
     <nav>
       <menu>
-        <div className="flex justify-around border-onSecondaryContainer border-b-4 border-t-4 py-2">
+        <div className="flex justify-around border-onSecondaryContainer border-b-4 border-t-4 py-2 -z-10">
           {menuItems.map((item) => (
             <Link
               key={item.link + "link" + item.text}

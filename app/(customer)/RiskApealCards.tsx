@@ -12,6 +12,54 @@ const defaultProps = {
   isHorizontal: false,
 };
 
+export function KlarnaLogo() {
+  return (
+    <Image
+      src={klarnIcon}
+      width={100}
+      height={10}
+      alt="Klarna icon showing that we accept klarna payments"
+      className="mr-2 w-10  md:w-16 self-center"
+    />
+  );
+}
+
+export function AfterPayLogo() {
+  return (
+    <Image
+      src={afterpayIcon}
+      width={70}
+      height={10}
+      alt="After pay icon showing that we accept after pay payments for instalments"
+      className="mr-2  w-10 md:w-16 self-center"
+    />
+  );
+}
+
+export function ClimateStripeLogo() {
+  return (
+    <Image
+      src={climateIcon}
+      width={70}
+      height={70}
+      alt="Climate change badge a a partner with sacbe cacao and our climate change pledge"
+      className="mr-2 h-10 w-10 self-center" // placeholder="blur"
+    />
+  );
+}
+
+export function FairTradeLogo() {
+  return (
+    <Image
+      src={fairTradeIcon}
+      width={70}
+      height={70}
+      alt="Icon Text "
+      className="mr-2 h-10 w-10 self-center"
+    />
+  );
+}
+
 export function RiskApealCards(props: props) {
   return (
     <div
@@ -24,14 +72,7 @@ export function RiskApealCards(props: props) {
           props.isHorizontal && "md:mr-5"
         } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
       >
-        <Image
-          src={climateIcon}
-          width={70}
-          height={70}
-          alt="Climate change badge a a partner with sacbe cacao and our climate change pledge"
-          className="mr-2 h-10 w-10 self-center"
-          // placeholder="blur"
-        />
+        <ClimateStripeLogo />
         <div>
           <h4 className="text-xl">Earth Pledge</h4>
           <p className="text-sm">
@@ -64,20 +105,8 @@ export function RiskApealCards(props: props) {
           <div className="flex justify-between">
             <h4 className="text-xl">Flexible Payments</h4>
             <div className="flex flex-wrap">
-              <Image
-                src={klarnIcon}
-                width={100}
-                height={10}
-                alt="Klarna icon showing that we accept klarna payments"
-                className="mr-2 w-10  md:w-16 self-center"
-              />
-              <Image
-                src={afterpayIcon}
-                width={70}
-                height={10}
-                alt="After pay icon showing that we accept after pay payments for instalments"
-                className="mr-2  w-10 md:w-16 self-center"
-              />
+              <KlarnaLogo />
+              <AfterPayLogo />
             </div>
           </div>
           <p className="text-sm">
@@ -100,13 +129,7 @@ export function RiskApealCards(props: props) {
         </div>
       </div>
       <div className="flex flex-row  p-2 rounded-xl drop-shadow-lg bg-surface mt-5 ">
-        <Image
-          src={fairTradeIcon}
-          width={70}
-          height={70}
-          alt="Icon Text "
-          className="mr-2 h-10 w-10 self-center"
-        />
+        <FairTradeLogo />
         <div>
           <h4 className="text-xl">Fair Trade</h4>
           <p className="text-sm">

@@ -11,16 +11,20 @@ export default async function handler(
   const prices = req.body.prices as string[];
   const qty = req.body.qty;
   const customerId = req.body.customerId as string | null | undefined;
+  const discount = req.body.discount as string | null | undefined;
   const mode = req.body.mode as Stripe.Checkout.SessionCreateParams.Mode;
 
-  let payload: Stripe.Checkout.SessionCreateParams = createCheckoutSessionParams(prices, qty, mode, customerId);
+  let payload: Stripe.Checkout.SessionCreateParams = createCheckoutSessionParams(prices, qty, mode, customerId, discount);
 
+
+  
+  
   res.status(200).json(await stripe.checkout.sessions.create(payload));
 
 }
 
 
-export function createCheckoutSessionParams(prices: string[], qty: any, mode: Stripe.Checkout.SessionCreateParams.Mode, customerId: string | null | undefined) {
+export function createCheckoutSessionParams(prices: string[], qty: any, mode: Stripe.Checkout.SessionCreateParams.Mode, customerId: string | null | undefined, discount?: string | null | undefined ) {
   let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   prices.forEach((price) => {
     lineItems.push({
@@ -40,7 +44,7 @@ export function createCheckoutSessionParams(prices: string[], qty: any, mode: St
     cancel_url: `${homeUrl}/cancelled/checkout?session_id={CHECKOUT_SESSION_ID}`,
     currency: "GBP",
     locale: "auto",
-
+    discounts: discount ? [{ coupon: discount }] : undefined,
     client_reference_id: customerId ? customerId : "guest checkout",
 
     phone_number_collection: {
@@ -62,7 +66,7 @@ export function createCheckoutSessionParams(prices: string[], qty: any, mode: St
   if (mode == "payment") {
     payload = {
       ...payload,
-      // payment_method_types: ["card",  "afterpay_clearpay", "klarna"],
+      // payment_method_types: ["card",  "afterpay_clearpay", "klarna", "],
       customer_creation: "if_required",
       shipping_options: [
         {

@@ -26,9 +26,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      className={`${raleway.variable} ${merriweather.variable} bg-[white] w-[100%]`}
-    >
+    <html className={`${raleway.variable} ${merriweather.variable}  w-[100%]`}>
       <AuthProvider>
         <UserProvider>
           {children}

@@ -1,9 +1,9 @@
 "use client";
-import homeUrl from "@/lib/constants/urls";
-import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+
+import { fetchGetJSON } from "@/utils/stripe/fetchPostJson";
 import { useSession } from "next-auth/react";
-import { useContext, createContext, useState, useEffect } from "react";
-import useSWR from "swr";
+import { useContext, createContext, useState, useEffect, useRef } from "react";
+
 const authContextDefaultValues: authContextType = {
   user: {
     accountId: "",
@@ -26,36 +26,45 @@ export function useUser() {
   return useContext(AuthContext);
 }
 
-const fetcher = (path: string) =>
-  fetchGetJSON(
-    path
-    //${session.data.user?.email}`
-  );
+const fetcher = (path: string) => fetchGetJSON(path);
 
 interface getAffiliateInterface {
   email: string;
   status: string;
 }
+
 function useUserSWR({ email, status }: getAffiliateInterface) {
-  // if (status == "authenticated") {
-  const { data, error, isLoading } = useSWR(
-    email && status == "authenticated" && `/api/affiliate/user?email=${email}`,
-    fetcher
-  );
+  const [user, setUser] = useState<userType>(authContextDefaultValues.user);
+  const [isError, setIsError] = useState(false);
+  const isMountedRef = useRef(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await fetcher(`/api/affiliate/user?email=${email}`);
+        setUser(userData);
+        localStorage.setItem("userData", JSON.stringify(userData)); // Store user data in localStorage
+      } catch (error) {
+        setIsError(true);
+      }
+    };
+
+    if (status === "authenticated" && email && !isMountedRef.current) {
+      const storedUserData = localStorage.getItem("userData");
+      if (storedUserData) {
+        setUser(JSON.parse(storedUserData)); // Retrieve user data from localStorage
+      } else {
+        fetchData();
+      }
+      isMountedRef.current = true;
+    }
+  }, [email, status]);
 
   return {
-    user: data,
-    isLoading,
-    isError: error,
+    user,
+    isLoading: !isMountedRef.current,
+    isError,
   };
-
-  // } else {
-  //   return {
-  //     user: authContextDefaultValues.user,
-  //     isLoading: false,
-  //     isError: false,
-  //   };
-  // }
 }
 
 export default function UserProvider({
@@ -63,36 +72,18 @@ export default function UserProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<userType>({} as userType);
-  const setUserDetails = (updatedUser: userType) => {
-    setUser(updatedUser);
-  };
-
   const session = useSession();
-
   const data = useUserSWR({
-    email: session.data?.user?.email ?? "", //"brucemckayone@gmail.com",
+    email: session.data?.user?.email ?? "",
     status: session.status,
   });
 
-  useEffect(() => {
-    if (session.data?.user?.email) {
-      if (data.user) {
-        setUserDetails(data.user);
-      }
-    }
-  }, [data.user ?? "", session.data?.user?.email]);
-
   const value: authContextType = {
-    user: user,
-    setUser: setUserDetails,
+    user: data.user,
+    setUser: () => {}, // You can set the setUser function if required
     isLoading: data.isLoading,
     isError: data.isError,
   };
 
-  return (
-    <>
-      <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-    </>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

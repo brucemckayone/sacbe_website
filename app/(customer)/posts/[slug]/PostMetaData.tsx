@@ -26,7 +26,7 @@ export function PostMetaData(props: {
               className="center relative inline-block select-none whitespace-nowrap"
               key={`${tag} KEY`}
             >
-              <p className="text-sm md:text-lg mx-1 bg-tertiaryContainer shadow rounded-md px-2">
+              <p className="text-sm md:text-lg mx-1 bg-tertiaryContainer shadow rounded-md px-2 my-1">
                 {tag.replaceAll(";", "")}
               </p>
             </div>
