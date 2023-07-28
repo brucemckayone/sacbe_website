@@ -16,10 +16,10 @@ export function KlarnaLogo() {
   return (
     <Image
       src={klarnIcon}
-      width={100}
-      height={10}
+      width={180}
+      height={6}
       alt="Klarna icon showing that we accept klarna payments"
-      className="mr-2 w-10  md:w-16 self-center"
+      className="mr-2 w-10  md:w-10 self-center"
     />
   );
 }
@@ -29,9 +29,9 @@ export function AfterPayLogo() {
     <Image
       src={afterpayIcon}
       width={70}
-      height={10}
+      height={8}
       alt="After pay icon showing that we accept after pay payments for instalments"
-      className="mr-2  w-10 md:w-16 self-center"
+      className="mr-2  w-10 md:w-10 self-center"
     />
   );
 }
@@ -43,7 +43,7 @@ export function ClimateStripeLogo() {
       width={70}
       height={70}
       alt="Climate change badge a a partner with sacbe cacao and our climate change pledge"
-      className="mr-2 h-10 w-10 self-center" // placeholder="blur"
+      className="mr-2 h-8 w-10 self-center" // placeholder="blur"
     />
   );
 }
@@ -55,7 +55,7 @@ export function FairTradeLogo() {
       width={70}
       height={70}
       alt="Icon Text "
-      className="mr-2 h-10 w-10 self-center"
+      className="mr-2 h-8 w-10 self-center"
     />
   );
 }

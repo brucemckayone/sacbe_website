@@ -88,7 +88,7 @@ module.exports = {
           },
         },
         zoom_in_fade: {
-          "0%": { transform: "scale(0.5)", opacity: 0 },
+          "0%": { transform: "scale(0.8)", opacity: 0 },
           "100%": { transform: "scale(1)", opacity: 1 },
         },
         zoom_in: {
@@ -164,7 +164,7 @@ module.exports = {
         slide_in_left_blur: " slide_in_left_blur 500ms ease-in-out",
         slide_in_right_fade: "slide_in_right_fade 1s ease-in-out",
         slide_out_left_fade: "slide_in_left 1s ease-in-out reverse",
-        zoom_in_fade: "zoom_in_fade 1s ease-in-out",
+        zoom_in_fade: "zoom_in_fade 400ms ease-in-out",
         zoom_in: "zoom_in 1s ease-in-out",
         float: "float 3s ease-in-out infinite",
         scale_shadow: "scale_shadow 3s ease-in-out infinite",

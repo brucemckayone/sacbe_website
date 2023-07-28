@@ -41,7 +41,7 @@ const ResponsiveImageComponent: React.FC = () => {
       fill
       placeholder="blur"
       style={{ objectPosition: "50%" }}
-      className="object-cover h-screen w-screen "
+      className="object-cover h-[95%] w-screen "
     />
   );
 };

@@ -1,12 +1,9 @@
 "use client";
-
 import Hamburger from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useSession } from "next-auth/react";
 import menuItems from "@/lib/constants/menu";
-import dynamic from "next/dynamic";
 import LoginButton from "../buttons/loginButton";
 
 export default function Navbar() {
@@ -15,16 +12,16 @@ export default function Navbar() {
   // );
 
   return (
-    <header className="sticky top-0 z-50 flex flex-row  justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
+    <header className="sticky top-0 z-50 flex flex-row  h-16 justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
       <Menu />
       <Link className="flex" href="/">
         <Image
           src="/logo.svg"
           alt="logo"
           width={300}
-          height={80}
+          height={50}
           priority
-          className="w-9/12 md:w-1/5 m-auto"
+          className="w-9/12  md:w-1/5 m-auto"
         ></Image>
       </Link>
       <LoginButton />
@@ -32,13 +29,12 @@ export default function Navbar() {
   );
 
   function Menu() {
-    const session = useSession();
     const [isDrawerOpen, setDrawerOpenState] = useState(false);
     function toggleDrawer() {
       setDrawerOpenState(!isDrawerOpen);
     }
     return (
-      <div className="flex m-3  ">
+      <div className="flex m-1 ">
         <Hamburger
           toggled={isDrawerOpen}
           onToggle={() => {
@@ -56,7 +52,7 @@ export default function Navbar() {
             <div className="w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
               <div className="flex justify-end mr-16 rounded-lg">
                 <div
-                  className="bg-surface drop-shadow-lg rounded-full mt-3 mr-5 opacity-80"
+                  className="bg-surface drop-shadow-lg rounded-full  mr-5 opacity-80"
                   aria-labelledby="open-menu"
                   role="menu"
                 >

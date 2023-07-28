@@ -16,12 +16,12 @@ export default function LoginButton() {
       {isLoggedIn ? (
         <Popover position="left-start">
           <Popover.Target>
-            <div className="m-3">
+            <div className="m-1">
               <Avatar
                 src={null}
                 alt="no image here"
                 color={"orange"}
-                className="rounded-full bg-transparent align-bottom h-[50px] w-[50px] shadow-lg hover:drop-shadow-lg duration-200"
+                className="rounded-full bg-transparent align-bottom h-[45px] w-[45px] shadow-lg hover:drop-shadow-lg duration-200"
               />
             </div>
           </Popover.Target>
@@ -79,9 +79,9 @@ export default function LoginButton() {
             ).signInAndRedirectTo;
             signInAndRedirectTo(pathname!);
           }}
-          className="bg-sacbeBrandColor hover:bg-onPrimaryContainer hover:text-surface hover:text-white border-2 mt-4 md:mt-2 p-1 px-3 md:p-2 md:px-4 rounded-md"
+          className="bg-sacbeBrandColor hover:bg-onPrimaryContainer hover:text-surface hover:text-white border-2 m-1.5 p-1 px-2 md:p-1 md:px-4 rounded-md"
         >
-          <p className=" text-xl md:text-3xl font-display">LOGIN</p>
+          <p className=" text-xl md:text-2xl font-display">LOGIN</p>
         </button>
       )}
     </div>
