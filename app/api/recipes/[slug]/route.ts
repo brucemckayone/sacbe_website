@@ -11,9 +11,10 @@ export async function GET(request: NextRequest) {
       const recipe = snap.data() as any;
       if (!snap.exists) 
         return NextResponse.json({ recipe: {}, relatedRecipes: [] });
+      
       console.log(recipe);
       
-      return NextResponse.json({ recipe: recipe, relatedRecipes: await getRelatedRecipes(recipe.relatedRecipes) });
+      return NextResponse.json({ recipe: recipe, relatedRecipes: recipe.relatedRecipes? await getRelatedRecipes(recipe.relatedRecipes):[] });
     } catch (e) {
         console.error(e);
         return NextResponse.error();
