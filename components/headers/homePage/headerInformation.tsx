@@ -14,7 +14,7 @@ export function FeaturesHorizontalList() {
 
 export default function HeaderInformation() {
   return (
-    <div className="basis-[45%] lg:basis-[35%] pb-5 px-2 md:px-5 lg:w-2/3 backdrop-blur-lg bg-onPrimary/70 mt-6 rounded-2xl mb-10 lg:mr-10">
+    <div className="basis-[45%] lg:basis-[35%] pb-5 px-2 md:px-5 lg:w-2/3 backdrop-blur-lg bg-onPrimary/70 mt-2 rounded-2xl mb-10 lg:mr-5">
       <div className="relative w-auto pb-2">
         <h2 className="text-4xl md:text-4xl mt-5">
           DISCOVER <br /> HEART OPENING <br /> BOUNDLESS ENERGY

@@ -43,7 +43,7 @@ export default function PurchaseOptions(props: props) {
   const [subQty, setSubQty] = useState(1);
 
   return (
-    <div className="flex flex-col justify-center h-full">
+    <div className="flex flex-col justify-center h-full drop-shadow-md">
       <div className="flex flex-col  rounded-md">
         <PurchaseTypeTabs isOnOff={isOnOff} setIsOnOff={setIsOnOff} />
         <div className="flex flex-col border-x-2 bg-surface w-full">
@@ -78,12 +78,14 @@ export default function PurchaseOptions(props: props) {
           </div>
         </div>
         <div className="basis-[50px] bg-onSecondaryContainer rounded-b-lg w-full m-auto self-center align-bottom text-surface">
-          <h5 className="text-4xl self-center text-center mt-1">{`£${(isOnOff
-            ? 35 * oneoffQty
-            : 28.0 * subQty
-          ).toFixed(2)}/month`}</h5>
+          <h5 className="text-4xl self-center text-center mt-1">{`£${
+            isOnOff
+              ? (35 * oneoffQty).toFixed(2)
+              : (28.0 * subQty).toFixed(2) + "/month"
+          }`}</h5>
         </div>
       </div>
+      <RiskAppealLogos />
     </div>
   );
   function handleGeneralLayout() {
@@ -121,7 +123,7 @@ export function handleOneOfPurchase(
 
 export function RiskAppealLogos() {
   return (
-    <div className="flex flex-row justify-around flex-wrap ">
+    <div className="flex flex-row justify-around flex-wrap mt-3 px-3 py-1  drop-shadow-md">
       <KlarnaLogo />
       <AfterPayLogo />
       <ClimateStripeLogo />
@@ -130,18 +132,21 @@ export function RiskAppealLogos() {
   );
 }
 
-export function RiskFreeEarthHealingPayments() {
+export function RiskFreeEarthHealingPayments(props: any) {
   return (
     <div>
       <h6 className="text-xs font-extrabold whitespace-nowrap">
         Risk Free, Earth Healing, Fair Trade Payments
       </h6>
       <p className="text-xs text-onPrimaryContainer pr-5 ">
-        Support
-        <strong className="text-xs "> Fair Trade</strong>, and{" "}
-        <strong className="text-xs">remove carbon from the atmosphere</strong>{" "}
-        Buy now Pay Later, or in 3-4 installments as low as £8.25.{" "}
-        <strong className="text-xs ">100% Money back garentee</strong>{" "}
+        <strong className="text-xs ">100% money back</strong> flexibile payments
+        that support
+        <strong className="text-xs "> Fair Trade</strong> all while{" "}
+        <strong className="text-xs">
+          removing carbon from the atmosphere.
+        </strong>{" "}
+        {props.canBuyNow &&
+          "Buy now Pay Later, or in 3-4 installments as low as £8.25."}
       </p>
     </div>
   );

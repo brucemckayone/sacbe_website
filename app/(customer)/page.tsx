@@ -33,10 +33,6 @@ export default function Home() {
     )
   );
 
-  // const AskAQuestion = dynamic(() =>
-  //   import("./AskAQuestion").then((res) => res.AskAQuestion)
-  // );
-
   return (
     <main>
       <HomePageHeader />

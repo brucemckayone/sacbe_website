@@ -2,7 +2,7 @@ import Card from "@/components/cards/card";
 import Image from "next/image";
 import LinkButton from "@/components/buttons/LinkButton";
 import SlideInUp from "@/components/animations/slide_in_up";
-import cacaoFacilatorImage from "@/public/cacaofacilitator.png";
+import cacaoFacilatorImage from "@/public/cacao-facilitator-training.png";
 
 export function BecomeAPractioner() {
   return (

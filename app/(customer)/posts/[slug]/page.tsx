@@ -104,7 +104,7 @@ export default async function Page({
           />
         </div>
 
-        <h1 className="my-10 text-4xl md:text-8xl text-center">{post.title}</h1>
+        <h1 className="my-10 text-xl md:text-6xl text-center">{post.title}</h1>
 
         <PostMetaData
           categories={post.categories}

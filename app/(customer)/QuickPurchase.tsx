@@ -77,8 +77,10 @@ export const QuickPurchase = () => {
       )}
 
       <div
-        className={`shadow-lg border-t-2 border-r-2 duration-700 border-l-2 rounded-md p-1 h-[80vh] overflow-scroll z-10 md:h-3/5 fixed bottom-0 z-100 bg-surface w-screen m-auto ${
-          open ? "translate-y-0" : "translate-y-[2000px]"
+        className={`shadow-lg border-t-2 border-r-2 duration-700 border-l-2 rounded-md p-1 h-[80vh] overflow-scroll md:h-[90%]  z-50 fixed md:right-0 bottom-0 z-100 bg-surface md:w-1/3 w-screen m-auto ${
+          open
+            ? "translate-y-0 md:translate-x-[0px]"
+            : "translate-y-[2000px] md:translate-x-[2000px]"
         } `}
       >
         <div className="flex justify-between">
@@ -91,9 +93,9 @@ export const QuickPurchase = () => {
             }}
           ></Hamburger>
         </div>
-        <div className="flex flex-col justify-around md:h-full">
+        <div className="flex flex-col justify-start w-10/12 m-auto">
           <PurchaseOptions isHorizontal={true} compact={true} />
-          <RiskApealCards isHorizontal={true}></RiskApealCards>
+          <RiskApealCards isHorizontal={false} />
         </div>
       </div>
     </div>

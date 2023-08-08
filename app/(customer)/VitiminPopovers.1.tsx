@@ -113,7 +113,11 @@ export function VitiminPopovers() {
           <strong> enhancement</strong>.
         </p>
         <PrimaryButton
-          onClicked={() => {}}
+          onClicked={() => {
+            open(
+              "http://localhost:3000/posts/the-therapeutic-potential-of-cacao--a-comprehensive-analysis-of-its-antioxidant--anti-inflammatory--mood-enhancing--cancer-preventive--and-cognitive-enhancing-properties"
+            );
+          }}
           text="Learn More"
           isPrimary={false}
           className=""

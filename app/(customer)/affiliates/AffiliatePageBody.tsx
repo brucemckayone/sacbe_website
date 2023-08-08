@@ -52,7 +52,7 @@ export function AffiliatePageBody() {
         <h2 className="text-7xl my-10">Why Join Our Affiliate Program?</h2>
         <ReasonToJoin
           header={"A Sacred Partnership"}
-          imageUrl={"/cacao_beans_in_hand.webp"}
+          imageUrl={"/home_header/home_page_header_image_9.jpg"}
           body={`Join our affiliate program and become a valued partner in
                 spreading the transformative magic of ceremonial cacao
                 worldwide. Together, we elevate consciousness, foster deep
@@ -66,7 +66,7 @@ export function AffiliatePageBody() {
         />
         <ReasonToJoin
           header={"Exceptional Product Quality:"}
-          imageUrl={"/yellow_cacao_pods.jpg"}
+          imageUrl={"/home_header/home_page_header_image_18.jpg"}
           body={` Experience the pinnacle of ceremonial cacao perfection. Our
                 affiliate program offers you the opportunity to share the utmost
                 excellence in cacao sourcing. We take great pride in selecting
@@ -82,7 +82,7 @@ export function AffiliatePageBody() {
         />
         <ReasonToJoin
           header={"Lucrative Commission Rates"}
-          imageUrl={"/cacao_beans_in_hand.webp"}
+          imageUrl={"/home_header/home_page_header_image_16.jpg"}
           body={` We deeply value your commitment and dedication as an affiliate
                 partner. Your outstanding efforts are recognized and rewarded
                 through our generous commission rates. Each sale you generate is
@@ -95,7 +95,7 @@ export function AffiliatePageBody() {
                 that your efforts will be recognized, fostering financial
                 success.`}
         />
-        <ReasonToJoin
+        {/* <ReasonToJoin
           header={
             " Captivating & Professionally Designed: Empowering Your Marketing Journey"
           }
@@ -111,15 +111,15 @@ export function AffiliatePageBody() {
             trove. Join our program and access captivating, professionally
             designed marketing materials. Amplify your impact as you inspire
             transformative journeys with our products.`}
-        />
-        <ReasonToJoin
+        /> */}
+        {/* <ReasonToJoin
           header={"Access to Exclusive Offers"}
-          imageUrl={"/cacao_beans_in_hand.webp"}
+          imageUrl={"/home_header/home_page_header_image_1.jpg"}
           body={` Elevate your affiliate game with our exclusive offers and promotions available solely to our valued affiliates. Gain a competitive edge and captivate your audience with unique deals and incentives that cannot be found elsewhere. By partnering with us, you unlock a world of exclusive opportunities that set you apart from the crowd. These special offers allow you to offer added value to your customers, enticing them to choose our ceremonial cacao products. Be the first to share exciting promotions, limited-time discounts, and captivating campaigns that create a buzz in the market. Stand out as an affiliate by delivering unparalleled benefits and captivating your audience with exclusive opportunities.`}
-        />
+        /> */}
         <ReasonToJoin
           header={"Deeply Committed to Ethics, Fair Trade, and Sustainability"}
-          imageUrl={"/eco_packaging_box.png"}
+          imageUrl={"/home_header/home_page_header_image_5.jpg"}
           body={`Ethics, fair trade, and sustainability lie at the core of our values. We are dedicated to sourcing our ceremonial cacao through ethical channels, promoting fair trade practices, and ensuring sustainability throughout our supply chain. Our commitment to these principles is unwavering, driving every aspect of our business. By choosing to partner with us, you join a movement that prioritizes social responsibility and environmental consciousness. We are proud to support the communities and farmers who cultivate our cacao, ensuring fair wages and working conditions. Together, we can make a positive impact and contribute to a more sustainable future.`}
         />
       </div>

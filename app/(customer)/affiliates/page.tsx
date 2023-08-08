@@ -59,7 +59,7 @@ export default async function AffiliatePage() {
     <>
       <AffiliateHeader />
       <NavMenuBottom />
-      <AffiliatePageBody></AffiliatePageBody>
+      <AffiliatePageBody />
     </>
   );
 }

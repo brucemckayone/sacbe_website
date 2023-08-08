@@ -9,6 +9,9 @@ import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
 import dynamic from "next/dynamic";
 
+
+let fetchLimit = 10;
+
 export const metadata: Metadata = {
   title: "Resources",
   description:
@@ -45,7 +48,7 @@ async function getFeaturedPosts(startAfter: string) {
     .collection("blog_posts")
     .orderBy("title")
     .startAfter(startAfter)
-    .limit(3)
+    .limit(fetchLimit)
     .get();
 
   return snap.docs.map((e) => {
@@ -60,7 +63,7 @@ async function getFeaturedRecipes(startAfter: string) {
     .collection("recipes")
     .orderBy("title")
     .startAfter(startAfter)
-    .limit(3)
+    .limit(fetchLimit)
     .get();
 
   return snap.docs.map((e) => {
