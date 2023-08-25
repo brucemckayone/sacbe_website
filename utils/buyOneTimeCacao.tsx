@@ -1,12 +1,15 @@
 "use client";
 import createCheckoutSession from "@/lib/stripe/createCheckoutSession";
+import { envConfig } from "@/lib/webhooks/envConfig";
 
 export async function buySubscriptionFirstClass(
   user: userType,
   subQty: number
 ) {
   const getPrices = () => {
-    const env = process.env.VERCEL_ENV;
+    const env = process.env.NEXT_PUBLIC_VERCEL_ENV;
+    console.log(env);
+
     if (env == "preview") {
       return [
         "price_1NIqy6G859ZdyFmpzaNNkSNu",
@@ -33,7 +36,8 @@ export async function buySubscriptionSecondClass(
   subQty: number
 ) {
   const getPrices = () => {
-    const env = process.env.VERCEL_ENV;
+    const env = process.env.NEXT_PUBLIC_VERCEL_ENV;
+    console.log(env);
     if (env == "preview") {
       return [
         "price_1NIqy6G859ZdyFmpzaNNkSNu",
@@ -57,7 +61,8 @@ export async function buySubscriptionSecondClass(
 
 export async function buyOneTimeCacao(user: userType, oneoffQty: number) {
   const getPrices = () => {
-    const env = process.env.VERCEL_ENV;
+    const env = process.env.NEXT_PUBLIC_VERCEL_ENV;
+    console.log(env);
     if (env == "preview") {
       return ["price_1NIqy6G859ZdyFmpEbQLnA5q"];
     } else {
