@@ -8,6 +8,7 @@ import { createCheckoutSessionParams } from "../client/create_checkout_session";
 import emailSender from "@/utils/email/nodemailer";
 
 import getRawBody from "raw-body";
+import { createTransferByAccoundId, getAccountIdFromCoupon } from "../../affiliate/payout";
 
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
@@ -50,40 +51,14 @@ export default async function handler(
         break;
       case "checkout.session.completed":
         const csCompleted = event.data.object as Stripe.Checkout.Session;
-        // get expanded customerSession
         let checkoutSession = await stripe.checkout.sessions.retrieve(
           csCompleted.id,
-          { expand: ["line_items", "customer"] }
+          { expand: ["line_items", "customer", "invoice"] }
         );
-        if (checkoutSession.mode == "payment") {
-          logEvent(analytics, "Single Payment Checkout Complete", {
-            total: checkoutSession.amount_total,
-            customer: checkoutSession.customer_details?.name,
-            customerEmail: checkoutSession.customer_details?.email
-          });
-        } else if (checkoutSession.mode == "subscription") {
-            logEvent(analytics, "Single Payment Checkout Complete", {
-              total: checkoutSession.amount_total,
-              customer: checkoutSession.customer_details?.name,
-              customerEmail: checkoutSession.customer_details?.email
-            });
-        }
 
-        if (checkoutSession.payment_status == "unpaid")  {
-          // The checkout session was canceled
-          // Perform your desired actions here
-          const customer = checkoutSession.customer as Stripe.Customer;
-          const newSession = await stripe.checkout.sessions.create(createCheckoutSessionParams(checkoutSession.line_items!.data.map((item) => item!.price!.id), checkoutSession!.line_items!.data[0].quantity, checkoutSession.mode, customer?.id ));
-
-          new emailSender().send({
-            to: customer.email!,
-            subject: "How can we help?",
-            bodyMessage: 'A little gift for you!',
-            htmlContent: `<p>Hi ${customer.name},</p> <p> We noticed that you did not complete your purchase, so we attached 10% discount to your account to help make your decision for positive change easier.</p> <p>Here is a link with your coupon code: <a href="${newSession.url}">link</a></p> <p><a href="https://sacbe-ceremonial-cacao.com">Sacbe Cacao</a></p>`, 
-            replayTo: 'no-replay@sacbe-ceremonial-cacao.com',
-            sender:'Sacbe Cacao',
-          });
-        }
+        handleCheckoutCompleteLogging(checkoutSession);
+        await handleUnpaid(checkoutSession, stripe);
+        await handleAffiliatePayoutsViaCoupon(checkoutSession);
 
       case "checkout.session.expired":
         const checkoutSessionExpired = event.data.object as Stripe.Checkout.Session;
@@ -110,6 +85,54 @@ export default async function handler(
     .json({ status: status, message: message, data: data });
 }
 
+
+async function handleAffiliatePayoutsViaCoupon(checkoutSession: Stripe.Response<Stripe.Checkout.Session>) {
+  const invoice = checkoutSession.invoice as Stripe.Invoice;
+  if (invoice.payment_intent) {
+    const coupon = invoice.discount?.coupon;
+    if (coupon) {
+      const accountId = await getAccountIdFromCoupon(coupon.name!);
+      if (accountId) {
+        const amount = invoice.total_discount_amounts?.reduce((sum, discount) => { return sum + discount.amount; }, 0) ?? 0;
+        createTransferByAccoundId({ accountId: accountId, amount: amount ?? 0, sourceTransation: invoice.payment_intent as string ,coupon: coupon.name!});
+      }
+    }
+  }
+}
+
+async function handleUnpaid(checkoutSession: Stripe.Response<Stripe.Checkout.Session>, stripe: Stripe) {
+  if (checkoutSession.payment_status == "unpaid") {
+    // The checkout session was canceled
+    // Perform your desired actions here
+    const customer = checkoutSession.customer as Stripe.Customer;
+    const newSession = await stripe.checkout.sessions.create(createCheckoutSessionParams(checkoutSession.line_items!.data.map((item) => item!.price!.id), checkoutSession!.line_items!.data[0].quantity, checkoutSession.mode, customer?.id));
+
+    new emailSender().send({
+      to: customer.email!,
+      subject: "How can we help?",
+      bodyMessage: 'A little gift for you!',
+      htmlContent: `<p>Hi ${customer.name},</p> <p> We noticed that you did not complete your purchase, so we attached 10% discount to your account to help make your decision for positive change easier.</p> <p>Here is a link with your coupon code: <a href="${newSession.url}">link</a></p> <p><a href="https://sacbe-ceremonial-cacao.com">Sacbe Cacao</a></p>`,
+      replayTo: 'no-replay@sacbe-ceremonial-cacao.com',
+      sender: 'Sacbe Cacao',
+    });
+  }
+}
+
+function handleCheckoutCompleteLogging(checkoutSession: Stripe.Response<Stripe.Checkout.Session>) {
+  if (checkoutSession.mode == "payment") {
+    logEvent(analytics, "Single Payment Checkout Complete", {
+      total: checkoutSession.amount_total,
+      customer: checkoutSession.customer_details?.name,
+      customerEmail: checkoutSession.customer_details?.email
+    });
+  } else if (checkoutSession.mode == "subscription") {
+    logEvent(analytics, "Single Payment Checkout Complete", {
+      total: checkoutSession.amount_total,
+      customer: checkoutSession.customer_details?.name,
+      customerEmail: checkoutSession.customer_details?.email
+    });
+  }
+}
 // {
 //   "id": "cs_test_a16tW6UCOHmwKq810qIw9mM5Buya1IMdDKfkItotjOIjPRV9O7ZHlyGg0L",
 //   "object": "checkout.session",

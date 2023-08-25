@@ -51,7 +51,7 @@ export default async function createCheckoutSession({ prices, mode, qty, discoun
       prices: prices,
       mode: mode,
       qty: qty,
-      // discount: discountCode ??'',
+      discount: discountCode ??'',
     }
   );
 

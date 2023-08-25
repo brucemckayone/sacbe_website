@@ -93,7 +93,7 @@ export function AskAQuestion() {
             className="self-end rounded-md px-2 py-1 border-2 font-display"
           >
             <p className="text-lg self-end">
-              {isLoading ? "Loading..." : "SUBMIT"}
+              {!isLoading ? "Loading..." : "SUBMIT"}
             </p>
           </button>
         </div>

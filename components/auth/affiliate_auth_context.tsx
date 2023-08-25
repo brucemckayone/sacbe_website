@@ -14,6 +14,7 @@ const authContextDefaultValues: authContextType = {
     chargesEnabled: false,
     email: "",
     uuid: "",
+    coupon: "",
   } as userType,
   setUser: (user: userType) => {},
   isError: false,
@@ -32,7 +33,6 @@ interface getAffiliateInterface {
   email: string;
   status: string;
 }
-
 function useUserSWR({ email, status }: getAffiliateInterface) {
   const [user, setUser] = useState<userType>(authContextDefaultValues.user);
   const [isError, setIsError] = useState(false);
@@ -52,21 +52,21 @@ function useUserSWR({ email, status }: getAffiliateInterface) {
     if (status === "authenticated" && email && !isMountedRef.current) {
       const storedUserData = localStorage.getItem("userData");
       if (storedUserData) {
-        setUser(JSON.parse(storedUserData)); // Retrieve user data from localStorage
-      } else {
-        fetchData();
+        setUser(JSON.parse(storedUserData)); // Use local data initially
       }
+
+      // Fetch asynchronously from the server to update the data in background
+      fetchData();
       isMountedRef.current = true;
     }
   }, [email, status]);
 
   return {
     user,
-    isLoading: !isMountedRef.current,
+    isLoading: !isMountedRef.current, // Show loading while initial local data is used
     isError,
   };
 }
-
 export default function UserProvider({
   children,
 }: {

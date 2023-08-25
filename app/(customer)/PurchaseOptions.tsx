@@ -139,7 +139,7 @@ export function RiskFreeEarthHealingPayments(props: any) {
         Risk Free, Earth Healing, Fair Trade Payments
       </h6>
       <p className="text-xs text-onPrimaryContainer pr-5 ">
-        <strong className="text-xs ">100% money back</strong> flexibile payments
+        <strong className="text-xs ">100% money back</strong> flexible payments
         that support
         <strong className="text-xs "> Fair Trade</strong> all while{" "}
         <strong className="text-xs">

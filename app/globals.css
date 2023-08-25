@@ -33,7 +33,7 @@
   }
 
   strong {
-    @apply text-primary text-xl;
+    @apply text-primary text-lg;
   }
   blockquote {
     @apply border-l-2 pl-1 ml-1 font-display border-sacbeBrandColor;

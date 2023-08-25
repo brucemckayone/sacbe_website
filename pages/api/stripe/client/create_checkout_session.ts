@@ -14,13 +14,7 @@ export default async function handler(
   const discount = req.body.discount as string | null | undefined;
   const mode = req.body.mode as Stripe.Checkout.SessionCreateParams.Mode;
 
-  let payload: Stripe.Checkout.SessionCreateParams = createCheckoutSessionParams(prices, qty, mode, customerId, discount);
-
-
-  
-  
-  res.status(200).json(await stripe.checkout.sessions.create(payload));
-
+  res.status(200).json(await stripe.checkout.sessions.create(createCheckoutSessionParams(prices, qty, mode, customerId, discount)));
 }
 
 
@@ -40,11 +34,11 @@ export function createCheckoutSessionParams(prices: string[], qty: any, mode: St
     line_items: lineItems,
     mode: mode,
     billing_address_collection: "required",
-    allow_promotion_codes: true,
+    allow_promotion_codes: discount ? undefined :true,
     cancel_url: `${homeUrl}/cancelled/checkout?session_id={CHECKOUT_SESSION_ID}`,
     currency: "GBP",
     locale: "auto",
-    discounts: discount ? [{ coupon: discount }] : undefined,
+    discounts: discount ? [{ coupon: discount}] : undefined,
     client_reference_id: customerId ? customerId : "guest checkout",
 
     phone_number_collection: {

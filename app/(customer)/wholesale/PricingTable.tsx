@@ -37,11 +37,11 @@ export function WholesalePricingTable() {
                 >
                   5 Cases
                 </th>
-                <td className="px-6 py-4 ">£21.25</td>
+                <td className="px-6 py-4 ">£25.00</td>
                 <td className="px-6 py-4">£35</td>
-                <td className="px-6 py-4">£1,050</td>
-                <td className="px-6 py-4">35%</td>
-                <td className="px-6 py-4 text-right">£288.75</td>
+                <td className="px-6 py-4">£750</td>
+                <td className="px-6 py-4">28.6%</td>
+                <td className="px-6 py-4 text-right">£1,050</td>
               </tr>
               <tr className="bg-surface border-b ">
                 <th
@@ -50,11 +50,11 @@ export function WholesalePricingTable() {
                 >
                   10 Cases
                 </th>
-                <td className="px-6 py-4">£21.25</td>
+                <td className="px-6 py-4">£25.00</td>
                 <td className="px-6 py-4">£35</td>
                 <td className="px-6 py-4">£2,100</td>
-                <td className="px-6 py-4">35%</td>
-                <td className="px-6 py-4 text-right">£577.50</td>
+                <td className="px-6 py-4">28.6%</td>
+                <td className="px-6 py-4 text-right">£600</td>
               </tr>
               <tr className="bg-surface border-b ">
                 <th
@@ -63,11 +63,11 @@ export function WholesalePricingTable() {
                 >
                   15 Cases
                 </th>
-                <td className="px-6 py-4">£21.25</td>
+                <td className="px-6 py-4">£25.00</td>
                 <td className="px-6 py-4">£35</td>
-                <td className="px-6 py-4">£1,050</td>
-                <td className="px-6 py-4">35%</td>
-                <td className="px-6 py-4 text-right">£866.25</td>
+                <td className="px-6 py-4">£3,150</td>
+                <td className="px-6 py-4">28.6%</td>
+                <td className="px-6 py-4 text-right">£900</td>
               </tr>
             </tbody>
           </table>
@@ -93,10 +93,7 @@ export function WholesalePricingTable() {
                   <div className="flex items-center">Total</div>
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  <div className="flex items-center">Margin</div>
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  <span className="flex items-center">Profit</span>
+                  <div className="flex items-center">Savings</div>
                 </th>
               </tr>
             </thead>
@@ -106,39 +103,48 @@ export function WholesalePricingTable() {
                   scope="row"
                   className="px-6 py-4 font-medium  whitespace-nowrap "
                 >
-                  5 Cases
+                  5 kg
                 </th>
-                <td className="px-6 py-4">£21.25</td>
+                <td className="px-6 py-4">£65</td>
                 <td className="px-6 py-4">£35</td>
-                <td className="px-6 py-4">£1,050</td>
-                <td className="px-6 py-4">35%</td>
-                <td className="px-6 py-4 text-right">£288.75</td>
+                <td className="px-6 py-4">£325</td>
+                <td className="px-6 py-4">£258.33</td>
               </tr>
               <tr className="bg-surface border-b ">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium  whitespace-nowrap "
                 >
-                  10 Cases
+                  10 kg
                 </th>
-                <td className="px-6 py-4">£21.25</td>
+                <td className="px-6 py-4">£65</td>
                 <td className="px-6 py-4">£35</td>
-                <td className="px-6 py-4">£2,100</td>
-                <td className="px-6 py-4">35%</td>
-                <td className="px-6 py-4 text-right">£577.50</td>
+                <td className="px-6 py-4">£650</td>
+                <td className="px-6 py-4">£516.66</td>
               </tr>
               <tr className="bg-surface border-b ">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium  whitespace-nowrap "
                 >
-                  15 Cases
+                  15 kg
                 </th>
-                <td className="px-6 py-4">£21.25</td>
+                <td className="px-6 py-4">£65</td>
                 <td className="px-6 py-4">£35</td>
-                <td className="px-6 py-4">£1,050</td>
-                <td className="px-6 py-4">35%</td>
-                <td className="px-6 py-4 text-right">£866.25</td>
+                <td className="px-6 py-4">£975</td>
+                <td className="px-6 py-4">£775.00</td>
+              </tr>
+              <tr className="bg-surface border-b ">
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium  whitespace-nowrap "
+                >
+                  20 kg
+                </th>
+                <td className="px-6 py-4">£65</td>
+                <td className="px-6 py-4">£35</td>
+                <td className="px-6 py-4">£1300</td>
+                <td className="px-6 py-4">£1,033.33</td>
               </tr>
             </tbody>
           </table>

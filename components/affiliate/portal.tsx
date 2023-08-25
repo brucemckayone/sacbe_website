@@ -5,11 +5,17 @@ import AccountBalanceTabs from "./AccountBalanceTabs";
 import PaymentLinks from "./paymentLinks";
 import { useUser } from "@/components/auth/affiliate_auth_context";
 import { useSession } from "next-auth/react";
+import PrimaryButton from "../buttons/primaryButton";
+import TextInput from "../form/inputs/TextInput";
+import { useState } from "react";
+import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 
 function Portal() {
   const { user: affiliate, isLoading: affiliateLoading } = useUser();
+
   const session = useSession();
 
+  console.log(affiliate);
   if (session!.data?.user) {
     // set loading state
     if (affiliateLoading) {
@@ -28,6 +34,7 @@ function Portal() {
                 <AccountBalanceTabs />
               </span>
             </span>
+            <CouponFeild affiliate={affiliate} />
             <PaymentLinks />
 
             <SetUpAccountButton />
@@ -38,5 +45,44 @@ function Portal() {
   }
   return <> </>;
 }
+
+interface ICouponFeild {
+  affiliate: userType;
+}
+
+const CouponFeild = ({ affiliate }: ICouponFeild) => {
+  const [couponName, setCouponName] = useState("");
+
+  if (!affiliate.coupon)
+    return (
+      <div className="border rounded-lg drop-shadow-sm p-2 m-5">
+        <h5>{affiliate.coupon}</h5>
+      </div>
+    );
+
+  if (affiliate.coupon && affiliate.accountId)
+    return (
+      <div>
+        <h5>Create Your coupon</h5>
+        <TextInput
+          placeHolder="Enter Your Coupon"
+          value={couponName}
+          update={setCouponName}
+        />
+        <PrimaryButton
+          onClicked={() => {
+            fetchPostJSON("api/affiliate/coupon", {
+              accountId: affiliate.accountId,
+              uuid: affiliate.uuid,
+              couponName: couponName,
+            });
+          }}
+          text={"Generate Coupon"}
+        />
+      </div>
+    );
+
+  return <></>;
+};
 
 export default Portal;

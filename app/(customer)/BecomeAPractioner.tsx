@@ -38,9 +38,9 @@ export function BecomeAPractioner() {
 
               <p className="flex md:w-3/5 text-xl">
                 We welcome those wishing to work with for cacao to join us in an
-                6 night emmersive training in the wild depths of the scottish
-                highlands where you will develope your skills as a space holder
-                & gaurdian of cacao.
+                6 night immersive training in the wild depths of the scottish
+                highlands where you will develop your skills as a space holder &
+                guardian of cacao.
               </p>
 
               <LinkButton

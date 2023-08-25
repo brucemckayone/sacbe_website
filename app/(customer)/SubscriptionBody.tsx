@@ -62,9 +62,9 @@ export function SubscriptionBody(props: any) {
                   Included
                 </h5>
                 <ol className={`list-disc ml-5 mb-3 text-sm`}>
-                  <li>60% For The Third Eye App</li>
-                  <li>Free Monthly Event</li>
-                  <li>Save 21% every month</li>
+                  <li>Everything include in One-Time Puchase</li>
+                  <li>Monthly Online Cacao Circle</li>
+                  <li>Save 20% every month</li>
                 </ol>
                 {props.isLoadingSub ? (
                   <SmallButtonLoader />

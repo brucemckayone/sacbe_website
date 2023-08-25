@@ -26,6 +26,7 @@ type userType = {
   wholesale?: boolean;
   name?: string;
   customerId?: string;
+  coupon?: string;
 };
 
 type marketingType = {

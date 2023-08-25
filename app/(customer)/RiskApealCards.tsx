@@ -136,12 +136,12 @@ export function RiskApealCards(props: props) {
           <p className="text-sm">
             Sacbe supports{" "}
             <strong className="text-sm text-onPrimaryContainer">
-              fair trade farming, tradition, and communities,
+              fair trade farming, indigenous communities and traditions
             </strong>{" "}
-            honoring this
+            which honour and respect the Earth and
             <strong className="text-sm text-onPrimaryContainer">
               {" "}
-              incredible plant
+              Her medicines
             </strong>
             .
           </p>

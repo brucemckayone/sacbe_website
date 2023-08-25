@@ -31,7 +31,7 @@ export function PurchaseTypeTabs(props: any) {
             props.isOnOff ? "bg-onPrimaryContainer" : "bg-recommendedGreen/30"
           }`}
         >
-          <p className="text-xs px-0.5  md:px-1 md:py-0.5">21% Off</p>
+          <p className="text-xs px-0.5  md:px-1 md:py-0.5">20% Off</p>
         </div>
       </button>
     </div>

@@ -41,6 +41,7 @@
     "hamburger-react": "^2.5.0",
     "magic-sdk": "^16.2.0",
     "micro": "^10.0.1",
+    "net": "^1.0.2",
     "next": "13.4.2",
     "next-auth": "^4.22.0",
     "nodemailer": "^6.9.1",

@@ -117,8 +117,8 @@ export default async function Page({
 
           <NewsletterSignup />
 
-          <div className="my-20">
-            <PurchaseOptions isHorizontal={true} compact={true} />
+          <div className="my-20 md:mx-20">
+            <PurchaseOptions isHorizontal={true} compact={false} />
           </div>
           {relatedPosts != undefined && (
             <div className="my-20">

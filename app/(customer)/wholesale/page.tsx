@@ -49,9 +49,9 @@ const SacbeCacaoWholesale = async () => {
   const WholesaleHeader = dynamic(() =>
     import("./WholesaleHeader").then((res) => res.WholesaleHeader)
   );
-  const AboutPackaging = dynamic(() =>
-    import("./AboutPackaging").then((res) => res.AboutPackaging)
-  );
+  // const AboutPackaging = dynamic(() =>
+  //   import("./AboutPackaging").then((res) => res.AboutPackaging)
+  // );
 
   const NavMenuBottom = dynamic(
     () => import("@/components/menu/NavMenuBottom")
@@ -67,7 +67,7 @@ const SacbeCacaoWholesale = async () => {
             <strong className="text-stroke-3 text-3xl md:text-6xl lg:text-8xl text-sacbeBrandColor">
               WHOLESALE CACAO:
             </strong>{" "}
-            AUTHENTIC AND SUSTAINABLE BULK CACAO FOR SPIRITUAL & HEALTH &
+            AUTHENTIC AND SUSTAINABLE BULK CACAO FOR SPIRITUAL, HEALTH &
             WELLBEING BUSINESSES IN THE UK
           </h2>
           <div className="flex flex-row justify-center">
@@ -80,7 +80,7 @@ const SacbeCacaoWholesale = async () => {
             />
           </div>
           <div>
-            <p className="lg:w-11/12 m-auto mb-20">
+            <p className="lg:w-10/12 m-auto mb-20">
               With our Wholesale Cacao Portal, you have a reliable partner for
               sourcing premium cacao products for your spiritual business.
               Whether you are looking for bulk cacao for retail, ceremonial
@@ -94,7 +94,7 @@ const SacbeCacaoWholesale = async () => {
           <div className="md:col-span-4 md:col-start-3 p-3 bg-surfaceVarient my-20 rounded-lg shadow-xl hover:shadow-2xl duration-200">
             <WholesalePricingTable />
           </div>
-          <AboutPackaging />
+          {/* <AboutPackaging /> */}
           <BottomWholeSaleForm />
         </div>
       </div>

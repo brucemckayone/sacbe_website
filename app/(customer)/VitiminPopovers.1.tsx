@@ -79,7 +79,7 @@ export function VitiminPopovers() {
     <div className="w-[95%] md:w-10/12 m-auto backdrop-blur-lg flex lg:flex-row flex-col  bg-tertiaryContainer/40 rounded-3xl my-20 py-20 px-3 md:px-10 ">
       <div className="lg:w-1/2 md:pr-10">
         <h2 className="text-6xl  ">
-          Oh, and Its Nutrient Dense{" "}
+          A Nutrient Dense{" "}
           <strong className="text-sacbeBrandColor stroke-onPrimaryContainer text-stroke-3 text-6xl">
             Super Food
           </strong>
@@ -107,7 +107,7 @@ export function VitiminPopovers() {
           <strong> healthy growth</strong>. It iss a good source of vitamins B1,
           B2, B3, B5, and B9,
           <strong> supporting metabolism</strong> and{" "}
-          <strong> cell growth</strong>. Cacaos flavonoids provide
+          <strong> cell growth</strong>. The flavonoids in Cacao provide
           <strong> antioxidant</strong> benefits, while theobromine and PEA
           contribute to mood
           <strong> enhancement</strong>.

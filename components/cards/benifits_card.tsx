@@ -28,10 +28,14 @@ const BenifitsCard: React.FC<Props> = ({
         />
 
         <div className="basis-3/4 bg-tertiaryContainer p-1 rounded-tr-md rounded-br-md grow group-hover:bg-onPrimary duration-300 ">
-          <h4 className=" ">
-            <strong>{headerText}</strong>
+          <h4>
+            <strong className="text-2xl md:text-sm lg:text-xl xl:text-2xl">
+              {headerText}
+            </strong>
           </h4>
-          <p className="text-sm md:text-lg">{text}</p>
+          <p className="text-sm md:text-sm lg:text-sm xl:text-lg leading-tight">
+            {text}
+          </p>
         </div>
       </div>
     </SlideInUp>

@@ -48,12 +48,14 @@ export const envConfig = {
     environmentVariable: "NEXTAUTH_URL",
     testKey: "http://localhost:3000",
   }),
-  //
+  
   STRIPE_SECRET: getEnvironmentVariable({
     environmentVariable: "STRIPE_SECRET",
+    testKey:"sk_test_51MXidpG859ZdyFmpVjbfa4cmXB4LxCbAOmGF2miuQhwYnPdvYKqKg7eojkplvixcd5tvQZTGShPwffzyzbILhoMZ00y45NdkRS"
   }),
   STRIPE_PUBLIC: getEnvironmentVariable({
     environmentVariable: "STRIPE_PUBLIC",
+    testKey:"pk_test_51MXidpG859ZdyFmpulIyjBVw96vod2EQJOyhZHLxEvHe7y1GTuXryqMF1X9SbhKT1xla0o6w7XvNBh6IYFQULVch005S97qsEO"
   }),
   STRIPE_CHECKOUT_WEBHOOK: getEnvironmentVariable({
     environmentVariable: "STRIPE_CHECKOUT_WEBHOOK",

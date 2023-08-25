@@ -1,51 +1,95 @@
 import Image from "next/image";
 import SlideInUp from "@/components/animations/slide_in_up";
 import Card from "@/components/cards/card";
-import chocolateButtonImage from "@/public/chocolate_buttons.png";
+import chocolateButtonImage from "@/public/cacaobuttonsWithShadow.png";
 import dropshadow from "@/public/drop_shadow.png";
 
-export function TheHook() {
-  const handleClick = () => {};
+import Link from "next/link";
+import { GetOfferButton } from "./GetOfferButton";
 
+function CheckListItem(props: any) {
+  return (
+    <li>
+      <p>
+        <span className="text-darkGreen">✓</span> {props.text}
+      </p>
+    </li>
+  );
+}
+
+function CheckList() {
+  return (
+    <div className="ml-1 my-4 p-2 lg:w-2/3">
+      <p>
+        <strong>A multitude of benefits</strong>:
+      </p>
+      <ol className="ml-3 list">
+        <CheckListItem text={"Nervous system support"} />
+        <CheckListItem text={"Improve mental health"} />
+        <CheckListItem text={"Improved cardiovascular function and recovery"} />
+        <CheckListItem text={"Powerful Mood Enhancement"} />
+        <CheckListItem text={"Nervous system support"} />
+      </ol>
+      <Link
+        className="ml-6 mt-4"
+        href={
+          "/posts/the-therapeutic-potential-of-cacao--a-comprehensive-analysis-of-its-antioxidant--anti-inflammatory--mood-enhancing--cancer-preventive--and-cognitive-enhancing-properties"
+        }
+      >
+        Learn More
+      </Link>
+    </div>
+  );
+}
+
+export function TheHook() {
   return (
     <div>
-      <h2 className="w-11/12 md:w-8/12 text-center text-4xl md:text-6xl lg:text-8xl m-auto py-20">
-        Seeking Inner Bliss and Vitality? Embrace the
-        <strong className="md:text-sacbeBrandColor font-thin text-onPrimaryContainer md:text-stroke-3 text-4xl md:text-6xl lg:text-8xl">
-          <br></br>
-          Transformative Power of {""} <br></br>
-          <strong className="text-sacbeBrandColor text-stroke-3 text-7xl md:text-8xl lg:text-8xl ">
-            SACBE CACAO
-          </strong>
+      <h2 className="w-11/12 md:w-8/12 text-center text-4xl md:text-6xl lg:text-8xl m-auto pt-20">
+        From the Heart of the Earth to Yours
+      </h2>
+      <h2 className="w-11/12 md:w-8/12 text-center m-auto py-6">
+        <strong className="text-sacbeBrandColor text-stroke-3 text-5xl md:text-7xl lg:text-8xl ">
+          SACBE CEREMONIAL CACAO
         </strong>
       </h2>
-      <div className="flex flex-col-reverse lg:flex-row w-[95%] md:w-10/12  px-2 md:px-10 m-auto py-20 md:mt-36 backdrop-blur-lg bg-primaryContainer/20 rounded-3xl">
-        <div className="md:w-10/12 lg:w-5/12 m-auto">
-          <div className="font-extrabold">
-            <h3 className="text-2xl md:text-4xl mt-5">
-              Embrace The Wonders Of Cacao
-            </h3>
-          </div>
-          <p className="ml-1 mb-2">
-            {" "}
-            If you could have a drink dense in essential minerals that
-            <strong> nourishes</strong> your body, supports your{" "}
-            <strong>immune system</strong>, gives you a feeling of
-            <strong> elevation and gratitude</strong>, provides{" "}
-            <strong>long-lasting joyful energy</strong>, and leaves you{" "}
-            <strong>free of anxiety and jitters</strong>, all while giving you
-            the opportunity to bring <strong>deep meaning and purpose</strong>{" "}
-            to your morning ritual, would you be interested?{" "}
-          </p>
+      <div className="flex flex-col-reverse lg:flex-row w-[95%] md:w-10/12  px-2 md:px-10 m-auto py-5 md:mt-36 backdrop-blur-lg bg-primaryContainer/20 rounded-3xl">
+        <div className="md:w-10/12 lg:w-7/12 m-auto">
+          <>
+            <div className="font-extrabold">
+              <h3 className="text-2xl md:text-4xl mt-5">
+                The Food Of The Gods
+              </h3>
+            </div>
+            <p className="ml-1 mb-2">
+              {" "}
+              If you could have a drink dense in essential minerals that
+              <strong> nourishes</strong> your body, supports your{" "}
+              <strong>immune system</strong>, gives you a feeling of
+              <strong> elevation and gratitude</strong>, provides{" "}
+              <strong>long-lasting joyful energy</strong>, and leaves you{" "}
+              <strong>free of anxiety and jitters</strong>, all while giving you
+              the opportunity to bring <strong>deep meaning and purpose</strong>{" "}
+              to your morning ritual, would you be interested?{" "}
+            </p>
+            <p className="ml-1">
+              Indulging in the ceremonial cacao of Sacbe is not only a
+              <strong> soul-nourishing experience</strong> but also a gift to
+              your overall well-being. Beyond its delicious flavour This sacred
+              elixir holds<br></br>
+            </p>
+          </>
+          <CheckList />
+
+          <GetOfferButton />
           <p className="ml-1">
-            Indulging in the ceremonial cacao of Sacbe is not only a
-            <strong> soul-nourishing experience</strong> but also a gift to your
-            overall well-being. Beyond its enchanting flavor, this sacred elixir
-            holds a <strong> multitude of health benefits</strong>. That can
-            support you in your journey what ever it may be.
+            Cacao offers a space to receive nourishment, clarity and healing,
+            for your physical, metaphysical and emotional bodies - wherever you
+            are on your journey.
           </p>
+
           <h3 className="text-2xl md:text-4xl mt-5 font-extrabold">
-            Discover a Blissful Balance
+            A Blissful Balance
           </h3>
           <p className="ml-1 ">
             Unlike drinks other that leave us gittery and anxious, Sacbe Cacao
@@ -53,38 +97,27 @@ export function TheHook() {
             harmonious blend of
             <strong> invigoration and grounding</strong>, providing a balanced
             experience for both your <strong>mind, body and soul</strong>. Feel
-            the gentle yet <strong> energizing</strong>, and{" "}
+            the gentle yet <strong> energising</strong>, and{" "}
             <strong> boundless heart opening</strong> effects that sustain you{" "}
             <strong> throughout the day</strong>, empowering you to embrace
             lifes challenges, and adventures with{" "}
             <strong> renewed vitality</strong>.
           </p>
         </div>
-        <Card className="flex md:basis-1/2" hasColor={false}>
-          <div className="absolute w-11/12 md:w-4/12 p-40 bg-primaryContainer rounded-full h-[500px] blur-md"></div>
+        <Card className="md:basis-1/2" hasColor={false}>
+          <div className="absolute w-11/12 md:w-5/12 p-40 bg-primaryContainer rounded-full h-[500px] lg:h-[700px] blur-md -z-10"></div>
           <SlideInUp animiation="animate-zoom_in_fade">
-            <div className="relative w-full p-40 h-[500px]  ">
-              <div className="absolute bottom-0 left-0 h-[140px] w-full">
-                <Image
-                  src={dropshadow}
-                  fill
-                  alt="Drop Shadow for buttons"
-                  className="object-contain"
-                ></Image>
-              </div>
-
-              <div
-                className={`absolute top-10 right-0 left-0 w-full h-[540px]`}
-              >
-                <Image
-                  src={chocolateButtonImage}
-                  fill
-                  className="object-contain"
-                  alt="Sacbe Cacao Chocolate buttons packed ontop of eachother"
-                ></Image>
-              </div>
+            <div className="relative w-8/12 m-auto p-40 h-[500px] lg:h-[720px] z-50">
+              <Image
+                src={chocolateButtonImage}
+                fill
+                className="object-contain z-50 mt-20"
+                alt="Sacbe Cacao Chocolate buttons packed ontop of eachother"
+              />
             </div>
-            {/* <GetOfferButton /> */}
+            <h3 className="text-center text-sm md:text-sm font-extrabold  backdrop-blur-2xl bg-onSecondary/20 border rounded-lg p-2  md:mx-20 z-50">
+              1 Gram Buttons for Intuitive Dosing
+            </h3>
           </SlideInUp>
         </Card>
       </div>

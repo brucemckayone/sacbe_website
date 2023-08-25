@@ -46,8 +46,8 @@ export function WhyWorkWithUs() {
       <div className="md:w-1/2 flex flex-col justify-center md:mr-10">
         <h2 className="text-4xl">Why Work With Us?</h2>
         <p className="text-sm">
-          At Sacbe We Beleieve in nuturing equal partnerships and helping one
-          and other grow together
+          At Sacbe, we believe in nurturing equal partnerships and helping one
+          another grow together.
         </p>
         <div className="h-0.5 bg-tertiary w-full"></div>
         <ol>

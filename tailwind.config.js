@@ -12,6 +12,7 @@ module.exports = {
     colors: {
       sacbeBrandColor: "#FF932F",
       recommendedGreen: "#D2FEB0",
+      darkGreen: "#21b844",
       pinkContainer: "#FEE6EA",
       transparent: "transparent",
       //primary

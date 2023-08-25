@@ -31,7 +31,16 @@ export function MarkDown(props: { content: string }) {
           );
         },
         p: ({ node, ...props }) => (
-          <p className="text-lg md:text-2xl my-5" {...props} />
+          <p className="text-lg md:text-xl my-5 ml-1" {...props} />
+        ),
+        ol: ({ node, ...props }) => (
+          <ol
+            className="text-lg md:text-xl my-5 ml-3 list-decimal"
+            {...props}
+          />
+        ),
+        ul: ({ node, ...props }) => (
+          <ul className="text-lg md:text-xl my-5 ml-3 list-disc" {...props} />
         ),
       }}
     >

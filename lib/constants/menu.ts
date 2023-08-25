@@ -6,7 +6,7 @@ const menuItems = [
   },
 
   {
-    text: "Learn",
+    text: "Training",
     subTitle: "Become A Facilitator",
     link: "https://skyeonearth.com/cacaofacilitation",
   },
