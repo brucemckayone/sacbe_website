@@ -1,5 +1,4 @@
 import Stripe from "stripe";
-import { buffer } from "micro";
 import { NextApiRequest, NextApiResponse } from "next";
 import { envConfig } from "@/lib/webhooks/envConfig";
 import { analytics } from "@/lib/firebase/firebase";
@@ -32,46 +31,32 @@ export default async function handler(
   let message = "unhandeld webhook";
   let data = { message: "no message" };
   try {
+
+    console.log(envConfig.STRIPE_CHECKOUT_WEBHOOK); 
     event = stripe.webhooks.constructEvent(
       rawBody,
       sig,
       envConfig.STRIPE_CHECKOUT_WEBHOOK
     );
+
     console.log(`handling ${event.type}`);
 
     switch (event.type) {
-      case "checkout.session.async_payment_failed":
-        const checkoutSessionAsyncPaymentFailed = event.data.object;
-        // Then define and call a function to handle the event checkout.session.async_payment_failed
-        logEvent(analytics, "checkoutsession failed ", {}); 
-        break;
-      case "checkout.session.async_payment_succeeded":
-        const checkoutSessionAsyncPaymentSucceeded = event.data.object;
-        // Then define and call a function to handle the event checkout.session.async_payment_succeeded
-        break;
       case "checkout.session.completed":
         const csCompleted = event.data.object as Stripe.Checkout.Session;
         let checkoutSession = await stripe.checkout.sessions.retrieve(
           csCompleted.id,
           { expand: ["line_items", "customer", "invoice"] }
         );
-
+        console.log("logging logs ");
+        
         handleCheckoutCompleteLogging(checkoutSession);
         await handleUnpaid(checkoutSession, stripe);
+        console.log("unpaid handled");
+    
         await handleAffiliatePayoutsViaCoupon(checkoutSession);
-
-      case "checkout.session.expired":
-        const checkoutSessionExpired = event.data.object as Stripe.Checkout.Session;
-        // Then define and call a function to handle the event checkout.session.expired
-        checkoutSession = await stripe.checkout.sessions.retrieve(
-          checkoutSessionExpired.id,
-          { expand: ["line_items", "customer"] }
-        );
-        
-        
-          
+        console.log("coupon handled ");
         break;
-      
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
