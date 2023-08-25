@@ -6,8 +6,8 @@ export async function buySubscriptionFirstClass(
   subQty: number
 ) {
   const getPrices = () => {
-    const env = process.env.NODE_ENV;
-    if (env == "development") {
+    const env = process.env.VERCEL_ENV;
+    if (env == "preview") {
       return [
         "price_1NIqy6G859ZdyFmpzaNNkSNu",
         "price_1NIsjZG859ZdyFmpvMG66qkf",
@@ -33,8 +33,8 @@ export async function buySubscriptionSecondClass(
   subQty: number
 ) {
   const getPrices = () => {
-    const env = process.env.NODE_ENV;
-    if (env == "development") {
+    const env = process.env.VERCEL_ENV;
+    if (env == "preview") {
       return [
         "price_1NIqy6G859ZdyFmpzaNNkSNu",
         "price_1NIsiYG859ZdyFmpLEjRmAAZ",
@@ -57,8 +57,8 @@ export async function buySubscriptionSecondClass(
 
 export async function buyOneTimeCacao(user: userType, oneoffQty: number) {
   const getPrices = () => {
-    const env = process.env.NODE_ENV;
-    if (env == "development") {
+    const env = process.env.VERCEL_ENV;
+    if (env == "preview") {
       return ["price_1NIqy6G859ZdyFmpEbQLnA5q"];
     } else {
       return ["price_1NLYCcG859ZdyFmpgkHOXIUZ"];

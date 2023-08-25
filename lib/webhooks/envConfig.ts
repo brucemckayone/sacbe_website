@@ -44,6 +44,7 @@ export const envConfig = {
   NEXTAUTH_SECRET: getEnvironmentVariable({
     environmentVariable: "NEXTAUTH_SECRET",
   }),
+  
   NEXTAUTH_URL: getEnvironmentVariable({
     environmentVariable: "NEXTAUTH_URL",
     testKey: "http://localhost:3000",
@@ -148,4 +149,8 @@ export const envConfig = {
   ALGOLIA_SEARCH_SECRET: getEnvironmentVariable({
     environmentVariable: "ALGOLIA_SEARCH_SECRET",
   }),
+  VERCEL_ENV: getEnvironmentVariable({
+    environmentVariable: "VERCEL_ENV",
+    testKey:"preview"
+  })
 };
