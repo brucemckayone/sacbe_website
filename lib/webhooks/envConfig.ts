@@ -6,7 +6,7 @@ const getEnvironmentVariable = ({
   environmentVariable,
   testKey,
 }: params): string => {
-  if (process.env.NODE_ENV == "production") {
+  if (process.env.NODE_ENV == "production" && process.env.NEXT_PUBLIC_VERCEL_ENV == "production") {
     const unvalidatedEnvironmentVariable = process.env[environmentVariable];
     if (!unvalidatedEnvironmentVariable) {
       throw new Error(
@@ -15,7 +15,7 @@ const getEnvironmentVariable = ({
     } else {
       return unvalidatedEnvironmentVariable;
     }
-  } else if (process.env.NODE_ENV == "development") {
+  } else if (process.env.NODE_ENV == "development" || process.env.NEXT_PUBLIC_VERCEL_ENV=="preview") {
     if (testKey) {
       return testKey!;
     } else {

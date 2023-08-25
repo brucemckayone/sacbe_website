@@ -64,6 +64,7 @@ const CouponFeild = ({ affiliate }: ICouponFeild) => {
     return (
       <div>
         <h5>Create Your coupon</h5>
+        <p>Enter whatever code you want</p>
         <TextInput
           placeHolder="Enter Your Coupon"
           value={couponName}

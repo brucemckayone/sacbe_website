@@ -46,12 +46,23 @@ const getCouponFromAccountId = async (accountId: string) => {
  }
 
 export const createCoupon = async (uuid: string, accountId: string, couponName: string) => {
+
+    const getProductIds = () => { 
+        const env = process.env.NEXT_PUBLIC_VERCEL_ENV;
+    console.log(env);
+
+        if (env == "preview") {
+            return ["prod_O7noF65HmL4yI7"]
+        } else { 
+            return ["prod_O7noF65HmL4yI7"];
+         }
+
+    }
+
     if ((await db.collection("coupons").doc(couponName).get()).exists)
         return { status: 200, ok: false, message:`The coupon ${couponName} already exists please try another name` };
 
     try {
-        db.collection("users").doc(uuid).set({ coupon: couponName }, { merge: true });
-        db.collection("coupons").doc(couponName).set({ coupon: couponName, uuid: uuid, accountId: accountId }, { merge: true });
         const coupon = await stripe.coupons.create({
             percent_off: 10,
             name: couponName,
@@ -62,7 +73,7 @@ export const createCoupon = async (uuid: string, accountId: string, couponName: 
                 "accountId": accountId
             },
             applies_to: {
-                products: ["prod_O7noF65HmL4yI7"]
+                products: getProductIds()
             }
         });
         await stripe.promotionCodes.create({
@@ -73,6 +84,8 @@ export const createCoupon = async (uuid: string, accountId: string, couponName: 
                 first_time_transaction:true
             }
         })
+        db.collection("users").doc(uuid).set({ coupon: couponName }, { merge: true });
+        db.collection("coupons").doc(couponName).set({ coupon: couponName, uuid: uuid, accountId: accountId }, { merge: true });
         return { status: 200, ok: true, message: `Coupon ${couponName} was created for connected account: ${accountId}, for user :${uuid}` };
     } catch (e) { 
         return { status: 400, ok: true, message: `Coupon ${couponName} was failed to be created for connected account: ${accountId}, for user :${uuid}` };
