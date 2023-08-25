@@ -5,20 +5,19 @@ import { analytics } from "@/lib/firebase/firebase";
 import { logEvent } from "firebase/analytics";
 import { createCheckoutSessionParams } from "../client/create_checkout_session";
 import emailSender from "@/utils/email/nodemailer";
-
 import getRawBody from "raw-body";
 import { createTransferByAccoundId, getAccountIdFromCoupon } from "../../affiliate/payout";
 import stripe from "@/lib/stripe/stripe";
-
-
-// This is your Stripe CLI webhook secret for testing your endpoint locally.
-
+import adminInit from "@/utils/firebase/admin_init";
 
 export const config = { api: { bodyParser: false } };
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  adminInit();
+  
   const sig: string = req.headers["stripe-signature"] as string;
   const rawBody = await getRawBody(req);
   
@@ -48,7 +47,7 @@ export default async function handler(
         );
         console.log("logging logs ");
         
-        handleCheckoutCompleteLogging(checkoutSession);
+        // handleCheckoutCompleteLogging(checkoutSession);
         await handleUnpaid(checkoutSession, stripe);
         console.log("unpaid handled");
     
@@ -102,6 +101,7 @@ async function handleUnpaid(checkoutSession: Stripe.Response<Stripe.Checkout.Ses
 }
 
 function handleCheckoutCompleteLogging(checkoutSession: Stripe.Response<Stripe.Checkout.Session>) {
+
   if (checkoutSession.mode == "payment") {
     logEvent(analytics, "Single Payment Checkout Complete", {
       total: checkoutSession.amount_total,
