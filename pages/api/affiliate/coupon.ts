@@ -67,7 +67,6 @@ export const createCoupon = async (uuid: string, accountId: string, couponName: 
             percent_off: 10,
             name: couponName,
             duration: "once",
-            max_redemptions: 1,
             metadata: {
                 "uuid": uuid,
                 "accountId": accountId
