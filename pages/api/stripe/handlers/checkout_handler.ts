@@ -8,6 +8,7 @@ import emailSender from "@/utils/email/nodemailer";
 
 import getRawBody from "raw-body";
 import { createTransferByAccoundId, getAccountIdFromCoupon } from "../../affiliate/payout";
+import stripe from "@/lib/stripe/stripe";
 
 
 // This is your Stripe CLI webhook secret for testing your endpoint locally.
@@ -18,9 +19,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const stripe = new Stripe(envConfig.STRIPE_SECRET, {
-    apiVersion: "2022-11-15",
-  });
   const sig: string = req.headers["stripe-signature"] as string;
   const rawBody = await getRawBody(req);
   
