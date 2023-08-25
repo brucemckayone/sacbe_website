@@ -76,7 +76,7 @@ async function handleAffiliatePayoutsViaCoupon(checkoutSession: Stripe.Response<
       const accountId = await getAccountIdFromCoupon(coupon.name!);
       if (accountId) {
         const amount = invoice.total_discount_amounts?.reduce((sum, discount) => { return sum + discount.amount; }, 0) ?? 0;
-        createTransferByAccoundId({ accountId: accountId, amount: amount ?? 0, sourceTransation: invoice.payment_intent as string ,coupon: coupon.name!});
+        createTransferByAccoundId({ accountId: accountId, amount: amount ?? 0, sourceTransation: invoice.charge as string ,coupon: coupon.name!});
       }
     }
   }
