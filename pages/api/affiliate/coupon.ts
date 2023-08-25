@@ -52,7 +52,7 @@ export const createCoupon = async (uuid: string, accountId: string, couponName: 
     console.log(env);
 
         if (env == "preview") {
-            return ["prod_O7noF65HmL4yI7"]
+            return ["prod_O510s671X0JDYq"]
         } else { 
             return ["prod_O7noF65HmL4yI7"];
          }
