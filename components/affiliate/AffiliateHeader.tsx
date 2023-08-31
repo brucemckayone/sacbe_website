@@ -12,7 +12,8 @@ import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { useSession } from "next-auth/react";
 import { signInAndRedirectTo } from "@/utils/client/auth/redirect/signinAndRedirectTo";
 import cacaoInALeaf from "@/public/cacao_in_leaf.png";
-import dynamic from "next/dynamic";
+
+import { Modal } from "@mantine/core";
 
 function AffiliateSignUpModal(props: {
   opened: boolean;
@@ -27,7 +28,7 @@ function AffiliateSignUpModal(props: {
   userData: any;
   setIsSent: (arg0: boolean) => void;
 }) {
-  const Modal = dynamic(() => import("@mantine/core").then((res) => res.Modal));
+  // const Modal = dynamic(() => import("@mantine/core").then((res) => res.Modal));
 
   return (
     <Modal

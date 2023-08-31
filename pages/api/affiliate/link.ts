@@ -6,6 +6,7 @@ import Stripe from "stripe";
 import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
 import adminInit from "@/utils/firebase/admin_init";
 import homeUrl from "@/lib/constants/urls";
+import testSwitch from "@/utils/test/TestSwitch";
 
 export default async function handler(
   req: NextApiRequest,
@@ -47,16 +48,13 @@ async function getPaymentLinks(uuid: string) {
 type createPaymentLinkParams = {
   accountId: string;
   uuid: string;
-  priceIds?: string[];
+  priceIds: string[];
   promoShippingId?: string;
 };
 async function createPaymentLink({
   accountId,
   uuid,
-  priceIds = [
-    "price_1NLYCcG859ZdyFmpgkHOXIUZ",
-    "price_1NLYCcG859ZdyFmpa95GIeSb",
-  ],
+  priceIds,
   promoShippingId,
 }: createPaymentLinkParams) {
   const params: Stripe.PaymentLinkCreateParams = {
@@ -84,15 +82,24 @@ async function createPaymentLink({
     billing_address_collection: "required",
     currency: "GBP",
     allow_promotion_codes: true,
-    shipping_options: [
-      {
-        shipping_rate: "shr_1NLYCuG859ZdyFmpLUaJkA6R",
-      
-      },
-      {
-        shipping_rate: "shr_1NLYCrG859ZdyFmp11reCjT7",
-      },
-    ],
+    shipping_options: testSwitch({
+      test: [
+        {
+          shipping_rate: "shr_1NIr2PG859ZdyFmpt5qaCSej",
+        },
+        {
+          shipping_rate: "shr_1NJkibG859ZdyFmpn31XJnFC",
+        }
+      ],
+      live: [
+        {
+          shipping_rate: "shr_1NLYCuG859ZdyFmpLUaJkA6R",
+        },
+        {
+          shipping_rate: "shr_1NLYCrG859ZdyFmp11reCjT7",
+        },
+      ]
+    }),
   };
   if (promoShippingId) {
     params.shipping_options = [
@@ -119,7 +126,10 @@ async function createPaymentLink({
       clone.line_items = [
         ...clone.line_items,
         {
-          price: "price_1NLYCaG859ZdyFmprZcXvCYg",
+          price: testSwitch({
+            test: "price_1NIsiYG859ZdyFmpLEjRmAAZ",
+            live: "price_1NLYCaG859ZdyFmprZcXvCYg"
+          }), //shipping subscription
           quantity: 1,
         },
       ];

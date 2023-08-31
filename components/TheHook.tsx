@@ -104,14 +104,14 @@ export function TheHook() {
             <strong> renewed vitality</strong>.
           </p>
         </div>
-        <Card className="md:basis-1/2" hasColor={false}>
-          <div className="absolute w-11/12 md:w-5/12 p-40 bg-primaryContainer rounded-full h-[500px] lg:h-[700px] blur-md -z-10"></div>
+        <Card className="12 md:basis-1/2" hasColor={false}>
+          <div className="absolute  md:w-5/12 p-40 bg-primaryContainer rounded-full h-[500px] lg:h-[700px] blur-md -z-10 pr-36 md:mr-0"></div>
           <SlideInUp animiation="animate-zoom_in_fade">
             <div className="relative w-8/12 m-auto p-40 h-[500px] lg:h-[720px] z-50">
               <Image
                 src={chocolateButtonImage}
                 fill
-                className="object-contain z-50 mt-20"
+                className="object-contain z-50 mt-20 md:pr-0 pr-8 "
                 alt="Sacbe Cacao Chocolate buttons packed ontop of eachother"
               />
             </div>

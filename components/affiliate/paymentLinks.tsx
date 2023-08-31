@@ -11,6 +11,7 @@ import generatePaymentLinks from "@/pages/api/affiliate/generatePaymentLinks";
 import { PaymentLinkListType } from "@/types/affiliatePaymentLinkType";
 import toast from "react-hot-toast";
 import dollarIcon from "@/public/icons/dollar_icon.svg";
+import testSwitch from "@/utils/test/TestSwitch";
 function PaymentLinks() {
   const { user: affiliate, isLoading: affiliateLoading } = useUser();
   const [isGeneratingLinks, setIsGeneratingLinks] = useState(false);
@@ -42,7 +43,7 @@ function PaymentLinks() {
       <div className=" m-auto">
         <span className="flex justify-end ">
           <button
-            className="rounded-lg bg-sacbeBrandColor border drop-shadow-lg px-2 py-1 text-white self-end "
+            className="rounded-md bg-sacbeBrandColor border drop-shadow-lg px-2  text-white self-end "
             onClick={async () => {
               try {
                 const awnser = window.prompt(
@@ -54,7 +55,17 @@ function PaymentLinks() {
                   setIsGeneratingLinks(true);
                   const links = await generatePaymentLinks(
                     affiliate.accountId,
-                    affiliate.uuid
+                    affiliate.uuid,
+                    testSwitch({
+                      live: [
+                        "price_1NLYCcG859ZdyFmpgkHOXIUZ",
+                        "price_1NLYCcG859ZdyFmpa95GIeSb",
+                      ],
+                      test: [
+                        "price_1NIqy6G859ZdyFmpzaNNkSNu",
+                        "price_1NIqy6G859ZdyFmpEbQLnA5q",
+                      ],
+                    })
                   );
                   setLinks(links);
                   setIsGeneratingLinks(false);
@@ -64,44 +75,52 @@ function PaymentLinks() {
               }
             }}
           >
-            <p>Regenerate Links</p>
+            <p className="text-xs md:text-md">Regenerate Links</p>
           </button>
         </span>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 mx-2 my-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 gap-y-2 my-2">
           {links?.map((link) => {
             return (
               <div
                 key={link.link.url}
-                className="flex flex-row  rounded-lg  p-1 justify-evenly items-center shadow-lg "
+                className="flex flex-row rounded-lg p-1 items-center shadow-lg bg-tertiaryContainer/40"
               >
-                <Image
-                  src={link.product.images[0]}
-                  height={100}
-                  width={100}
-                  alt="product Image"
-                />
-
-                <div className="basis-6/12">
-                  <h4>{link.price.type.replaceAll("_", " ")}</h4>
-                  <p className="text-sm">{link.product.description}</p>
-                  <p>£{link.price.unit_amount / 100} + Shipping</p>
-                </div>
-                <div
-                  onClick={() => {
-                    navigator.clipboard.writeText(link.link.url);
-                    toast.success("Link Copied");
-                  }}
-                  className="bg-tertiaryContainer rounded-lg items-center text-center p-2 hover:bg-recommendedGreen duration-300 shadow-md "
-                >
-                  <RxClipboardCopy className="w-full" />
-                  <p className="text-md">copy link</p>
+                <div className="flex-col flex">
+                  <div className="flex flex-row">
+                    <Image
+                      src={link.product.images[0]}
+                      height={100}
+                      width={100}
+                      alt="product Image"
+                      className="h-20 w-20 mr-4 "
+                    />
+                    <div>
+                      <div className="basis-6/12">
+                        <h4>{link.price.type.replaceAll("_", " ")}</h4>
+                        <p className="text-sm">{link.product.description}</p>
+                        <p>£{link.price.unit_amount / 100} + Shipping</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => {
+                      navigator.clipboard.writeText(link.link.url);
+                      toast.success("Link Copied");
+                    }}
+                    className="rounded-lg items-center text-center p-1 hover:bg-recommendedGreen bg-onPrimary duration-300 drop-shadow-md border"
+                  >
+                    <div className="flex flex-row justify-center">
+                      <RxClipboardCopy className=" h-7 mr-5" />
+                      <p>Copy To ClipBoard</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <p>
+        <p className="text-xs md:text-lg">
           These links will take your customer right to the checkout. They work
           great in a link tree, or in your bio on social media. These are
           designed to share with customers who already want to buy!.
@@ -192,7 +211,17 @@ function PaymentLinks() {
               setIsGeneratingLinks(true);
               const links = await generatePaymentLinks(
                 affiliate.accountId,
-                affiliate.uuid
+                affiliate.uuid,
+                testSwitch({
+                  live: [
+                    "price_1NLYCcG859ZdyFmpgkHOXIUZ",
+                    "price_1NLYCcG859ZdyFmpa95GIeSb",
+                  ],
+                  test: [
+                    "price_1NIqy6G859ZdyFmpzaNNkSNu",
+                    "price_1NIqy6G859ZdyFmpEbQLnA5q",
+                  ],
+                })
               );
               setLinks(links);
               setIsGeneratingLinks(false);

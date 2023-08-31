@@ -70,7 +70,7 @@ export default async function handler(
 
 async function handleAffiliatePayoutsViaCoupon(checkoutSession: Stripe.Response<Stripe.Checkout.Session>) {
   const invoice = checkoutSession.invoice as Stripe.Invoice;
-  if (invoice.payment_intent) {
+  if (invoice.payment_intent && !invoice.transfer_data) {
     const coupon = invoice.discount?.coupon;
     if (coupon) {
       const accountId = await getAccountIdFromCoupon(coupon.name!);

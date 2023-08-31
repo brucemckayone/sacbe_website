@@ -79,7 +79,7 @@ export default function LoginButton() {
             ).signInAndRedirectTo;
             signInAndRedirectTo(pathname!);
           }}
-          className="bg-sacbeBrandColor hover:bg-onPrimaryContainer hover:text-surface hover:text-white border-2 m-1.5 p-1 px-2 md:p-1 md:px-4 rounded-md"
+          className="bg-sacbeBrandColor hover:bg-onPrimaryContainer hover:text-surface hover:text-white border-2 m-1.5 p-1 px-2 md:p-1 md:px-8 rounded-full"
         >
           <p className=" text-xl md:text-2xl font-display">LOGIN</p>
         </button>
