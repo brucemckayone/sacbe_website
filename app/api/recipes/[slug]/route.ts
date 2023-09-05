@@ -9,8 +9,9 @@ export async function GET(request: NextRequest) {
     try {
       const snap = await getRecipe(request.nextUrl.pathname.split('/').pop()!);
       const recipe = snap.data() as any;
-      if (!snap.exists) 
-        return NextResponse.json({ recipe: {}, relatedRecipes: [] });
+      if (!snap.exists) {
+        return NextResponse.json({ recipe: {}, relatedRecipes: [], message:'recipe does not exist' });
+      }
       
       console.log(recipe);
       

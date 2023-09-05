@@ -132,8 +132,7 @@ export function AffiliateHeader() {
           Join Our Affiliate Program Today! Unlock the power of ceremonial cacao
           and embark on a journey of spiritual awakening while earning enticing
           rewards. Become a part of our affiliate community and share the
-          profound benefits of ceremonial cacao with others. Join now in the
-          abundant opportunities that await you!
+          profound benefits of ceremonial cacao with others.
         </p>
         <GenerateButton />
       </div>

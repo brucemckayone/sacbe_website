@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import menuItems from "@/lib/constants/menu";
 function Footer() {
   return (
     <footer className="p-4 bg-white sm:p-6 dark:bg-gray-900 pt-10 bg-primaryContainer border-t">
@@ -11,13 +12,22 @@ function Footer() {
             </h2>
             <ul className="text-gray-600 dark:text-gray-400">
               <li>
-                <a
+                <Link
                   href="https://skyeonearth.com/cacaofacilitation"
                   className="hover:underline"
                 >
                   Cacao Facilitator Training
-                </a>
+                </Link>
               </li>
+              {menuItems.map((e) => {
+                return (
+                  <li key={e.subTitle}>
+                    <Link href={e.link} className="hover:underline">
+                      {e.text}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div>
@@ -26,12 +36,12 @@ function Footer() {
             </h2>
             <ul className="text-gray-600 dark:text-gray-400">
               <li className="mb-4">
-                <a
+                <Link
                   href="https://www.instagram.com/sacbe.cacao/?hl=en"
                   className="hover:underline "
                 >
                   Instagram
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -41,14 +51,14 @@ function Footer() {
             </h2>
             <ul className="text-gray-600 dark:text-gray-400">
               <li className="mb-4">
-                <a href="#" className="hover:underline">
+                <Link href="#" className="hover:underline">
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <Link href="#" className="hover:underline">
                   Terms &amp; Conditions
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
