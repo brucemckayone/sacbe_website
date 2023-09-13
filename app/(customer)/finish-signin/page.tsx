@@ -11,11 +11,13 @@ import MagicLinkForm from "@/components/form/MagicLinkForm";
 
 function FinishSignin() {
   const [isValidLink, setIsValidLink] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [crfToken, setCrfToken] = useState("");
   const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (isSignInWithEmailLink(auth, window.location.href)) {
+      setLoading(true);
       let email = window.localStorage.getItem("emailForSignIn");
       if (!email) {
         email = window.prompt("Please provide your email for confirmation");
@@ -27,10 +29,14 @@ function FinishSignin() {
           const res = await fetchGetJSON("/api/auth/csrf");
           setCrfToken(res["csrfToken"]);
           handleSignin(email!, crfToken);
+          setLoading(false);
         })
-        .catch(async (error) => {
+        .catch((error) => {
           setIsValidLink(false);
+          setLoading(false);
         });
+    } else {
+      setIsValidLink(false);
     }
   }, [crfToken]);
   if (isValidLink) {
@@ -52,7 +58,7 @@ function FinishSignin() {
         </div>
       </div>
     );
-  } else {
+  } else if (!loading && !isValidLink) {
     return (
       <div>
         <div className="flex flex-col items-center justify-around bg-gradient-to-br from-sacbeBrandColor to-primaryContainer ">
@@ -60,11 +66,19 @@ function FinishSignin() {
             <div className=" bg-surfaceVarient  px-5 md:px-20  py-5 my-24 mx-5 md:mx-20 rounded-xl border-2 shadow-2xl">
               <div className="text-center border-b-2 pb-6 mb-3">
                 <MagicLinkForm />
-                <p className="md:w-96 p-4 rounded-md border bg-error text-onError shadow-md border-onError">
-                  It looks like there was a problem with your link. Its possible
+                <p
+                  className={`d:w-96 p-4 rounded-md border ${
+                    !loading && !isValidLink
+                      ? "bg-error border-onError text-onError"
+                      : "bg-tertiaryContainer border-r-errorContainer text-onBackground"
+                  }   shadow-md `}
+                >
+                  {!loading && !isValidLink
+                    ? `It looks like there was a problem with your link. Its possible
                   you waited too link, or there was a problem with the link
                   generation. OR your are a hacker!!! please try again, unless
-                  your a hacker!
+                  your a hacker!`
+                    : `Validating Link....`}
                 </p>
               </div>
             </div>
@@ -72,6 +86,8 @@ function FinishSignin() {
         </div>
       </div>
     );
+  } else {
+    return <></>;
   }
 }
 

@@ -60,21 +60,24 @@ const CouponFeild = ({ affiliate, setUser }: ICouponFeild) => {
   const [isCouponSet, setIsCouponSet] = useState(false);
 
   const handleCouponChange = (newValue: string) => {
+    setIsFetching(true);
     setCouponName(newValue.toUpperCase());
   };
 
   useEffect(() => {
-    if (!isFetching && couponName.length > 2) {
-      setIsFetching(true);
-      setTimeout(async () => {
+    const asyncFunction = async () => {
+      if (!isFetching && couponName.length > 2) {
         const exists = !(await fetchGetJSON(
           `/api/affiliate/coupon?coupon=${couponName}&validate=true`
         ));
-
         setIsValidName(exists && couponName.length >= 4);
-        setIsFetching(false);
-      }, 1000);
-    }
+        console.log(exists);
+      }
+    };
+    asyncFunction();
+    setTimeout(() => {
+      setIsFetching(false);
+    }, 2000);
   }, [couponName, handleCouponChange]);
 
   if (affiliate.coupon || isCouponSet)
@@ -105,6 +108,7 @@ const CouponFeild = ({ affiliate, setUser }: ICouponFeild) => {
             type="text"
             name=""
             id=""
+            value={couponName}
             onChange={(e) => {
               handleCouponChange(e.target.value);
             }}
@@ -130,6 +134,8 @@ const CouponFeild = ({ affiliate, setUser }: ICouponFeild) => {
               toast.success("Your coupon has been set");
               setIsCouponSet(true);
             } else {
+              console.log(resp);
+
               toast.error(resp.message);
             }
           }}

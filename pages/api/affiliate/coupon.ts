@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
 import testSwitch from "@/utils/test/TestSwitch";
+import { log } from "console";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,6 +13,7 @@ export default async function handler(
       case "GET":
           // validate coupon
           if (req.query.validate == 'true') { 
+              
               return res.status(200).json((await db.collection('coupons').doc(req.query.coupon as string).get()).exists)
           }
           //get accountIdFromCoupon
@@ -58,8 +60,7 @@ export const createCoupon = async (uuid: string, accountId: string, couponName: 
         return { status: 200, ok: false, message:`The coupon ${couponName} already exists please try another name` };
 
     try {
-        console.log();
-        
+        console.log('STARTED');
         const coupon = await stripe.coupons.create({
             percent_off: 10,
             name: couponName,
@@ -72,6 +73,7 @@ export const createCoupon = async (uuid: string, accountId: string, couponName: 
                 products: testSwitch({test:["prod_O510s671X0JDYq"], live:["prod_O7noF65HmL4yI7"]})
             }
         });
+        console.log('coupon created')
         await stripe.promotionCodes.create({
             coupon: coupon.id,
             code: couponName,
@@ -84,6 +86,7 @@ export const createCoupon = async (uuid: string, accountId: string, couponName: 
                 "accountId": accountId
             },
         })
+        console.log('promo created');
         db.collection("users").doc(uuid).set({ coupon: couponName }, { merge: true });
         db.collection("coupons").doc(couponName).set({ coupon: couponName, uuid: uuid, accountId: accountId }, { merge: true });
         return { status: 200, ok: true, message: `Coupon ${couponName} was created for connected account: ${accountId}, for user :${uuid}` };

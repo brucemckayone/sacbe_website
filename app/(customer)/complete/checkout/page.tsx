@@ -24,7 +24,7 @@ function CheckoutComplete() {
           <ConfettiExplosion />
         </div>
         <Image
-          src={"/celebration.gif"}
+          src={"/sacbe_logo_icon.png"}
           width={300}
           height={300}
           unoptimized
@@ -36,7 +36,7 @@ function CheckoutComplete() {
           <ConfettiExplosion />
         </div>
         <h1 className="text-center mt-1 mb-3 text-3xl">
-          You are the best!<br></br> Thank you for your purchase !
+          We Appreciate You!<br></br> Thank you for your purchase !
         </h1>
         <div className="flex justify-between">
           <ConfettiExplosion />
@@ -46,25 +46,27 @@ function CheckoutComplete() {
           You just did you bit for the planet by removing co2 from the
           atmosphere
         </p>
-        <h4>We have a gift for you... 🎁</h4>
-        <p>
-          We want you to have the best experiance possible, It Truly Matters To
-          Us. So we designed a system to help you find out how to get the most
-          out of cacao. We dont want to waste your time, we want to help you
-          thrive, and we know we can help. The free guides, recipes, and live
-          event invitations are a given if you want them, but there might be a
-          little something else in it for you too... its a surprise 🥳.
-        </p>
+        <div className=" bg-tertiaryContainer drop-shadow-md rounded-3xl my-20 p-5 md:p-10">
+          <h4>We have a gift for you... 🎁</h4>
+          <p>
+            We want you to have the best experiance possible, It Truly Matters
+            To Us. So we designed a system to help you find out how to get the
+            most out of cacao. We dont want to waste your time, we want to help
+            you thrive, and we know we can help. The free guides, recipes, and
+            live event invitations are a given if you want them, but there might
+            be a little something else in it for you too... its a surprise 🥳.
+          </p>
 
-        <div className="">
-          <Link
-            href={`/bespoke/quiz?session_id=${sessionId}`}
-            className="no-underline"
-          >
-            <div className="rounded-lg border hover:text-onPrimary hover:bg-onPrimaryContainer bg-sacbeBrandColor drop-shadow-md p-2 text-center w-11/12 duration-300 no-underline m-3">
-              <p>Start your Journey</p>
-            </div>
-          </Link>
+          <div className="">
+            <Link
+              href={`/bespoke/quiz?session_id=${sessionId}`}
+              className="no-underline"
+            >
+              <div className="rounded-lg border hover:text-onPrimary hover:bg-onPrimaryContainer bg-sacbeBrandColor drop-shadow-md p-2 text-center w-11/12 duration-300 no-underline m-3">
+                <p>Start your Journey</p>
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

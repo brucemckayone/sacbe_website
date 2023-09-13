@@ -89,8 +89,8 @@ export function WholesalePortalPage() {
     setHasBulk(!hasBulk);
   }
 
-  let bulkCost = bulkQty * 21.25 * 6;
-  let retailCost = retailQty * 21.25 * 6;
+  let bulkCost = bulkQty * 65;
+  let retailCost = retailQty * 25 * 6;
 
   if (isLoading) return <CardLoader />;
 
@@ -225,7 +225,7 @@ export function WholesalePortalPage() {
                     Quantity
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center">Unit Cost</div>
+                    <div className="flex items-center">Unit Cost (pouch)</div>
                   </th>
                   <th scope="col" className="px-6 py-3">
                     <div className="flex items-center">RRP</div>
@@ -278,7 +278,7 @@ export function WholesalePortalPage() {
                     </div>
                   </th>
                   <td className="px-6 py-4 w-2.50">
-                    <p>£21.25</p>
+                    <p>£25 x {retailQty * 6}</p>
                   </td>
                   <td className="px-6 py-4 w-2.50">
                     <p>£35</p>
@@ -331,11 +331,9 @@ export function WholesalePortalPage() {
                     Quantity
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center">Unit Cost</div>
+                    <div className="flex items-center">Unit Cost (1kg)</div>
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center">RRP</div>
-                  </th>
+
                   <th scope="col" className="px-6 py-3">
                     <div className="flex items-center">Total</div>
                   </th>
@@ -382,11 +380,9 @@ export function WholesalePortalPage() {
                     </div>
                   </th>
                   <td className="px-6 py-4 w-2.50">
-                    <p>£21.25</p>
+                    <p>£65</p>
                   </td>
-                  <td className="px-6 py-4 w-2.50">
-                    <p>£35</p>
-                  </td>
+
                   <td className="px-6 py-4 w-2.50 border-r">
                     <p>{`£${bulkCost.toFixed(2)}`}</p>
                   </td>

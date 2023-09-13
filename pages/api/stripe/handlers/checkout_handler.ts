@@ -23,12 +23,10 @@ export default async function handler(
   
   let event: Stripe.Event;
 
-  
   let status = 200;
   let message = "unhandeld webhook";
   let data = { message: "no message" };
   try {
-
     console.log(envConfig.STRIPE_CHECKOUT_WEBHOOK); 
     event = stripe.webhooks.constructEvent(
       rawBody,
@@ -84,8 +82,6 @@ async function handleAffiliatePayoutsViaCoupon(checkoutSession: Stripe.Response<
 
 async function handleUnpaid(checkoutSession: Stripe.Response<Stripe.Checkout.Session>, stripe: Stripe) {
   if (checkoutSession.payment_status == "unpaid") {
-    // The checkout session was canceled
-    // Perform your desired actions here
     const customer = checkoutSession.customer as Stripe.Customer;
     const newSession = await stripe.checkout.sessions.create(createCheckoutSessionParams(checkoutSession.line_items!.data.map((item) => item!.price!.id), checkoutSession!.line_items!.data[0].quantity, checkoutSession.mode, customer?.id));
 

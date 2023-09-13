@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { sendSignInLinkToEmail } from "firebase/auth";
 import { auth } from "@/lib/firebase/firebase";
 import homeUrl from "@/lib/constants/urls";
+import adminInit from "@/utils/firebase/admin_init";
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,32 +12,27 @@ export default async function handler(
   const method = req.method as requestMethodType;
   switch (method) {
     case "POST":
-      // Initialize Firebase Authentication and get a reference to the service
-      const email = req.body.email as string;
-      console.log(email);
+      const email = req.body.email as string;      
       try {
-        sendSignInLinkToEmail(auth, email, {
+        console.log("sending email");
+        await sendSignInLinkToEmail(auth, email, {
           url: `${homeUrl}/finish-signin`,
-          // This must be true.
           handleCodeInApp: true,
-        })
-          .then(() => {
-            res
-              .status(200)
-              .json({ message: "email has been sent", status: 200 });
-          })
-          .catch((e) => {
-            res.status(400).json({
-              message: "there was an error generating link",
-              status: 400,
-              details: e,
-            });
-          });
+        });
+
+        console.log("email sent");
+        return res
+          .status(200)
+          .json({ message: "email has been sent", status: 200 });
+  
       } catch (e) {
-        res.status(200).json({
+        console.log(e);
+        return res.status(200).json({
           message: "there was an issue with this request",
           status: 400,
+          error:e          
         });
       }
   }
+ 
 }

@@ -6,7 +6,7 @@ const getEnvironmentVariable = ({
   environmentVariable,
   testKey,
 }: params): string => {
-  if (process.env.NODE_ENV == "production") {
+  if (process.env.NEXT_PUBLIC_VERCEL_ENV == "production" ) {
     const unvalidatedEnvironmentVariable = process.env[environmentVariable];
     if (!unvalidatedEnvironmentVariable) {
       throw new Error(
@@ -15,7 +15,7 @@ const getEnvironmentVariable = ({
     } else {
       return unvalidatedEnvironmentVariable;
     }
-  } else if (process.env.NODE_ENV == "development") {
+  } else if (process.env.NEXT_PUBLIC_VERCEL_ENV == "preview" || process.env.NODE_ENV == "development") {
     if (testKey) {
       return testKey!;
     } else {
@@ -60,7 +60,7 @@ export const envConfig = {
   STRIPE_CHECKOUT_WEBHOOK: getEnvironmentVariable({
     environmentVariable: "STRIPE_CHECKOUT_WEBHOOK",
     testKey:
-      "whsec_242937646811ecb8ce3e863161dceb662b1f88539e08efe29da1eb17a21bb704",
+      "whsec_cdnwuLAIEQNpVEoxnqnO45WmuVFy3CWN",
   }),
 
   STRIPE_INVOICE_WEBHOOK: getEnvironmentVariable({
