@@ -18,6 +18,7 @@ import { OneTimeBody } from "./OneTimeBody";
 import { SubscriptionBody } from "./SubscriptionBody";
 
 import { PurchaseTypeTabs } from "./PurchaseTypeTabs";
+import { userType } from "@/types/typings";
 
 type props = {
   isHorizontal: boolean;

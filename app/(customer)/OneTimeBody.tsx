@@ -23,7 +23,7 @@ export function OneTimeBody(props: any) {
                 <li>Join A Beautiful Community</li>
                 <li>Recipes & Articles</li>
               </ol>
-              {props.isLoadingSub ? (
+              {props.isLoadingOn ? (
                 <SmallButtonLoader />
               ) : (
                 <div className="flex">

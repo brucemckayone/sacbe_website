@@ -3,6 +3,8 @@ import { useRef } from "react";
 import { Carousel } from "@mantine/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import FlavourCard from "../cards/flavourCard";
+import { Flavours } from "@/types/typings";
+
 interface Props {
   flavours: Flavours[];
 }

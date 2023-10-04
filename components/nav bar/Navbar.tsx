@@ -12,17 +12,17 @@ export default function Navbar() {
   // );
 
   return (
-    <header className="sticky top-0 z-50 flex flex-row  h-16 justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
+    <header className=" sticky top-0 z-50 flex flex-row  h-16 justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
       <Menu />
-      <Link className="flex" href="/">
+      <Link className="flex md:ml-20" href="/">
         <Image
           src="/logo.svg"
           alt="logo"
           width={300}
           height={50}
           priority
-          className="w-9/12  md:w-1/5 m-auto"
-        ></Image>
+          className="w-9/12 md:pl-5 md:w-1/5 m-auto"
+        />
       </Link>
       <LoginButton />
     </header>

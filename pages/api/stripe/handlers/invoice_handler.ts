@@ -7,6 +7,9 @@ import stripe from "@/lib/stripe/stripe";
 import adminInit from "@/utils/firebase/admin_init";
 import emailSender from "@/utils/email/nodemailer";
 import getRawBody from "raw-body";
+import { orderStatusType } from "@/types/typings";
+import { convertStripeInvoiceToWoocommerceOrder, createWoocommerceOrder } from "@/app/api/thirdeye/woo";
+
 // import { InvoiceHandler } from "@/utils/server/webhooks/invoices";
 
 // import emailTemplateSender from "@/utils/email/templates/templateSender";
@@ -19,18 +22,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const sig: string = req.headers["stripe-signature"] as string;
-  
   const rawBody = await getRawBody(req);
-
-
-
   let event: Stripe.Event;
-
   let status = 200;
   let message = "message not set";
-  let data = {};
+  let data: any = {};
+  console.log(envConfig.STRIPE_INVOICE_WEBHOOK);
   try {
     adminInit();
+    
     event = stripe.webhooks.constructEvent(
       rawBody,
       sig,
@@ -60,8 +60,20 @@ export default async function handler(
       case "invoice.paid":
         const invoicePaid = event.data.object as Stripe.Invoice;
         ({ data, message } = await handleInvoicePaid(invoicePaid, data, message));
+        
+        const order = await convertStripeInvoiceToWoocommerceOrder(invoicePaid)
+        console.log(order); 
+        const response = createWoocommerceOrder(order);
+        console.log(response);
+        //  new emailSender().send({
+        //   bodyMessage: `Invoice Has Been Paid: ${data.customer_name} ${data.customer_email} `,
+        //   htmlContent: `An Invoice has been paided ${invoicePaid.subscription? "for a subscription": " for a one time purchase"}`,
+        //   replayTo: "no-replay@sacbe-ceremonial-cacao.com",
+        //   sender: "no-replay@sacbe-ceremonial-cacao.com",
+        //   subject: `Payment failed for invoice email `,
+        //   to: "brucemckayone@gmail.com",
+        // });
         break;
-
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
@@ -142,7 +154,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice, data: {}, message: str
   messaging().send({
     topic: "all",
     notification: {
-      body: `Fuck Yes! Another sale worth £${productList.reduce((total, a) => a.cost + total, 0) / 100} Smackaroonies`,
+      body: `Fuck Yes! Another sale worth £${productList.reduce((total, a) => a.cost + total, 0) / 100??"something"} Smackaroonies`,
       imageUrl: productList[0]?.image ??
         "https://www.sacbe-ceremonial-cacao.com/logo.svg",
       title: `New Order: ${invoice.customer_name}`,

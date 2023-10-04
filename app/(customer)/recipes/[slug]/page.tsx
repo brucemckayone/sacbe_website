@@ -25,7 +25,7 @@ export async function generateMetadata({
     },
     image: recipe.main_image,
     alternates: {
-      canonical: `${homeUrl}/posts/${recipe.title.replaceAll(" ", "-")}`,
+      canonical: `${homeUrl}/recipes/${recipe.title.replaceAll(" ", "-")}`,
     },
     creator: "Sacbe Cacao",
     twitter: {
@@ -37,7 +37,7 @@ export async function generateMetadata({
     openGraph: {
       title: recipe.title.replaceAll("-", " "),
       description: recipe.excerpt,
-      url: `${homeUrl}/posts/${recipe.title.replaceAll(" ", "-")}`,
+      url: `${homeUrl}/recipes/${recipe.title.replaceAll(" ", "-")}`,
       type: "article",
       images: recipe.main_image,
     },

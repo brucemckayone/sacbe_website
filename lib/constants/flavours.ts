@@ -1,3 +1,5 @@
+import { Flavours } from "@/types/typings";
+
 const flavours: Flavours[] = [
   {
     flavourName: ["string one", "string 2"],

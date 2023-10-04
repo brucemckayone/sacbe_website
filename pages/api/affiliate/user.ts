@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
+import { userType } from "@/types/typings";
 // import getAffiliateUser from "@/utils/server/affiliate/getAffiliateUser";
 export default async function handler(
   req: NextApiRequest,

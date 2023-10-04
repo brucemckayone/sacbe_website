@@ -3,15 +3,11 @@ import Image from "next/image";
 import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
 import { BlogPostType } from "@/types/blogPost";
-
 import dynamic from "next/dynamic";
-
 import { TestMarkdown } from "./MarkDown";
-
 import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
 import { notFound } from "next/navigation";
 import PurchaseOptions from "../../PurchaseOptions";
-import { log } from "console";
 
 async function getPost(slug: string) {
   const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {

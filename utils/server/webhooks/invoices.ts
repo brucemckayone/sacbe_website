@@ -3,6 +3,7 @@ import { firestore, messaging } from "firebase-admin";
 import stripe from "@/lib/stripe/stripe";
 import adminInit from "@/utils/firebase/admin_init";
 import InvoiceSender from "@/utils/email/senders/invoiceSender";
+import { orderStatusType } from "@/types/typings";
 
 adminInit();
 

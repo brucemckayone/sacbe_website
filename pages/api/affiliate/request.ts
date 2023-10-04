@@ -3,6 +3,7 @@ import { firestore, messaging } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
 import AffiliateSender from "@/utils/email/senders/affiliateSender";
 import affiliate_update_status from "@/utils/email/templates/affiliate_update_status";
+import { affiliateStatusType, userType } from "@/types/typings";
 
 
 export const affiliateRequestEndpoint = `/api/affiliate/request`;

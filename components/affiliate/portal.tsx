@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
 import { Spinner } from "../loaders/Spinner";
 import toast from "react-hot-toast";
+import { userType } from "@/types/typings";
 
 function Portal() {
   const { user: affiliate, isLoading: affiliateLoading, setUser } = useUser();

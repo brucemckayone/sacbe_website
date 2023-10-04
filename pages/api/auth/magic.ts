@@ -30,7 +30,7 @@ export default async function handler(
         return res.status(200).json({
           message: "there was an issue with this request",
           status: 400,
-          error:e          
+          e:e          
         });
       }
   }

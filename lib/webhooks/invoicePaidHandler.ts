@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import admin from "firebase-admin";
 import { Timestamp } from "firebase/firestore";
+import { orderStatusType } from "@/types/typings";
 interface Params {
   invoice: Stripe.Invoice;
   stripe: Stripe;

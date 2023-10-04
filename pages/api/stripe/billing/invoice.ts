@@ -5,6 +5,7 @@ import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
 import emailSender from "@/utils/email/nodemailer";
 import wholesale_invoice_email from "@/utils/email/templates/wholesale/invoice";
+import { userType } from "@/types/typings";
 
 export default async function handler(
   req: NextApiRequest,
@@ -22,9 +23,11 @@ export default async function handler(
   }
 }
 
+type NewType = userType;
+
 type sendWholeSaleInvoiceType = {
   extraEmail: string;
-  user: userType;
+  user: NewType;
   bulk: {
     qty: number;
   };

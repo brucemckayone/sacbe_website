@@ -1,5 +1,6 @@
 "use client";
 
+import { authContextType, userType } from "@/types/typings";
 import { fetchGetJSON } from "@/utils/stripe/fetchPostJson";
 import { useSession } from "next-auth/react";
 import { useContext, createContext, useState, useEffect, useRef } from "react";

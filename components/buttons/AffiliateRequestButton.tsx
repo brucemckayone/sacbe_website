@@ -6,7 +6,8 @@ import { useUser } from "../auth/affiliate_auth_context";
 import PrimaryButton from "./primaryButton";
 import TextInput from "../form/inputs/TextInput";
 import TextArea from "../form/inputs/TextArea";
-import homeUrl from "@/lib/constants/urls";
+import { marketingType } from "@/types/typings";
+
 function AffiliateRequestButton() {
   const affiliate = useUser();
   const { data: data } = useSession();
@@ -16,7 +17,6 @@ function AffiliateRequestButton() {
   const [instagram, setInstgram] = useState("");
   const [message, setMessage] = useState("");
   const [isLoading, setLoading] = useState(false);
-  const [requestSent, setRequestSent] = useState(false);
 
   let marketingDetails: marketingType = {
     facebook: facebook,

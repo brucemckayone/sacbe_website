@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { firestore } from "firebase-admin";
 import adminInit from "@/utils/firebase/admin_init";
 import Stripe from "stripe";
-import LoginButton from "@/components/buttons/loginButton";
+
 const mailchimp = require('@mailchimp/mailchimp_marketing');
 mailchimp.setConfig({
   apiKey: process.env.MAILCHIMP_API_KEY,

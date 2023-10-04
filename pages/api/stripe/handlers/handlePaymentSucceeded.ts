@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { firestore } from "firebase-admin";
+import { orderStatusType } from "@/types/typings";
 
 export async function handlePaymentSucceeded(
   event: Stripe.Event,
