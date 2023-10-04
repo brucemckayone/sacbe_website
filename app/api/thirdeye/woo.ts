@@ -74,7 +74,5 @@ export async function convertStripeInvoiceToWoocommerceOrder(invoice: Stripe.Inv
             }
         ]
     }
-    
-    
     return order;
 }
