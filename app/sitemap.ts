@@ -42,19 +42,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${homeUrl}/about`,
-      lastModified: new Date('2023-06-01'),
+      lastModified: new Date("2023-06-01"),
     },
     {
       url: `${homeUrl}/affiliates`,
-      lastModified: new Date('2023-06-01'),
+      lastModified: new Date("2023-06-01"),
     },
     {
       url: `${homeUrl}/wholesale`,
-      lastModified: new Date('2023-06-01'),
+      lastModified: new Date("2023-06-01"),
     },
     {
       url: `${homeUrl}/resources`,
-      lastModified: new Date('2023-06-01'),
+      lastModified: new Date("2023-06-01"),
+    },
+    {
+      url: `${homeUrl}/facilitator-training`,
+      lastModified: new Date("2023-12-28"),
     },
     ...blogPosts,
     ...recipes,

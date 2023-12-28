@@ -120,7 +120,7 @@ export default function TrainingVenue() {
         <div className="rounded-3xl overflow-clip">
           <Image
             src={"/training/venue/1.webp"}
-            alt={""}
+            alt={"Aberdeenshire Villa Venue Image"}
             width={500}
             height={500}
             className="object-cover w-full  h-[300px] md:h-[600px] rounded-xl my-2 "
@@ -131,7 +131,7 @@ export default function TrainingVenue() {
           <div className="hidden md:flex w-full md:w-1/2">
             <Image
               src={"/home_header/home_page_header_image_1.jpg"}
-              alt={""}
+              alt={"A person working with ceremonial cacao"}
               width={1000}
               height={1000}
               style={{ width: "100%", height: "100%" }}

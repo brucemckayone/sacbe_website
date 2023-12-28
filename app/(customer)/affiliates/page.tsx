@@ -34,17 +34,15 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Affiliate Program",
-    description:
-      "Join Our Affiliate Program Today! Unlock the power of ceremonial cacao and embark on a journey of spiritual awakening while earning enticing rewards. Become a part of our affiliate community and share the profound benefits of ceremonial cacao with others. Join now in the abundant opportunities that await you!",
+    description: description,
     site: "@SacbeCacao",
-    siteId: "https://sacbe-ceremonial-cacao.com/affiliate-program",
+    siteId: "https://sacbe-ceremonial-cacao.com/affiliates",
   },
   openGraph: {
     type: "website",
-    url: "https://sacbe-ceremonial-cacao.com/affiliate-program",
+    url: "https://sacbe-ceremonial-cacao.com/affiliates",
     title: "Affiliate Program",
-    description:
-      "Join Our Affiliate Program Today! Unlock the power of ceremonial cacao and embark on a journey of spiritual awakening while earning enticing rewards. Become a part of our affiliate community and share the profound benefits of ceremonial cacao with others. Join now in the abundant opportunities that await you!",
+    description: description,
     siteName: "Sacbe Cacao",
     countryName: "UK",
   },

@@ -24,6 +24,7 @@ export function PayInFullButton(props: {
                 roomType: props.currentRoom?.uuid,
               },
               hasShipping: false,
+              hasReferalFeild: true,
             },
           });
           location.href = checkout.data.url;

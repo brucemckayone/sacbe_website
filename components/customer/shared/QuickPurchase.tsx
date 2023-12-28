@@ -13,7 +13,7 @@ import { RawUnlockOfferButton } from "@/components/shared/buttons/GetOfferButton
 import api from "@/lib/apiSchema/apiSchema";
 import { usePathname } from "next/navigation";
 
-export const QuickPurchase = () => {
+export const Actions = () => {
   const path = usePathname();
   const [open, setOpen] = useState(false);
   const { user: affiliate, isLoading: affiliateLoading } = useUser();
@@ -45,7 +45,7 @@ export const QuickPurchase = () => {
   }
 
   return (
-    <div>
+    <div className="fixed bottom-0 w-full overflow-auto">
       <button
         className={`fixed bottom-5 right-5 bg-sacbeBrandColor rounded-full drop-shadow-2xl animate-float }`}
         onClick={() => {
@@ -89,7 +89,7 @@ export const QuickPurchase = () => {
           />
         </button>
       )}
-      <div className="animate-slide_in_left_blur_delay fixed bottom-3 left-0 m-4 z-50 border-black">
+      <div className="animate-slide_in_left_blur_delay fixed bottom-3 left-0 m-4 z-50 ">
         <RawUnlockOfferButton />
       </div>
       <div

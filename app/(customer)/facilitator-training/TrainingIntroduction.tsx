@@ -19,22 +19,20 @@ export interface ISlide {
 
 function IntroductionBody() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-11/12 m-auto">
-      <div className="w-full mr-10 m-auto h-full">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl visible md:hidden">
-          Cultivate Your Spirit - Overview
-        </h2>
-
+    <div className="w-11/12 m-auto my-10 md:my-36 py-10 md:px-2 justify-between flex flex-col md:flex-row-reverse  md:bg-secondaryContainer/30 md:shadow md:rounded-3xl">
+      <div className="w-full md:w-6/12 md:mr-10 ">
         <Image
-          src={"/home_header/home_page_header_image_11.jpg"}
-          alt={""}
-          width={1000}
-          height={1000}
-          // style={{ width: "100%", height: "100%" }}
-          className="rounded-lg drop-shadow-sm h-fit object-cover flex flex-grow"
-        />
+          src={"/home_header/home_page_header_image_10.jpg"}
+          height={500}
+          width={500}
+          alt={" An image of a person working with cacao"}
+          className="rounded-lg object-cover w-full h-full"
+        ></Image>
       </div>
-      <div className="flex flex-col justify-center w-11/12 md:ml-16   md:my-0">
+      <h2 className="text-3xl md:text-4xl mt-5 lg:text-5xl visible md:hidden">
+        Cultivate Your Spirit - Overview
+      </h2>
+      <div className="flex flex-col justify-center w-11/12 md:w-6/12 md:mx-10 md:my-0">
         <h2 className="text-3xl md:text-4xl lg:text-5xl  hidden md:block">
           Cultivate Your Spirit - Overview
         </h2>
@@ -133,12 +131,12 @@ const slides: ISlide[] = [
 
 function TrainingIntroduction() {
   return (
-    <div className="my-20 md:my-36">
+    <section className="my-20 md:my-36">
       <IntroductionBody />
       <div className="my-10 w-11/12 m-auto">
         <SmoothCarousel slides={slides} />
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -199,7 +197,7 @@ function CarouselCard(prop: {
         <div className="relative">
           <Image
             src={props.image}
-            alt={" image header "}
+            alt={"An image of the cacao training in scotland"}
             width={1200}
             height={800}
             className="object-cover rounded-xl h-[350px] "

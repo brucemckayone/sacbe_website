@@ -16,7 +16,7 @@ export function ImageWithContent(props: {
       <div className="w-full md:w-1/2 flex flex-col ">
         <Image
           src={props.image}
-          alt=""
+          alt=" Image with content displaying the text as shown"
           width={1000}
           height={1000}
           style={{ width: "100%", height: "100%" }}

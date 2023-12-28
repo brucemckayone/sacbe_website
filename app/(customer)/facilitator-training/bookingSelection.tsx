@@ -2,8 +2,8 @@
 import { RiskApealCards } from "@/components/customer/shared/RiskApealCards";
 import { useUser } from "@/components/shared/auth/UserProvider";
 import SmallLinkButton from "@/components/shared/buttons/smallLinkButton";
-import { useState } from "react";
-import { CountdownTimer } from "./AccomidationChoiceCard";
+import { useEffect, useState } from "react";
+import { CountdownTimer as EarlyBirdCountdownTimer } from "./AccomidationChoiceCard";
 import JoinWaitlistButton from "./JoinWaitlistButton";
 import { PackagePurchaseOption } from "./PackagePurchaseOption";
 
@@ -37,12 +37,17 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
     const firstAvailableRoom = roomOptions.find((room) => room.isAvailable);
     return firstAvailableRoom?.id;
   };
-
   const [selectedId, setSelectedId] = useState<string | null>(
     getFirstAvailableRoom() ?? null
   );
+  const [currentRoom, setCurrentRoom] = useState<RoomOptionType>(
+    roomOptions.find((room) => room.id === selectedId)!
+  );
 
-  const currentRoom = roomOptions.find((room) => room.id === selectedId);
+  useEffect(() => {
+    const room = roomOptions.find((room) => room.id === selectedId);
+    setCurrentRoom(room!);
+  }, [selectedId]);
 
   function isAfterJan3rd(): boolean {
     const currentDate = new Date();
@@ -85,19 +90,20 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
               customKlarnaText={`Pay Deposit in 3 Installments of £${(
                 roomOptions[0].deposit / 3
               ).toFixed(2)}`}
+              howMuchIsDonatedToClimateChange={currentRoom?.price ?? 1 / 100}
             />
           </div>
-          <CountdownTimer />
+          <EarlyBirdCountdownTimer />
         </div>
       </div>
 
-      <div className="w-full md:w-5/12 flex flex-col justify-center mx-2">
+      <div className="w-11/12 m-auto md:w-5/12 flex flex-col justify-center">
         <PackagePurchaseOption
           roomOptions={roomOptions}
           selectedId={selectedId}
           setSelectedId={setSelectedId}
         />
-        {!isAfterJan3rd() ? (
+        {isAfterJan3rd() ? (
           <JoinWaitlistButton />
         ) : (
           <>
@@ -121,6 +127,7 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
             customKlarnaText={`Pay Deposit in 3 Installments of £${(
               roomOptions[0].deposit / 3
             ).toFixed(2)}`}
+            howMuchIsDonatedToClimateChange={currentRoom?.price ?? 1 / 100}
           />
         </div>
       </div>

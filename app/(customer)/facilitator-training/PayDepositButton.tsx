@@ -195,7 +195,7 @@ export function PayDepositButton(props: {
       </Modal>
       <button
         onClick={open}
-        className="py-2 px-6  font-semibold rounded-lg shadow-md col-span-full w-full"
+        className="py-2 px-6  font-semibold bg-white rounded-lg shadow-md col-span-full w-full"
       >
         {props.isLoading ? "Loading..." : "I'm all in, customize payment plan "}
       </button>

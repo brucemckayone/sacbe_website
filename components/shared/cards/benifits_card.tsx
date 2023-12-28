@@ -23,7 +23,7 @@ const BenifitsCard: React.FC<Props> = ({
           src={imagePath}
           width={70}
           height={70}
-          alt=""
+          alt="Cups full of cacaow"
           className="basis-1/4 h-20 w-20 md:h-[95px] bg-primaryContainer p-2 rounded-tl-md rounded-bl-md group-hover:bg-tertiaryContainer duration-300"
         />
 

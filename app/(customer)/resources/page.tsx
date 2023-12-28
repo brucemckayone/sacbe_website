@@ -8,11 +8,11 @@ import adminInit from "@/lib/firebase/admin_init";
 import dynamic from "next/dynamic";
 
 let fetchLimit = 10;
-
+const description =
+  "Dive into our blog and recipe trove to unearth the secrets of cacao. Savor new recipes and glean insights from our articles for a fuller cacao journey.";
 export const metadata: Metadata = {
   title: "Resources",
-  description:
-    "Explore our blog and recipe collection to learn more about cacao and discover new ways to enjoy it. From delicious recipes to informative articles, our resources will help you make the most of your cacao experience.",
+  description: description,
   keywords: [
     "Blog",
     "Recipes",
@@ -27,11 +27,19 @@ export const metadata: Metadata = {
   ],
   twitter: {
     card: "summary_large_image",
+    title: "Resources",
+    description: description,
+    site: "@SacbeCacao",
+    siteId: "https://www.sacbe-ceremonial-cacao.com/resources",
+    creator: "@SacbeCacao",
   },
   openGraph: {
     title: "Resources",
-    description:
-      "Explore our blog and recipe collection to learn more about cacao and discover new ways to enjoy it. From delicious recipes to informative articles, our resources will help you make the most of your cacao experience.",
+    description: description,
+    url: "https://www.sacbe-ceremonial-cacao.com/resources",
+    type: "website",
+    siteName: "Sacbe Cacao",
+    countryName: "UK",
   },
   alternates: {
     canonical: "https://www.sacbe-ceremonial-cacao.com/resources",

@@ -95,7 +95,9 @@ export default function PurchaseOptions(props: props) {
           }`}</h5>
         </div>
       </div>
-      <RiskAppealLogos />
+      <div className="bg-white rounded-xl mt-2 backdrop-blur-md bg-white/30">
+        <RiskAppealLogos />
+      </div>
     </div>
   );
 
@@ -127,7 +129,7 @@ export const handleOneOfPurchase = async (
 
 export function RiskAppealLogos() {
   return (
-    <div className="flex flex-row justify-around flex-wrap mt-3 px-3 py-1  drop-shadow-md">
+    <div className="flex flex-row justify-around flex-wrap  px-3 py-1 drop-shadow-md">
       <KlarnaLogo />
       <AfterPayLogo />
       <ClimateStripeLogo />

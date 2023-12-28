@@ -8,7 +8,7 @@ import {
   Marcellus as bodyFont,
 } from "next/font/google";
 import UserProvider from "@/components/shared/auth/UserProvider";
-import { QuickPurchase } from "../../components/customer/shared/QuickPurchase";
+import { Actions } from "../../components/customer/shared/QuickPurchase";
 import AffiliateLinkProvider from "@/components/providers/AffiliatePaymentLinkProvider";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
@@ -39,16 +39,17 @@ export default function RootLayout({
 
   return (
     <html
-      className={`${raleway.variable} ${merriweather.variable} bg-[white] border-black w-full `}
+      lang="en"
+      className={`${raleway.variable} ${merriweather.variable} bg-[white] w-full `}
     >
-      <body>
+      <body className="w-full">
         <AuthProvider>
           <UserProvider>
             <Navbar />
             <Suspense fallback={<PostLoader />}>
               <AffiliateLinkProvider>
                 {children}
-                <QuickPurchase />
+                <Actions />
               </AffiliateLinkProvider>
               <Footer />
               <Toaster />

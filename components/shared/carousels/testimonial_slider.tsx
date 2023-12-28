@@ -19,7 +19,7 @@ const SimpleSlider = () => {
       slidesToScroll={1}
     >
       <Carousel.Slide key={"tesves"} className="self-center px-3 md:px-10">
-        <div className="w-11/12 md:w-9/12 m-auto bg-tertiaryContainer/60 border border-black p-2 md:p-10 rounded-3xl my-10 py-5">
+        <div className="w-11/12 md:w-9/12 m-auto bg-tertiaryContainer/60 border border-black p p-2 md:p-10 rounded-3xl my-10 py-5">
           <h3 className="mb-2 text-3xl ">Our customers said it best:</h3>
           <blockquote className="text-md md:text-md">
             WOWWWZZAAAA!!!! Now, I have tried a few different Cacao’s but I have

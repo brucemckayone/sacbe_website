@@ -77,7 +77,7 @@ const vits = [
 
 export function VitiminPopovers() {
   return (
-    <div className="w-[95%] md:w-10/12 m-auto backdrop-blur-lg flex lg:flex-row flex-col  bg-tertiaryContainer/40 rounded-3xl my-20 py-20 px-3 md:px-10 ">
+    <div className="w-[95%] md:w-10/12 m-auto backdrop-blur-lg flex lg:flex-row flex-col  bg-tertiaryContainer/90 rounded-3xl my-20 py-20 px-3 md:px-10 ">
       <div className="lg:w-1/2 md:pr-10">
         <h2 className="text-6xl  ">
           A Nutrient Dense{" "}

@@ -1,7 +1,6 @@
 import HomePageHeader from "@/components/shared/headers/homePage/homePageHeader";
 import NavMenuBottom from "@/components/menu/NavMenuBottom";
 import SimpleSlider from "@/components/shared/carousels/testimonial_slider";
-// import { AskAQuestion } from "./AskAQuestion";
 import { BlogAndRecipes } from "../../components/customer/blog/BlogAndRecipes";
 import dynamic from "next/dynamic";
 import { QuickQuestion } from "../../components/customer/shared/QuickQuestion";
@@ -48,7 +47,9 @@ export default function Home() {
         <div>
           <Image
             src={pod}
-            alt={""}
+            alt={
+              "A floatin cacao pod used to make cacao it is orange and green"
+            }
             className="absolute md:right-32 mt-72 md:mt-0 "
           />
           <VitiminPopovers />

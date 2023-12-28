@@ -12,7 +12,7 @@ export function TrainingHeader() {
         <Image
           src={headerImage}
           placeholder="blur"
-          alt="Cacao Facilitator Training"
+          alt="Cacao Facilitator Training header image it is of a woman making ceremonial cacao"
           className="object-cover rounded w-full h-[700px] md:h-[900px] z-10"
         />
         <div className="absolute inset-x-0 bottom-0 h-1/4 md:h-1/6 bg-gradient-to-t from- to-transparent" />

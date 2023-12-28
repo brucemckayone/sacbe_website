@@ -29,10 +29,10 @@ export function AfterPayLogo() {
   return (
     <Image
       src={afterpayIcon}
-      width={70}
-      height={8}
+      width={75}
+      height={10}
       alt="After pay icon showing that we accept after pay payments for instalments"
-      className="mr-2  w-12 md:w-13 self-center"
+      className="mr-2 w-12 md:w-13 self-center"
     />
   );
 }
@@ -64,8 +64,10 @@ export function FairTradeLogo() {
 export function RiskApealCards(props: {
   isHorizontal: boolean;
   customKlarnaText?: string;
+  howMuchIsDonatedToClimateChange?: number;
 }) {
-  const { isHorizontal, customKlarnaText } = props;
+  const { isHorizontal, customKlarnaText, howMuchIsDonatedToClimateChange } =
+    props;
   return (
     <div
       className={`flex ${
@@ -91,6 +93,12 @@ export function RiskApealCards(props: {
             >
               fight climate change
             </Link>
+            {howMuchIsDonatedToClimateChange && (
+              <p className="text-sm font-bold">
+                This purchase will donate £
+                {(howMuchIsDonatedToClimateChange / 100).toFixed(2)}
+              </p>
+            )}
           </p>
         </div>
       </div>

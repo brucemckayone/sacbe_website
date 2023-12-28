@@ -182,7 +182,7 @@ export function QuickQuestion(props: {
         ) : (
           <div className="flex flex-col items-center justify-center">
             <h5 className="text-center text-xl">{data.question}</h5>
-            <div className="flex flex-wrap justify-center mt-1 mx-5">
+            <div className="flex flex-wrap justify-center text-center mt-1 mx-5">
               {data.awnsers &&
                 data.awnsers.map((answer) => {
                   return (

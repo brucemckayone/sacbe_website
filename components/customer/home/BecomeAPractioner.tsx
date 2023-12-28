@@ -1,4 +1,4 @@
-import cacaoFacilatorImage from "@/public/cacao-facilitator-training.png";
+import cacaoFacilatorImage from "@/public/training/logodark.png";
 import { ImageLeftTextRight } from "@/components/shared/body/ImageLeftTextRight";
 
 export function BecomeAPractioner() {

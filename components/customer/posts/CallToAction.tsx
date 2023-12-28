@@ -14,7 +14,7 @@ export function CallToAction(props: {
         {props.image && (
           <Image
             src={props.image}
-            alt=""
+            alt=" call to action image"
             width={500}
             height={500}
             className="rounded-lg drop-shadow-sm w-full h-1/2"

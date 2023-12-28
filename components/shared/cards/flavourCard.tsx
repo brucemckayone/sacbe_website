@@ -13,7 +13,7 @@ const FlavourCard: React.FC<Props> = ({ flavourNames, flavourTitle }) => {
           src={"/we_love_mother_leaf.png"}
           fill
           className="self-center w-full p-3"
-          alt=""
+          alt="Icon describing the text"
           style={{
             objectFit: "contain",
           }}

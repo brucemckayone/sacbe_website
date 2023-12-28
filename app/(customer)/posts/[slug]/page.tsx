@@ -26,7 +26,7 @@ export async function generateMetadata({
   if (!post) return {};
 
   return {
-    title: post.title,
+    title: post.title.split(":")[0],
     description: post.excerpt,
     authors: {
       name: post.publisher?.name ?? "",

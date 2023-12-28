@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import menuItems from "@/lib/constants/menu";
 import LoginButton from "../buttons/loginButton";
+import { EarlyBirdCountdownTimer } from "@/app/(customer)/facilitator-training/AccomidationChoiceCard";
 
 export default function Navbar() {
   // const SearchBar = dynamic(() =>
@@ -43,39 +44,42 @@ export default function Navbar() {
     }
     return (
       <div className="flex m-1 ">
-        <Hamburger
-          toggled={isDrawerOpen}
-          onToggle={() => {
-            toggleDrawer();
-          }}
-        />
-        {
-          <div
-            className={`absolute top-0 bottom-0 right-0 left-0 ${
-              isDrawerOpen
-                ? "animate-slide_in_left_fade "
-                : "animate-slide_out_left_fade hidden"
-            } `}
-          >
-            <div className="w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
-              <div className="flex justify-end mr-16 rounded-lg">
-                <div
-                  className="bg-surface drop-shadow-lg rounded-full  mr-5 opacity-80"
-                  aria-labelledby="open-menu"
-                  role="menu"
-                >
-                  <Hamburger
-                    toggled={isDrawerOpen}
-                    onToggle={() => {
-                      toggleDrawer();
-                    }}
-                    label="Show menu"
-                  />
-                </div>
+        <div className="w-full ml-a">
+          <Hamburger
+            toggled={isDrawerOpen}
+            onToggle={() => {
+              toggleDrawer();
+            }}
+          />
+        </div>
+
+        <div
+          className={`fixed top-0 bottom-0 right-0 left-0 ${
+            isDrawerOpen
+              ? "animate-slide_in_left_fade "
+              : "animate-slide_out_left_fade hidden"
+          } `}
+        >
+          <div className="w-full md:w-1/3 bg-sacbeBrandColor h-screen border-r-2 ">
+            <div className="flex justify-end rounded-lg">
+              <div
+                className="bg-surface drop-shadow-lg rounded-full  m-3 opacity-80"
+                aria-labelledby="open-menu"
+                role="menu"
+              >
+                <Hamburger
+                  toggled={isDrawerOpen}
+                  onToggle={() => {
+                    toggleDrawer();
+                  }}
+                  label="Show menu"
+                />
               </div>
-              <div className="ml-10 ">
-                {menuItems.map((item) => {
-                  return (
+            </div>
+            <div className="ml-10 ">
+              {menuItems.map((item) => {
+                return (
+                  <>
                     <Link
                       onClick={() => {
                         toggleDrawer();
@@ -91,16 +95,21 @@ export default function Navbar() {
                         {item.subTitle}
                       </h4>
                     </Link>
-                  );
-                })}
-              </div>
+                    {item.text == "Training" && (
+                      <div className="w-11/12 md:w-6/12 -mt-10">
+                        <EarlyBirdCountdownTimer />
+                      </div>
+                    )}
+                  </>
+                );
+              })}
             </div>
-            <div
-              className="w-2/3"
-              onClick={() => setDrawerOpenState(!isDrawerOpen)}
-            ></div>
           </div>
-        }
+          <div
+            className="w-2/3"
+            onClick={() => setDrawerOpenState(!isDrawerOpen)}
+          ></div>
+        </div>
       </div>
     );
   }

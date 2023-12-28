@@ -71,17 +71,13 @@ function TextComponent(props: {
 function ImageComponent(props: { image: StaticImageData; jiggle?: boolean }) {
   return (
     <Card className="flex basis-1/2" hasColor={false}>
-      <div className="absolute w-11/12 md:w-4/12 p-40 bg-primaryContainer rounded-full h-[500px] blur-md"></div>
-      <div className="relative w-full p-40 h-[500px]">
+      <div className="absolute w-11/12 md:w-4/12 p-40 bg-primaryContainer b rounded-full h-[500px] blur-md"></div>
+      <div className="relative w-full p-40 h-[500px] ">
         <Image
           src={props.image}
           fill
           alt=" Floating cacao pod image"
-          className={
-            props.jiggle
-              ? "animate-float z-10 object-contain "
-              : " object-contain z-10"
-          }
+          className={" object-contain  z-10 text-black"}
         />
       </div>
     </Card>

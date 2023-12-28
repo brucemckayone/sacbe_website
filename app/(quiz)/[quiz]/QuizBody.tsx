@@ -4,7 +4,7 @@ import homeUrl from "@/lib/constants/urls";
 import { analytics } from "@/lib/firebase/firebase";
 import { fetchPostJSON } from "@/utils/http/fetchPostJson";
 import { logEvent } from "firebase/analytics";
-import { useRouter } from "next/navigation";
+
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Stripe from "stripe";
@@ -138,7 +138,7 @@ function SingleSelect(props: SingleSelectProps) {
             onClick={() => {
               setSelected(awnser);
             }}
-            className={`flex flex-row justify-betwee ${
+            className={`flex flex-row text-center justify-betwee ${
               selected != awnser
                 ? "bg-sacbeBrandColor border-2 drop-shadow-lg"
                 : "bg-surface drop-shadow-md hover:bg-tertiaryContainer cursor-auto"
@@ -193,7 +193,9 @@ export function MultiAwnserCard(props: {
         props.addToSelected([...props.selected, props.awnser]);
       }}
     >
-      <p className={"" + !props.compact && "text-sm"}>{props.awnser}</p>
+      <p className={" text-center" + !props.compact && "text-sm"}>
+        {props.awnser}
+      </p>
     </div>
   );
 }

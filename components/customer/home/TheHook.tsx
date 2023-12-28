@@ -38,11 +38,11 @@ export function TheHook() {
   return (
     <div>
       <div className="mt-20">
-        <h2 className="w-11/12 md:w-10/12 text-center m-auto py-6">
+        <h1 className="w-11/12 md:w-10/12 text-center m-auto py-6">
           <strong className="text-sacbeBrandColor text-stroke-3 text-5xl md:text-7xl lg:text-8xl ">
             SACBE CEREMONIAL CACAO
           </strong>
-        </h2>
+        </h1>
         <h2 className="w-11/12 md:w-8/12 text-center text-4xl md:text-6xl lg:text-8xl m-auto pb-10">
           From the Heart <br />
           of the Earth to Yours

@@ -10,13 +10,13 @@ export default function BenefitsOfCacao() {
   );
 
   return (
-    <div className="flex flex-col  lg:flex-row w-full md:w-10/12 m-auto backdrop-blur-lg bg-onPrimary/50 rounded-3xl my-20">
+    <div className="flex flex-col  lg:flex-row w-[95%] md:w-10/12 m-auto backdrop-blur-lg bg-onPrimary/50 rounded-3xl my-20">
       <div className="xl:basis-1/3 md:basis-1/3  self-center flex flex-col justify-stretch ">
         <Image
           src={"/home_header/home_page_header_image_8.jpg"}
           width={700}
           height={900}
-          alt="alt"
+          alt="Cups full of ceremonial cacao"
           className="rounded-xl md:rounded-3xl h-[500px] md:h-[650px] object-cover "
         />
       </div>

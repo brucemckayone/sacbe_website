@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
 const description =
-  "Learn about our mission, values, and the story behind our brand. Discover how we are dedicated to providing high-quality products, fostering sustainable practices, and promoting wellness. Explore our About page to understand our commitment to your well-being and the positive impact we strive to make in the world.";
+  "Discover our mission and values on our About page. Learn how we commit to quality, sustainability, and wellness, impacting the world positively.";
 export const metadata: Metadata = {
   title: "About",
   description: description,

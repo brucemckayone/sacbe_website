@@ -1,3 +1,4 @@
+import { TestimonialQuote } from "@/app/(customer)/facilitator-training/TestimonialQuote";
 import PurchaseOptions from "@/components/customer/shared/PurchaseOptions";
 import {
   ReactElement,
@@ -52,13 +53,8 @@ export default function HeaderInformation() {
         <FeaturesHorizontalList />
       </div>
       <div className="flex md:flex-col flex-col ">
-        <div className="w-full flex flex-col justify-center rounded border border-black p-2">
-          <p className="italic text-sm font-bold">
-            {
-              "'This cacao is absolutely delicious and very nourishing! The energy behind the cacao production, its origins and the reverence for the medicine from the indigenous cultures that harvest the beans can be deeply felt.'"
-            }
-          </p>
-        </div>
+        <TestimonialQuote quote="This cacao is absolutely delicious and very nourishing! The energy behind the cacao production, its origins and the reverence for the medicine from the indigenous cultures that harvest the beans can be deeply felt." />
+
         <ul className="w-full mb-5 ">
           <ListItem title="300g">- Organic Ecuadorian Cacao</ListItem>
           <ListItem title="Notes:">Plum, Fudge, Caramel, Raisin</ListItem>

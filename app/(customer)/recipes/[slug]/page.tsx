@@ -30,7 +30,7 @@ export async function generateMetadata({
     },
     image: data.recipe.main_image,
     alternates: {
-      canonical: `${homeUrl}/recipes/${data.recipe.title.replaceAll(" ", "-")}`,
+      canonical: `${homeUrl}/recipes/${data.recipe.slug.replaceAll(" ", "-")}`,
     },
     creator: "Sacbe Cacao",
     twitter: {

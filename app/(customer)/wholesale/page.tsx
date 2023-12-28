@@ -4,11 +4,14 @@ import Image from "next/image";
 import { Metadata } from "next";
 import wholesalePortalMockUp from "@/public/wholesale_portal_mock_up.png";
 import dynamic from "next/dynamic";
-
+const metaDescription =
+  "Boost your business with Wholesale Sacbe Cacao! Offer an authentic cacao experience to customers and increase profits with our premium bulk offerings.";
 export const metadata: Metadata = {
   title: "Wholesale",
-  description:
-    "Revitalize Your Business with Wholesale Sacbe Cacao! Harness the Authentic Essence of Cacao and Offer Your Customers a Truly Enchanting Experience. Maximize Profits and Delight Your Clients With Our Premium Bulk Cacao Offerings. Take the Leap and Amplify Your Success with Wholesale Ceremonial Cacao Today!",
+  description: metaDescription,
+  category: "Sacbe Cacao Wholesale",
+  publisher: "Sacbe Cacao",
+  abstract: "Sacbe Cacao Wholesale",
   keywords: [
     "Wholesale ceremonial cacao",
     "bulk cacao",
@@ -24,14 +27,18 @@ export const metadata: Metadata = {
   ],
   twitter: {
     card: "summary_large_image",
+    description: metaDescription,
+    creator: "@SacbeCacao",
+    title: "Wholesale",
+    site: "@SacbeCacao",
   },
   openGraph: {
     type: "website",
     url: "https://sacbe-ceremonial-cacao.com/wholesale",
     title: "Wholesale",
-    description:
-      "Revitalize Your Business with Wholesale Sacbe Cacao! Harness the Authentic Essence of Cacao and Offer Your Customers a Truly Enchanting Experience. Maximize Profits and Delight Your Clients With Our Premium Bulk Cacao Offerings. Take the Leap and Amplify Your Success with Wholesale Ceremonial Cacao Today!",
+    description: metaDescription,
     siteName: "Sacbe Cacao",
+    countryName: "UK",
   },
   alternates: {
     canonical: "https://www.sacbe-ceremonial-cacao.com/wholesale",
@@ -57,10 +64,6 @@ const SacbeCacaoWholesale = async () => {
       (res) => res.WholesaleHeader
     )
   );
-  // const AboutPackaging = dynamic(() =>
-  //   import("./AboutPackaging").then((res) => res.AboutPackaging)
-  // );
-
   const NavMenuBottom = dynamic(
     () => import("@/components/menu/NavMenuBottom")
   );
@@ -71,13 +74,13 @@ const SacbeCacaoWholesale = async () => {
       <NavMenuBottom />
       <div className="flex flex-row items-center justify-center bg-secondaryContainer pt-20">
         <div className="self-center w-11/12 md:w-10/12">
-          <h2 className=" text-3xl md:text-6xl lg:text-8xl text-center mb-10 mt-5">
+          <h1 className=" text-3xl md:text-6xl lg:text-8xl text-center mb-10 mt-5">
             <strong className="text-stroke-3 text-3xl md:text-6xl lg:text-8xl text-sacbeBrandColor">
               WHOLESALE CACAO:
             </strong>{" "}
             AUTHENTIC AND SUSTAINABLE BULK CACAO FOR SPIRITUAL, HEALTH &
             WELLBEING BUSINESSES IN THE UK
-          </h2>
+          </h1>
           <div className="flex flex-row justify-center">
             <Image
               src={wholesalePortalMockUp}

@@ -38,7 +38,7 @@ export function UpdateQuantityButtons(props: {
   setQty: Dispatch<SetStateAction<number>>;
 }) {
   return (
-    <div className="flex  text-[black] mx-2 h-10 items-center rounded-full p-2 bg-surface self-center border ">
+    <div className="flex  text-[black] border-black mx-2 h-10 items-center rounded-full p-2 bg-surface self-center border ">
       <ModifyCountButton
         count={props.qty}
         modifyCount={props.setQty}

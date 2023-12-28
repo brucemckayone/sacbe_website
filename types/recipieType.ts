@@ -14,6 +14,7 @@ export interface RecipeType {
   excerpt: string;
   introduction: string;
   story: string;
+  slug: string;
 }
 
 export interface Feel {

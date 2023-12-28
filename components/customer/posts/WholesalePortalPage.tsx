@@ -13,16 +13,6 @@ import { useDisclosure } from "@mantine/hooks";
 import homeUrl from "@/lib/constants/urls";
 import toast from "react-hot-toast";
 
-function WholeSalePortalSignUpForm() {
-  return (
-    <div className="p-4 sm:ml-64">
-      <div className="mx-36">
-        <WholeSaleForm key={"hey"} />
-      </div>
-    </div>
-  );
-}
-
 export function WholesalePortalPage() {
   const [opened, { open, close }] = useDisclosure(false);
   const [retailQty, setRetailQty] = useState(5);

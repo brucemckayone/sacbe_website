@@ -11,7 +11,7 @@ export function AccomidationChoiceCard(props: {
   return (
     <div
       onClick={() => props.handleSelect(props.room.id)}
-      className={`border rounded-xl  shadow duration-500 border-sacbeBrandColor/60 p-5 w-11/12 m-auto md:w-full md:mx-2 my-2 md:px-2 ${
+      className={`border rounded-xl  shadow duration-500 border-sacbeBrandColor/60 p-5 w-full m-auto md:w-full md:mx-2 my-2 md:px-2 ${
         props.selectedId == props.room.id
           ? "bg-sacbeBrandColor/10 shadow-xl scale-105"
           : ` ${
@@ -61,7 +61,7 @@ type TimeLeft = {
   seconds?: number;
 };
 
-const CountdownTimer = () => {
+export const EarlyBirdCountdownTimer = () => {
   const calculateTimeLeft = (): TimeLeft => {
     const difference = +new Date("2024-01-31") - +new Date();
     let timeLeft = {};
@@ -100,7 +100,7 @@ const CountdownTimer = () => {
     ));
 
   return (
-    <div className="flex-col md:flex-row justify-between bg-recommendedGreen border md:border-none md:bg-transparent p-2 md:p-0 rounded-2xl shadow-lg my-10">
+    <div className="flex-col md:flex-row justify-between bg-recommendedGreen border md:border-none md:bg-transparent p-2 md:p-0 rounded-2xl shadow-lg md:shadow-none my-10">
       <h4 className="md:mt-3">Early Bird Discount: </h4>
       <div className=" flex p-2 rounded-2xl space-x-3 md:bg-recommendedGreen/40 md:border">
         {timeComponents}
@@ -109,4 +109,4 @@ const CountdownTimer = () => {
   );
 };
 
-export { CountdownTimer };
+export { EarlyBirdCountdownTimer as CountdownTimer };

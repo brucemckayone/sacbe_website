@@ -124,7 +124,7 @@ export function SubscriptionBody(props: any) {
                       text="SUBSCRIBE"
                       className="text-onPrimaryContainer border-onPrimaryContainer"
                     />
-                    <div className="flex z-10 text-[black] mx-2 h-10 items-center rounded-full p-2 bg-surface self-center border ">
+                    <div className="flex z-10 border-black text-[black] mx-2 h-10 items-center rounded-full p-2 bg-surface self-center border ">
                       <button
                         onClick={subDecrement}
                         className="p-1 rounded-full bg-surface mx-1"

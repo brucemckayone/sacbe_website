@@ -1,17 +1,17 @@
 import { Metadata } from "next";
-
-export const homeMetaData:Metadata = {
+const metaDescription =
+  "Explore Sacbe's premium ceremonial cacao: a journey of rich flavors and ancient traditions. Delve into our curated cacao blends, recipes, and insightful blogs. Available in the UK.";
+export const homeMetaData: Metadata = {
   title: {
-    default: "Sacbe Cacao",
+    default: "Sacbe Ecuadorian Ceremonial Cacao",
     template: "%s | Sacbe Cacao",
   },
   applicationName: "Sacbe Cacao",
-  metadataBase: new URL("https://sacbe-ceremonial-cacao.com"),
+  metadataBase: new URL("https://www.sacbe-ceremonial-cacao.com"),
   category: "Cacao",
   alternates: {
     canonical: "https://www.sacbe-ceremonial-cacao.com",
   },
-
   keywords: [
     "Ceremonial cacao",
     "Transformative experiences",
@@ -27,33 +27,30 @@ export const homeMetaData:Metadata = {
     "Keto",
     "Super Food",
   ],
-
   viewport: {
     width: "device-width",
     initialScale: 1,
   },
-  colorScheme: "light",
 
+  colorScheme: "light",
   twitter: {
     title: {
       default: "Sacbe Cacao",
       template: "%s | Sacbe Cacao",
     },
-    description:
-      "Discover the exquisite world of Sacbe ceremonial cacao, a purveyor of premium, single-origin cacao. Immerse yourself in the ancient practice of cacao ceremonies with our meticulously sourced and crafted products. Our website features a diverse selection of our signature cacao, along with an array of tantalizing recipes, insightful blog posts, and an exclusive subscription service. Explore the transformative potential of cacao as you connect with its rich flavors, explore our collection of delicious recipes, delve into our informative blog, and elevate your cacao journey with our convenient subscription. Available in the UK.",
+    description: metaDescription,
     site: "https://sacbe-ceremonial-cacao.com",
   },
-  description:
-    "Discover the exquisite world of Sacbe ceremonial cacao, a purveyor of premium, single-origin cacao. Immerse yourself in the ancient practice of cacao ceremonies with our meticulously sourced and crafted products. Our website features a diverse selection of our signature cacao, along with an array of tantalizing recipes, insightful blog posts, and an exclusive subscription service. Explore the transformative potential of cacao as you connect with its rich flavors, explore our collection of delicious recipes, delve into our informative blog, and elevate your cacao journey with our convenient subscription. Available in the UK.",
+
+  description: metaDescription,
   openGraph: {
     title: {
       default: "Sacbe Cacao",
       template: "%s | Sacbe Cacao",
     },
-    description:
-      "Discover the exquisite world of Sacbe ceremonial cacao, a purveyor of premium, single-origin cacao. Immerse yourself in the ancient practice of cacao ceremonies with our meticulously sourced and crafted products. Our website features a diverse selection of our signature cacao, along with an array of tantalizing recipes, insightful blog posts, and an exclusive subscription service. Explore the transformative potential of cacao as you connect with its rich flavors, explore our collection of delicious recipes, delve into our informative blog, and elevate your cacao journey with our convenient subscription. Available in the UK.",
+    description: metaDescription,
     siteName: "Sacbe Cacao",
-    url: "https://sacbe-ceremonial-cacao.com",
+    url: "https://www.sacbe-ceremonial-cacao.com",
     locale: "en_GB",
     type: "website",
     countryName: "United Kingdom",
