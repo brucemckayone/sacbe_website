@@ -5,7 +5,7 @@ import {
   Marcellus as bodyFont,
 } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import UserProvider from "@/components/auth/affiliate_auth_context";
+import UserProvider from "@/components/shared/auth/UserProvider";
 import AuthProvider from "@/components/providers/SessionProvider";
 
 const raleway = displayFont({

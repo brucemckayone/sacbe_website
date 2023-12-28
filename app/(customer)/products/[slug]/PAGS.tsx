@@ -1,20 +1,18 @@
 import React from "react";
-import PurchaseOptions from "../../PurchaseOptions";
-import { RiskApealCards } from "../../RiskApealCards";
+import PurchaseOptions from "../../../../components/customer/shared/PurchaseOptions";
+import { RiskApealCards } from "../../../../components/customer/shared/RiskApealCards";
 import { ProductImageSelector } from "./ProductImageSelector";
 import NavMenuBottom from "@/components/menu/NavMenuBottom";
-import BenifitsOfCacao from "@/components/body/benifits_of_cacao";
-import { FeaturesHorizontalList } from "@/components/headers/homePage/headerInformation";
+import BenifitsOfCacao from "@/components/shared/body/benifits_of_cacao";
+import { FeaturesHorizontalList } from "@/components/shared/headers/homePage/headerInformation";
 import { firestore } from "firebase-admin";
-import { TestMarkdown } from "../../posts/[slug]/MarkDown";
-import adminInit from "@/utils/firebase/admin_init";
+import { TestMarkdown } from "../../../../components/customer/posts/MarkDown";
+import adminInit from "@/lib/firebase/admin_init";
 
 async function getProduct() {
   adminInit();
   const db = firestore();
   const product = await db.collection("products").doc("sacbe-cacao").get();
-  console.log(product.data());
-
   return product.data();
 }
 async function ProductPage() {

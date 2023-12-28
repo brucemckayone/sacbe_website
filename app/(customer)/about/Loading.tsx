@@ -1,5 +1,5 @@
-import ImageHeaderLoader from "@/components/loaders/ImageHeaderLoader";
-import TextLoader from "@/components/loaders/TextLoader";
+import ImageHeaderLoader from "@/components/shared/loaders/ImageHeaderLoader";
+import TextLoader from "@/components/shared/loaders/TextLoader";
 export default function AboutLoader() {
   return (
     <div>

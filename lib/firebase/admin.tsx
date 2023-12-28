@@ -1,7 +1,7 @@
 "use client";
 import { initFirestore } from "@next-auth/firebase-adapter";
 import { initializeApp } from "firebase/app";
-import { envConfig } from "../webhooks/envConfig";
+import { envConfig } from "../env/envConfig";
 import { cert } from "firebase-admin/app";
 import { getAuth } from "firebase/auth";
 import admin from "firebase-admin";

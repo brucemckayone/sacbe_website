@@ -2,13 +2,16 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { envConfig } from "./lib/env/envConfig";
 
 export async function middleware(request: NextRequest) {
+  // const user = await checkAuthentication(request);
+
   const user = await checkAuthentication(request);
 
   if (!user) {
     if (pathNameIncludes("/portal")) {
-      return redirectTo("/auth/signin?");
+      return redirectTo("/auth/signin");
     }
   } else {
     if (pathNameIncludes("/auth/signin")) {
@@ -37,6 +40,6 @@ export async function middleware(request: NextRequest) {
 async function checkAuthentication(request: NextRequest) {
   return await getToken({
     req: request,
-    secret: process.env.SECRET,
+    secret: process.env.NEXTAUTH_SECRET,
   });
 }

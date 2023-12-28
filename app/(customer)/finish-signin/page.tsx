@@ -3,14 +3,14 @@ import { auth } from "@/lib/firebase/firebase";
 import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 import { signIn } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { fetchGetJSON } from "@/utils/stripe/fetchPostJson";
+import { fetchGetJSON } from "@/utils/http/fetchGetJSON";
 import homeUrl from "@/lib/constants/urls";
-import PrimaryButton from "@/components/buttons/primaryButton";
+import PrimaryButton from "@/components/shared/buttons/primaryButton";
 import SlideInUp from "@/components/animations/slide_in_up";
-import MagicLinkForm from "@/components/form/MagicLinkForm";
+import MagicLinkForm from "@/components/shared/form/MagicLinkForm";
 
 function FinishSignin() {
-  const [isValidLink, setIsValidLink] = useState(false);
+  const [isValidLink, setIsValidLink] = useState(true);
   const [loading, setLoading] = useState(false);
   const [crfToken, setCrfToken] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +28,7 @@ function FinishSignin() {
           setIsValidLink(true);
           const res = await fetchGetJSON("/api/auth/csrf");
           setCrfToken(res["csrfToken"]);
-          handleSignin(email!, crfToken);
+          handleSignin(email!, res["csrfToken"]);
           setLoading(false);
         })
         .catch((error) => {
@@ -38,8 +38,11 @@ function FinishSignin() {
     } else {
       setIsValidLink(false);
     }
-  }, [crfToken]);
-  if (isValidLink) {
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
+  if (isValidLink && !loading) {
     return (
       <div>
         <div className="flex flex-col items-center justify-around bg-gradient-to-br from-sacbeBrandColor to-primaryContainer">
@@ -58,7 +61,7 @@ function FinishSignin() {
         </div>
       </div>
     );
-  } else if (!loading && !isValidLink) {
+  } else if (loading && !isValidLink) {
     return (
       <div>
         <div className="flex flex-col items-center justify-around bg-gradient-to-br from-sacbeBrandColor to-primaryContainer ">
@@ -100,7 +103,7 @@ function handleSignin(email: string, token: string) {
       callbackUrl: homeUrl,
     });
   } catch (e) {
-    console.log(e);
+    console.error(e);
   }
 }
 

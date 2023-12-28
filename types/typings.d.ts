@@ -1,3 +1,7 @@
+// Create a type that requires at least one of the keys to be present
+type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
+  U[keyof U];
+
 type orderStatusType =
   | "processing"
   | "complete"
@@ -48,48 +52,49 @@ type authContextType = {
   setUser: (user: NewType) => void;
   isLoading: Boolean;
   isError: Boolean;
+  refresh: () => void;
 };
 type affiliateLinksType = {
-  links:linksType;
-  setLinks:Dispatch<SetStateAction<undefined>>;
+  links: linksType;
+  setLinks: Dispatch<SetStateAction<undefined>>;
 };
 
-type linksType={
-  subscriptionLink: string,
-  oneOffLink:string
+type linksType = {
+  subscriptionLink: string;
+  oneOffLink: string;
 };
 
 export interface WooCreateOrderModel {
-    payment_method:       string;
-    payment_method_title: string;
-    set_paid:             boolean;
-    billing:              Ing;
-    shipping:             Ing;
-    line_items:           LineItem[];
-    shipping_lines:       ShippingLine[];
+  payment_method: string;
+  payment_method_title: string;
+  set_paid: boolean;
+  billing: Ing;
+  shipping: Ing;
+  line_items: LineItem[];
+  shipping_lines: ShippingLine[];
 }
 
 export interface Ing {
-    first_name: string;
-    last_name:  string;
-    address_1:  string;
-    address_2:  string;
-    city:       string;
-    state:      string;
-    postcode:   string;
-    country:    string;
-    email?:     string;
-    phone?:     string;
+  first_name: string;
+  last_name: string;
+  address_1: string;
+  address_2: string;
+  city: string;
+  state: string;
+  postcode: string;
+  country: string;
+  email?: string;
+  phone?: string;
 }
 
 export interface LineItem {
-    product_id:    number;
-    quantity:      number;
-    variation_id?: number;
+  product_id: number;
+  quantity: number;
+  variation_id?: number;
 }
 
 export interface ShippingLine {
-    method_id:    string;
-    method_title: string;
-    total:        string;
+  method_id: string;
+  method_title: string;
+  total: string;
 }

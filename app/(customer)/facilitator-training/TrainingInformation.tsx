@@ -1,0 +1,55 @@
+import { BulletPoints } from "./BulletPoints";
+import { TestimonialQuote } from "./TestimonialQuote";
+import Image from "next/image";
+export default function TrainingInformation() {
+  // description schedule
+  return (
+    <section className="w-11/12 m-auto my-10 md:my-36 py-10 md:px-2 justify-between flex flex-col md:flex-row-reverse  md:bg-secondaryContainer/30 md:shadow md:rounded-3xl">
+      <div className="w-full md:w-6/12 md:mr-10 ">
+        <Image
+          src={"/home_header/home_page_header_image_10.jpg"}
+          height={500}
+          width={500}
+          alt={""}
+          className="rounded-lg object-cover w-full h-full"
+        ></Image>
+      </div>
+      <div className="w-full md:w-5/12 md:ml-10 px-2">
+        <h3 className="mb-5 h-3">Pathway to Mastery</h3>
+        <h5 className="mt-3  mb-2  underline">
+          Inside Our Facilitator Training
+        </h5>
+        <p>
+          Delve into the heart of ceremonial cacao with a curriculum that is as
+          enriching as it is enlightening. Our training program covers
+          everything from the historical roots of cacao to the practical aspects
+          of facilitating ceremonies.
+        </p>
+        <TestimonialQuote quote="Being in space with Luzura for the Cacao Facilitator Training was revelationary, filled with compassion, love, and transformative guidance." />
+        <h5 className="mt-5 mb-2">Training Components</h5>
+        <BulletPoints
+          bulletPoints={[
+            {
+              name: "Cacao Study",
+              effect:
+                "Comprehensive study of ceremonial grade cacao, from cultivation to cultural significance.",
+            },
+            {
+              name: "Healing Spaces",
+              effect: "Techniques for creating transformative healing spaces.",
+            },
+            {
+              name: "Trauma-Informed Practices",
+              effect: "Learning trauma-informed somatic healing practices.",
+            },
+            {
+              name: "Mayan Calendar Integration",
+              effect:
+                "Integration of Mayan calendar and spiritual practices in cacao ceremonies.",
+            },
+          ]}
+        />
+      </div>
+    </section>
+  );
+}

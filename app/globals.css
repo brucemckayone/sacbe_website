@@ -41,15 +41,15 @@
   .btn-primary {
     @apply font-display p-10 bg-primary;
   }
-  .btn-secondary {
-    @apply;
-  }
-  .btn-tertiary {
-    @apply;
-  }
 
   .text-stroke-3 {
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
       1px 1px 0 black;
+  }
+  .dashed-border-spaced {
+    border: 1px dashed black;
+    border-style: dashed;
+    border-width: 2px;
+    border-image: linear-gradient(to right, black 1%, transparent 1%) 1 100%;
   }
 }

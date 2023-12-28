@@ -1,19 +1,17 @@
 import Stripe from "stripe";
 
 import { NextApiRequest, NextApiResponse } from "next";
-import { envConfig } from "@/lib/webhooks/envConfig";
+import { envConfig } from "@/lib/env/envConfig";
 import { firestore, messaging } from "firebase-admin";
-import stripe from "@/lib/stripe/stripe";
-import adminInit from "@/utils/firebase/admin_init";
-import emailSender from "@/utils/email/nodemailer";
+import stripe from "@/lib/stripe/init/stripe";
+import adminInit from "@/lib/firebase/admin_init";
+import emailSender from "@/lib/email/nodemailer";
 import getRawBody from "raw-body";
-import { orderStatusType } from "@/types/typings";
-import { convertStripeInvoiceToWoocommerceOrder, createWoocommerceOrder } from "@/app/api/thirdeye/woo";
-
-// import { InvoiceHandler } from "@/utils/server/webhooks/invoices";
-
-// import emailTemplateSender from "@/utils/email/templates/templateSender";
-// This is your Stripe CLI webhook secret for testing your endpoint locally.
+import { orderStatusType, WooCreateOrderModel } from "@/types/typings";
+import {
+  convertStripeInvoiceToWoocommerceOrder,
+  createWoocommerceOrder,
+} from "@/app/api/thirdeye/woo";
 
 export const config = { api: { bodyParser: false } };
 
@@ -27,10 +25,10 @@ export default async function handler(
   let status = 200;
   let message = "message not set";
   let data: any = {};
-  console.log(envConfig.STRIPE_INVOICE_WEBHOOK);
+
   try {
     adminInit();
-    
+
     event = stripe.webhooks.constructEvent(
       rawBody,
       sig,
@@ -41,10 +39,14 @@ export default async function handler(
         const invoiceFailed = event.data.object as Stripe.Invoice;
         // send email to admin that payment failed
 
-        const customer = await stripe.customers.retrieve(invoiceFailed.customer as string) as Stripe.Customer;
+        const customer = (await stripe.customers.retrieve(
+          invoiceFailed.customer as string
+        )) as Stripe.Customer;
 
         new emailSender().send({
-          bodyMessage: `${customer.name??''} Payment failed for invoice ${invoiceFailed.id}`,
+          bodyMessage: `${customer.name ?? ""} Payment failed for invoice ${
+            invoiceFailed.id
+          }`,
           htmlContent: `<p>Hi Bruce, </p><p> This is an automated message to let you know that a payment has failed. for customer ${customer.name}, </p><p> Please check the admin portal for more details.</p>`,
           replayTo: "no-replay@sacbe-ceremonial-cacao.com",
           sender: "no-replay@sacbe-ceremonial-cacao.com",
@@ -52,19 +54,26 @@ export default async function handler(
           to: "brucemckayone@gmail.com",
         });
 
-          
         console.log(`handled event type ${event.type}`);
 
         break;
-      
+
       case "invoice.paid":
         const invoicePaid = event.data.object as Stripe.Invoice;
-        ({ data, message } = await handleInvoicePaid(invoicePaid, data, message));
-        
-        const order = await convertStripeInvoiceToWoocommerceOrder(invoicePaid)
-        console.log(order); 
-        const response = createWoocommerceOrder(order);
-        console.log(response);
+        ({ data, message } = await handleInvoicePaid(
+          invoicePaid,
+          data,
+          message
+        ));
+
+        const order = await convertStripeInvoiceToWoocommerceOrder(invoicePaid);
+
+        // const order = await convertStripeInvoiceToWoocommerceOrder(invoicePaid)
+
+        const response = await createWoocommerceOrder(order!);
+
+        // const response = await createWoocommerceOrder(order);
+
         //  new emailSender().send({
         //   bodyMessage: `Invoice Has Been Paid: ${data.customer_name} ${data.customer_email} `,
         //   htmlContent: `An Invoice has been paided ${invoicePaid.subscription? "for a subscription": " for a one time purchase"}`,
@@ -73,12 +82,15 @@ export default async function handler(
         //   subject: `Payment failed for invoice email `,
         //   to: "brucemckayone@gmail.com",
         // });
+
+        message =
+          "invoice handled both woocommerce and sacbe order created and email sent";
         break;
       default:
         console.log(`Unhandled event type ${event.type}`);
     }
   } catch (err) {
-    console.log(`webhook error failed: ${err}`);
+    console.error(`webhook error failed: ${err}`);
     const error = err as any;
     return res.status(401).send(`web hook error: ${error.message}`);
   }
@@ -88,9 +100,11 @@ export default async function handler(
     .json({ status: status, message: message, data: data });
 }
 
-
-
-async function handleInvoicePaid(invoice: Stripe.Invoice, data: {}, message: string) {
+async function handleInvoicePaid(
+  invoice: Stripe.Invoice,
+  data: {},
+  message: string
+) {
   const productIds = invoice.lines.data.map(
     (line) => line.price!.product as string
   );
@@ -111,13 +125,19 @@ async function handleInvoicePaid(invoice: Stripe.Invoice, data: {}, message: str
 
   let productList = [];
   for (let i = 0; i < products.data.length; i++) {
+    const name = products.data[i].name;
+    const lineItem = invoice.lines.data.filter((e) => {
+      return e.description?.toLowerCase().includes(name.toLowerCase());
+    })[0];
     const product = {
       id: products.data[i].id ?? "no id",
       name: products.data[i].name ?? "no nake",
-      image: products.data[i].images[0] ?? "https://www.sacbe-ceremonial-cacao.com/logo.svg",
-      quantity: invoice.lines.data[i].quantity ?? "non quantity",
-      cost: invoice.lines.data[i].amount ?? 0,
-      subscriptionId: invoice.lines.data[i].subscription ?? "no sub id",
+      image:
+        products.data[i].images[0] ??
+        "https://www.sacbe-ceremonial-cacao.com/logo.svg",
+      quantity: lineItem.quantity ?? "non quantity",
+      cost: lineItem.amount ?? 0,
+      subscriptionId: lineItem.subscription ?? "no sub id",
     };
     productList.push(product);
   }
@@ -143,19 +163,19 @@ async function handleInvoicePaid(invoice: Stripe.Invoice, data: {}, message: str
   };
   const db = firestore();
 
-  const firebaseResponse = await db
-    .collection("orders")
-    .doc(invoice.id)
-    .set(data);
-  console.log(firebaseResponse);
+  db.collection("orders").doc(invoice.id).set(data);
+
   message =
     "Invoice payment_succeeded handled: email,notification and data saved";
 
   messaging().send({
     topic: "all",
     notification: {
-      body: `Fuck Yes! Another sale worth £${productList.reduce((total, a) => a.cost + total, 0) / 100??"something"} Smackaroonies`,
-      imageUrl: productList[0]?.image ??
+      body: `Fuck Yes! Another sale worth £${
+        productList.reduce((total, a) => a.cost + total, 0) / 100 ?? "something"
+      } Smackaroonies`,
+      imageUrl:
+        productList[0]?.image ??
         "https://www.sacbe-ceremonial-cacao.com/logo.svg",
       title: `New Order: ${invoice.customer_name}`,
     },

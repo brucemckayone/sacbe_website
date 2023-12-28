@@ -40,14 +40,22 @@ export const metadata: Metadata = {
 
 const SacbeCacaoWholesale = async () => {
   const WholesalePricingTable = dynamic(() =>
-    import("./PricingTable").then((res) => res.WholesalePricingTable)
+    import("../../../components/customer/wholesale/PricingTable").then(
+      (res) => res.WholesalePricingTable
+    )
   );
-  const WhyWorkWithUs = (await import("./WhyWorkWithUs")).WhyWorkWithUs;
+  const WhyWorkWithUs = (
+    await import("../../../components/customer/wholesale/WhyWorkWithUs")
+  ).WhyWorkWithUs;
   const BottomWholeSaleForm = dynamic(() =>
-    import("./BottomWholeSaleForm").then((res) => res.BottomWholeSaleForm)
+    import("../../../components/customer/wholesale/BottomWholeSaleForm").then(
+      (res) => res.BottomWholeSaleForm
+    )
   );
   const WholesaleHeader = dynamic(() =>
-    import("./WholesaleHeader").then((res) => res.WholesaleHeader)
+    import("../../../components/customer/wholesale/WholesaleHeader").then(
+      (res) => res.WholesaleHeader
+    )
   );
   // const AboutPackaging = dynamic(() =>
   //   import("./AboutPackaging").then((res) => res.AboutPackaging)

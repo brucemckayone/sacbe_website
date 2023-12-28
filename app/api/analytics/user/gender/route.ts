@@ -1,5 +1,5 @@
 import { r } from '@/types/affiliatePaymentLinkType';
-import adminInit from '@/utils/firebase/admin_init'
+import adminInit from '@/lib/firebase/admin_init'
 import { firestore } from 'firebase-admin'
 import { NextRequest, NextResponse } from 'next/server'
 import { saveUserAwnsersForEmailSignup } from '../../multi/route';

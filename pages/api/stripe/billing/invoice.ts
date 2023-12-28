@@ -1,10 +1,10 @@
-import stripe from "../../../../lib/stripe/stripe";
+import stripe from "../../../../lib/stripe/init/stripe";
 import Stripe from "stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
-import adminInit from "@/utils/firebase/admin_init";
-import emailSender from "@/utils/email/nodemailer";
-import wholesale_invoice_email from "@/utils/email/templates/wholesale/invoice";
+import adminInit from "@/lib/firebase/admin_init";
+import emailSender from "@/lib/email/nodemailer";
+import wholesale_invoice_email from "@/lib/email/templates/wholesale/invoice";
 import { userType } from "@/types/typings";
 
 export default async function handler(

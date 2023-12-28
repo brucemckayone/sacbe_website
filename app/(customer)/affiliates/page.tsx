@@ -1,7 +1,7 @@
 import React from "react";
 import NavMenuBottom from "@/components/menu/NavMenuBottom";
 import { Metadata } from "next";
-import { AffiliateHeader } from "@/components/affiliate/AffiliateHeader";
+import { AffiliateHeader } from "@/components/customer/affiliate/AffiliateHeader";
 import dynamic from "next/dynamic";
 
 const description =
@@ -52,7 +52,9 @@ export const metadata: Metadata = {
 
 export default async function AffiliatePage() {
   const AffiliatePageBody = dynamic(() =>
-    import("./AffiliatePageBody").then((res) => res.AffiliatePageBody)
+    import("../../../components/customer/affiliate/AffiliatePageBody").then(
+      (res) => res.AffiliatePageBody
+    )
   );
 
   return (

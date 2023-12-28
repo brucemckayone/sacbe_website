@@ -4,31 +4,24 @@ import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
 import { BlogPostType } from "@/types/blogPost";
 import dynamic from "next/dynamic";
-import { TestMarkdown } from "./MarkDown";
-import { NewsletterSignup } from "../../recipes/[slug]/NewsletterSignup";
+import { TestMarkdown } from "../../../../components/customer/posts/MarkDown";
+import { NewsletterSignup } from "../../../../components/customer/recipes/NewsletterSignup";
 import { notFound } from "next/navigation";
-import PurchaseOptions from "../../PurchaseOptions";
-
-async function getPost(slug: string) {
-  const request = await fetch(`${homeUrl}/api/blog/posts/${slug}`, {
-    method: "GET",
-    next: {
-      tags: [slug],
-    },
-    cache: "no-cache",
-  });
-  if (request.status == 404) return {};
-  return await request.json();
-}
+import PurchaseOptions from "../../../../components/customer/shared/PurchaseOptions";
+import api from "@/lib/apiSchema/apiSchema";
 
 export async function generateMetadata({
   params,
-  searchParams,
 }: {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }): Promise<Metadata> {
-  const { post, relatedPosts } = await getPost(params.slug as string);
+  const data = (await api.posts.get({
+    dynamicEndpoint: `/${params.slug}`,
+    data: { withRelated: false },
+  }))!;
+
+  const post = data?.post;
 
   if (!post) return {};
 
@@ -70,21 +63,34 @@ export async function generateMetadata({
 
 export default async function Page({
   params,
-  searchParams,
 }: {
   params: { slug: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
   const BlogPostSuggestionCard = dynamic(() =>
-    import("./BlogPostSuggestionCard").then((mod) => mod.BlogPostSuggestionCard)
+    import("../../../../components/customer/posts/BlogPostSuggestionCard").then(
+      (mod) => mod.BlogPostSuggestionCard
+    )
   );
 
   const PostMetaData = dynamic(() =>
-    import("./PostMetaData").then((mod) => mod.PostMetaData)
+    import("../../../../components/customer/posts/PostMetaData").then(
+      (mod) => mod.PostMetaData
+    )
   );
 
-  const { post, relatedPosts } = await getPost(params.slug as string);
-  console.log(relatedPosts);
+  console.log(params.slug);
+
+  const data = (await api.posts.get({
+    dynamicEndpoint: `/${params.slug}`,
+    data: { withRelated: true },
+  }))!;
+
+  // const post = data?.post;
+  const relatedPosts = data?.relatedPost;
+  const post = data?.post;
+  console.log(data);
+
   if (!post) return notFound();
 
   return (

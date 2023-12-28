@@ -1,7 +1,7 @@
-import stripe from "@/lib/stripe/stripe";
-import { envConfig } from "@/lib/webhooks/envConfig";
-import { LineItem, WooCreateOrderModel } from "@/types/typings";
-import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import stripe from "@/lib/stripe/init/stripe";
+import { envConfig } from "@/lib/env/envConfig";
+import { LineItem, ShippingLine, WooCreateOrderModel } from "@/types/typings";
+import { fetchPostJSON } from "@/utils/http/fetchPostJson";
 import Stripe from "stripe";
 
 export async function createWoocommerceOrder(order: WooCreateOrderModel) {
@@ -12,7 +12,8 @@ export async function convertStripeInvoiceToWoocommerceOrder(invoice: Stripe.Inv
     const productIds = invoice.lines.data.map((line) => line.price!.product as string);
     const products = await stripe.products.list({ids: productIds, limit: 100});
     
-    if (products.has_more) {
+    if (products.has_more)
+    {
         const moreProducts = await stripe.products.list({
         ids: productIds,
         limit: 100,
@@ -23,16 +24,28 @@ export async function convertStripeInvoiceToWoocommerceOrder(invoice: Stripe.Inv
 
     let productList = [];
     for (let i = 0; i < products.data.length; i++) {
-        const product = {
-        id: products.data[i].id ?? "no id",
-        name: products.data[i].name ?? "no nake",
-        image: products.data[i].images[0] ?? "https://www.sacbe-ceremonial-cacao.com/logo.svg",
-        quantity: invoice.lines.data[i].quantity ?? "non quantity",
-        cost: invoice.lines.data[i].amount ?? 0,
-        subscriptionId: invoice.lines.data[i].subscription ?? "no sub id",
-        };
-        productList.push(product);
-    }
+    const name = products.data[i].name;
+    const lineItem = invoice.lines.data.filter((e) => {
+      return e.description?.toLowerCase().includes(name.toLowerCase());
+    })[0];
+    const product = {
+      id: products.data[i].id ?? "no id",
+      name: products.data[i].name ?? "no nake",
+      image: products.data[i].images[0] ?? "https://www.sacbe-ceremonial-cacao.com/logo.svg",
+      quantity: lineItem.quantity ?? "non quantity",
+      cost:lineItem.amount ?? 0,
+      subscriptionId: lineItem.subscription ?? "no sub id",
+    };
+    productList.push(product);
+  }
+
+    const sacbeItems = productList.filter((p) => {
+        return p.name.toLocaleLowerCase().includes("sacbe")
+    });
+    
+    let shippingItem = invoice.lines.data.filter((e) => { 
+        return e.description?.toLowerCase().includes("shipping")
+    })
 
     const order: WooCreateOrderModel = {
         billing: {
@@ -40,7 +53,7 @@ export async function convertStripeInvoiceToWoocommerceOrder(invoice: Stripe.Inv
             address_2: invoice.customer_address?.line2 ?? '',
             city: invoice.customer_address?.city ?? '',
             country: invoice.customer_address?.country ?? '',
-            first_name: invoice.customer_name?? " ",
+            first_name: invoice.customer_name ?? " ",
             last_name: '',
             postcode: invoice.customer_address?.postal_code ?? "",
             state: invoice.customer_address?.state ?? '',
@@ -57,22 +70,29 @@ export async function convertStripeInvoiceToWoocommerceOrder(invoice: Stripe.Inv
             state: invoice.customer_address?.state ?? '',
             email: invoice.customer_email??'',
         },
-        line_items: productList.map((p) => { 
+        line_items: sacbeItems.map((p) => {
                 return {
-                    product_id: 5188,
+                    product_id: p.subscriptionId != "no sub id" ?  5331 : 5188,
                     quantity: p.quantity,
                 } as LineItem;
             }),
         payment_method: 'Sacbe Stripe Integration - Card',
         payment_method_title: "Sacbe Stripe Integration",
         set_paid: true,
-        shipping_lines: [
+        shipping_lines: shippingItem.length==0 ? [
             {
                 method_id: invoice.shipping_cost?.shipping_rate as string ?? 'see order for shipping',
                 method_title: (await stripe.shippingRates.retrieve(invoice.shipping_cost?.shipping_rate as string)).display_name ?? 'Nameless shipping rate ',
                 total: (invoice.amount_shipping / 100).toFixed(2),
             }
-        ]
+        ] as ShippingLine[] : [
+            {
+                method_id: shippingItem[0].description,
+                method_title: shippingItem[0].description,
+                total: ( shippingItem[0].amount/100).toFixed(2),
+            } 
+        ]as ShippingLine[]
     }
+
     return order;
 }

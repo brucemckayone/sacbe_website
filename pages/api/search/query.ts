@@ -1,9 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { BlogPostsType } from "@/types/blogposts";
-import adminInit from "@/utils/firebase/admin_init";
+import adminInit from "@/lib/firebase/admin_init";
 import { firestore } from "firebase-admin";
 import type { NextApiRequest, NextApiResponse } from "next";
-import Algolia from "@/utils/algolia/config";
+import Algolia from "@/lib/algolia/config";
 import { AlgoliaBlogSearchType } from "@/types/algoliaBlogSearchType";
 const algolia = new Algolia();
 export default async function handler(
@@ -26,20 +26,16 @@ export default async function handler(
 
       switch (filter) {
         case "All":
-          console.log("all");
           return res.status(200).json(await queryAll(query));
         case "Article":
-          console.log("articles");
           return res
             .status(200)
             .json(await queryArticles(query, hasCount ? count! : 5));
         case "Recipes":
-          console.log("recipes");
           return res
             .status(200)
             .json(await queryRecipes(query, hasCount ? count! : 5));
         case "Pages":
-          console.log("pages");
           return res
             .status(200)
             .json(await queryPages(query, hasCount ? count! : 5));

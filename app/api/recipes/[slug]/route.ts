@@ -1,47 +1,20 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { firestore } from 'firebase-admin';
-import adminInit from '@/utils/firebase/admin_init';
-import { DocumentReference } from 'firebase/firestore';
+import { NextRequest, NextResponse } from "next/server";
+
+import adminInit from "@/lib/firebase/admin_init";
+
+import RecipeApiHelper from "./RecipeApiHandler";
 
 export async function GET(request: NextRequest) {
-  console.log(request.nextUrl.pathname.split('/').pop()!);
-  
-    try {
-      const snap = await getRecipe(request.nextUrl.pathname.split('/').pop()!);
-      const recipe = snap.data() as any;
-      if (!snap.exists) {
-        return NextResponse.json({ recipe: {}, relatedRecipes: [], message:'recipe does not exist' });
-      }
-      
-      console.log(recipe);
-      
-      return NextResponse.json({ recipe: recipe, relatedRecipes: recipe.relatedRecipes? await getRelatedRecipes(recipe.relatedRecipes):[] });
-    } catch (e) {
-        console.error(e);
-        return NextResponse.error();
-    }
-}
+  const helper = new RecipeApiHelper(adminInit().firestore());
+  const params = new URL(request.url).searchParams;
 
-async function getRecipe(slug: string) {
-  adminInit();
-  const db = firestore();  
-  
-  return  await db
-    .collection("recipes")
-    .doc(slug)
-    .get();
-}
+  const withRelated =
+    params.has("withRelated") || params.get("withRelated") == "true";
 
-async function getRelatedRecipes(relatedRecipes: DocumentReference[]) {
-  adminInit();
-  const db = firestore();
-  const snapshot = await db
-    .collection("recipes")
-    .where(
-      firestore.FieldPath.documentId(),
-      "in",
-      relatedRecipes.map((e) => e.id)
+  return NextResponse.json(
+    await helper.getBySlug(
+      request.nextUrl.pathname.split("/").pop()!,
+      withRelated
     )
-    .get();
-  return snapshot.docs.map((e) => e.data());
+  );
 }

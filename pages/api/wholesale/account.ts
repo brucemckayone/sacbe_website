@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore } from "firebase-admin";
-import adminInit from "@/utils/firebase/admin_init";
+import adminInit from "@/lib/firebase/admin_init";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse

@@ -1,5 +1,5 @@
 const { transform } = require("typescript");
-
+const colors = require("tailwindcss/colors");
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   // darkMode: "class",
@@ -10,6 +10,7 @@ module.exports = {
   ],
   theme: {
     colors: {
+      ...colors,
       sacbeBrandColor: "#FF932F",
       recommendedGreen: "#D2FEB0",
       darkGreen: "#21b844",
@@ -44,15 +45,15 @@ module.exports = {
       onSurfaceVarient: "#51443b",
       //outline
       outline: "#847469",
+
+      // standards
+      black: "#000000",
     },
     fontFamily: {
       display: "var(--display-font)",
       body: "var(--body-font)",
     },
     extend: {
-      backgroundImage: {
-        "hero-sacbe": "/src/public/sacbe_image.jpg",
-      },
       keyframes: {
         slide_in_left: {
           "0%": {
@@ -163,6 +164,7 @@ module.exports = {
       animation: {
         slide_in_left_fade: "slide_in_left 1s ease-in-out",
         slide_in_left_blur: " slide_in_left_blur 500ms ease-in-out",
+        slide_in_left_blur_delay: " slide_in_left 1000ms ease-in-out",
         slide_in_right_fade: "slide_in_right_fade 1s ease-in-out",
         slide_out_left_fade: "slide_in_left 1s ease-in-out reverse",
         zoom_in_fade: "zoom_in_fade 400ms ease-in-out",

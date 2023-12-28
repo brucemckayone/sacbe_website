@@ -1,20 +1,20 @@
-import NextAuth, { AuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import EmailProvider from "next-auth/providers/email";
-import AppleProvider from "next-auth/providers/apple";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { envConfig } from "@/lib/webhooks/envConfig";
+import { envConfig } from "@/lib/env/envConfig";
 import {
   firestore,
   firestore as firestoreAdaptorVersion,
 } from "@/lib/firebase/admin";
-import { sendSignInLinkToEmail } from "firebase/auth";
-import { auth } from "@/lib/firebase/firebase";
+
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
+
+import CollectionHelper from "@/utils/firebase/collectionHelper";
+import adminInit from "@/lib/firebase/admin_init";
+import { getOrCreateCustomer } from "../stripe/client/create_customer/_create_customer";
 import { FirestoreAdapter } from "@next-auth/firebase-adapter";
-import getOrSaveCustomerIdFromFirebase from "@/lib/stripe/getOrSaveStripeCustomerIdFromFirebase";
+import NextAuth, { AuthOptions } from "next-auth";
+import { AdapterUser } from "next-auth/adapters";
 
-import homeUrl from "@/lib/constants/urls";
-
+const fbAdaptor = FirestoreAdapter(firestoreAdaptorVersion);
 const authOptions: AuthOptions = {
   secret: envConfig.NEXTAUTH_SECRET,
   session: {
@@ -65,11 +65,10 @@ const authOptions: AuthOptions = {
             .collection("users")
             .where("email", "==", email)
             .get();
-          console.log(`number of users = ${userSnap.docs.length != 0}`);
 
           if (userSnap.docs.length == 1) {
             const user = userSnap.docs[0].data();
-            console.log(user);
+
             return { email: user.email, id: user.uuid };
           } else if (userSnap.docs.length == 0) {
             const newUserDoc = await firestore
@@ -93,31 +92,23 @@ const authOptions: AuthOptions = {
     GoogleProvider({
       clientId: envConfig.GOOGLE_OAUTH_CLIENT_ID,
       clientSecret: envConfig.GOOGLE_CLIENT_SECRET,
+      httpOptions: {
+        timeout: 40000,
+      },
     }),
-    AppleProvider({
-      clientId: envConfig.APPLE_CLIENT_ID,
-      clientSecret: envConfig.APPLE_CLIENT_SECRET,
-    }),
+    // AppleProvider({
+    //   clientId: envConfig.APPLE_CLIENT_ID,
+    //   clientSecret: envConfig.APPLE_CLIENT_SECRET,
+    // }),
   ],
 
   theme: {
     brandColor: "#ff932f",
-
     colorScheme: "light",
     logo: "/sacbe_logo_icon.png",
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      // console.log("SIGN IN CALLBACK");
-      // console.log("profile is here");
-      // console.log(profile);
-      // console.log("account is here");
-      // console.log(account);
-      // console.log("cred is here");
-      // console.log(credentials);
-      
-      // console.log("USER ID IS HERE" + user.id);
-      
       return true;
     },
     async session({ session }) {
@@ -128,20 +119,56 @@ const authOptions: AuthOptions = {
       return token;
     },
   },
-  adapter: FirestoreAdapter(firestoreAdaptorVersion),
+  adapter: {
+    ...fbAdaptor,
+    createUser: async (user) => {
+      const createdUser = await fbAdaptor.createUser!(user);
+      prePopulateUserData(createdUser);
+      return createdUser;
+    },
+  },
   debug: false,
 };
 export { authOptions };
 
 export default NextAuth(authOptions);
 
-function getSearchParams(url: string): Map<string, string> {
-  const urlObj = new URL(url);
-  const paramsMap = new Map<string, string>();
-
-  urlObj.searchParams.forEach((value, key) => {
-    paramsMap.set(key, value);
+async function prePopulateUserData(user: AdapterUser) {
+  const helper = new CollectionHelper(
+    adminInit().firestore().collection("users")
+  );
+  const customer = await getOrCreateCustomer({
+    email: user.email,
   });
 
-  return paramsMap;
+  await helper.findAndUpdateDocByKeyValue(
+    { key: "email", value: user.email },
+    { customerId: customer?.id, uuid: user.id }
+  );
+  // }
+  // function CredentialsProvider(arg0: {
+  //   name: string;
+  //   credentials: { email: { label: string; type: string; placeholder: string } };
+  //   authorize(
+  //     credentials: any,
+  //     req: any
+  //   ): Promise<{ email: any; id: any } | null>;
+  // }): import("next-auth/providers").Provider {
+  //   throw new Error("Function not implemented.");
+  // }
+
+  // function GoogleProvider(arg0: {
+  //   clientId: string;
+  //   clientSecret: string;
+  //   httpOptions: { timeout: number };
+  // }): import("next-auth/providers").Provider {
+  //   throw new Error("Function not implemented.");
+  // }
+
+  // function AppleProvider(arg0: {
+  //   clientId: string;
+  //   clientSecret: string;
+  // }): import("next-auth/providers").Provider {
+  //   throw new Error("Function not implemented.");
+  // }
 }

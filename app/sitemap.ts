@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import homeUrl from "@/lib/constants/urls";
 import { firestore } from "firebase-admin";
-import adminInit from "@/utils/firebase/admin_init";
+import adminInit from "@/lib/firebase/admin_init";
 
 async function getAllBlogPosts() {
   adminInit();

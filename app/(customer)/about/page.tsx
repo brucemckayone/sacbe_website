@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { AboutClouds } from "../wholesale/AboutClouds";
+import { AboutClouds } from "../../../components/customer/wholesale/AboutClouds";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
@@ -49,10 +49,16 @@ export interface sectionProps {
 
 async function About() {
   const TextSection = dynamic(() =>
-    import("./TextSection").then((res) => res.default)
+    import("../../../components/customer/about/TextSection").then(
+      (res) => res.default
+    )
   );
 
-  const Section = dynamic(() => import("./Section").then((res) => res.Section));
+  const Section = dynamic(() =>
+    import("../../../components/customer/about/Section").then(
+      (res) => res.Section
+    )
+  );
 
   return (
     <div>

@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const email = req.body.email;
-  console.log(`calling get get user by id: with email: ${email}`);
+
   if (email) {
     //get snapshot of users with emails
     const db = firestore();
@@ -14,9 +14,6 @@ export default async function handler(
       .collection("users")
       .where("email", "==", email)
       .get();
-    console.log(
-      `returned ${snapshots.docs.length} users with email: from firestore ${email}`
-    );
 
     const { customerId } = snapshots.docs[0].data();
     if (customerId) {
@@ -32,7 +29,6 @@ export default async function handler(
         });
         // prime updates with customer id
         snapshots.forEach(async (doc) => {
-          console.log("updating all acounts with email");
           updates.push(
             doc.ref.set({
               ...doc.data(),

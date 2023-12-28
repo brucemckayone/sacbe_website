@@ -1,4 +1,4 @@
-import stripe from "@/lib/stripe/stripe";
+import stripe from "@/lib/stripe/init/stripe";
 import Stripe from "stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -13,7 +13,6 @@ export default async function handler(
       const status = req.query.status;
       const limit = req.query.limit as string;
       const starting_after = req.query.starting_after;
-      console.log(starting_after);
 
       const subscriptions = await stripe.subscriptions.list({
         expand: ["data.customer", "data.latest_invoice"],
@@ -39,8 +38,6 @@ export default async function handler(
         };
       });
 
-      console.log(productImages);
-
       const data = [];
       for (let i = 0; i < subscriptions.data.length; i++) {
         const subData = subscriptions.data[i];
@@ -55,15 +52,7 @@ export default async function handler(
             id: latestInvoice.id,
             total: latestInvoice.amount_paid,
             products: latestInvoice.lines.data.map((line) => {
-              //   const product = await stripe.products.retrieve(
-              //     line.price?.product as string
-              //   );
-              //   console.log(product.images[0]);
               const product = productImages.find((product) => {
-                console.log(product.id);
-                console.log(line.price?.product);
-                console.log(product.id == line.price?.product);
-
                 return product.id == line.price?.product;
               });
               return {
@@ -97,9 +86,6 @@ export default async function handler(
     }
     case "PATCH": {
       const { subscriptionId, updateParams } = req.body;
-      console.log(subscriptionId);
-      console.log(updateParams);
-
       const response = await stripe.subscriptions.update(
         subscriptionId,
         updateParams
@@ -109,7 +95,7 @@ export default async function handler(
     case "DELETE": {
       const id = req.query.subscriptionId;
 
-      const response = await stripe.subscriptions.del(id as string);
+      const response = await stripe.subscriptions.cancel(id as string);
       return res.status(200).json(response);
     }
   }

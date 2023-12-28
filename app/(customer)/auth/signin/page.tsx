@@ -1,6 +1,6 @@
 import { getProviders } from "next-auth/react";
-import MagicLinkForm from "@/components/form/MagicLinkForm";
-import ProviderSigninButton from "@/components/buttons/ProviderSigninButton";
+import MagicLinkForm from "@/components/shared/form/MagicLinkForm";
+import ProviderSigninButton from "@/components/shared/buttons/ProviderSigninButton";
 import SlideInUp from "@/components/animations/slide_in_up";
 
 async function SignIn() {
@@ -13,7 +13,7 @@ async function SignIn() {
             <div className="text-center border-b-2 pb-6 mb-3">
               <MagicLinkForm />
             </div>
-            <div key={"GOogle"}>
+            <div key={"Google"}>
               <ProviderSigninButton
                 id={providers!.google.id}
                 name={providers!.google.name}

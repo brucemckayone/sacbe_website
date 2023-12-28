@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { QuizBody, QuizBodyProps } from "./QuizBody";
 import quizPods from "@/public/quiz_cacao_pods.png";
-import stripe from "@/lib/stripe/stripe";
+import stripe from "@/lib/stripe/init/stripe";
 
 function getQuiz() {
   return new Promise((resolve, reject) => {
@@ -183,8 +183,6 @@ async function Quiz({
   const session = await stripe.checkout.sessions.retrieve(
     searchParams!.session_id as string
   );
-
-  console.log(session);
 
   return (
     <main className="w-screen h-screen flex flex-col md:flex-row bg-sacbeBrandColor">

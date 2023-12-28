@@ -1,6 +1,6 @@
 "use client";
 
-import PrimaryButton from "@/components/buttons/primaryButton";
+import PrimaryButton from "@/components/shared/buttons/primaryButton";
 import { analytics } from "@/lib/firebase/firebase";
 import { logEvent } from "firebase/analytics";
 import { useSearchParams } from "next/navigation";

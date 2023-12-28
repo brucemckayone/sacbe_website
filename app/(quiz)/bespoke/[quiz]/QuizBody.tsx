@@ -1,6 +1,7 @@
 "use client";
+import api from "@/lib/apiSchema/apiSchema";
 import { analytics } from "@/lib/firebase/firebase";
-import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import { fetchPostJSON } from "@/utils/http/fetchPostJson";
 import { logEvent } from "firebase/analytics";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
@@ -129,7 +130,6 @@ function SingleSelect(props: SingleSelectProps) {
         {props.awnsers.map((awnser) => (
           <div
             onClick={() => {
-              console.log("called");
               setSelected(awnser);
             }}
             className={`flex flex-row justify-betwee ${
@@ -141,7 +141,6 @@ function SingleSelect(props: SingleSelectProps) {
           >
             <p
               onClick={() => {
-                console.log("called");
                 setSelected(awnser);
               }}
             >
@@ -302,9 +301,8 @@ function Completion(props: {
   address?: any;
 }) {
   const [formEmail, setEmail] = useState(props.email ?? "");
-
-  const [selected, setSelected] = useState([] as string[]);
   const [loading, setLoading] = useState(false);
+
   return (
     <div className="animate-slide_in_right_fade">
       <h5>Where should we send your gift...🎁</h5>
@@ -332,24 +330,27 @@ function Completion(props: {
         className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
         onClick={async () => {
           setLoading(true);
-          const response = await fetchPostJSON(`/api/mailing/signup`, {
-            name: props.name,
-            email: props.email,
-            address: props.address,
-            phone: props.phone,
-          });
-          setLoading(false);
-          if (response.success == true)
-            toast.success(
-              response.message ?? "Thanks for signing up for our mailing list"
-            );
-          else {
-            const json = JSON.parse(response.message.response.text);
 
-            toast.error(
-              `${json["title"] ?? ""} There was some error signing you up`
+          const response = await api.mailing.signUp.post({
+            data: {
+              name: props.name ?? "",
+              email: props.email!,
+              address: props.address,
+              phoneNumber: props.phone ?? "",
+              tags: [""],
+            },
+          });
+
+          setLoading(false);
+          if (response?.ok) {
+            toast.success(
+              response?.message ?? "Thanks for signing up for our mailing list"
             );
             window.location.href = "/";
+          } else {
+            toast.error(
+              `${response?.message} There was some error signing you up`
+            );
           }
         }}
       >

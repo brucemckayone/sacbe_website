@@ -3,81 +3,81 @@ import Image from "next/image";
 import { Metadata } from "next";
 import homeUrl from "@/lib/constants/urls";
 import dynamic from "next/dynamic";
-import { NewsletterSignup } from "./NewsletterSignup";
+import { NewsletterSignup } from "../../../../components/customer/recipes/NewsletterSignup";
 import { notFound } from "next/navigation";
-import { FeelsProgressBar } from "./FeelsProgressBar";
+import { FeelsProgressBar } from "../../../../components/customer/recipes/FeelsProgressBar";
+import api from "@/lib/apiSchema/apiSchema";
 
 export async function generateMetadata({
   params,
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { recipe, relatedRecipes } = await getRecipeData(params.slug!);
+  const data = (await api.recipes.get({
+    dynamicEndpoint: `/${params.slug!}`,
+    data: { withRelated: false },
+  }))!;
 
-  if (recipe) return {};
+  if (!data?.recipe) return {};
+
   return {
-    title: recipe.title.replaceAll("-", " "),
-    description: recipe.excerpt,
-    keywords: recipe.tags,
+    title: data.recipe.title.replaceAll("-", " "),
+    description: data.recipe.excerpt,
+    keywords: data.recipe.tags,
     publisher: "Sacbe Cacao",
     authors: {
-      name: recipe.publisher.name,
+      name: data.recipe.publisher.name,
     },
-    image: recipe.main_image,
+    image: data.recipe.main_image,
     alternates: {
-      canonical: `${homeUrl}/recipes/${recipe.title.replaceAll(" ", "-")}`,
+      canonical: `${homeUrl}/recipes/${data.recipe.title.replaceAll(" ", "-")}`,
     },
     creator: "Sacbe Cacao",
     twitter: {
       card: "summary_large_image",
-      description: recipe.excerpt,
-      title: recipe.title.replaceAll("-", " "),
-      images: recipe.main_image,
+      description: data.recipe.excerpt,
+      title: data.recipe.title.replaceAll("-", " "),
+      images: data.recipe.main_image,
     },
     openGraph: {
-      title: recipe.title.replaceAll("-", " "),
-      description: recipe.excerpt,
-      url: `${homeUrl}/recipes/${recipe.title.replaceAll(" ", "-")}`,
+      title: data.recipe.title.replaceAll("-", " "),
+      description: data.recipe.excerpt,
+      url: `${homeUrl}/recipes/${data.recipe.title.replaceAll(" ", "-")}`,
       type: "article",
-      images: recipe.main_image,
+      images: data.recipe.main_image,
     },
   } as Metadata;
 }
 
-async function getRecipeData(slug: string) {
-  console.log(slug);
-
-  const response = await fetch(`${homeUrl}/api/recipes/${slug}`, {
-    method: "GET",
-    next: {
-      tags: [slug], ///TODO: add revalidated webhook to call backs in sacbe admin
-    },
-  });
-
-  return (await response.json()) as {
-    recipe: any;
-    relatedRecipes: any[];
-  };
-}
-
-async function RercipePage({
+async function RecipePage({
   params,
 }: {
   params: { id: string; slug: string };
 }) {
-  const { recipe, relatedRecipes } = await getRecipeData(params.slug!);
+  const data = await api.recipes.get({
+    dynamicEndpoint: `/${params.slug!}`,
+    data: { withRelated: true },
+  });
 
-  if (!recipe?.title) return notFound();
+  if (!data) return notFound();
+
+  const { recipe, relatedRecipes } = data;
 
   const MarkDown = dynamic(() =>
-    import("../../posts/[slug]/MarkDown.1").then((mod) => mod.MarkDown)
+    import("../../../../components/customer/posts/MarkDown.1").then(
+      (mod) => mod.MarkDown
+    )
   );
   const PostMetaData = dynamic(() =>
-    import("../../posts/[slug]/PostMetaData").then((mod) => mod.PostMetaData)
+    import("../../../../components/customer/posts/PostMetaData").then(
+      (mod) => mod.PostMetaData
+    )
   );
 
   const RecipeCard = dynamic(() =>
-    import("./RecipeCard.1").then((mod) => mod.RecipeCard)
+    import("../../../../components/customer/recipes/RecipeCard.1").then(
+      (mod) => mod.RecipeCard
+    )
   );
 
   return (
@@ -190,4 +190,4 @@ async function RercipePage({
   );
 }
 
-export default RercipePage;
+export default RecipePage;

@@ -6,16 +6,19 @@ import Link from "next/link";
 import { logEvent } from "firebase/analytics";
 import { analytics } from "@/lib/firebase/firebase";
 import ConfettiExplosion from "react-confetti-explosion";
+import { markFirstTimeBuyer } from "@/components/shared/buttons/GetOfferButton";
 
 function CheckoutComplete() {
   const searchParams = useSearchParams();
   const sessionId = searchParams!.get("session_id");
 
   useEffect(() => {
+    markFirstTimeBuyer();
     logEvent(analytics, "order_completed", {
       checkout_session: sessionId,
     });
   }, [sessionId]);
+
   return (
     <div className="w-full m-auto h-screen">
       <div className="w-11/12 md:w-6/12 m-auto">
@@ -63,7 +66,7 @@ function CheckoutComplete() {
               className="no-underline"
             >
               <div className="rounded-lg border hover:text-onPrimary hover:bg-onPrimaryContainer bg-sacbeBrandColor drop-shadow-md p-2 text-center w-11/12 duration-300 no-underline m-3">
-                <p>Start your Journey</p>
+                <p>START YOUR JOURNEY</p>
               </div>
             </Link>
           </div>

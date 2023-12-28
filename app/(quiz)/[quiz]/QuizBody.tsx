@@ -1,7 +1,10 @@
 "use client";
+import api from "@/lib/apiSchema/apiSchema";
+import homeUrl from "@/lib/constants/urls";
 import { analytics } from "@/lib/firebase/firebase";
-import { fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import { fetchPostJSON } from "@/utils/http/fetchPostJson";
 import { logEvent } from "firebase/analytics";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Stripe from "stripe";
@@ -133,7 +136,6 @@ function SingleSelect(props: SingleSelectProps) {
         {props.awnsers.map((awnser) => (
           <div
             onClick={() => {
-              console.log("called");
               setSelected(awnser);
             }}
             className={`flex flex-row justify-betwee ${
@@ -145,7 +147,6 @@ function SingleSelect(props: SingleSelectProps) {
           >
             <p
               onClick={() => {
-                console.log("called");
                 setSelected(awnser);
               }}
             >
@@ -185,7 +186,7 @@ export function MultiAwnserCard(props: {
     <div
       className={`flex flex-row justify-between animate-slide_in_right_fade ${
         !props.selected.includes(props.awnser)
-          ? "bg-transparent border-2 drop-shadow-lg"
+          ? "bg-transparent border-2 border-black drop-shadow-lg"
           : "bg-surface drop-shadow-md hover:bg-tertiaryContainer cursor-auto"
       } rounded-lg m-2 ${!props.compact ? "p-1" : "p-2"}`}
       onClick={() => {
@@ -309,7 +310,7 @@ function Completion(props: {
 }) {
   const [formEmail, setEmail] = useState(props.email ?? "");
   const [loading, setLoading] = useState(false);
-
+  const [hasSent, setHasSent] = useState(false);
   return (
     <div className="animate-slide_in_right_fade">
       <h5>Where should we send your gift...🎁</h5>
@@ -333,35 +334,50 @@ function Completion(props: {
         have to say. we LOVE IT when you reply to emails so please do even if it
         just to say hi!.
       </p>
-      <button
-        className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
-        onClick={async () => {
-          setLoading(true);
-          const response = await fetchPostJSON(`/api/mailing/signup`, {
-            name: props.name,
-            email: props.email,
-            address: props.address,
-            phone: props.phone,
-          });
+      {hasSent ? (
+        <button
+          onClick={() => {
+            window.location.href = homeUrl;
+          }}
+          className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
+        >
+          {"< Back To Home Page"}
+        </button>
+      ) : (
+        <button
+          className="bg-sacbeBrandColor border-2 drop-shadow-lg rounded-lg m-2 p-2 w-full"
+          onClick={async () => {
+            setLoading(true);
+            const response = await api.mailing.signUp.post({
+              data: {
+                phoneNumber: "",
+                tags: [""],
+                name: props.name ?? "",
+                email: props.email!,
+                address: props.address,
+              },
+            });
 
-          setLoading(false);
-          if (response.success == true) {
-            toast.success(
-              response.message ?? "Thanks for signing up for our mailing list"
-            );
+            setLoading(false);
+            if (response?.ok) {
+              toast.success(
+                response.message ?? "Thanks for signing up for our mailing list"
+              );
 
-            logEvent(analytics, "newsletter_signup");
-          } else {
-            const json = JSON.parse(response.message.response.text);
-            toast.error(
-              `${json["title"] ?? ""} There was some error signing you up`
-            );
-            window.location.href = "/";
-          }
-        }}
-      >
-        {loading ? "Loading..." : "Lets Start A Conversation"}
-      </button>
+              setHasSent(true);
+            } else {
+              const json = JSON.parse(
+                response?.data.message.response.text ?? "Error"
+              );
+              toast.error(
+                `${json["title"] ?? ""} There was some error signing you up`
+              );
+            }
+          }}
+        >
+          {loading ? "Loading..." : "Lets Start A Conversation"}
+        </button>
+      )}
     </div>
   );
 }

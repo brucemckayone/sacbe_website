@@ -8,14 +8,18 @@ const menuItems = [
   {
     text: "Training",
     subTitle: "Become A Facilitator",
-    link: "https://skyeonearth.com/cacaofacilitation",
+    link: "/facilitator-training",
   },
   {
     text: "About",
     subTitle: "Learn about our origins",
     link: "/about",
   },
-
+  {
+    text: "Facilitators",
+    subTitle: "Find a Sacbe Facilitators",
+    link: "/facilitators",
+  },
   {
     text: "Wholesale",
     subTitle: "Share This Medicine",

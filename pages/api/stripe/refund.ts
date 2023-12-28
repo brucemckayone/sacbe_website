@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import stripe from "@/lib/stripe/stripe";
+import stripe from "@/lib/stripe/init/stripe";
 import Stripe from "stripe";
 export default async function handler(
   req: NextApiRequest,
@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   if (req.method == "POST") {
     const charges = req.body.charges as string[];
-    console.log(charges);
+
     let data = {
       failed: [] as string[],
       successed: [] as string[],
@@ -24,14 +24,9 @@ export default async function handler(
           data.successed = [...data.successed, charges[i]];
         }
       } catch (e) {
-        console.log("error");
-        console.log(charges[i]);
         data.non_existant = [...data.non_existant, charges[i]];
-        console.log(data.non_existant);
       }
     }
-
-    console.log(data);
 
     res.status(200).json(data);
   }

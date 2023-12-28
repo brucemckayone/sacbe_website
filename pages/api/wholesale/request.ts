@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { firestore, messaging } from "firebase-admin";
-import adminInit from "@/utils/firebase/admin_init";
-import stripe from "@/lib/stripe/stripe";
+import adminInit from "@/lib/firebase/admin_init";
+import stripe from "@/lib/stripe/init/stripe";
 
 
 export default async function handler(

@@ -1,14 +1,11 @@
 import React from "react";
 import Link from "next/link";
-
 import { RecipeType } from "@/types/recipieType";
 import { BlogPostType } from "@/types/blogPost";
-
 import { Metadata } from "next";
 import { firestore } from "firebase-admin";
-import adminInit from "@/utils/firebase/admin_init";
+import adminInit from "@/lib/firebase/admin_init";
 import dynamic from "next/dynamic";
-
 
 let fetchLimit = 10;
 
@@ -85,13 +82,15 @@ async function ResourcesPage({
   ]);
 
   const BlogPostSuggestionCard = dynamic(() =>
-    import("../posts/[slug]/BlogPostSuggestionCard").then(
+    import("../../../components/customer/posts/BlogPostSuggestionCard").then(
       (res) => res.BlogPostSuggestionCard
     )
   );
 
   const RecipeCard = dynamic(() =>
-    import("../recipes/[slug]/RecipeCard").then((res) => res.RecipeCard)
+    import("../../../components/customer/recipes/RecipeCard").then(
+      (res) => res.RecipeCard
+    )
   );
 
   const postCards = posts.map((e) => {
