@@ -19,7 +19,7 @@ export function PayInFullButton(props: {
               mode: "payment",
               prices: [props.currentRoom?.id!],
               qty: 1,
-              discount: "WHNKm2JA",
+              discount: "RtQp0C00",
               metaData: {
                 roomType: props.currentRoom?.uuid,
               },
