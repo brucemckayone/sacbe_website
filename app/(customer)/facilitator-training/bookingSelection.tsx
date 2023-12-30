@@ -160,7 +160,11 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
           </div>
           <RiskApealCards
             isHorizontal={false}
-            show={{ flexiblePayments: false }}
+            show={{
+              flexiblePayments: false,
+              earthPledge: true,
+              fairTrade: true,
+            }}
             customKlarnaText={`Pay Deposit in 3 Installments of £${(
               roomOptions[0].deposit / 3
             ).toFixed(2)}`}
