@@ -97,9 +97,11 @@ export default function Navbar() {
                       </h4>
                     </Link>
                     {item.text == "Training" && (
-                      <div className="w-11/12 md:w-6/12 -mt-10">
+                      <div className="w-11/12 md:w-6/12 mt-4">
                         <EarlyBirdCountdownTimer />
-                        <JoinWaitlistButton />
+                        <div className="mt-2">
+                          <JoinWaitlistButton />
+                        </div>
                       </div>
                     )}
                   </>

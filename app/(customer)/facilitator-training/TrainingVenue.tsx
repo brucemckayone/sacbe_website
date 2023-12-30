@@ -91,22 +91,6 @@ const slides: ISlide[] = [
       "A serene twin room with soft floral touches, offering a peaceful retreat.",
     image: "/training/venue/12.webp",
   },
-  {
-    title: "Elegant Private Quarters",
-    buttonLink: "/training/accommodation",
-    buttonText: "View Room",
-    description:
-      "Sophisticated solitude with a touch of elegance for your restful sanctuary.",
-    image: "/training/venue/13.webp",
-  },
-  {
-    title: "Spa-Like Serenity",
-    buttonLink: "/training/accommodation",
-    buttonText: "View Amenities",
-    description:
-      "Indulge in relaxation with our spa-inspired bath, designed for your rejuvenation.",
-    image: "/training/venue/14.webp",
-  },
 ];
 
 export default function TrainingVenue(props: {
@@ -116,8 +100,9 @@ export default function TrainingVenue(props: {
   return (
     <section className="w-11/12 m-auto md:mt-64md:p-5 p-0">
       <div className="">
-        <h3 className="md:text-7xl text-center md:mb-10">
-          The Sanctuary & Private Forest
+        <h3 className=" text-5xl md:text-7xl text-center md:mb-10">
+          Your Sanctuary <br className="md:hidden" />&{" "}
+          <br className="md:hidden" /> Private Forest
         </h3>
         <div className="rounded-3xl overflow-clip">
           <Image
@@ -146,9 +131,10 @@ export default function TrainingVenue(props: {
               set within peaceful and idyllic surroundings, featuring large
               gardens (which will be in the fullness of Spring) and a private
               woodland of sacred birch trees. Giving plenty of places to connect
-              with nature, recharge and integrate the teachings. The area of
-              Banchory, Aberdeenshire is known for its stunning landscapes and
-              Crathes Castle.
+              with nature, recharge and integrate the teachings. The land is
+              abundant with wild life and receives regular visits from deer. The
+              area of Banchory, Aberdeenshire is known for its stunning
+              landscapes and Crathes Castle.
             </p>
             <h5 className="mt-5 mb-2">Villa Features</h5>
             <BulletPoints
@@ -165,7 +151,12 @@ export default function TrainingVenue(props: {
                 {
                   name: "Accommodations",
                   effect:
-                    "Comfortable accommodations surrounded by natural beauty.",
+                    "Comfortable accommodations surrounded by natural beauty. Featuring traditional fire place, and an abundance of natural light",
+                },
+                {
+                  name: "Practice Space",
+                  effect:
+                    "Featuring high ceilings, wood burning stove, garden views and patio.",
                 },
               ]}
             />
@@ -190,9 +181,9 @@ export default function TrainingVenue(props: {
                   ref: props.foodRef,
                 },
                 {
-                  name: "Travel Arrangements:",
+                  name: "Travel Arrangements",
                   effect:
-                    " If you are travelling some distance, it is recommended you arrive and stay nearby the night before as we will be gathering at the villa at 10am on the18th. You will depart on 24th between 1-2pm after our closing brunch / feast!",
+                    "If you are travelling some distance, it is recommended you arrive and stay nearby the night before as we will be gathering at the villa at 10am on the 18th. You will depart on 24th between 1-2pm after our closing brunch / feast!",
                 },
               ]}
             />

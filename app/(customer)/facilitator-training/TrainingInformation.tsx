@@ -14,7 +14,7 @@ export default function TrainingInformation() {
         ></Image>
       </div>
       <div className="w-full md:w-5/12 md:ml-10 px-2">
-        <h3 className="mb-5 h-3 mt-5 md:mt-0">Pathway to Mastery</h3>
+        <h3 className="mb-5 h-3 mt-5 md:mt-0">Pathway Home</h3>
         <h5 className="mt-3  mb-2  underline">
           Inside Our Facilitator Training
         </h5>

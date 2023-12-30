@@ -61,11 +61,11 @@ function IntroductionBody() {
         ></Image>
       </div>
       <h2 className="text-3xl md:text-4xl mt-5 lg:text-5xl visible md:hidden">
-        Into The Heart of The Earth
+        The Heart of The Earth
       </h2>
       <div className="flex flex-col justify-center w-full m-auto md:w-6/12 md:mx-10 md:my-0">
         <h2 className="text-3xl md:text-4xl lg:text-5xl  hidden md:block">
-          Into The Heart of The Earth
+          The Heart of The Earth
         </h2>
         <p className="mt-3">
           Join our founder Luzura Laguz Peralta this Spring to learn all the
@@ -154,7 +154,7 @@ function TrainingIntroduction(props: {
       image: "/home_header/home_page_header_image_8.jpg",
       title: "The Experience",
       description: "Learn about the experiance",
-      buttonText: "Discover Experiance",
+      buttonText: "Discover Experience",
       buttonLink: "/training/accommodations",
       ref: experianceRef,
     },
@@ -162,7 +162,7 @@ function TrainingIntroduction(props: {
       image: "/home_header/home_page_header_image_3.jpg",
       title: "Reserve Your Journey",
       description: "Begin the path to becoming a Cacao Facilitator – book now.",
-      buttonText: "Discover Booking",
+      buttonText: "Invest Now",
       buttonLink: "/training/booking",
       ref: bookingRef,
     },

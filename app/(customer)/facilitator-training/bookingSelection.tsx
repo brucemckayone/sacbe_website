@@ -11,6 +11,10 @@ import { PayDepositButton } from "./PayDepositButton";
 import { PayInFullButton } from "./PayInFullButton";
 import { TestimonialQuote } from "./TestimonialQuote";
 
+/**
+ * Checks if the current date is before January 3rd, 2024.
+ * @returns {boolean} Returns true if the current date is before January 3rd, 2024; otherwise, returns false.
+ */
 export function isEarlyBird(): boolean {
   const currentDate = new Date();
   const jan3rd = new Date(2024, 0, 31);
@@ -27,6 +31,12 @@ export type RoomOptionType = {
   deposit: number;
   features: string[];
 };
+
+export function isAfterJan3rd(): boolean {
+  const currentDate = new Date();
+  const jan3rd = new Date(2024, 0, 3);
+  return currentDate > jan3rd;
+}
 
 function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
   const { user } = useUser();
@@ -48,12 +58,6 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
     const room = roomOptions.find((room) => room.id === selectedId);
     setCurrentRoom(room!);
   }, [selectedId]);
-
-  function isAfterJan3rd(): boolean {
-    const currentDate = new Date();
-    const jan3rd = new Date(2024, 0, 3);
-    return currentDate > jan3rd;
-  }
 
   return (
     <div className="flex flex-col md:flex-row justify-around ">
@@ -95,6 +99,11 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
             </div>
             <RiskApealCards
               isHorizontal={false}
+              show={{
+                flexiblePayments: false,
+                earthPledge: true,
+                fairTrade: true,
+              }}
               customKlarnaText={`Pay Deposit in 3 Installments of £${(
                 roomOptions[0].deposit / 3
               ).toFixed(2)}`}
@@ -111,8 +120,10 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
           selectedId={selectedId}
           setSelectedId={setSelectedId}
         />
-        {isAfterJan3rd() ? (
-          <JoinWaitlistButton />
+        {!isAfterJan3rd() ? (
+          <div className="my-5">
+            <JoinWaitlistButton />
+          </div>
         ) : (
           <>
             <PayInFullButton
@@ -149,6 +160,7 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
           </div>
           <RiskApealCards
             isHorizontal={false}
+            show={{ flexiblePayments: false }}
             customKlarnaText={`Pay Deposit in 3 Installments of £${(
               roomOptions[0].deposit / 3
             ).toFixed(2)}`}

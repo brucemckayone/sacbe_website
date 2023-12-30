@@ -5,13 +5,13 @@ export default function TrainingTheExperiance() {
     <section className="w-11/12 m-auto my-10 md:my-36 py-10 md:px-2 justify-between flex flex-col md:flex-row x-2 md:bg-secondaryContainer/30 md:shadow md:rounded-3xl">
       <div className="w-full md:w-6/12 md:mx-10  ">
         <Image
-          src={"/home_header/home_page_header_image_6.jpg"}
+          src={"/training/previous/1.jpeg"}
           height={500}
           width={500}
           alt={
             "An Image of the showing the experiance of going to the training"
           }
-          className="rounded-lg object-cover w-full h-full"
+          className="rounded-lg object-cover w-full md:h-[890px]"
         />
       </div>
 
@@ -32,9 +32,19 @@ export default function TrainingTheExperiance() {
                 "Practical sessions in preparing and serving ceremonial cacao. and history. To practical information about dosing, contradictions, and conversations on cultural appropriation",
             },
             {
+              name: "Rising Rituals:",
+              effect:
+                " Each day will begin with a two hour devotional practice with Cacao, meditation, prayer, breath, movement, somatic experiencing, vocal toning + embodiment work. ",
+            },
+            {
+              name: "Attunement:",
+              effect:
+                "Experience opening + closing ceremonies with Cacao, Ecstatic Dance, Sound therapy, Group energy healing, and Elemental rituals to support your own wellbeing, healing and empowerment.",
+            },
+            {
               name: "Bodywork",
               effect:
-                "Learn neuro-somatic tools to bridge the body and brain, safe ways to support big emotional releases, and simple effective science backed tools for emotional empowerment and improving nervous system health.",
+                "Learn neuro-somatic tools to bridge the body and brain, safe ways to support big emotional releases, and simple effective science backed techniques for emotional empowerment and improving nervous system health.",
             },
             {
               name: "Metaphysical Exploration",
@@ -44,7 +54,7 @@ export default function TrainingTheExperiance() {
             {
               name: "Continuing Development",
               effect:
-                "months integration support post in-person training, plus opportunities to facilitate 1:1 + group journeys with Cacao and receive feedback",
+                "3 months integration support post in-person training, including guidance on  facilitator self care, how to market your offerings in an aligned way, ways to continue practising reciprocity and responsibility and opportunities to facilitate 1:1 + group journeys with Cacao and receive feedback. Additionally, you will receive free entry to monthly online Cacao Circles with Luzura from the moment you sign up and beyond completion of your training.",
             },
           ]}
         />

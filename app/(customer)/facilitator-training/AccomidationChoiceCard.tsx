@@ -99,14 +99,16 @@ export const EarlyBirdCountdownTimer = () => {
       </div>
     ));
 
-  return (
-    <div className="flex-col md:flex-row justify-between bg-recommendedGreen border md:border-none md:bg-transparent p-2 md:p-0 rounded-2xl shadow-lg md:shadow-none my-10">
-      <h4 className="md:mt-3">Early Bird Discount: </h4>
-      <div className=" flex p-2 rounded-2xl space-x-3 md:bg-recommendedGreen/40 md:border">
-        {timeComponents}
+  if (!isEarlyBird())
+    return (
+      <div className="flex-col md:flex-row justify-between bg-recommendedGreen border md:border-none md:bg-transparent md:p-0 rounded-2xl shadow-lg md:shadow-none ">
+        <div className=" md:bg-recommendedGreen/70 md:border rounded-2xl text-left p-1 px-5">
+          <h4 className="">Early Bird Discount: </h4>
+          <div className=" flex p-2  space-x-3">{timeComponents}</div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  else return <></>;
 };
 
 export { EarlyBirdCountdownTimer as CountdownTimer };

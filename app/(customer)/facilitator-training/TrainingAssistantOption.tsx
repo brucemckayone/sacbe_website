@@ -4,13 +4,15 @@ export default function TrainingAssistingRole() {
   return (
     <section className="w-11/12 md:w-6/12 m-auto bg-tertiaryContainer/80 border rounded-xl p-2 md:p-10 my-10 ">
       <div className="w-full rounded-xl bg-white p-2 md:p-5">
-        <h2 className="text-2xl font-bold">Assistant Option</h2>
+        <h2 className="text-2xl font-bold">Assistant Role</h2>
         <div className="space-y-4">
           <p>
             Ideal for those who are unable to afford the full cost of training.
-            Looking for someone who is efficient, organised + manages time well
-            to help with various tasks such as setting up + clearing of spaces,
-            making cacao + altar creation, building + tending fires.
+            I am Looking for someone who is efficient, organised + manages time
+            well to help with various tasks such as setting up + clearing of
+            spaces, making cacao + altar creation, building + tending fires.
+            Luzura will contact those who express interest to arrange a call
+            interview to access suitability.
           </p>
           <BulletPoints
             bulletPoints={[

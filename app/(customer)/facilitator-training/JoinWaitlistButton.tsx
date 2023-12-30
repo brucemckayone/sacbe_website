@@ -8,6 +8,7 @@ import { useUser } from "@/components/shared/auth/UserProvider";
 import TextInput from "@/components/shared/form/inputs/TextInput";
 import api from "@/lib/apiSchema/apiSchema";
 import toast from "react-hot-toast";
+import { isAfterJan3rd, isEarlyBird } from "./bookingSelection";
 
 export default function JoinWaitlistButton() {
   const buttonstyle =
@@ -47,7 +48,7 @@ export default function JoinWaitlistButton() {
 
   if (status === "loading") return <Loader className=" w-full m-auto" />;
 
-  if (!user || status === "unauthenticated")
+  if (!user || (status === "unauthenticated" && !isAfterJan3rd()))
     return (
       <>
         <Modal opened={opened} onClose={close} title="Join Waitlist" size="md">

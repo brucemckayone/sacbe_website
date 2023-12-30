@@ -61,108 +61,123 @@ export function FairTradeLogo() {
   );
 }
 
-export function RiskApealCards(props: {
-  isHorizontal: boolean;
+export function RiskApealCards({
+  isHorizontal = false,
+  customKlarnaText = "",
+  howMuchIsDonatedToClimateChange,
+  show = {
+    flexiblePayments: true,
+    afterPay: true,
+    earthPledge: true,
+    fairTrade: true,
+  },
+}: {
+  isHorizontal?: boolean;
   customKlarnaText?: string;
   howMuchIsDonatedToClimateChange?: number;
+  show?: {
+    flexiblePayments?: boolean;
+    afterPay?: boolean;
+    earthPledge?: boolean;
+    fairTrade?: boolean;
+  };
 }) {
-  const { isHorizontal, customKlarnaText, howMuchIsDonatedToClimateChange } =
-    props;
   return (
     <div
       className={`flex ${
         isHorizontal ? " md:flex-row flex-col" : "flex-col"
       } justify-around`}
     >
-      <div
-        className={`flex flex-row ${
-          isHorizontal && "md:mr-5"
-        } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
-      >
-        <ClimateStripeLogo />
-        <div>
-          <h4 className="text-lg">Earth Pledge</h4>
-          <p className="text-sm">
-            <strong className="text-sm text-onPrimaryContainer">
-              Make a difference with every sip,
-            </strong>{" "}
-            find out how we are helping &nbsp;
-            <Link
-              className="text-sacbeBrandColor"
-              href={"https://climate.stripe.com/ThyMCu"}
-            >
-              fight climate change
-            </Link>
-            {howMuchIsDonatedToClimateChange && (
-              <p className="text-sm font-bold">
-                This purchase will donate £
-                {(howMuchIsDonatedToClimateChange / 100).toFixed(2)}
-              </p>
-            )}
-          </p>
-        </div>
-      </div>
-      <div
-        className={`flex flex-row ${
-          props.isHorizontal && "md:mr-5"
-        } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
-      >
-        <Image
-          src={dollarIcon}
-          width={70}
-          height={70}
-          alt="dollor icon a symbol of flexible payments"
-          className="mr-2 h-10 w-10 self-center"
-        />
-        <div className="w-full">
-          <div className="flex justify-between w-full">
-            <h4 className="text-lg">Flexible Payments</h4>
-            <div className="flex flex-wrap">
-              <KlarnaLogo />
-              <AfterPayLogo />
-            </div>
-          </div>
-          {customKlarnaText ? (
-            <p className="text-sm">{customKlarnaText}</p>
-          ) : (
+      {show?.earthPledge && (
+        <div
+          className={`flex flex-row ${
+            isHorizontal && "md:mr-5"
+          } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
+        >
+          <ClimateStripeLogo />
+          <div>
+            <h4 className="text-lg">Earth Pledge</h4>
             <p className="text-sm">
               <strong className="text-sm text-onPrimaryContainer">
-                Buy Now Pay later
-              </strong>
-              , or spread the cost with
-              <strong className="text-sm text-onPrimaryContainer">
-                {" "}
-                small installments
-              </strong>
-              as low as{" "}
-              <strong className="text-sm text-onPrimaryContainer">£8.25</strong>
-              , all with a
-              <strong className="text-sm text-onPrimaryContainer">
-                {" "}
-                100% money back garentee
-              </strong>
+                Make a difference with every sip,
+              </strong>{" "}
+              find out how we are helping &nbsp;
+              <Link
+                className="text-sacbeBrandColor"
+                href={"https://climate.stripe.com/ThyMCu"}
+              >
+                fight climate change
+              </Link>
+              {howMuchIsDonatedToClimateChange && (
+                <p className="text-sm font-bold">
+                  This purchase will donate £
+                  {(howMuchIsDonatedToClimateChange / 100).toFixed(2)}
+                </p>
+              )}
             </p>
-          )}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-row  p-2 rounded-xl drop-shadow-lg bg-surface mt-5 ">
-        <FairTradeLogo />
-        <div>
-          <h4 className="text-lg">Fair Trade</h4>
-          <p className="text-sm">
-            Sacbe supports{" "}
-            <strong className="text-sm text-onPrimaryContainer">
-              fair trade farming, indigenous communities and traditions
-            </strong>{" "}
-            which honour and respect the Earth and
-            <strong className="text-sm text-onPrimaryContainer">
-              {" "}
-              Her medicines
-            </strong>
-            .
-          </p>
+      )}
+      {show?.flexiblePayments && (
+        <div
+          className={`flex flex-row ${
+            isHorizontal && "md:mr-5"
+          } p-2 rounded-xl drop-shadow-lg bg-surface mt-5`}
+        >
+          <KlarnaLogo />
+          <div className="w-full">
+            <div className="flex justify-between w-full">
+              <h4 className="text-lg">Flexible Payments</h4>
+              <div className="flex flex-wrap">
+                <AfterPayLogo />
+              </div>
+            </div>
+            {customKlarnaText ? (
+              <p className="text-sm">{customKlarnaText}</p>
+            ) : (
+              <p className="text-sm">
+                <strong className="text-sm text-onPrimaryContainer">
+                  Buy Now Pay later
+                </strong>
+                , or spread the cost with
+                <strong className="text-sm text-onPrimaryContainer">
+                  {" "}
+                  small installments
+                </strong>
+                as low as{" "}
+                <strong className="text-sm text-onPrimaryContainer">
+                  £8.25
+                </strong>
+                , all with a
+                <strong className="text-sm text-onPrimaryContainer">
+                  {" "}
+                  100% money back guarantee
+                </strong>
+              </p>
+            )}
+          </div>
         </div>
-      </div>
+      )}
+      {show?.fairTrade && (
+        <div className="flex flex-row  p-2 rounded-xl drop-shadow-lg bg-surface mt-5 ">
+          <FairTradeLogo />
+          <div>
+            <h4 className="text-lg">Fair Trade</h4>
+            <p className="text-sm">
+              Supports{" "}
+              <strong className="text-sm text-onPrimaryContainer">
+                fair trade farming, indigenous communities and traditions
+              </strong>{" "}
+              which honour and respect the Earth and
+              <strong className="text-sm text-onPrimaryContainer">
+                {" "}
+                Her medicines
+              </strong>
+              .
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
