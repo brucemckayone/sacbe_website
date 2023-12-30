@@ -120,7 +120,7 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
           selectedId={selectedId}
           setSelectedId={setSelectedId}
         />
-        {!isAfterJan3rd() ? (
+        {isAfterJan3rd() ? (
           <div className="my-5">
             <JoinWaitlistButton />
           </div>
