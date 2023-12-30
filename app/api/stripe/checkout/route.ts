@@ -13,6 +13,8 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   const helper = getHelper();
   const resp = await helper.createCustomCheckout((await req.json()) as any);
+  console.log(resp);
+
   return NextResponse.json(resp);
 }
 export async function DELETE(req: NextRequest) {
