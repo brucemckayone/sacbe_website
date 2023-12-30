@@ -25,28 +25,34 @@ function HostBioPopup() {
             alt="An image of Luzura Peralta working with cacao"
           />
           <h2 className="mt-5">Luzura Peralta</h2>
-          <div className="flex w-full justify-start spacing-x-5 items-center my-2 rounded-xl bg-white border shadow p-3">
-            <p>Bussines: </p>
-            <Link
-              className=" ml-1 mr-5 border p-1 px-2 rounded shadow"
-              href={"https://www.instagram.com/thirdeyetribe__"}
-            >
-              @thirdeyetribe__
-            </Link>
-            <p>Personal: </p>
-            <Link
-              className=" ml-1 mr-5 border p-1 px-2 rounded shadow"
-              href={"https://www.instagram.com/iamluzuraperalta"}
-            >
-              @iamluzuraperalta
-            </Link>
-            <p>Website: </p>
-            <Link
-              className=" ml-1 mr-5 border p-1 px-2 rounded shadow"
-              href={"https://www.thirdeyetribe.co.uk"}
-            >
-              Third Eye
-            </Link>
+          <div className="flex flex-col space-y-2 md:flex-row items-start justify-between spacing-x-5 md:items-center my-2 rounded-xl bg-white border shadow p-3">
+            <div className="flex items-center">
+              <p>Bussines: </p>
+              <Link
+                className=" ml-1 mr-5 border p-1 px-2 rounded shadow"
+                href={"https://www.instagram.com/thirdeyetribe__"}
+              >
+                @thirdeyetribe__
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <p>Personal: </p>
+              <Link
+                className=" ml-1.5 mr-5 border p-1 px-2 rounded shadow"
+                href={"https://www.instagram.com/iamluzuraperalta"}
+              >
+                @iamluzuraperalta
+              </Link>
+            </div>
+            <div className="flex items-center">
+              <p>Website: </p>
+              <Link
+                className=" ml-3 mr-5 border p-1 px-2 rounded shadow"
+                href={"https://www.thirdeyetribe.co.uk"}
+              >
+                Third Eye
+              </Link>
+            </div>
           </div>
           <p className="mt-5">
             Luzura (they/them) is the founding director of Sacbe Ceremonial

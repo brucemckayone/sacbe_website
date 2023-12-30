@@ -8,11 +8,11 @@ import { useUser } from "@/components/shared/auth/UserProvider";
 import TextInput from "@/components/shared/form/inputs/TextInput";
 import api from "@/lib/apiSchema/apiSchema";
 import toast from "react-hot-toast";
-import { isAfterJan3rd, isEarlyBird } from "./bookingSelection";
+import { isAfterJan3rd } from "./bookingSelection";
 
 export default function JoinWaitlistButton() {
   const buttonstyle =
-    "py-2 px-6 bg-sacbeBrandColor/80 rounded-lg shadow-md font-bold border col-span-full w-full";
+    "py-2 px-6 bg-sacbeBrandColor/80 rounded-lg  text-center shadow-md font-bold border col-span-full w-full";
 
   const { user } = useUser();
   const { status } = useSession();
