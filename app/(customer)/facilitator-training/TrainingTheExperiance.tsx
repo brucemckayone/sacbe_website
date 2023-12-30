@@ -16,34 +16,35 @@ export default function TrainingTheExperiance() {
       </div>
 
       <div className="w-11/12 md:w-6/12 md:mr-10">
-        <h3 className="mt-5 md:mt-0">The Experiance</h3>
+        <h3 className="mb-5 h-3 mt-5 md:mt-0">The Experience</h3>
         <p>
-          The Sacbe training is more than just an educational course; it is a
-          journey of personal and spiritual discovery. Engage in hands-on
-          activities and learn transformative practices that you can carry into
-          your own cacao ceremonies.
+          You will be guided to discover your own way of holding space;
+          exploring inspiration over imitation. This is much more than training.
+          It is an initiation into a Path of devotional service in alliance with
+          Cacao.
         </p>
-        <h5 className="mt-5 mb-2">Experiential Learning</h5>
+        <h5 className="mt-5 mb-2">Embodied Learning</h5>
         <BulletPoints
           bulletPoints={[
             {
-              name: "Cacao Preparation",
+              name: "Cacao Study",
               effect:
-                "Practical sessions in preparing and serving ceremonial cacao.",
+                "Practical sessions in preparing and serving ceremonial cacao. and history. To practical information about dosing, contradictions, and conversations on cultural appropriation",
             },
             {
-              name: "Bodywork Tools",
+              name: "Bodywork",
               effect:
-                "Bodywork tools and practices to enhance the cacao journey.",
+                "Learn neuro-somatic tools to bridge the body and brain, safe ways to support big emotional releases, and simple effective science backed tools for emotional empowerment and improving nervous system health.",
             },
             {
               name: "Metaphysical Exploration",
-              effect: "Exploration of cacao's metaphysical properties.",
+              effect:
+                "Understanding heart consciousness, plant consciousness and communicating with plants.",
             },
             {
-              name: "Personal Development",
+              name: "Continuing Development",
               effect:
-                "Personal development as a cacao guardian and spiritual facilitator.",
+                "months integration support post in-person training, plus opportunities to facilitate 1:1 + group journeys with Cacao and receive feedback",
             },
           ]}
         />

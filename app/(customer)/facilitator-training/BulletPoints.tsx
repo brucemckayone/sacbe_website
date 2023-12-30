@@ -1,10 +1,13 @@
 type BulletPointType = {
   name: string;
   effect: string;
+  ref?: React.MutableRefObject<null> | undefined;
 };
+
 type IBulletPointsProps = {
   bulletPoints: BulletPointType[];
 };
+
 export const BulletPoints: React.FC<IBulletPointsProps> = ({
   bulletPoints,
 }) => {
@@ -12,7 +15,11 @@ export const BulletPoints: React.FC<IBulletPointsProps> = ({
     <div className="border border-dashed bg-white p-2 rounded-lg  ">
       <ul className="list-disc space-y-2">
         {bulletPoints.map((point, index) => (
-          <li key={index} className="flex items-start space-x-2">
+          <li
+            ref={point.ref}
+            key={index}
+            className="flex items-start space-x-2"
+          >
             <span className="text-primary border  items-center h-6 w-6 text-center bg-sacbeBrandColor/40 rounded-full mt-1 md:mt-3">
               {index + 1}
             </span>

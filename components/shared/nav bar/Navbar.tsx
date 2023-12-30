@@ -6,6 +6,7 @@ import { useState } from "react";
 import menuItems from "@/lib/constants/menu";
 import LoginButton from "../buttons/loginButton";
 import { EarlyBirdCountdownTimer } from "@/app/(customer)/facilitator-training/AccomidationChoiceCard";
+import JoinWaitlistButton from "@/app/(customer)/facilitator-training/JoinWaitlistButton";
 
 export default function Navbar() {
   // const SearchBar = dynamic(() =>
@@ -98,6 +99,7 @@ export default function Navbar() {
                     {item.text == "Training" && (
                       <div className="w-11/12 md:w-6/12 -mt-10">
                         <EarlyBirdCountdownTimer />
+                        <JoinWaitlistButton />
                       </div>
                     )}
                   </>

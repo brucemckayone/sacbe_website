@@ -57,7 +57,7 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
 
   return (
     <div className="flex flex-col md:flex-row justify-around ">
-      <div className="w-full md:w-5/12">
+      <div className="w-full md:w-5/12 md:ml-10">
         <h3 className="pt-5 px-2 mb-2 text-stroke-3 text-7xl text-sacbeBrandColor">
           Invest In Yourself
         </h3>
@@ -85,6 +85,14 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
             </p>
           </div>
           <div className="hidden md:block">
+            <div className="flex flex-row  p-2 rounded-xl drop-shadow-lg bg-surface mt-5 ">
+              <p className="text-sm">
+                A percentage of the total profits will be divided between
+                indigenous + earth supporting organisations in Ecuador, Mexico +
+                Guatemala. By purchasing this training, you are supporting the
+                lineage of Cacao & the ancient wisdom ways of the people.
+              </p>
+            </div>
             <RiskApealCards
               isHorizontal={false}
               customKlarnaText={`Pay Deposit in 3 Installments of £${(
@@ -119,9 +127,26 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
               setIsLoading={setIsLoading}
               currentRoom={currentRoom}
             />
+            <p
+              className="underline text-center cursor-pointer text-xs mb-5 p-2 bg-white rounded-lg shadow-md w-full md:w-1/2 m-auto"
+              onClick={() => {
+                scrollBy({ top: 1200, behavior: "smooth" });
+              }}
+            >
+              Discounted Assistant Role Available
+            </p>
           </>
         )}
+
         <div className="md:hidden">
+          <div className="flex flex-row  p-2 rounded-xl drop-shadow-lg bg-surface mt-5 ">
+            <p className="text-sm">
+              A percentage of the total profits will be divided between
+              indigenous + earth supporting organisations in Ecuador, Mexico +
+              Guatemala. By purchasing this training, you are supporting the
+              lineage of Cacao & the ancient wisdom ways of the people.
+            </p>
+          </div>
           <RiskApealCards
             isHorizontal={false}
             customKlarnaText={`Pay Deposit in 3 Installments of £${(

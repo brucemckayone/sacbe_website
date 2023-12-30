@@ -5,9 +5,9 @@ import ApiBuilderHelper, {
 
 const builder = new ApiBuilderHelper();
 
-export const waitlistSchema = {
-  post: builder.createAPIMethod<IEndpointMethod<{ email: string }>>(
-    "/training/waitlist",
-    HTTPMethods.POST
+export const roomsSchema = {
+  get: builder.createAPIMethod<IEndpointMethod<{}>>(
+    "/training/rooms",
+    HTTPMethods.GET
   ),
 };

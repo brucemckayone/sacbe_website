@@ -109,13 +109,15 @@ const slides: ISlide[] = [
   },
 ];
 
-export default function TrainingVenue() {
+export default function TrainingVenue(props: {
+  foodRef: React.MutableRefObject<null>;
+}) {
   //should include description of the place images of the bedrooms
   return (
     <section className="w-11/12 m-auto md:mt-64md:p-5 p-0">
       <div className="">
         <h3 className="md:text-7xl text-center md:mb-10">
-          Sanctuary of Harmony: Our Enchanting Venue
+          The Sanctuary & Private Forest
         </h3>
         <div className="rounded-3xl overflow-clip">
           <Image
@@ -127,7 +129,7 @@ export default function TrainingVenue() {
           />
           <SmoothCarousel slides={slides} hideButton />
         </div>
-        <div className="flex flex-col md:flex-row mt-10 justify-between w-full">
+        <div className="flex flex-col md:flex-row mt-10 justify-around w-full">
           <div className="hidden md:flex w-full md:w-1/2">
             <Image
               src={"/home_header/home_page_header_image_1.jpg"}
@@ -140,12 +142,13 @@ export default function TrainingVenue() {
           </div>
           <div className="mt-5 md:w-5/12">
             <p>
-              Our venue, a spacious and cozy villa, promises both comfort and
-              inspiration. With room to sleep eleven, it offers a blend of
-              communal areas and private sanctuaries, ideal for introspection
-              and group activities. The villa, set within its own majestic
-              grounds, provides access to a tennis court, squash court, and the
-              enchanting National Trust site Crathes Castle.
+              Our holding field for this training is a beautiful spacious villa,
+              set within peaceful and idyllic surroundings, featuring large
+              gardens (which will be in the fullness of Spring) and a private
+              woodland of sacred birch trees. Giving plenty of places to connect
+              with nature, recharge and integrate the teachings. The area of
+              Banchory, Aberdeenshire is known for its stunning landscapes and
+              Crathes Castle.
             </p>
             <h5 className="mt-5 mb-2">Villa Features</h5>
             <BulletPoints
@@ -166,7 +169,7 @@ export default function TrainingVenue() {
                 },
               ]}
             />
-            <h4 className="mt-5">Accomidation & Andemites</h4>
+            <h4 className="mt-5">Accommodation and Amenities</h4>
             <p>
               Your comfort and well-being are paramount during your stay. We
               have ensured that every aspect of your accommodation contributes
@@ -183,15 +186,29 @@ export default function TrainingVenue() {
                 {
                   name: "Plant-Based Meals",
                   effect:
-                    "Daily nourishing plant-based meals tailored for participants.",
+                    "3 x daily nourishing plant based meals provided by our experienced chef (introduction coming soon!) who will create from seasonal, locally sourced produce which serves both the people and the land. Dietary requirements will be accommodated, please contact us with your request.",
+                  ref: props.foodRef,
                 },
                 {
-                  name: "Villa Amenities",
+                  name: "Travel Arrangements:",
                   effect:
-                    "Access to villa amenities for relaxation and personal time.",
+                    " If you are travelling some distance, it is recommended you arrive and stay nearby the night before as we will be gathering at the villa at 10am on the18th. You will depart on 24th between 1-2pm after our closing brunch / feast!",
                 },
               ]}
             />
+            <p className="mt-3">
+              The venue is located 30 minutes drive from Aberdeen Airport and 40
+              minutes from the train station / city centre just outside the town
+              of Banchory. You can get a taxi directly to the venue. Closer to
+              the time, we will support the group in organising car shares to
+              make the journey as easy as possible.
+            </p>
+            <p className="mt-3">
+              Alternatively, there is the 727 bus service from the airport into
+              the bus station in the city centre, where you can get the 201 bus
+              for Ballater to Banchory and then take a 5 minute taxi ride to the
+              villa.
+            </p>
           </div>
         </div>
       </div>

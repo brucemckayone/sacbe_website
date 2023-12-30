@@ -1,90 +1,49 @@
-import BookingInformation from "./BookingInformation";
-import TrainingTestimonial from "./TrainingTestimonial";
-import { Metadata } from "next";
-import dynamic from "next/dynamic";
+"use client";
+import React, { Suspense, useRef } from "react";
+import TrainingAssistingRole from "./TrainingAssistantOption";
 import { TrainingHeader } from "./TrainingHeader";
-// import { useRef } from "react";
-
-export const metadata: Metadata = {
-  abstract: "Sacbe Cacao Training",
-  title: "Facilitator Training",
-  description: "Sacbe Cacao Training",
-  keywords: [
-    "Sacbe Cacao Training",
-    "Cacao Training",
-    "Cacao",
-    "Sacbe Cacao",
-    "Sacbe",
-    "Cacao Ceremony",
-    "Cacao Ceremonies",
-    "Cacao Ceremony Train",
-    "Cacao Ceremony Training",
-    "Cacao Training",
-  ],
-  category: "Sacbe Cacao Training",
-  publisher: "Sacbe Cacao",
-  alternates: {
-    canonical: "https://sacbecacao.com/training",
-  },
-  creator: "Sacbe Cacao",
-  twitter: {
-    card: "summary_large_image",
-    description: "Sacbe Cacao Training",
-    title: "Sacbe Cacao Training",
-    images: "https://sacbecacao.com/training",
-  },
-  openGraph: {
-    title: "Sacbe Cacao Training",
-    description: "Sacbe Cacao Training",
-    url: "https://sacbecacao.com/training",
-    type: "article",
-    siteName: "Sacbe Cacao",
-    tags: [
-      "Sacbe Cacao Training",
-      "Cacao Training",
-      "Cacao",
-      "Sacbe Cacao",
-      "Sacbe",
-      "Cacao Ceremony",
-      "Cacao Ceremonies",
-      "Cacao Ceremony Train",
-      "Cacao Ceremony Training",
-      "Cacao Training",
-    ],
-    images: [
-      {
-        url: "https://sacbecacao.com/training",
-      },
-    ],
-  },
-};
+import TrainingInformation from "./TrainingInformation";
+import TrainingIntroduction from "./TrainingIntroduction";
+import TrainingTheExperiance from "./TrainingTheExperiance";
+import TrainingVenue from "./TrainingVenue";
+import BookingInformation from "./BookingInformation";
+// ... other imports ...
 
 function TrainingPage() {
-  const TrainingIntroduction = dynamic(() =>
-    import("./TrainingIntroduction").then((res) => res.default)
-  );
-
-  const TrainingVenue = dynamic(() =>
-    import("./TrainingVenue").then((res) => res.default)
-  );
-  const TrainingInformation = dynamic(() =>
-    import("./TrainingInformation").then((res) => res.default)
-  );
-
-  const TrainingTheExperiance = dynamic(() =>
-    import("./TrainingTheExperiance").then((res) => res.default)
-  );
+  const infoRef = useRef(null);
+  const experienceRef = useRef(null);
+  const venueRef = useRef(null);
+  const foodRef = useRef(null);
+  const bookingRef = useRef(null);
 
   return (
     <div>
       <TrainingHeader />
-      <TrainingIntroduction />
-      <TrainingVenue />
-      <TrainingInformation />
-      <TrainingTheExperiance />
-      {/* @ts-expect-error Server Component */}
-      <BookingInformation />
-      <TrainingTestimonial />
+      <div>
+        <TrainingIntroduction
+          venueRef={venueRef}
+          foodRef={foodRef}
+          experianceRef={experienceRef}
+          trainingRef={infoRef}
+          bookingRef={bookingRef}
+        />
+      </div>
+      <div ref={infoRef}>
+        <TrainingInformation />
+      </div>
+      <div ref={experienceRef}>
+        <TrainingTheExperiance />
+      </div>
+      <div ref={venueRef}>
+        <TrainingVenue foodRef={foodRef} />
+      </div>
+      <div ref={bookingRef}>
+        <Suspense>
+          {/* @ts-expect-error Server Component */}
+          <BookingInformation />
+        </Suspense>
+      </div>
+      <TrainingAssistingRole />
     </div>
   );
 }

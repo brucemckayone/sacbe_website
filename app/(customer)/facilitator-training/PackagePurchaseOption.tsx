@@ -24,14 +24,15 @@ export function PackagePurchaseOption(props: {
     <div className="">
       <h4 className="pl-3">Choose Accommodation</h4>
       <div className="flex flex-col ">
-        {props.roomOptions.map((room) => (
-          <AccomidationChoiceCard
-            key={room.id}
-            selectedId={props.selectedId}
-            handleSelect={handleSelect}
-            room={room}
-          />
-        ))}
+        {props.roomOptions.length > 0 &&
+          props.roomOptions.map((room) => (
+            <AccomidationChoiceCard
+              key={room.id}
+              selectedId={props.selectedId}
+              handleSelect={handleSelect}
+              room={room}
+            />
+          ))}
       </div>
     </div>
   );

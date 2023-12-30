@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 
 export default function JoinWaitlistButton() {
   const buttonstyle =
-    "py-2 px-6 bg-sacbeBrandColor/80 my-4 rounded-lg shadow-md font-bold border col-span-full w-full";
+    "py-2 px-6 bg-sacbeBrandColor/80 rounded-lg shadow-md font-bold border col-span-full w-full";
 
   const { user } = useUser();
   const { status } = useSession();

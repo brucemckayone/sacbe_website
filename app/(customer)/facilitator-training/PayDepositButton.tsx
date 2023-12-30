@@ -199,7 +199,8 @@ export function PayDepositButton(props: {
       >
         {props.isLoading ? "Loading..." : "I'm all in, customize payment plan "}
       </button>
-      <p className="text-xs my-5 text-center">Deposits are non-refundable</p>
+
+      <p className="text-xs mt-5 text-center">Deposits are non-refundable</p>
     </div>
   );
 }

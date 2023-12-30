@@ -1,10 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import { FaInstagram, FaFacebook, FaTwitter, FaEnvelope } from "react-icons/fa";
-import Link from "next/link";
 import SmallLinkButton from "@/components/shared/buttons/smallLinkButton";
 
 import facilitatorPageMetadata from "./metadata";
+import { SocialContactPill } from "./SocialContactPill";
 
 interface IFacilitatorInfo {
   name: string;
@@ -52,28 +51,12 @@ function FacilitatorPage() {
                 <h3 className="text-onPrimaryContainer">{facilitator.name}</h3>
                 <p>{facilitator.bio}</p>
                 <div className=" flex justify-end w-full text-end">
-                  <div className="flex justify-around gap-3 items-center rounded-full bg-onPrimary px-3 mt-2 mr-5 drop-shadow h-9">
-                    {facilitator.social.instagram && (
-                      <Link href={facilitator.social.instagram}>
-                        <FaInstagram className="w-5 h-5" />
-                      </Link>
-                    )}
-                    {facilitator.social.facebook && (
-                      <Link href={facilitator.social.facebook}>
-                        <FaFacebook className="w-5 h-5" />
-                      </Link>
-                    )}
-                    {facilitator.social.twitter && (
-                      <Link href={facilitator.social.twitter}>
-                        <FaTwitter className="w-5 h-5" />
-                      </Link>
-                    )}
-                    {facilitator.email && (
-                      <Link href={`mailto:${facilitator.email}`}>
-                        <FaEnvelope className="w-5 h-5" />
-                      </Link>
-                    )}
-                  </div>
+                  <SocialContactPill
+                    instagram={facilitator.social.instagram}
+                    facebook={facilitator.social.facebook}
+                    twitter={facilitator.social.twitter}
+                    email={facilitator.email}
+                  />
                   <SmallLinkButton
                     link={facilitator.website}
                     text="Learn More"
