@@ -143,7 +143,7 @@ function TrainingIntroduction(props: {
       ref: foodRef,
     },
     {
-      image: "/home_header/home_page_header_image_10.jpg",
+      image: "/training/misc/cacaopods.jpg",
       title: "Wisdom of Cacao",
       description: "Immerse in the sacred teachings and rituals of Cacao.",
       buttonText: "Discover Training",
@@ -160,8 +160,8 @@ function TrainingIntroduction(props: {
     },
     {
       image: "/home_header/home_page_header_image_3.jpg",
-      title: "Reserve Your Journey",
-      description: "Begin the path to becoming a Cacao Facilitator – book now.",
+      title: "Your Journey",
+      description: "Begin the path to becoming a Cacao Facilitator",
       buttonText: "Invest Now",
       buttonLink: "/training/booking",
       ref: bookingRef,

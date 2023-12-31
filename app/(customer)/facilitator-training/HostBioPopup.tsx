@@ -27,7 +27,7 @@ function HostBioPopup() {
           <h2 className="mt-5">Luzura Peralta</h2>
           <div className="flex flex-col space-y-2 md:flex-row items-start justify-between spacing-x-5 md:items-center my-2 rounded-xl bg-white border shadow p-3">
             <div className="flex items-center">
-              <p>Bussines: </p>
+              <p>Business: </p>
               <Link
                 className=" ml-1 mr-5 border p-1 px-2 rounded shadow"
                 href={"https://www.instagram.com/thirdeyetribe__"}
@@ -55,7 +55,8 @@ function HostBioPopup() {
             </div>
           </div>
           <p className="mt-5">
-            Luzura (they/them) is the founding director of Sacbe Ceremonial
+            Luzura (they /them) is a Somatic Spiritual Guide + Healer of Latino
+            Celtic descent. They are the founding director of Sacbe Ceremonial
             Cacao, set up in 2020 after developing a relationship with sacred
             Cacao during 2017 whilst living in Mexico.
           </p>
@@ -99,7 +100,12 @@ function HostBioPopup() {
             Neuro-Somatic Coach. Holding a BA in Dance + Professional Practice,
             with over 20 years experience in various movement, somatic, sound +
             energy healing modalities, they intuitively weave what is needed
-            into the landscape of their.
+            into the landscape of their offerings.
+          </p>
+          <p className="mt-5">
+            Luzura’s Path is in devotion to dissolving the structures of
+            separation and oppression; advocating for ecological harmony, unity
+            & freedom for all beings on Earth.
           </p>
         </div>
       </Modal>

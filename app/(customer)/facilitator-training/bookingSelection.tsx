@@ -68,10 +68,10 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
 
         <div className="mx-3 ">
           <p>
-            Embarking on this journey is a significant step, and we have made
-            the booking process as smooth and flexible as possible. Discover the
-            details below to begin your transformative experience with Sacbe
-            Cacao
+            Embarking on this journey is a significant step, and so we have
+            aimed to make the enrolment process as smooth and flexible as
+            possible. Discover our self adjusting deposit and payment options
+            below and enjoy an early bird saving of £200 until January 31st.
           </p>
           <div className="bg-onPrimary/70 mt-5 mb-10 md:mb-0 md:mt-0 border rounded-lg px-4">
             <TestimonialQuote quote="Luzura's non-judgmental listening and insightful guidance underscore the value of this training, making the investment a gateway to personal and spiritual growth." />
@@ -85,7 +85,8 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
 
             <p className="text-xs mb-10 ">
               If you are unsure or need more info we offer a free 20 minute
-              discovery call, where we can answer any questions you may have.
+              discovery call with Luzura, where they can answer any questions
+              you may have.
             </p>
           </div>
           <div className="hidden md:block">

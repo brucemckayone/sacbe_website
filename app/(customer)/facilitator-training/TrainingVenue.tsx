@@ -12,19 +12,11 @@ const slides: ISlide[] = [
     image: "/training/venue/2.webp",
   },
   {
-    title: "Culinary Comforts",
-    buttonLink: "/training/accommodation",
-    buttonText: "Explore Accommodations",
-    description:
-      "Cozy, fully-equipped kitchen to nourish and gather in warmth during your stay.",
-    image: "/training/venue/3.webp",
-  },
-  {
     title: "Gather and Nourish",
     buttonLink: "/training/accommodation",
     buttonText: "View Kitchen",
     description:
-      "Delight in our inviting kitchen, the heart of communal culinary creation.",
+      "Experience the delight of our inviting kitchen, where our chef will be creating vegan soul food.",
     image: "/training/venue/4.webp",
   },
   {
@@ -87,8 +79,7 @@ const slides: ISlide[] = [
     title: "Tranquil Twin Stay",
     buttonLink: "/training/accommodation",
     buttonText: "View Room",
-    description:
-      "A serene twin room with soft floral touches, offering a peaceful retreat.",
+    description: "A serene twin room with soft floral touches.",
     image: "/training/venue/12.webp",
   },
 ];

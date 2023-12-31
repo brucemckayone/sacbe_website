@@ -19,11 +19,12 @@ export function HeaderBody() {
           className="object-contain w-8/12 m-auto"
         />
         <p className="text-white text-center md:mx-10 p-1 m-3 backdrop-blur-lg bg-black/30 backdrop-filter rounded-xl">
-          18th-24th May 2024, <br /> Aberdeenshire Scotland.
+          18th-24th May 2024, <br /> Aberdeenshire Scotland
         </p>
         <p className="text-onPrimary text-center my-2 font-display md:text-xl">
           Gain deep insights and skills for leading sacred Cacao journeys,
-          honoring its ancient lineage and wisdom.
+          honoring <br className="md:hidden" />
+          its ancient <br className="hidden md:block" /> lineage & wisdom.
         </p>
         <div className="flex-col  m-auto text-center justify-center ">
           <div className="mt-3 mb-10 w-8/12 m-auto">

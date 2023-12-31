@@ -50,6 +50,12 @@ export function AccomidationChoiceCard(props: {
           <p className="text-xs"> min deposit: £{props.room.deposit}</p>
         </div>
       </div>
+      {props.room.name === "Private Double Room" && (
+        <p className="text-xs text-left w-9/12">
+          Requests for shared option can be placed in the booking notes along
+          with additional persons name + email. Price listed is per person.
+        </p>
+      )}
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function TrainingAssistingRole() {
             well to help with various tasks such as setting up + clearing of
             spaces, making cacao + altar creation, building + tending fires.
             Luzura will contact those who express interest to arrange a call
-            interview to access suitability.
+            interview to assess suitability.
           </p>
           <BulletPoints
             bulletPoints={[

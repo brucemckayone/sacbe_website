@@ -57,9 +57,9 @@ export default function TrainingTheExperiance() {
                 "3 months integration support post in-person training, including guidance on  facilitator self care, how to market your offerings in an aligned way, ways to continue practising reciprocity and responsibility and opportunities to facilitate 1:1 + group journeys with Cacao and receive feedback. Additionally, you will receive free entry to monthly online Cacao Circles with Luzura from the moment you sign up and beyond completion of your training.",
             },
             {
-              name: "Handpoke Tattoo",
+              name: "Sacred Marking",
               effect:
-                "Receive a handpoke tattoo from Luzura, as a symbol of your commitment to the path of Cacao.",
+                "Option to receive a ceremonial hand poke tattoo from Luzura. A sacred marking to seal and honour your devotion to the medicine of Cacao + Path of the heart.",
             },
           ]}
         />
