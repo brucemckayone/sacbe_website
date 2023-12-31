@@ -9,6 +9,7 @@ export interface ICreateCheckoutParams {
   discount?: string | null | undefined;
   hasShipping?: boolean;
   hasReferalFeild?: boolean;
+  hasCustomerNotes?: boolean;
   metaData?: Record<string, any> | undefined;
 }
 
@@ -20,6 +21,7 @@ export interface IPOSTCreateCheckoutParams {
   discount?: string;
   hasShipping?: boolean;
   hasReferalFeild?: boolean;
+  hasCustomerNotes?: boolean;
   metaData?: Record<string, any> | undefined;
 }
 
@@ -30,6 +32,7 @@ export interface IGETCreateCustomCheckoutParams {
   hasShipping?: boolean;
   duration: number;
   metaData?: Record<string, any> | undefined;
+  hasCustomerNotes?: boolean;
 }
 
 export const referalFeild: Stripe.Checkout.SessionCreateParams.CustomField = {
@@ -41,6 +44,17 @@ export const referalFeild: Stripe.Checkout.SessionCreateParams.CustomField = {
   type: "text",
   optional: true,
 };
+
+export const customerNotesFeild: Stripe.Checkout.SessionCreateParams.CustomField =
+  {
+    key: "notes",
+    label: {
+      custom: "Sharing a room? Provide contact info.",
+      type: "custom",
+    },
+    type: "text",
+    optional: true,
+  };
 
 export default class StripeCheckoutApiHelper {
   private stripe: Stripe;
@@ -68,9 +82,7 @@ export default class StripeCheckoutApiHelper {
       cancel_url: `${homeUrl}/cancelled/checkout?session_id={CHECKOUT_SESSION_ID}`,
       payment_method_types: ["card"],
       mode: "subscription",
-      custom_fields: [
-        referalFeild,
-      ] as Stripe.Checkout.SessionCreateParams.CustomField[],
+      custom_fields: getCustomFeilds(true, body.hasCustomerNotes),
       line_items: [
         {
           price_data: {
@@ -171,6 +183,7 @@ export default class StripeCheckoutApiHelper {
         metaData: body.metaData,
         hasShipping: body.hasShipping,
         hasReferalFeild: body.hasReferalFeild,
+        hasCustomerNotes: body.hasCustomerNotes,
       })
     );
 
@@ -252,6 +265,7 @@ export default class StripeCheckoutApiHelper {
       metaData,
       hasShipping,
       hasReferalFeild,
+      hasCustomerNotes,
     } = input;
 
     let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
@@ -300,7 +314,7 @@ export default class StripeCheckoutApiHelper {
         allowed_countries: ["GB"],
       },
       metadata: metaData,
-      custom_fields: hasReferalFeild ? [referalFeild] : undefined,
+      custom_fields: getCustomFeilds(hasReferalFeild, hasCustomerNotes),
       customer: undefinedCheck(customerId) ? customerId! : undefined,
       customer_update: undefinedCheck(customerId)
         ? {
@@ -396,4 +410,16 @@ export default class StripeCheckoutApiHelper {
       );
     }
   }
+}
+export function getCustomFeilds(
+  hasReferalFeild: boolean | undefined,
+  hasCustomerNotes: boolean | undefined
+): Stripe.Checkout.SessionCreateParams.CustomField[] | undefined {
+  if (hasReferalFeild && hasCustomerNotes) {
+    return [referalFeild, customerNotesFeild];
+  } else if (hasReferalFeild) {
+    return [referalFeild];
+  } else if (hasCustomerNotes) {
+    return [customerNotesFeild];
+  } else return undefined;
 }

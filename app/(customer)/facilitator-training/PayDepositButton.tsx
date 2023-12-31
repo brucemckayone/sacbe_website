@@ -177,6 +177,7 @@ export function PayDepositButton(props: {
                     duration: duration + 1,
                   },
                   hasShipping: false,
+                  hasCustomerNotes: props.currentRoom?.uuid == "doublePrivate",
                 },
               });
               location.href = checkout.data.url;

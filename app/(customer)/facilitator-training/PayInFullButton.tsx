@@ -1,5 +1,6 @@
 "use client";
 import api from "@/lib/apiSchema/apiSchema";
+import testSwitch from "@/utils/test/TestSwitch";
 import toast from "react-hot-toast";
 
 export function PayInFullButton(props: {
@@ -19,12 +20,13 @@ export function PayInFullButton(props: {
               mode: "payment",
               prices: [props.currentRoom?.id!],
               qty: 1,
-              discount: "RtQp0C00",
+              discount: testSwitch({ live: "RtQp0C00", test: "WHNKm2JA" }),
               metaData: {
                 roomType: props.currentRoom?.uuid,
               },
               hasShipping: false,
               hasReferalFeild: true,
+              hasCustomerNotes: props.currentRoom?.uuid == "doublePrivate",
             },
           });
           location.href = checkout.data.url;
