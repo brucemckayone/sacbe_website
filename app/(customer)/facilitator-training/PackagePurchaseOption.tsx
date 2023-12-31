@@ -1,7 +1,7 @@
 "use client";
 import toast from "react-hot-toast";
 import { AccomidationChoiceCard } from "./AccomidationChoiceCard";
-import { isEarlyBird, RoomOptionType } from "./bookingSelection";
+import { RoomOptionType } from "./bookingSelection";
 
 export function PackagePurchaseOption(props: {
   roomOptions: RoomOptionType[];
