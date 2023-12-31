@@ -27,14 +27,12 @@ export function PackagePurchaseOption(props: {
         {props.roomOptions.length > 0 &&
           props.roomOptions.map((room) => {
             return (
-              <div>
-                <AccomidationChoiceCard
-                  key={room.id}
-                  selectedId={props.selectedId}
-                  handleSelect={handleSelect}
-                  room={room}
-                />
-              </div>
+              <AccomidationChoiceCard
+                key={room.id}
+                selectedId={props.selectedId}
+                handleSelect={handleSelect}
+                room={room}
+              />
             );
           })}
       </div>
