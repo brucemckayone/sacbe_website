@@ -108,7 +108,8 @@ export class AffiliateRequestHelper {
       return {
         ok: true,
         status: "success",
-        message: "affiliate status Updated messaging complete",
+        message:
+          "affiliate status Updated messaging complete status: " + body.status,
         data: null,
       };
     } catch (e) {
