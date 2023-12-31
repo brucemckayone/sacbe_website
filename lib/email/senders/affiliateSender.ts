@@ -26,11 +26,13 @@ export default class AffiliateSender {
 
   async sendRequestMade(email: string, status?: "active" | "pending") {
     this.email.send({
-      bodyMessage: `Affiliate Request: "pending"`,
+      bodyMessage: `Affiliate Request: ${status ? status : "pending"}`,
       htmlContent: affiliate_update_status({
         status: status ? status : "pending",
       }),
-      subject: ` Affiliate Status has been updated: 'pending'`,
+      subject: ` Affiliate Status has been updated: ${
+        status ? status : "pending"
+      }`,
       to: email,
       replayTo: "no-reply@sacbe-ceremonial-cacao.com",
       sender: '"Sacbe Cacao ☕" <no-reply@sacbe-ceremonial-cacao.com>',
