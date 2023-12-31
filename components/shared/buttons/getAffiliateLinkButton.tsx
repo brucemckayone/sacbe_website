@@ -38,7 +38,7 @@ function AffiliateStatusChecker() {
                   status == "pending"
                     ? `bg-errorContainer`
                     : "bg-recommendedGreen"
-                } rounded-lg p-2 `}
+                } rounded-lg p-2 text-black `}
               >
                 <p>status: {status}</p>
               </div>
@@ -67,7 +67,7 @@ function AffiliateStatusChecker() {
                     status == "pending"
                       ? `bg-errorContainer`
                       : "bg-recommendedGreen"
-                  } rounded-lg p-2 `}
+                  } rounded-lg p-2 text-black `}
                 >
                   <p>status: {status}</p>
                 </div>
