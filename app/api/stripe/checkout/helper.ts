@@ -316,8 +316,8 @@ export default class StripeCheckoutApiHelper {
         ...payload,
         // payment_method_types: ["card",  "afterpay_clearpay", "klarna", "],
         customer_creation: undefinedCheck(customerId)
-          ? "if_required"
-          : undefined,
+          ? undefined
+          : "if_required",
         shipping_options: !hasShipping
           ? undefined
           : [
