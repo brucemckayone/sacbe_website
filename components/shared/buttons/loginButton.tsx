@@ -11,6 +11,7 @@ export default function LoginButton() {
   const { data } = useSession();
   const [isLoading, setIsLoading] = useState(false);
   const user = useUser();
+
   const pathname = usePathname();
   const isLoggedIn = data != null; //data?.user?.email != null;
 
@@ -21,7 +22,7 @@ export default function LoginButton() {
           <Popover.Target>
             <div className="m-1">
               <Avatar
-                src={null}
+                src={data.user?.image ?? null}
                 alt="no image here"
                 color={"orange"}
                 className="rounded-full bg-transparent align-bottom h-[45px] w-[45px] shadow-lg hover:drop-shadow-lg duration-200"
@@ -34,6 +35,15 @@ export default function LoginButton() {
                 className="text-start py-2 mx-5 "
                 aria-labelledby="dropdown-button"
               >
+                {user.isLoading ? (
+                  <div></div>
+                ) : (
+                  <div>
+                    <li className="text-sm  rounded  bg-white -ml-4 -mt-1">
+                      {user.user.email}
+                    </li>
+                  </div>
+                )}
                 {!user.isLoading &&
                 (user.user.wholesale || user.user.affiliateStatus) ? (
                   <div>
