@@ -24,8 +24,7 @@ export function HeaderBody() {
         </p>
         <p className="text-onPrimary text-center my-2 font-display md:text-xl">
           Gain deep insights and skills for leading sacred Cacao journeys,
-          honoring <br className="md:hidden" />
-          its ancient <br className="hidden md:block" /> lineage & wisdom.
+          honoring its ancient lineage & wisdom.
         </p>
         <div className="flex-col  m-auto text-center justify-center ">
           <div className="mt-3 mb-10 w-8/12 m-auto">
