@@ -7,7 +7,6 @@ import TrainingIntroduction from "./TrainingIntroduction";
 import TrainingTheExperiance from "./TrainingTheExperiance";
 import TrainingVenue from "./TrainingVenue";
 import BookingInformation from "./BookingInformation";
-// ... other imports ...
 
 function TrainingPage() {
   const infoRef = useRef(null);

@@ -9,6 +9,7 @@ import { EarlyBirdCountdownTimer } from "./AccomidationChoiceCard";
 export function HeaderBody() {
   return (
     <div className="w-11/12 md:w-/12 lg:w-7/12  p-2 md:p-10">
+      <h1 className="text-[0px]">Cacao Facilitator Training</h1>
       <div className="rounded-lg object-contain w-full md:w-7/12 lg:w-6/12 m-auto  border-y bg-onPrimaryContainer/10 backdrop-blur-sm backdrop-filter border-onPrimary/30">
         <Image
           src={logo}
