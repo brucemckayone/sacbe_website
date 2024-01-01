@@ -61,11 +61,11 @@ function IntroductionBody() {
         ></Image>
       </div>
       <h2 className="text-3xl md:text-4xl mt-5 lg:text-5xl visible md:hidden">
-        The Heart of The Earth
+        Heart of The Earth
       </h2>
       <div className="flex flex-col justify-center w-full m-auto md:w-6/12 md:mx-10 md:my-0">
         <h2 className="text-3xl md:text-4xl lg:text-5xl  hidden md:block">
-          The Heart of The Earth
+          Heart of The Earth
         </h2>
         <p className="mt-3">
           Join our founder Luzura Laguz Peralta this Spring to learn all the
@@ -78,8 +78,8 @@ function IntroductionBody() {
           profound change on Earth. Becoming one who serves Cacao is one who is
           supporting the dream of the Earth; who deeply desires to heal. Help
           Cacao’s mission to guide humanity deeper into love and truth, so we
-          may create what Charles Eistenstein said to be “the more beautiful
-          world our hearts know is possible”.
+          may collectively create what Charles Eistenstein coined as “the more
+          beautiful world our hearts know is possible
         </p>
         <IntroQuestions />
         <TestimonialQuote quote="Luzura's passion and wisdom in the Cacao Facilitator Training truly illuminated the depth and cultural significance of ceremonial grade cacao." />
