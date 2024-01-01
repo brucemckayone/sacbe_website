@@ -83,7 +83,6 @@ function IntroductionBody() {
         </p>
         <IntroQuestions />
         <TestimonialQuote quote="Luzura's passion and wisdom in the Cacao Facilitator Training truly illuminated the depth and cultural significance of ceremonial grade cacao." />
-        <HostBioPopup />
 
         <div>
           <h5 className="mt-5 mb-2 text-lg md:text-xl lg:text-2xl">
@@ -110,6 +109,7 @@ function IntroductionBody() {
             ]}
           />
         </div>
+        <HostBioPopup />
       </div>
     </div>
   );

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { SocialContactPill } from "../facilitators/SocialContactPill";
+
 import Link from "next/link";
 function HostBioPopup() {
   const [open, { toggle, close }] = useDisclosure();
@@ -89,7 +89,7 @@ function HostBioPopup() {
             America under the guidance of elder (abeula) Sofia Hernandez of the
             Totzil peoples of Chiapas, Mexico. They are a keeper of sacred Maya
             time (Known as Chol Q&apos;ij in Ki&apos;che Maya + Tzolk&apos;in in
-            Yucatec Maya) ) which informs their personal practice + how they
+            Yucatec Maya) which informs their personal practice + how they
             conduct the ceremonial space, as a way of honouring the lineage +
             wisdom keepers of Cacao.
           </p>

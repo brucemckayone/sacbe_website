@@ -35,11 +35,12 @@ export default function TrainingInformation() {
             },
             {
               name: "Healing Spaces",
-              effect: "Techniques for creating transformative healing spaces.",
+              effect:
+                "What to consider when to create welcoming, safe and transformative healing spaces. How to correctly open and close ceremonial space and create structures that support your intentions. Learn the basics of crafting and tending to altars, as well as creating energetic structures you can create to charge and protect the space. Discover how to guide working with the elements through ritual and embodiment work.",
             },
             {
               name: "Trauma-Informed Practices",
-              effect: "Learning trauma-informed somatic healing practices.",
+              effect: "Learn trauma-informed somatic healing practices.",
             },
             {
               name: "Mayan Calendar Integration",
@@ -50,12 +51,12 @@ export default function TrainingInformation() {
             {
               name: "Medicine Songs:",
               effect:
-                "Deepen your personal practice and up level your facilitation",
+                "Deepen your personal practice and up level your facilitation.",
             },
             {
               name: "Plant Study",
               effect:
-                "Discover the role of other plant allies + ways to work with them to enhance your ceremonies. From synergetic plants and fungi to use in Cacao recipes to learning elemental cleansing “Limpia” rituals working with Fire, Earth, Water + Air. You will receive an initiation into working with sacred smoke through learning how to use the Copalera / Popoxcomitl and create incense mixes “Sahumerio” using dried herbs and plants.",
+                "Discover the role of other plant allies + ways to work with them to enhance your ceremonies. From synergetic plants and fungi to use in Cacao recipes to learning elemental cleansing “Limpia” rituals working with Fire, Earth, Water + Air. You will receive an initiation into working with sacred smoke through learning how to use the Copalera / Popoxcomitl and create incense mixes  “Sahumerio” using dried herbs and plants.",
             },
           ]}
         />
