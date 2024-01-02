@@ -10,10 +10,10 @@ function HostBioPopup() {
   return (
     <>
       <button
-        className="w-full border my-5 p-2 bg-white hover:bg-black hover:text-white duration-500 rounded-lg shadow"
+        className="w-full border my-5 p-2 bg-white hover:bg-black border-black hover:text-white duration-500 rounded-lg shadow-lg"
         onClick={toggle}
       >
-        LEARN ABOUT HOST
+        MORE ABOUT LUZURA
       </button>
       <Modal opened={open} onClose={close} size={900} className="m-0">
         <div className="p-5 rounded-xl shadow-2xl ">

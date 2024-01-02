@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   title: "Affiliate Program",
   description: description,
   keywords: [
-    "Sacbe Ambassador Program",
+    "Sacbe Affiliate Program",
     "ceremonial cacao",
     "Make money with cacao",
     "affiliate program",

@@ -67,7 +67,11 @@ type TimeLeft = {
   seconds?: number;
 };
 
-export const EarlyBirdCountdownTimer = () => {
+export const EarlyBirdCountdownTimer = ({
+  isDark = true,
+}: {
+  isDark: boolean;
+}) => {
   const calculateTimeLeft = (): TimeLeft => {
     const difference = +new Date("2024-01-31") - +new Date();
     let timeLeft = {};
@@ -98,19 +102,23 @@ export const EarlyBirdCountdownTimer = () => {
     .filter((key) => timeLeft[key] !== undefined)
     .map((key) => (
       <div key={key} className="flex flex-col items-center">
-        <div className=" text-sm  font-bold transition-transform transform duration-500 ease-out">
+        <div className=" text-xl  font-bold transition-transform transform duration-500 ease-out">
           {timeLeft[key]}
         </div>
         <div className="text-sm uppercase">{key}</div>
       </div>
     ));
 
-  if (!isEarlyBird())
+  if (isEarlyBird())
     return (
-      <div className="flex-col md:flex-row justify-between bg-recommendedGreen border md:border-none md:bg-transparent md:p-0 rounded-2xl shadow-lg md:shadow-none ">
-        <div className=" md:bg-recommendedGreen/70 md:border rounded-2xl text-left p-1 px-5">
-          <h4 className="">Early Bird Discount: </h4>
-          <div className=" flex p-2  space-x-3">{timeComponents}</div>
+      <div
+        className={`${
+          isDark ? "text-white border-gray-400" : "text-black border-black"
+        } md:border rounded-2xl text-center p-1 px-5`}
+      >
+        <h4 className="">Early Bird Discount </h4>
+        <div className=" flex justify-center   p-2 space-x-3">
+          {timeComponents}
         </div>
       </div>
     );

@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Loader, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
@@ -8,7 +7,8 @@ import { useUser } from "@/components/shared/auth/UserProvider";
 import TextInput from "@/components/shared/form/inputs/TextInput";
 import api from "@/lib/apiSchema/apiSchema";
 import toast from "react-hot-toast";
-import { isAfterJan3rd } from "./bookingSelection";
+import { isAfterJan3rd530 } from "./bookingSelection";
+import SmallButton from "@/components/shared/buttons/small_button";
 
 export default function JoinWaitlistButton() {
   const buttonstyle =
@@ -48,7 +48,20 @@ export default function JoinWaitlistButton() {
 
   if (status === "loading") return <Loader className=" w-full m-auto" />;
 
-  if (!user || (status === "unauthenticated" && !isAfterJan3rd()))
+  if (isAfterJan3rd530())
+    return (
+      <button
+        onClick={() => {
+          scrollBy({ top: 1000, behavior: "smooth" });
+        }}
+        className={buttonstyle}
+      >
+        {" "}
+        Discover Training
+      </button>
+    );
+
+  if (!user || (status === "unauthenticated" && !isAfterJan3rd530()))
     return (
       <>
         <Modal opened={opened} onClose={close} title="Join Waitlist" size="md">

@@ -13,12 +13,12 @@ import { TestimonialQuote } from "./TestimonialQuote";
 
 /**
  * Checks if the current date is before January 3rd, 2024.
- * @returns {boolean} Returns true if the current date is before January 3rd, 2024; otherwise, returns false.
+ * @returns {boolean} True if the current date is before January 3rd, 2024; otherwise, false.
  */
 export function isEarlyBird(): boolean {
   const currentDate = new Date();
-  const jan3rd = new Date(2024, 0, 31);
-  return currentDate < jan3rd;
+  const jan31st = new Date(2024, 0, 31);
+  return currentDate < jan31st;
 }
 
 export type RoomOptionType = {
@@ -32,9 +32,9 @@ export type RoomOptionType = {
   features: string[];
 };
 
-export function isAfterJan3rd(): boolean {
+export function isAfterJan3rd530(): boolean {
   const currentDate = new Date();
-  const jan3rd = new Date(2024, 0, 3);
+  const jan3rd = new Date(2024, 0, 3, 5, 30, 0, 0);
   return currentDate > jan3rd;
 }
 
@@ -62,11 +62,18 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
   return (
     <div className="flex flex-col md:flex-row justify-around ">
       <div className="w-full md:w-5/12 md:ml-10">
-        <h3 className="pt-5 px-2 mb-2 text-stroke-3 text-7xl text-sacbeBrandColor">
-          Invest In Yourself
+        <h3 className="pt-5 px-2 mb-1 text-stroke-3 text-[45px] leading-10 md:text-7xl text-sacbeBrandColor">
+          Leadership for Earth's Awakening
         </h3>
+        <h4 className=" px-3"> An Initiation to the Path of Cacao</h4>
 
         <div className="mx-3 ">
+          <p className="mb-3">
+            Our shamanic oriented training is for those individuals who are
+            already in deep relationship with Cacao. And who are ready to truly
+            take on these teachings with reverence in service to our collective
+            transformation on Earth.
+          </p>
           <p>
             Embarking on this journey is a significant step, and so we have
             aimed to make the enrolment process as smooth and flexible as
@@ -111,7 +118,9 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
               howMuchIsDonatedToClimateChange={currentRoom?.price ?? 1 / 100}
             />
           </div>
-          <EarlyBirdCountdownTimer />
+          <div className="mt-5">
+            <EarlyBirdCountdownTimer isDark={false} />
+          </div>
         </div>
       </div>
 
@@ -121,7 +130,7 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
           selectedId={selectedId}
           setSelectedId={setSelectedId}
         />
-        {!isAfterJan3rd() ? (
+        {!isAfterJan3rd530() ? (
           <div className="my-5 m-auto w-10/12">
             <JoinWaitlistButton />
           </div>

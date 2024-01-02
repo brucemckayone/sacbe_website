@@ -7,6 +7,7 @@ import menuItems from "@/lib/constants/menu";
 import LoginButton from "../buttons/loginButton";
 import { EarlyBirdCountdownTimer } from "@/app/(customer)/facilitator-training/AccomidationChoiceCard";
 import JoinWaitlistButton from "@/app/(customer)/facilitator-training/JoinWaitlistButton";
+import { isAfterJan3rd530 } from "@/app/(customer)/facilitator-training/bookingSelection";
 
 export default function Navbar() {
   // const SearchBar = dynamic(() =>
@@ -98,9 +99,9 @@ export default function Navbar() {
                     </Link>
                     {item.text == "Training" && (
                       <div className="w-11/12 md:w-6/12 mt-4">
-                        <EarlyBirdCountdownTimer />
+                        <EarlyBirdCountdownTimer isDark={false} />
                         <div className="mt-2">
-                          <JoinWaitlistButton />
+                          {!isAfterJan3rd530() && <JoinWaitlistButton />}
                         </div>
                       </div>
                     )}

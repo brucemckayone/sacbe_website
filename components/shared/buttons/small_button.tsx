@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, MouseEvent } from "react";
 import { SmallButtonLoader } from "../loaders/ButtonLoader";
 
