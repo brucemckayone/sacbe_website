@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function TrainingTheExperiance() {
   return (
     <section className="w-11/12 m-auto my-10 md:my-36 py-10 md:px-2 justify-between flex flex-col md:flex-row x-2 md:bg-secondaryContainer/30 md:shadow md:rounded-3xl">
-      <div className="w-full md:w-6/12 md:mx-10  ">
+      <div className="w-full m-auto md:w-6/12 md:mx-10  ">
         <Image
           src={"/training/previous/1.jpeg"}
           height={500}
@@ -15,7 +15,7 @@ export default function TrainingTheExperiance() {
         />
       </div>
 
-      <div className="w-11/12 md:w-6/12 md:mr-10">
+      <div className="w-full m-auto md:w-6/12 md:mr-10">
         <h3 className="mb-5 h-3 mt-5 md:mt-0">The Experience</h3>
         <p>
           You will be guided to discover your own way of holding space;

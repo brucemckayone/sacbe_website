@@ -25,7 +25,7 @@ export const BulletPoints: React.FC<IBulletPointsProps> = ({
             </span>
             <p className="flex-1 md:my-2">
               <span className="font-bold md:text-xl">{point.name}</span>:{" "}
-              <span className="text-lg md:text-lg">{point.effect}</span>
+              {point.effect}
             </p>
           </li>
         ))}
