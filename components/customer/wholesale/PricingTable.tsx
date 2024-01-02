@@ -114,7 +114,7 @@ export function WholesalePricingTable() {
                 <td className="px-6 py-4">£65</td>
                 <td className="px-6 py-4">£{117 * 5}</td>
                 <td className="px-6 py-4">£325</td>
-                <td className="px-6 py-4">£{325 - 117 * 5}</td>
+                <td className="px-6 py-4">£{117 * 5 - 325}</td>
               </tr>
               <tr className="bg-surface border-b ">
                 <th
@@ -126,7 +126,7 @@ export function WholesalePricingTable() {
                 <td className="px-6 py-4">£65</td>
                 <td className="px-6 py-4">£{117 * 10}</td>
                 <td className="px-6 py-4">£650</td>
-                <td className="px-6 py-4">£{650 - 117.1}</td>
+                <td className="px-6 py-4">£{117.1 * 10 - 650}</td>
               </tr>
               <tr className="bg-surface border-b ">
                 <th
@@ -138,7 +138,7 @@ export function WholesalePricingTable() {
                 <td className="px-6 py-4">£65</td>
                 <td className="px-6 py-4">£{117 * 15}</td>
                 <td className="px-6 py-4">£975</td>
-                <td className="px-6 py-4">£{975 - 117.15 * 15}</td>
+                <td className="px-6 py-4">£{117.15 * 15 - 975}</td>
               </tr>
               <tr className="bg-surface border-b ">
                 <th
@@ -150,7 +150,7 @@ export function WholesalePricingTable() {
                 <td className="px-6 py-4">£65</td>
                 <td className="px-6 py-4">£{117 * 20}</td>
                 <td className="px-6 py-4">£1300</td>
-                <td className="px-6 py-4">£{1300 - 117 * 20}</td>
+                <td className="px-6 py-4">£{117 * 20 - 1300}</td>
               </tr>
             </tbody>
           </table>

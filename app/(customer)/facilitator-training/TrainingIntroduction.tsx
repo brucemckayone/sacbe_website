@@ -18,10 +18,12 @@ export interface ISlide {
   ref?: React.RefObject<HTMLDivElement>;
 }
 
-function IntroQuestions() {
+function IntroQuestions({ className }: { className?: string }) {
   return (
-    <div className=" border bg-white rounded-lg p-2 my-5">
-      <ul className="list-disc ml-0 font-body space-y-2 text-gray-700">
+    <div
+      className={`border bg-white rounded-lg p-2 my-5 mb-16 md:mb-0 ${className}`}
+    >
+      <ul className="list-disc ml-0 font-body space-y-2 text-gray-700 font-bold">
         <li className="flex items-start ">
           <span className="mr-2">+</span>
           <p>
@@ -52,13 +54,14 @@ function IntroductionBody() {
   return (
     <div className="w-11/12 m-auto my-10 md:my-36 py-10 md:px-2 justify-between flex flex-col md:flex-row-reverse  md:bg-secondaryContainer/30 md:shadow md:rounded-3xl">
       <div className="w-full md:w-6/12 md:mr-10 ">
+        <IntroQuestions className="md:hidden" />
         <Image
           src={"/home_header/home_page_header_image_10.jpg"}
           height={500}
           width={500}
           alt={" An image of a person working with cacao"}
           className="rounded-lg object-cover w-full h-full"
-        ></Image>
+        />
       </div>
       <h2 className="text-3xl md:text-4xl mt-5 lg:text-5xl visible md:hidden">
         Heart of The Earth
@@ -67,6 +70,7 @@ function IntroductionBody() {
         <h2 className="text-3xl md:text-4xl lg:text-5xl  hidden md:block">
           Heart of The Earth
         </h2>
+        <IntroQuestions className="hidden md:block" />
         <p className="mt-3">
           Join our founder Luzura Laguz Peralta this Spring to learn all the
           practicalities, tools and knowledge you need to start holding
@@ -81,7 +85,7 @@ function IntroductionBody() {
           may collectively create what Charles Eistenstein coined as “the more
           beautiful world our hearts know is possible
         </p>
-        <IntroQuestions />
+
         <TestimonialQuote quote="Luzura's passion and wisdom in the Cacao Facilitator Training truly illuminated the depth and cultural significance of ceremonial grade cacao." />
 
         <div>
@@ -115,7 +119,7 @@ function IntroductionBody() {
   );
 }
 
-function TrainingIntroduction(props: {
+export function NavigationSlider(props: {
   venueRef: React.MutableRefObject<null>;
   foodRef: React.MutableRefObject<null>;
   experianceRef: React.MutableRefObject<null>;
@@ -168,10 +172,15 @@ function TrainingIntroduction(props: {
     },
   ];
   return (
+    <div className="mb-10 w-11/12 m-auto">
+      <SmoothCarousel slides={slides} />
+    </div>
+  );
+}
+
+function TrainingIntroduction() {
+  return (
     <section className="mt-20 md:mt-36">
-      <div className="mb-10 w-11/12 m-auto">
-        <SmoothCarousel slides={slides} />
-      </div>
       <IntroductionBody />
     </section>
   );

@@ -3,7 +3,7 @@ import React, { Suspense, useRef } from "react";
 import TrainingAssistingRole from "./TrainingAssistantOption";
 import { TrainingHeader } from "./TrainingHeader";
 import TrainingInformation from "./TrainingInformation";
-import TrainingIntroduction from "./TrainingIntroduction";
+import TrainingIntroduction, { NavigationSlider } from "./TrainingIntroduction";
 import TrainingTheExperiance from "./TrainingTheExperiance";
 import TrainingVenue from "./TrainingVenue";
 import BookingInformation from "./BookingInformation";
@@ -19,13 +19,7 @@ function TrainingPage() {
     <div>
       <TrainingHeader />
       <div>
-        <TrainingIntroduction
-          venueRef={venueRef}
-          foodRef={foodRef}
-          experianceRef={experienceRef}
-          trainingRef={infoRef}
-          bookingRef={bookingRef}
-        />
+        <TrainingIntroduction />
       </div>
       <div ref={infoRef}>
         <TrainingInformation />
@@ -43,6 +37,13 @@ function TrainingPage() {
         </Suspense>
       </div>
       <TrainingAssistingRole />
+      <NavigationSlider
+        bookingRef={bookingRef}
+        experianceRef={experienceRef}
+        venueRef={venueRef}
+        foodRef={foodRef}
+        trainingRef={infoRef}
+      />
     </div>
   );
 }

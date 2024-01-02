@@ -108,7 +108,7 @@ export default function TrainingVenue(props: {
         <div className="flex flex-col md:flex-row mt-10 justify-around w-full">
           <div className="hidden md:flex w-full md:w-1/2">
             <Image
-              src={"/home_header/home_page_header_image_1.jpg"}
+              src={"/home_header/home_page_header_image_21.jpg"}
               alt={"A person working with ceremonial cacao"}
               width={1000}
               height={1000}

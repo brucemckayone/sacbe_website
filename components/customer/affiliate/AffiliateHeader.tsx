@@ -116,7 +116,7 @@ export function AffiliateHeader() {
         />
         <div className="absolute px-2 py-2 text-white bottom-0 md:bottom-32 md:left-28 backdrop-blur-sm backdrop-filter bg-black/20  shadow-2xl border-white w-full md:w-1/3">
           <h1 className="sm:text-center md:text-start text-4xl lg:text-6xl flex flex-wrap ">
-            SACBE AMBASSADOR PROGRAM
+            SACBE AFFILIATE PROGRAM
           </h1>
           <h2 className="text-xl font-bold mt-5">
             Join in the abundance of cacao
@@ -127,6 +127,7 @@ export function AffiliateHeader() {
             enticing rewards. Become a part of our affiliate community and share
             the profound benefits of ceremonial cacao with others.
           </p>
+          a
           <GenerateButton />
         </div>
       </div>

@@ -8,9 +8,9 @@ export default function TrainingAssistingRole() {
         <div className="space-y-4">
           <p>
             Ideal for those who are unable to afford the full cost of training.
-            I am Looking for someone who is efficient, organised + manages time
-            well to help with various tasks such as setting up + clearing of
-            spaces, making cacao + altar creation, building + tending fires.
+            We are looking for someone who is efficient, organised + manages
+            time well to help with various tasks such as setting up + clearing
+            of spaces, making cacao + altar creation, building + tending fires.
             Luzura will contact those who express interest to arrange a call
             interview to assess suitability.
           </p>

@@ -46,9 +46,9 @@ export function TrainingHeader() {
           src={headerImage}
           placeholder="blur"
           alt="Cacao Facilitator Training header image it is of a woman making ceremonial cacao"
-          className="object-cover rounded w-full h-[700px] md:h-[900px] z-10"
+          className="object-cover rounded w-full h-[800px] md:h-[900px] z-10"
         />
-        <div className="absolute inset-x-0 bottom-0 h-1/4 md:h-1/6 bg-gradient-to-t from- to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/4 md:h-1/6 bg-gradient-to-t from- to-transparent border-b-4 border-black" />
       </div>
       <div className="absolute w-full m-auto  bottom-0 md:bottom-10  px-10 z-30 flex flex-col items-center p-2 justify-center md:m-4">
         <HeaderBody />
