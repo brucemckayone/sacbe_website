@@ -32,12 +32,12 @@ export default function TrainingTheExperiance() {
                 "Practical sessions in preparing and serving ceremonial cacao. and history. To practical information about dosing, contradictions, and conversations on cultural appropriation",
             },
             {
-              name: "Rising Rituals:",
+              name: "Rising Rituals",
               effect:
                 " Each day will begin with a two hour devotional practice with Cacao, meditation, prayer, breath, movement, somatic experiencing, vocal toning + embodiment work. ",
             },
             {
-              name: "Attunement:",
+              name: "Attunement",
               effect:
                 "Experience opening + closing ceremonies with Cacao, Ecstatic Dance, Sound therapy, Group energy healing, and Elemental rituals to support your own wellbeing, healing and empowerment.",
             },

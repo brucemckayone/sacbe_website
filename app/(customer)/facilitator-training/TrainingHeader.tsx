@@ -53,7 +53,6 @@ export function TrainingHeader() {
       <div className="absolute w-full m-auto  bottom-0 md:bottom-10  px-10 z-30 flex flex-col items-center p-2 justify-center md:m-4">
         <HeaderBody />
       </div>
-      <NavMenuBottom />
     </section>
   );
 }

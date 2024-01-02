@@ -15,9 +15,7 @@ export default function TrainingInformation() {
       </div>
       <div className="w-full md:w-5/12 md:ml-10 px-2">
         <h3 className="mb-5 h-3 mt-5 md:mt-0">Pathway Home</h3>
-        <h5 className="mt-3  mb-2  underline">
-          Inside Our Facilitator Training
-        </h5>
+        <h5 className="mt-3  mb-2 ">Inside Our Facilitator Training</h5>
         <p>
           Delve into the heart of ceremonial cacao with a curriculum that is as
           enriching as it is enlightening. Our training program covers
@@ -49,7 +47,7 @@ export default function TrainingInformation() {
             },
 
             {
-              name: "Medicine Songs:",
+              name: "Medicine Songs",
               effect:
                 "Deepen your personal practice and up level your facilitation.",
             },
