@@ -63,7 +63,7 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
     <div className="flex flex-col md:flex-row justify-around ">
       <div className="w-full md:w-5/12 md:ml-10">
         <h3 className="pt-5 px-2 mb-1 text-stroke-3 text-[45px] leading-10 md:text-7xl text-sacbeBrandColor">
-          Leadership for Earth's Awakening
+          Leadership for Earth&apos;s Awakening
         </h3>
         <h4 className=" px-3"> An Initiation to the Path of Cacao</h4>
 

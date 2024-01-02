@@ -70,7 +70,7 @@ type TimeLeft = {
 export const EarlyBirdCountdownTimer = ({
   isDark = true,
 }: {
-  isDark: boolean;
+  isDark?: boolean;
 }) => {
   const calculateTimeLeft = (): TimeLeft => {
     const difference = +new Date("2024-01-31") - +new Date();
