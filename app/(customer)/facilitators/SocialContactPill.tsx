@@ -38,7 +38,7 @@ export function SocialContactPill(props: {
         </Link>
       )}
       {props.email && (
-        <Link href={`mailto:${props.whatsapp}`}>
+        <Link href={`https://wa.me/${props.whatsapp}`}>
           <FaWhatsapp className="w-5 h-5" />
         </Link>
       )}

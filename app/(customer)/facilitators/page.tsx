@@ -43,7 +43,7 @@ const facilitatorInfo: IFacilitatorInfo[] = [
     bio: "Stephanie holds cacao with blue lotus ceremonies in Bedfordshire, and monthly online events. She has spent the past 20 years travelling back and forth to Egypt and is currently studying Ancient Egyptian shamanism. She works with the Ancient Egyptian calendar, the deities and Heka (Ancient Egyptian magic). She also facilitates initiation journeys and sacred pilgrimages to Egypt.",
     contact: {
       email: "journeytoheka@outlook.com",
-      whatsapp: "07930676363",
+      whatsapp: "+447930676363",
     },
   },
 ];
@@ -66,7 +66,7 @@ function FacilitatorPage() {
                 width={200}
                 height={200}
                 alt={"image of the facilitator" + facilitator.name}
-                className="rounded-xl w-full m-auto object-cover h-96"
+                className="rounded-xl w-full m-auto object-cover md:h-[650px]"
               />
               <div className="p-2 flex-col justify-between">
                 <h3 className="text-onPrimaryContainer">{facilitator.name}</h3>
