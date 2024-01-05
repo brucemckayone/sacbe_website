@@ -7,9 +7,16 @@ import { SocialContactPill } from "./SocialContactPill";
 
 interface IFacilitatorInfo {
   name: string;
-  email?: string;
-  website: string;
-  social: { instagram?: string; facebook?: string; twitter?: string };
+  contact?: {
+    email?: string;
+    whatsapp?: string;
+  };
+  website?: string;
+  social: {
+    instagram?: string;
+    facebook?: string;
+    twitter?: string;
+  };
   bio: string;
   image: string;
 }
@@ -25,6 +32,20 @@ const facilitatorInfo: IFacilitatorInfo[] = [
     image: "/facilitators/SUSANFINALS-14.jpg",
     bio: "Susan holds deep sacred and safe space through her various online and in person offerings in East Lothian.  Join her for monthly women's circles, quarterly full day retreats or deep healing and transformation groups.",
   },
+  {
+    name: "Stephanie Harkin",
+    social: {
+      facebook: "https://www.facebook.com/profile.php?id=61550747162238",
+      instagram:
+        "https://www.instagram.com/journeytoheka?igsh=MXhvYXRzNmxibDE4aQ%3D%3D&utm_source=qr",
+    },
+    image: "/facilitators/steph.jpg", // You did not provide an image for Stephanie Harkin.
+    bio: "Stephanie holds cacao with blue lotus ceremonies in Bedfordshire, and monthly online events. She has spent the past 20 years travelling back and forth to Egypt and is currently studying Ancient Egyptian shamanism. She works with the Ancient Egyptian calendar, the deities and Heka (Ancient Egyptian magic). She also facilitates initiation journeys and sacred pilgrimages to Egypt.",
+    contact: {
+      email: "journeytoheka@outlook.com",
+      whatsapp: "07930676363",
+    },
+  },
 ];
 
 export const metadata = facilitatorPageMetadata;
@@ -38,13 +59,13 @@ function FacilitatorPage() {
           return (
             <div
               className="my-5 bg-primaryContainer/20 rounded-xl shadow"
-              key={facilitator.email}
+              key={facilitator.contact?.email}
             >
               <Image
                 src={facilitator.image}
                 width={200}
                 height={200}
-                alt={"image of the facilitator" + facilitator.email}
+                alt={"image of the facilitator" + facilitator.name}
                 className="rounded-xl w-full m-auto object-cover h-96"
               />
               <div className="p-2 flex-col justify-between">
@@ -55,13 +76,16 @@ function FacilitatorPage() {
                     instagram={facilitator.social.instagram}
                     facebook={facilitator.social.facebook}
                     twitter={facilitator.social.twitter}
-                    email={facilitator.email}
+                    email={facilitator.contact?.email}
+                    whatsapp={facilitator.contact?.whatsapp}
                   />
-                  <SmallLinkButton
-                    link={facilitator.website}
-                    text="Learn More"
-                    isPrimary={false}
-                  />
+                  {facilitator.website && (
+                    <SmallLinkButton
+                      link={facilitator?.website}
+                      text="Learn More"
+                      isPrimary={false}
+                    />
+                  )}
                 </div>
               </div>
             </div>
