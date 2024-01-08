@@ -25,14 +25,6 @@ export function WholeSaleForm(): JSX.Element {
 
   const { isLoading, user } = useUser();
 
-  // useEffect(() => {
-  //   fetchGetJSON(
-  //     `/api/wholesale/account?email=${session.data?.user?.email}`
-  //   ).then((res) => {
-
-  //   });
-  // }, [session]);
-
   return (
     <div className="flex flex-col">
       {session.status == "unauthenticated" ? (
@@ -66,20 +58,20 @@ export function WholeSaleForm(): JSX.Element {
             text="Go To Portal"
             url="/portal"
             key={"go to portal button "}
-          ></LinkButton>
+          />
         </div>
       );
     } else {
       if (user.wholesale != null || isSent) {
         return (
-          <div className="my-5">
+          <div className="my-5 text-black">
             <h3>Wholesale Request Status</h3>
             <p>
               Your whole sale request is is being processed, you will be
               notified by email when your request is processed
             </p>
 
-            <div className="flex justify-between bg-recommendedGreen rounded-lg p-4 my-4 drop-shadow-lg">
+            <div className="flex justify-between bg-recommendedGreen/70 rounded-lg p-4 my-4 drop-shadow-lg">
               <div>
                 <h5>Request Status</h5>
                 <p className="px-2">Your request has been sent</p>

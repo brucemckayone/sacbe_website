@@ -118,7 +118,7 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
               howMuchIsDonatedToClimateChange={currentRoom?.price ?? 1 / 100}
             />
           </div>
-          <div className="mt-5">
+          <div className="my-5">
             <EarlyBirdCountdownTimer isDark={false} />
           </div>
         </div>

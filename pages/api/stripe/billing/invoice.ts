@@ -18,6 +18,8 @@ export default async function handler(
       );
       res.status(200).json(invoice);
     } catch (e) {
+      console.log(e);
+
       res.status(200).json(false);
     }
   }
@@ -25,13 +27,13 @@ export default async function handler(
 
 type NewType = userType;
 
-type sendWholeSaleInvoiceType = {
+export type sendWholeSaleInvoiceType = {
   extraEmail: string;
   user: NewType;
-  bulk: {
+  bulk?: {
     qty: number;
   };
-  retail: {
+  retail?: {
     qty: number;
   };
   shipping: {
@@ -71,7 +73,7 @@ export async function sendWholeSaleInvoice({
         shipping_rate_data: {
           display_name: user.name ?? "No Name",
           fixed_amount: {
-            amount: shipping.fixedAmount ?? 50,
+            amount: (shipping.fixedAmount ?? 50) * 100,
             currency: "GBP",
           },
           type: "fixed_amount",
@@ -80,7 +82,7 @@ export async function sendWholeSaleInvoice({
     });
 
     let items = [];
-    if (bulk) {
+    if (bulk?.qty) {
       items.push({
         name: "bulk",
         invoice: invoice.id,
@@ -88,7 +90,8 @@ export async function sendWholeSaleInvoice({
         unit_amount: bulkUnitPirce!.price,
       });
     }
-    if (retail) {
+
+    if (retail?.qty) {
       items.push({
         name: "Retail",
         invoice: invoice.id,

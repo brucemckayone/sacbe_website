@@ -7,6 +7,7 @@ import TrainingIntroduction, { NavigationSlider } from "./TrainingIntroduction";
 import TrainingTheExperiance from "./TrainingTheExperiance";
 import TrainingVenue from "./TrainingVenue";
 import BookingInformation from "./BookingInformation";
+import TrainingTestimonials from "./TrainingTestimonials";
 
 function TrainingPage() {
   const infoRef = useRef(null);
@@ -18,6 +19,7 @@ function TrainingPage() {
   return (
     <div>
       <TrainingHeader />
+
       <div>
         <TrainingIntroduction />
       </div>
@@ -29,6 +31,10 @@ function TrainingPage() {
       </div>
       <div ref={venueRef}>
         <TrainingVenue foodRef={foodRef} />
+      </div>
+
+      <div>
+        <TrainingTestimonials />
       </div>
       <div ref={bookingRef}>
         <Suspense>

@@ -13,7 +13,7 @@ export function WholesalePricingTable() {
                   Quantity
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  <div className="flex items-center">Unit Cost</div>
+                  <div className="flex items-center">£ Per pouch</div>
                 </th>
                 <th scope="col" className="px-6 py-3">
                   <div className="flex items-center">RRP</div>

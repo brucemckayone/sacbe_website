@@ -5,6 +5,7 @@ import stripe from "@/lib/stripe/init/stripe";
 
 import Stripe from "stripe";
 import homeUrl from "@/lib/constants/urls";
+import testSwitch from "@/utils/test/TestSwitch";
 
 export default async function handler(
   req: NextApiRequest,
@@ -56,13 +57,19 @@ export default async function handler(
       let lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
       if (bulkQty >= 5) {
         lineItems.push({
-          price: "price_1NLYCPG859ZdyFmpUm8QEV1k",
+          price: testSwitch({
+            live: "price_1OWGsrG859ZdyFmpnWWplERZ",
+            test: "price_1OWGqmG859ZdyFmp4V1XUUaq",
+          }),
           quantity: bulkQty,
         });
       }
       if (retailQty >= 5) {
         lineItems.push({
-          price: "price_1NLYCAG859ZdyFmpdYI5HGd1",
+          price: testSwitch({
+            live: "price_1OWGsUG859ZdyFmp3neRr0sc",
+            test: "price_1OWGnzG859ZdyFmpBsLwapvD",
+          }),
           quantity: retailQty,
         });
       }

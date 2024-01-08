@@ -12,6 +12,7 @@ import { useDisclosure } from "@mantine/hooks";
 
 import homeUrl from "@/lib/constants/urls";
 import toast from "react-hot-toast";
+import { sendWholeSaleInvoiceType } from "@/pages/api/stripe/billing/invoice";
 
 export function WholesalePortalPage() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -45,13 +46,13 @@ export function WholesalePortalPage() {
     city: city,
   };
 
-  let orderDetails = {
+  let orderDetails: sendWholeSaleInvoiceType = {
     extraEmail: email,
     user: user,
-    bulk: { qty: bulkQty },
-    retail: { qty: retailQty },
+    bulk: hasBulk ? { qty: bulkQty } : undefined,
+    retail: hasRetail ? { qty: retailQty } : undefined,
     shipping: {
-      fixed_amount: shippingCost,
+      fixedAmount: shippingCost,
       address: {
         city: city,
         country: country,
@@ -169,20 +170,30 @@ export function WholesalePortalPage() {
           <PrimaryButton
             onClicked={async () => {
               setIsSendingOrder(true);
-              if (addCustomEmail) user.email = email;
-              const isOK = await fetchPostJSON(
-                "api/stripe/billing/invoice",
-                orderDetails
-              );
-              if (isOK) {
-                setIsSendingOrder(false);
+              try {
+                if (addCustomEmail) user.email = email;
+                const isOK = await fetchPostJSON(
+                  "/api/stripe/billing/invoice",
+                  orderDetails
+                );
 
-                close();
-              } else {
+                if (isOK) {
+                  setIsSendingOrder(false);
+                  toast.success("Invoice Sent");
+                  if (orderDetails.extraEmail)
+                    toast.success(
+                      `Extra Email sent to ${orderDetails.extraEmail}`
+                    );
+                  close();
+                } else {
+                  setIsSendingOrder(false);
+                }
+              } catch (error) {
                 setIsSendingOrder(false);
+                console.log(error);
               }
             }}
-            text={isSendingOrder ? "Loading" : "Confirm order"}
+            text={isSendingOrder ? "Loading" : "Confirm Request"}
             isPrimary={true}
             key={"confirm order button"}
           />
@@ -194,7 +205,7 @@ export function WholesalePortalPage() {
           <h3>Retail Orders</h3>
           <div className="flex flex-col md:flex-row justify-between">
             <p>
-              Branded Beautiful Pouches sold by the case.6 pouches to a case
+              Branded Beautiful Pouches sold by the case. 6 pouches to a case
             </p>
             <div
               onClick={handleRetailOnChange}
@@ -333,10 +344,10 @@ export function WholesalePortalPage() {
                     <div className="flex items-center">Total</div>
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center">Margin</div>
+                    <div className="flex items-center">% Saved</div>
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <span className="flex items-center">Profit</span>
+                    <span className="flex items-center">£ Saved</span>
                   </th>
                 </tr>
               </thead>
@@ -348,7 +359,7 @@ export function WholesalePortalPage() {
                   >
                     <div className="flex justify-between flex-row">
                       <p className="p-3 rounded-lg border shadow items-baseline">
-                        {bulkQty} Cases
+                        {bulkQty} kg
                       </p>
                       <div className="self-center">
                         <button
@@ -436,18 +447,18 @@ export function WholesalePortalPage() {
           className={`${!hasBulk && !hasRetail && "opacity-10"} flex flex-col`}
         >
           <PrimaryButton
-            text="Place Order"
+            text="Request Invoice"
             onClicked={async () => {
               if (hasBulk || hasRetail) open();
             }}
             isPrimary={true}
             key={"send invoice button "}
           />
+          <p className="text-center">OR</p>
           <PrimaryButton
-            text="Pay in 4 Installments"
-            className={`${totalCost >= 1000 && "opacity-20"}`}
+            text="Pay in Installments"
             onClicked={async () => {
-              if ((hasBulk || hasRetail) && totalCost <= 1000) {
+              if (hasBulk || hasRetail) {
                 const url = await fetchGetJSON(
                   `${homeUrl}/api/stripe/checkout/wholesale_pay_in_4?bulkQty=${
                     hasBulk && bulkQty
@@ -462,7 +473,7 @@ export function WholesalePortalPage() {
                 );
               }
             }}
-            isPrimary={totalCost <= 1000 ? true : false}
+            isPrimary
             key={"send pay in 4 button "}
           />
         </div>
