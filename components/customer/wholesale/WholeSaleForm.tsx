@@ -64,14 +64,14 @@ export function WholeSaleForm(): JSX.Element {
     } else {
       if (user.wholesale != null || isSent) {
         return (
-          <div className="my-5 text-black">
+          <div className="my-5 ">
             <h3>Wholesale Request Status</h3>
             <p>
               Your whole sale request is is being processed, you will be
               notified by email when your request is processed
             </p>
 
-            <div className="flex justify-between bg-recommendedGreen/70 rounded-lg p-4 my-4 drop-shadow-lg">
+            <div className="flex justify-between text-black bg-recommendedGreen/70 rounded-lg p-4 my-4 drop-shadow-lg">
               <div>
                 <h5>Request Status</h5>
                 <p className="px-2">Your request has been sent</p>

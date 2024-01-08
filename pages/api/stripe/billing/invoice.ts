@@ -112,6 +112,7 @@ export async function sendWholeSaleInvoice({
     }
 
     const finalInvoice = await stripe.invoices.finalizeInvoice(invoice.id);
+    await stripe.invoices.sendInvoice(invoice.id);
 
     if (extraEmail != "")
       new emailSender().send({
@@ -123,7 +124,16 @@ export async function sendWholeSaleInvoice({
         to: extraEmail,
       });
 
-    return await stripe.invoices.sendInvoice(invoice.id);
+    new emailSender().send({
+      bodyMessage: "Your Wholesale Invoice is ready",
+      htmlContent: wholesale_invoice_email(finalInvoice.hosted_invoice_url!),
+      replayTo: "no-reply@sacbe-ceremonial-cacao.com",
+      sender: "no-reply@sacbe-ceremonial-cacao.com",
+      subject: "Your Wholesale Order Is Ready To Pay",
+      to: user.email,
+    });
+
+    return;
   } catch (error) {
     console.error("Error creating and sending invoice:", error);
   }
