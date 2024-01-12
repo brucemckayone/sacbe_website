@@ -149,13 +149,7 @@ export default function wholesale_invoice_email(invoiceUrl: string) {
 															</td>
 														</tr>
 													</table>
-													<table class="image_block block-2" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-																<div class="alignment" align="center" style="line-height:10px"><img src="https://d15k2d11r6t6rl.cloudfront.net/public/users/Integrators/BeeProAgency/960586_945130/May%21.png" style="display: block; height: auto; border: 0; width: 275px; max-width: 100%;" width="275" alt="logo" title="logo"></div>
-															</td>
-														</tr>
-													</table>
+													
 													<table class="heading_block block-3" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
