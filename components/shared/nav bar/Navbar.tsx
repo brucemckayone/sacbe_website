@@ -8,6 +8,7 @@ import LoginButton from "../buttons/loginButton";
 import { EarlyBirdCountdownTimer } from "@/app/(customer)/facilitator-training/AccomidationChoiceCard";
 import JoinWaitlistButton from "@/app/(customer)/facilitator-training/JoinWaitlistButton";
 import { isAfterJan3rd530 } from "@/app/(customer)/facilitator-training/bookingSelection";
+import SessionProvider from "@/components/providers/SessionProvider";
 
 export default function Navbar() {
   // const SearchBar = dynamic(() =>
@@ -15,28 +16,30 @@ export default function Navbar() {
   // );
 
   return (
-    <div>
-      <header className=" sticky top-0 z-50 flex flex-row  h-16 justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
-        <Menu />
-        <Link className="flex md:ml-20" href="/">
-          <Image
-            src="/logo.svg"
-            alt="logo"
-            width={300}
-            height={50}
-            priority
-            className="w-9/12 md:pl-5 md:w-1/5 m-auto"
-          />
-        </Link>
-        <LoginButton />
-      </header>
-      {/* <div className="w-full bg-errorContainer text-onError relative z-50">
-        <p className="pl-2 text-onErrorContainer text-ellipsis text-xs md:text-lg  ">
-          Order no later than Dec 12th for guaranteed Solstice delievery + 19th
-          for Christmas.
-        </p>
-      </div> */}
-    </div>
+    <SessionProvider>
+      <div>
+        <header className=" sticky top-0 z-50 flex flex-row  h-16 justify-between border-b-4 border-t-4 border-onSurface align-baseline bg-surface  ">
+          <Menu />
+          <Link className="flex md:ml-20" href="/">
+            <Image
+              src="/logo.svg"
+              alt="logo"
+              width={300}
+              height={50}
+              priority
+              className="w-9/12 md:pl-5 md:w-1/5 m-auto"
+            />
+          </Link>
+          <LoginButton />
+        </header>
+        {/* <div className="w-full bg-errorContainer text-onError relative z-50">
+          <p className="pl-2 text-onErrorContainer text-ellipsis text-xs md:text-lg  ">
+            Order no later than Dec 12th for guaranteed Solstice delievery + 19th
+            for Christmas.
+          </p>
+        </div> */}
+      </div>
+    </SessionProvider>
   );
 
   function Menu() {

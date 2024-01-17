@@ -1,7 +1,9 @@
 import { BulletPoints } from "./BulletPoints";
 import { TestimonialQuote } from "./TestimonialQuote";
 import Image from "next/image";
-export default function TrainingInformation() {
+export default function TrainingInformation(props: {
+  testRef: React.MutableRefObject<null>;
+}) {
   return (
     <section className="w-11/12 m-auto my-10 md:my-36 py-10 md:px-2 justify-between flex flex-col md:flex-row-reverse  md:bg-secondaryContainer/30 md:shadow md:rounded-3xl">
       <div className="w-full md:w-6/12 md:mr-10 ">
@@ -22,7 +24,10 @@ export default function TrainingInformation() {
           everything from the historical roots of cacao to the practical aspects
           of facilitating ceremonies.
         </p>
-        <TestimonialQuote quote="Being in space with Luzura for the Cacao Facilitator Training was revelationary, filled with compassion, love, and transformative guidance." />
+        <TestimonialQuote
+          testRef={props.testRef}
+          quote="Being in space with Luzura for the Cacao Facilitator Training was revelationary, filled with compassion, love, and transformative guidance."
+        />
         <h5 className="mt-5 mb-2">Training Elements</h5>
         <BulletPoints
           bulletPoints={[

@@ -38,7 +38,10 @@ export function isAfterJan3rd530(): boolean {
   return currentDate > jan3rd;
 }
 
-function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
+function AccommodationSelection(props: {
+  roomOptions: RoomOptionType[];
+  testRef: React.MutableRefObject<null>;
+}) {
   const { user } = useUser();
   const roomOptions = props.roomOptions;
   const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +84,10 @@ function AccommodationSelection(props: { roomOptions: RoomOptionType[] }) {
             below and enjoy an early bird saving of £200 until January 31st.
           </p>
           <div className="bg-onPrimary/70 mt-5 mb-10 md:mb-0 md:mt-0 border rounded-lg px-4">
-            <TestimonialQuote quote="Luzura's non-judgmental listening and insightful guidance underscore the value of this training, making the investment a gateway to personal and spiritual growth." />
+            <TestimonialQuote
+              testRef={props.testRef}
+              quote="Luzura's non-judgmental listening and insightful guidance underscore the value of this training, making the investment a gateway to personal and spiritual growth."
+            />
 
             <SmallLinkButton
               link="https://calendly.com/thirdeyetribe/discovery-call-20mins"

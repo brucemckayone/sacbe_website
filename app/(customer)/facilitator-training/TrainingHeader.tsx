@@ -1,4 +1,3 @@
-import NavMenuBottom from "@/components/menu/NavMenuBottom";
 import headerImage from "../../../public/home_header/home_page_header_image_12.jpg";
 import logo from "../../../public/training/logo.png";
 import Image from "next/image";

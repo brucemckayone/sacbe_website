@@ -15,16 +15,17 @@ function TrainingPage() {
   const venueRef = useRef(null);
   const foodRef = useRef(null);
   const bookingRef = useRef(null);
+  const testRef = useRef(null);
 
   return (
     <div>
       <TrainingHeader />
 
       <div>
-        <TrainingIntroduction />
+        <TrainingIntroduction testRef={testRef} />
       </div>
       <div ref={infoRef}>
-        <TrainingInformation />
+        <TrainingInformation testRef={testRef} />
       </div>
       <div ref={experienceRef}>
         <TrainingTheExperiance />
@@ -33,20 +34,20 @@ function TrainingPage() {
         <TrainingVenue foodRef={foodRef} />
       </div>
 
-      <div>
+      <div ref={testRef}>
         <TrainingTestimonials />
       </div>
       <div ref={bookingRef}>
         <Suspense>
           {/* @ts-expect-error Server Component */}
-          <BookingInformation />
+          <BookingInformation testRef={testRef} />
         </Suspense>
       </div>
       <TrainingAssistingRole />
       <NavigationSlider
         bookingRef={bookingRef}
         experianceRef={experienceRef}
-        venueRef={venueRef}
+        venueRef={testRef}
         foodRef={foodRef}
         trainingRef={infoRef}
       />

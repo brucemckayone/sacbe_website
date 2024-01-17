@@ -50,7 +50,7 @@ function IntroQuestions({ className }: { className?: string }) {
   );
 }
 
-function IntroductionBody() {
+function IntroductionBody(props: { testRef: React.MutableRefObject<null> }) {
   return (
     <div className="w-11/12 m-auto my-10 md:my-36 py-10 md:px-2 justify-between flex flex-col md:flex-row-reverse  md:bg-secondaryContainer/30 md:shadow md:rounded-3xl">
       <div className="w-full md:w-6/12 md:mr-10 ">
@@ -86,7 +86,10 @@ function IntroductionBody() {
           beautiful world our hearts know is possible
         </p>
 
-        <TestimonialQuote quote="Luzura's passion and wisdom in the Cacao Facilitator Training truly illuminated the depth and cultural significance of ceremonial grade cacao." />
+        <TestimonialQuote
+          testRef={props.testRef}
+          quote="Luzura's passion and wisdom in the Cacao Facilitator Training truly illuminated the depth and cultural significance of ceremonial grade cacao."
+        />
 
         <div>
           <h5 className="mt-5 mb-2 text-lg md:text-xl lg:text-2xl">
@@ -178,10 +181,12 @@ export function NavigationSlider(props: {
   );
 }
 
-function TrainingIntroduction() {
+function TrainingIntroduction(props: {
+  testRef: React.MutableRefObject<null>;
+}) {
   return (
     <section className="mt-20 md:mt-36">
-      <IntroductionBody />
+      <IntroductionBody testRef={props.testRef} />
     </section>
   );
 }
