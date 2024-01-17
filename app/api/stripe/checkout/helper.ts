@@ -314,6 +314,13 @@ export default class StripeCheckoutApiHelper {
         allowed_countries: ["GB"],
       },
       metadata: metaData,
+      custom_text: {
+        submit: {
+          message:
+            "All Cacao Orders are pre-order, and will be shipped out on 5th of Feburary",
+        },
+      },
+
       custom_fields: getCustomFeilds(hasReferalFeild, hasCustomerNotes),
       customer: undefinedCheck(customerId) ? customerId! : undefined,
       customer_update: undefinedCheck(customerId)
