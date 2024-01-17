@@ -8,6 +8,8 @@ const builder = new ApiBuilderHelper();
 export const roomsSchema = {
   get: builder.createAPIMethod<IEndpointMethod<{}>>(
     "/training/rooms",
-    HTTPMethods.GET
+    HTTPMethods.GET,
+    undefined,
+    true
   ),
 };

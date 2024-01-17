@@ -37,17 +37,16 @@ export async function fetchRoomStock() {
   const docs = await helper.getAllDocs();
 
   const rooms: (RoomOptionType | undefined)[] = docs.data!.map((doc) => {
-    if (doc.stock && doc.id && doc.price && doc.uuid && doc.deposit)
-      return {
-        id: doc.id,
-        name: doc.name,
-        price: doc.price,
-        isAvailable: doc.stock > 0,
-        stock: doc.stock,
-        uuid: doc.uuid,
-        deposit: doc.deposit,
-        features: doc.features,
-      } as RoomOptionType;
+    return {
+      id: doc.id,
+      name: doc.name,
+      price: doc.price,
+      isAvailable: doc.stock > 0,
+      stock: doc.stock,
+      uuid: doc.uuid,
+      deposit: doc.deposit,
+      features: doc.features,
+    } as RoomOptionType;
   });
   return rooms;
 }

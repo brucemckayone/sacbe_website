@@ -11,6 +11,9 @@ export default async function BookingInformation(props: {
     const resp = await api.training.rooms.get({
       data: {},
     });
+
+    console.log(resp);
+    console.log(resp.slice(0, 3));
     setRooms(resp.slice(0, 3) as RoomOptionType[]);
   }
 

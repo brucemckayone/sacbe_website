@@ -22,7 +22,7 @@ export default class HTTPClient {
     }
   }
 
-  async get<T>(endpoint: string) {
+  async get<T>(endpoint: string, cache?: boolean) {
     if (
       !this.errorHandler.validateInputs({ endpoint: endpoint, method: "GET" })
     )
@@ -33,6 +33,7 @@ export default class HTTPClient {
       fetch(this.baseUrl + endpoint, {
         headers: this.baseHeaders,
         method: "GET",
+        cache: cache ? "no-cache" : "default",
       })
     );
 

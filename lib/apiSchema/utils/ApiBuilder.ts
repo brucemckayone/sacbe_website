@@ -29,9 +29,8 @@ export default class ApiBuilderHelper {
       | IDynamicEndpointMethod<any>
       | IEndpointMethod<any>,
     R = any
-  >(path: string, method: HTTPMethods, dynamicPath?: string) {
+  >(path: string, method: HTTPMethods, dynamicPath?: string, cache?: boolean) {
     path = "/api" + path;
-    console.log(path);
 
     switch (method) {
       case HTTPMethods.GET:
@@ -40,11 +39,13 @@ export default class ApiBuilderHelper {
             return client.get(
               `${path}${input.dynamicEndpoint}${
                 input.data && this.generateUserQueryParams(input.data)
-              }`
+              }`,
+              cache
             ) as Promise<R>;
           } else if (this.isEndpointMethod(input)) {
             return client.get(
-              `${path}${this.generateUserQueryParams(input.data)}`
+              `${path}${this.generateUserQueryParams(input.data)}`,
+              cache
             ) as Promise<R>;
           }
         };
