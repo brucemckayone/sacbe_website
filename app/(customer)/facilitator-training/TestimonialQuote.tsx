@@ -15,9 +15,6 @@ export function TestimonialQuote(props: {
           <p className="italic text-sm">{props.quote}</p>
         </div>
       </div>
-      <button className="ml-auto w-full text-right underline">
-        Read Testimonials
-      </button>
     </div>
   );
 }
