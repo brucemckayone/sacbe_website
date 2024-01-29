@@ -46,6 +46,18 @@ const facilitatorInfo: IFacilitatorInfo[] = [
       whatsapp: "+447930676363",
     },
   },
+  {
+    name: "Liulfr Wilde",
+    social: {
+      instagram: "https://www.instagram.com/feral_gaze",
+    },
+    contact: {
+      email: "feral.gaze@gmail.com",
+    },
+    image: "/facilitators/lilfur.jpeg",
+    bio: "Liulfr (He/It/They) is the creator of Feral Gaze and focuses on providing queer-inclusive spaces that connect the perceptible magic of the Elements in nature to their presence within each of our bodies. Working primarily in Edinburgh, he finds great joy in bringing sacred space to areas that may seem unusual choices. Café basements to graffiti covered gig venues, as well as known wellness venues.",
+    website: "https://www.feralgaze.com/",
+  },
 ];
 
 export const metadata = facilitatorPageMetadata;

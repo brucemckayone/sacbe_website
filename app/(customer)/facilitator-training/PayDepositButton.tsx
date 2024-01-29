@@ -39,6 +39,9 @@ function PlanSliders(props: {
   amount: string;
   setAmount: (arg0: number) => void;
 }) {
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
+  const monthsLeft = 8 - currentMonth;
   return (
     <div className="p-2 bg-tertiaryContainer rounded-lg  my-5">
       <div className=" rounded-xl bg-onPrimary drop-shadow p-2 mb-2">
@@ -46,7 +49,7 @@ function PlanSliders(props: {
         <div className="">
           <Slider
             min={3}
-            max={8}
+            max={monthsLeft - 1}
             step={1}
             value={props.duration}
             onChange={(value) => props.setDuration(value)}

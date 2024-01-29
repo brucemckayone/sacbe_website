@@ -26,14 +26,16 @@ export function TestimonialQuote(props: {
         </div>
       </div>
 
-      <button
-        onClick={() => {
-          scrollToRef(props.testRef!);
-        }}
-        className="ml-auto w-full text-right underline"
-      >
-        Read Testimonials
-      </button>
+      {props.testRef && (
+        <button
+          onClick={() => {
+            scrollToRef(props.testRef!);
+          }}
+          className="ml-auto w-full text-right underline"
+        >
+          Read Testimonials
+        </button>
+      )}
     </div>
   );
 }

@@ -19,6 +19,13 @@ export default function TrainingTestimonials() {
       image: "/facilitators/fiona.png",
     },
     {
+      name: "Luilfr Wilde",
+      subName: "",
+      quote:
+        "This training was one of the greatest gifts I gave myself. From the moment of arrival the focus was on each of us feeling empowered and held. Both Luzura and Skye take their practices very seriously, but it’s still a joyous experience. I wasn’t expecting the depth of healing and wholeness I’d return home with, and I’m still in touch with the beautiful souls I met there. I was already an Elemental practitioner before arriving, but having freedom to strengthen my practice was invaluable. A true adventure of discovery. From crying together, laughter while sharing incredible food, and letting my vitality roar while naked in a river. I could not recommend this training enough. There’s a focus on indigenous importance as well as practical knowledge, and I left with full confidence in myself as a guardian of Cacao.",
+      image: "/facilitators/lilfur.jpeg",
+    },
+    {
       name: "Steph Harkin",
       subName: "@journeytoheka",
       quote:

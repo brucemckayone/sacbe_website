@@ -10,18 +10,23 @@ const SimpleSlider = () => {
 
   return (
     <Carousel
-      draggable
-      loop
+      dragFree
       breakpoints={[
-        { maxWidth: 640, slideSize: "100%" },
-        { maxWidth: 1024, slideSize: "100%" },
+        { maxWidth: 640, slideSize: "80%" },
+        { maxWidth: 1024, slideSize: "50%" },
+        { maxWidth: 1324, slideSize: "50%" },
+        { maxWidth: 2000, slideSize: "50%" },
       ]}
-      slidesToScroll={1}
+      slideGap="md"
+      initialSlide={1}
+      className="w-full rounded-xl overflow-hidden mt-20"
+      withIndicators={false}
+      withControls={false}
     >
       <Carousel.Slide key={"tesves"} className="self-center px-3 md:px-10">
-        <div className="w-11/12 md:w-9/12 m-auto bg-tertiaryContainer/60 border border-black p p-2 md:p-10 rounded-3xl my-10 py-5">
+        <div className="  m-auto bg-tertiaryContainer border border-black p-2 md:p-10 rounded-3xl my-10 py-5 min-h-[550px] lg:min-h-[400px] drop-shadow-lg">
           <h3 className="mb-2 text-3xl ">Our customers said it best:</h3>
-          <blockquote className="text-md md:text-md">
+          <blockquote className="text-md md:text-md pl-5">
             WOWWWZZAAAA!!!! Now, I have tried a few different Cacao’s but I have
             to say that SACBE is my new absolute fave! The texture & taste is
             soooo smooth, it foams up beautifully in a blender. The taste is
@@ -46,11 +51,11 @@ const SimpleSlider = () => {
           return (
             <Carousel.Slide
               key={review.review}
-              className="self-center px-3 md:px-10"
+              className="self-center px-3 md:px-10  "
             >
-              <div className="w-11/12 md:w-9/12 m-auto bg-tertiaryContainer/60 border p-2 md:p-10 rounded-3xl my-10 py-5">
-                <h5 className="mb-2">{review.reviewTitle}</h5>
-                <blockquote className="text-md md:text-md">
+              <div className="  m-auto bg-tertiaryContainer border border-black drop-shadow-lg p-2 md:p-10 rounded-3xl my-10 py-5  min-h-[550px] lg:min-h-[400px]">
+                <h3 className="mb-2 text-3xl ">{review.reviewTitle}</h3>
+                <blockquote className="text-md md:text-md pl-5">
                   {review.review}
                   <p className="text-end">- {review.title}</p>
                   <div className="flex flex-row justify-end">
