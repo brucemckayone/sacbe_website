@@ -73,7 +73,7 @@ export const EarlyBirdCountdownTimer = ({
   isDark?: boolean;
 }) => {
   const calculateTimeLeft = (): TimeLeft => {
-    const difference = +new Date("2024-01-31") - +new Date();
+    const difference = +new Date("2024-02-1") - +new Date();
     let timeLeft = {};
 
     if (difference > 0) {

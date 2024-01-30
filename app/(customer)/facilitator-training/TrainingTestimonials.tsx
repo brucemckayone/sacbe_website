@@ -22,14 +22,21 @@ export default function TrainingTestimonials() {
       name: "Luilfr Wilde",
       subName: "",
       quote:
-        "This training was one of the greatest gifts I gave myself. From the moment of arrival the focus was on each of us feeling empowered and held. Both Luzura and Skye take their practices very seriously, but it’s still a joyous experience. I wasn’t expecting the depth of healing and wholeness I’d return home with, and I’m still in touch with the beautiful souls I met there. I was already an Elemental practitioner before arriving, but having freedom to strengthen my practice was invaluable. A true adventure of discovery. From crying together, laughter while sharing incredible food, and letting my vitality roar while naked in a river. I could not recommend this training enough. There’s a focus on indigenous importance as well as practical knowledge, and I left with full confidence in myself as a guardian of Cacao.",
+        "This training was one of the greatest gifts I gave myself. From the moment of arrival the focus was on each of us feeling empowered and held. I wasn’t expecting the depth of healing and wholeness I’d return home with, and I’m still in touch with the beautiful souls I met there. I was already an Elemental practitioner before arriving, but having freedom to strengthen my practice was invaluable. A true adventure of discovery. From crying together, laughter while sharing incredible food, and letting my vitality roar while naked in a river. I could not recommend this training enough. There’s a focus on indigenous importance as well as practical knowledge, and I left with full confidence in myself as a guardian of Cacao.",
       image: "/facilitators/lilfur.jpeg",
+    },
+    {
+      name: "Susan Findlay",
+      subName: "@journeytoheka",
+      quote:
+        "I joined Luzura for the Cacao & Elemental Facilitator training in October 2024 and I feel that I received everything that I needed and more. The course really exceeded my expectations and I went away feeling fully equipped to step into my new role as a Cacao Facilitator and guardian of this sacred medicine. Luzura has a wealth of knowledge on the Maya people and their ancient calender, rituals and traditions. I felt that they really honoured their lineage and delivered this course as a true wisdom keeper. Luzura's teaching style is both multifaceted and fluid and they created a very unique learning environment. I'm sure that I will be a student to Luzura for many years to come.",
+      image: "/facilitators/SUSANFINALS-14.jpg",
     },
     {
       name: "Steph Harkin",
       subName: "@journeytoheka",
       quote:
-        "I joined Luzura for the Cacao & Elemental Facilitator training in October 2024 and I feel that I received everything that I needed and more. The course really exceeded my expectations and I went away feeling fully equipped to step into my new role as a Cacao Facilitator and guardian of this sacred medicine. Luzura has a wealth of knowledge on the Maya people and their ancient calender, rituals and traditions. I felt that they really honoured their lineage and delivered this course as a true wisdom keeper. Luzura's teaching style is both multifaceted and fluid and they created a very unique learning environment. I'm sure that I will be a student to Luzura for many years to come.",
+        "What an incredible journey it was to be part of Luzura Cacao Facilitator Training. It was more than this, it was as much a personal rite of passage into Self as it was learning the medicine of Cacao and the elements. This was packed to the brim of embodiment practices, teachings and guidance from Luzura. Luzura is a dream to watch and their devotion is exemplified in everything they do.  This was a full mind, body, soul experience; one not to be missed.",
       image: "/facilitators/steph.jpg",
     },
     {

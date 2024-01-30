@@ -10,12 +10,9 @@ const SimpleSlider = () => {
 
   return (
     <Carousel
-      dragFree
       breakpoints={[
-        { maxWidth: 640, slideSize: "80%" },
-        { maxWidth: 1024, slideSize: "50%" },
-        { maxWidth: 1324, slideSize: "50%" },
-        { maxWidth: 2000, slideSize: "50%" },
+        { maxWidth: 640, slideSize: "100%" },
+        { maxWidth: 1024, slideSize: "100%" },
       ]}
       slideGap="md"
       initialSlide={1}
@@ -24,7 +21,7 @@ const SimpleSlider = () => {
       withControls={false}
     >
       <Carousel.Slide key={"tesves"} className="self-center px-3 md:px-10">
-        <div className="  m-auto bg-tertiaryContainer border border-black p-2 md:p-10 rounded-3xl my-10 py-5 min-h-[550px] lg:min-h-[400px] drop-shadow-lg">
+        <div className="w-[90%]  m-auto bg-tertiaryContainer border border-black p-2 md:p-10 rounded-3xl my-10 py-5 min-h-[550px] lg:min-h-[400px] drop-shadow-lg">
           <h3 className="mb-2 text-3xl ">Our customers said it best:</h3>
           <blockquote className="text-md md:text-md pl-5">
             WOWWWZZAAAA!!!! Now, I have tried a few different Cacao’s but I have

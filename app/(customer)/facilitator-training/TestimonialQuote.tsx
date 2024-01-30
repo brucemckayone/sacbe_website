@@ -1,5 +1,4 @@
 "use client";
-import { MutableRefObject } from "react";
 import { ImQuotesRight } from "react-icons/im";
 export function TestimonialQuote(props: {
   quote: string;
