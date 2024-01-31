@@ -17,7 +17,7 @@ import { TestimonialQuote } from "./TestimonialQuote";
  */
 export function isEarlyBird(): boolean {
   const currentDate = new Date();
-  const jan31st = new Date(2024, 0, 31);
+  const jan31st = new Date(2024, 1, 1);
   return currentDate < jan31st;
 }
 

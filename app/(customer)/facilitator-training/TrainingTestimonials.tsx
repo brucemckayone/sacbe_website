@@ -53,10 +53,10 @@ export default function TrainingTestimonials() {
       <Carousel
         dragFree
         breakpoints={[
-          { maxWidth: 640, slideSize: "80%" },
-          { maxWidth: 1024, slideSize: "50%" },
-          { maxWidth: 1324, slideSize: "50%" },
-          { maxWidth: 2000, slideSize: "50%" },
+          { maxWidth: 640, slideSize: "90%" },
+          { maxWidth: 1024, slideSize: "60%" },
+          { maxWidth: 1324, slideSize: "60%" },
+          { maxWidth: 2000, slideSize: "37%" },
         ]}
         slideGap="md"
         initialSlide={1}
@@ -67,7 +67,7 @@ export default function TrainingTestimonials() {
         {slides.map((slide) => {
           return (
             <Carousel.Slide key={slide.quote}>
-              <div className="w-full p-5 rounded-3xl border-2 border-dashed border-black md:h-80">
+              <div className="w-full p-5 rounded-3xl border-2 border-dashed border-black md:h-[500px] lg:h-96">
                 <div className="flex">
                   <Image
                     src={slide.image}
