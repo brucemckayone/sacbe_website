@@ -3,7 +3,6 @@ import { firestore, messaging } from "firebase-admin";
 import adminInit from "@/lib/firebase/admin_init";
 import stripe from "@/lib/stripe/init/stripe";
 
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -17,25 +16,20 @@ export default async function handler(
   let ref: firestore.DocumentReference<firestore.DocumentData>;
 
   const method = req.method as requestMethodType;
-  
+
   switch (method) {
     case "POST":
-      
       user = req.body.user;
-      
+
       ref = requestCol.doc(user.email);
-      
-      
 
       if (!user.uuid) {
         user.uuid = await addUuidToUser(user.email);
       }
-      
 
       if (!user.customerId) {
         await addCustomerIdToUser(user.uuid, user.email);
       }
-      
 
       await userCol.doc(user.uuid).set({ wholesale: false }, { merge: true });
 
@@ -54,11 +48,11 @@ export default async function handler(
 
           userCol.doc(user.uuid).set({ wholesale: false }, { merge: true });
 
-           messaging().send({
+          messaging().send({
             notification: {
               title: "New Wholesale Request",
               body: `${user.email} has requested a wholesale account`,
-              imageUrl:"https://www.sacbe-ceremonial-cacao.com/logo.svg",
+              imageUrl: "https://www.sacbe-ceremonial-cacao.com/logo.svg",
             },
             topic: "all",
           });
@@ -78,25 +72,12 @@ export default async function handler(
       }
 
     case "PATCH":
-      user = req.body.user;
+      const uuid = req.body.uuid;
       const status = req.body.status;
 
-      ref = requestCol.doc(user.email);
-      const doc = await ref.get();
+      userCol.doc(uuid).set({ wholesale: status }, { merge: true });
 
-      if (doc.exists) {
-        ref.set({
-          isApproved: status,
-        });
-
-        userCol.doc(user.uuid).set({ wholesale: status }, { merge: true });
-
-        return res.status(200).json({ message: "Status has been updated" });
-      } else {
-        return res.status(400).json({
-          message: "There is no wholesale account request for this account",
-        });
-      }
+      return res.status(200).json({ message: "Status has been updated" });
   }
 }
 
