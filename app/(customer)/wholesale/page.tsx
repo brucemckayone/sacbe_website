@@ -78,7 +78,7 @@ const SacbeCacaoWholesale = async () => {
             <strong className="text-stroke-3 text-3xl md:text-6xl lg:text-8xl text-sacbeBrandColor">
               WHOLESALE CACAO:
             </strong>{" "}
-            AUTHENTIC AND SUSTAINABLE BULK CACAO FOR SPIRITUAL, HEALTH &
+            AUTHENTIC AND SUSTAINABLE CEREMONIAL CACAO FOR SPIRITUAL, HEALTH &
             WELLBEING BUSINESSES IN THE UK
           </h1>
           <div className="flex flex-row justify-center">
