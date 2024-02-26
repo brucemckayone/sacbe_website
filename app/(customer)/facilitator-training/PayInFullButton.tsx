@@ -6,9 +6,11 @@ import toast from "react-hot-toast";
 export function PayInFullButton(props: {
   setIsLoading: (arg0: boolean) => void;
   customerId: any;
-  currentRoom?: { id: string; uuid: any };
+  currentRoom?: { id: string; uuid: any; test_id: string };
   isLoading: any;
 }) {
+  console.log(props.currentRoom);
+
   return (
     <button
       onClick={async () => {
@@ -18,9 +20,12 @@ export function PayInFullButton(props: {
             data: {
               customerId: props.customerId,
               mode: "payment",
-              prices: [props.currentRoom?.id!],
+              prices: testSwitch({
+                live: [props.currentRoom?.id!],
+                test: [props.currentRoom?.test_id!],
+              }),
               qty: 1,
-              discount: testSwitch({ live: "RtQp0C00", test: "WHNKm2JA" }),
+              discount: testSwitch({ live: "RtQp0C00" }),
               metaData: {
                 roomType: props.currentRoom?.uuid,
               },

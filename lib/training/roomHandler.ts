@@ -10,13 +10,12 @@ export async function handleRoomPurchase(
 ) {
   console.log("handling room purchase", roomType, duration, subscriptionId);
   if (duration && subscriptionId) {
-    // Calculate tomorrow's date
+    // Calculate the timestamp 7 months from now
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
-    currentDate.setDate(currentDate.getDate() + 1);
+    currentDate.setMonth(currentDate.getMonth() + duration);
     const cancelAtTimestamp = Math.floor(currentDate.getTime() / 1000);
 
-    // cancel the subscription after the duration in months has passed
+    // Update the subscription to cancel at the calculated timestamp
     await stripe.subscriptions.update(subscriptionId, {
       cancel_at: cancelAtTimestamp,
     });
@@ -46,6 +45,7 @@ export async function fetchRoomStock() {
       uuid: doc.uuid,
       deposit: doc.deposit,
       features: doc.features,
+      test_id: doc.test_id,
     } as RoomOptionType;
   });
   return rooms;

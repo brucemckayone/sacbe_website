@@ -30,6 +30,7 @@ export type RoomOptionType = {
   uuid: string;
   deposit: number;
   features: string[];
+  test_id: string;
 };
 
 export function isAfterJan3rd530(): boolean {

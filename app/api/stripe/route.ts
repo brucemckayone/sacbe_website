@@ -7,9 +7,21 @@ export async function GET(req: NextRequest) {
   throw NextResponse.error();
 }
 export async function POST(req: NextRequest) {
-  const { customerId, duration, total, depositAmount, roomType } =
-    await req.json();
-  // await handleRoomPurchase(roomType, duration, depositAmount, customerId, total);
+  const {
+    customerId,
+    duration,
+    total,
+    depositAmount,
+    roomType,
+    subscriptionId,
+  } = await req.json();
+  await handleRoomPurchase(
+    roomType,
+    duration,
+    depositAmount
+    // customerId,
+    // total
+  );
   return NextResponse.json({ message: "success" });
 }
 export async function DELETE(req: NextRequest) {

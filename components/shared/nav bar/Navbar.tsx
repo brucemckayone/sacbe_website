@@ -32,12 +32,13 @@ export default function Navbar() {
           </Link>
           <LoginButton />
         </header>
-        {/* <div className="w-full bg-recommendedGreen text-onError relative z-50">
+        <div className="w-full bg-recommendedGreen text-onError relative z-50">
           <p className="pl-2 text-black text-ellipsis text-xs md:text-lg  ">
-            Sacbe Cacao Is currently on pre-order, orders will be shipped out on
-            5th of Feburary
+            Please Note: We are currently taking a break, any orders place
+            between the 1st and the 14th of march will be shipped on the 15th of
+            march. Thank you for your understanding.
           </p>
-        </div> */}
+        </div>
       </div>
     </SessionProvider>
   );

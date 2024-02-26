@@ -3,6 +3,7 @@ import api from "@/lib/apiSchema/apiSchema";
 import { Suspense, useEffect, useState } from "react";
 import AccommodationSelection, { RoomOptionType } from "./bookingSelection";
 
+export const revalidate = 0;
 export default async function BookingInformation(props: {
   testRef: React.MutableRefObject<null>;
 }) {

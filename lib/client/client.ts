@@ -29,11 +29,16 @@ export default class HTTPClient {
       return;
     console.log(this.baseUrl + endpoint);
 
+    console.log(cache);
+
     const responseValidation = await this.errorHandler.handleFetch(
       fetch(this.baseUrl + endpoint, {
         headers: this.baseHeaders,
         method: "GET",
-        cache: cache ? "no-cache" : "default",
+        cache: cache ? "no-store" : "default",
+        next: {
+          revalidate: 0,
+        },
       })
     );
 
