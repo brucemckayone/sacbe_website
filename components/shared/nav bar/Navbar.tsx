@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="w-full bg-recommendedGreen text-onError relative z-50">
           <p className="pl-2 text-black text-ellipsis text-xs md:text-lg  ">
             Please Note: We are currently taking a break, any orders place
-            between the 1st and the 14th of march will be shipped on the 15th of
+            between the 1st and the 17th of march will be shipped on the 18th of
             march. Thank you for your understanding.
           </p>
         </div>
