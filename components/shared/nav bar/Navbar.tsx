@@ -11,10 +11,6 @@ import { isAfterJan3rd530 } from "@/app/(customer)/facilitator-training/bookingS
 import SessionProvider from "@/components/providers/SessionProvider";
 
 export default function Navbar() {
-  // const SearchBar = dynamic(() =>
-  //   import("../search/searchbar").then((res) => res.default)
-  // );
-
   return (
     <SessionProvider>
       <div>
@@ -35,7 +31,7 @@ export default function Navbar() {
         <div className="w-full bg-recommendedGreen text-onError relative z-50">
           <p className="pl-2 text-black text-ellipsis text-xs md:text-lg  ">
             Please Note: We are currently taking a break, any orders place
-            between the 1st and the 17th of march will be shipped on the 18th of
+            between now and the 15th of march will be shipped on the 18th of
             march. Thank you for your understanding.
           </p>
         </div>
