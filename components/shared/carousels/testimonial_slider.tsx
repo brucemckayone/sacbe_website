@@ -13,10 +13,11 @@ const SimpleSlider = () => {
       breakpoints={[
         { maxWidth: 640, slideSize: "100%" },
         { maxWidth: 1024, slideSize: "100%" },
+        { maxWidth: 3000, slideSize: "40%" },
       ]}
       slideGap="md"
       initialSlide={1}
-      className="w-full rounded-xl overflow-hidden mt-20"
+      className="w-full rounded-xl overflow-hidden mt-20 mx-auto"
       withIndicators={false}
       withControls={false}
     >

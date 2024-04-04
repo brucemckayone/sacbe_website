@@ -41,14 +41,14 @@ function PlanSliders(props: {
 }) {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
-  const monthsLeft = 8 - currentMonth;
+  const monthsLeft = 11 - currentMonth;
   return (
     <div className="p-2 bg-tertiaryContainer rounded-lg  my-5">
       <div className=" rounded-xl bg-onPrimary drop-shadow p-2 mb-2">
         <h5>Choose Payment Plan Duration</h5>
         <div className="">
           <Slider
-            min={3}
+            min={2}
             max={monthsLeft - 1}
             step={1}
             value={props.duration}
