@@ -299,11 +299,12 @@ export default class StripeCheckoutApiHelper {
       line_items: lineItems,
       mode: mode,
       billing_address_collection: "required",
-      allow_promotion_codes: discount == "undefined" ? true : undefined,
+      allow_promotion_codes: discount == undefined ? true : undefined,
       cancel_url: `${homeUrl}/cancelled/checkout?session_id={CHECKOUT_SESSION_ID}`,
       currency: "GBP",
       locale: "auto",
       discounts: discounts,
+
       client_reference_id: undefinedCheck(customerId)
         ? customerId!
         : "guest checkout",
