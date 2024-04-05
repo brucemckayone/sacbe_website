@@ -25,7 +25,7 @@ export function PayInFullButton(props: {
                 test: [props.currentRoom?.test_id!],
               }),
               qty: 1,
-              discount: testSwitch({ live: "RtQp0C00" }),
+              // discount: testSwitch({ live: "RtQp0C00" }),
               metaData: {
                 roomType: props.currentRoom?.uuid,
               },
