@@ -163,7 +163,8 @@ export default function TrainingVenue(props: {
               bulletPoints={[
                 {
                   name: "Accommodation Options",
-                  effect: "Choice of single or shared accommodation options.",
+                  effect:
+                    "Choice of single or shared accommodation options. Early arrival + checkin is welcomed on the 13th from between 5-5.45pm for a Goddess Day feast at 6pm. Second arrival + checkin is from 8.30-9.30am on the 14th. Departure for all will be from noon-1pm on Friday 20th.",
                 },
                 {
                   name: "Plant-Based Meals",
@@ -174,7 +175,7 @@ export default function TrainingVenue(props: {
                 {
                   name: "Travel Arrangements",
                   effect:
-                    "If you are travelling some distance, it is recommended you arrive and stay nearby the night before as we will be gathering at the villa at 10am on the 18th. You will depart on 24th between 1-2pm after our closing brunch / feast!",
+                    "If you are travelling some distance, it is highly recommended you stay with us on the 13th before training starts. Our opening ceremony will be at 10am on 14th.",
                 },
               ]}
             />

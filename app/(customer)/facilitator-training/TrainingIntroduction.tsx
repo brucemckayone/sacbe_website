@@ -101,7 +101,7 @@ function IntroductionBody(props: { testRef: React.MutableRefObject<null> }) {
               {
                 name: "Training Duration",
                 effect:
-                  "1 week (7 days, 6 nights) immersion held in Aberdeenshire, Scotland. Plus 3 months integration, which includes 3 x live group integration calls with Luzura.",
+                  "1 week immersion held in Aberdeenshire, Scotland. Plus 3 months integration, which includes 3 x live group integration calls with Luzura.",
               },
               {
                 name: "Indigenous Wisdom + Contemporary Animism",
