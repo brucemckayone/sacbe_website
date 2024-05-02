@@ -32,7 +32,7 @@ const defaultProps = {
 export default function PurchaseOptions(props: props) {
   const { data: session } = useSession();
 
-  const [isOnOff, setIsOnOff] = useState(false);
+  const [isOnOff, setIsOnOff] = useState(true);
   const [isLoadingSub, setIsLoadingSub] = useState(false);
   const [isLoadingOn, setIsLoadingOne] = useState(false);
   const [isShippingLoading, setIsShippingLoading] = useState(false);

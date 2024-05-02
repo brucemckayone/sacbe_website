@@ -1,4 +1,7 @@
 "use client";
+
+import toast from "react-hot-toast";
+
 export function PurchaseTypeTabs(props: any) {
   return (
     <div className="flex flex-row justify-between text-surface bg-onSecondaryContainer rounded-t-lg">
@@ -17,7 +20,10 @@ export function PurchaseTypeTabs(props: any) {
 
       <button
         onClick={() => {
-          props.setIsOnOff(false);
+          toast.error(
+            "We are not taking on any new subscriptions at the moment"
+          );
+          props.setIsOnOff(true);
         }}
         className={`relative basis-1/2 text-center h-[55px] rounded-tr-lg duration-300 ${
           props.isOnOff
