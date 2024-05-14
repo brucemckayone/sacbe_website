@@ -20,6 +20,8 @@ import { SubscriptionBody } from "./SubscriptionBody";
 import { PurchaseTypeTabs } from "./PurchaseTypeTabs";
 import { userType } from "@/types/typings";
 
+import toast from "react-hot-toast";
+
 type props = {
   isHorizontal: boolean;
   compact: boolean;
@@ -120,11 +122,12 @@ export const handleOneOfPurchase = async (
   push: (url: string) => void,
   user: userType
 ) => {
-  if (affiliateLink) return push(affiliateLink);
-  await buyOneTimeCacao(user, oneoffQty);
-  logEvent(analytics, "one-off-purchase-checkout-started", {
-    quantity: oneoffQty,
-  });
+  toast.error("Sacbe Is Out Of Stock");
+  // if (affiliateLink) return push(affiliateLink);
+  // await buyOneTimeCacao(user, oneoffQty);
+  // logEvent(analytics, "one-off-purchase-checkout-started", {
+  //   quantity: oneoffQty,
+  // });
 };
 
 export function RiskAppealLogos() {
