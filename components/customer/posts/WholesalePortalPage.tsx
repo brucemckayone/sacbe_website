@@ -457,18 +457,19 @@ export function WholesalePortalPage() {
           <PrimaryButton
             text="Pay in Installments"
             onClicked={async () => {
-              if (hasBulk || hasRetail) {
-                const url = await fetchGetJSON(
-                  `${homeUrl}/api/stripe/checkout/wholesale_pay_in_4?bulkQty=${hasBulk && bulkQty
-                  }&retailQty=${hasRetail && retailQty}&customerId=${user.customerId
-                  }&shippingCost=${shippingCost}`
-                );
-                window.location.href = url.url;
-              } else {
-                toast.error(
-                  "You can only use installements for orders £1000 and under"
-                );
-              }
+              // if (hasBulk || hasRetail) {
+              //   const url = await fetchGetJSON(
+              //     `${homeUrl}/api/stripe/checkout/wholesale_pay_in_4?bulkQty=${hasBulk && bulkQty
+              //     }&retailQty=${hasRetail && retailQty}&customerId=${user.customerId
+              //     }&shippingCost=${shippingCost}`
+              //   );
+              //   window.location.href = url.url;
+              // } else {
+              //   toast.error(
+              //     "You can only use installements for orders £1000 and under"
+              //   );
+              // }
+              toast.error('out of stock');
             }}
             isPrimary
             key={"send pay in 4 button "}
