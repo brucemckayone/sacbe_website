@@ -1,26 +1,18 @@
 "use client";
-import { WholeSaleForm } from "@/app/(customer)/wholesale/WholeSaleForm.1";
-import { useUser } from "@/components/auth/affiliate_auth_context";
-import PrimaryButton from "@/components/buttons/primaryButton";
-import CardLoader from "@/components/loaders/CardLoader";
-import { fetchGetJSON, fetchPostJSON } from "@/utils/stripe/fetchPostJson";
+import { WholeSaleForm } from "@/components/customer/wholesale/WholeSaleForm";
+import { useUser } from "@/components/shared/auth/UserProvider";
+import PrimaryButton from "@/components/shared/buttons/primaryButton";
+import CardLoader from "@/components/shared/loaders/CardLoader";
+import { fetchPostJSON } from "@/utils/http/fetchPostJson";
+import { fetchGetJSON } from "@/utils/http/fetchGetJSON";
 import { Checkbox, Modal } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import TextInput from "@/components/form/inputs/TextInput";
+import TextInput from "@/components/shared/form/inputs/TextInput";
 import { useDisclosure } from "@mantine/hooks";
 
 import homeUrl from "@/lib/constants/urls";
 import toast from "react-hot-toast";
-
-function WholeSalePortalSignUpForm() {
-  return (
-    <div className="p-4 sm:ml-64">
-      <div className="mx-36">
-        <WholeSaleForm key={"hey"} />
-      </div>
-    </div>
-  );
-}
+import { sendWholeSaleInvoiceType } from "@/pages/api/stripe/billing/invoice";
 
 export function WholesalePortalPage() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -54,13 +46,13 @@ export function WholesalePortalPage() {
     city: city,
   };
 
-  let orderDetails = {
+  let orderDetails: sendWholeSaleInvoiceType = {
     extraEmail: email,
     user: user,
-    bulk: { qty: bulkQty },
-    retail: { qty: retailQty },
+    bulk: hasBulk ? { qty: bulkQty } : undefined,
+    retail: hasRetail ? { qty: retailQty } : undefined,
     shipping: {
-      fixed_amount: shippingCost,
+      fixedAmount: shippingCost,
       address: {
         city: city,
         country: country,
@@ -89,13 +81,17 @@ export function WholesalePortalPage() {
     setHasBulk(!hasBulk);
   }
 
-  let bulkCost = bulkQty * 21.25 * 6;
-  let retailCost = retailQty * 21.25 * 6;
+  let bulkCost = bulkQty * 65;
+  let retailCost = retailQty * 25 * 6;
 
   if (isLoading) return <CardLoader />;
 
   if (!user.wholesale)
-    return <WholeSalePortalSignUpForm></WholeSalePortalSignUpForm>;
+    return (
+      <div className="p-4 sm:ml-64">
+        <WholeSaleForm />
+      </div>
+    );
 
   return (
     <div className="p-4 sm:ml-64">
@@ -173,22 +169,33 @@ export function WholesalePortalPage() {
         <div>
           <PrimaryButton
             onClicked={async () => {
-              // setIsSendingOrder(true);
-              // if (addCustomEmail) user.email = email;
-              // const isOK = await fetchPostJSON(
-              //   "api/stripe/billing/invoice",
-              //   orderDetails
-              // );
-              // if (isOK) {
-              //   setIsSendingOrder(false);
 
-              //   close();
-              // } else {
+              toast.error('out of stock');
+              // setIsSendingOrder(true);
+              // try {
+              //   if (addCustomEmail) user.email = email;
+              //   const isOK = await fetchPostJSON(
+              //     "/api/stripe/billing/invoice",
+              //     orderDetails
+              //   );
+
+              //   if (isOK) {
+              //     setIsSendingOrder(false);
+              //     toast.success("Invoice Sent");
+              //     if (orderDetails.extraEmail)
+              //       toast.success(
+              //         `Extra Email sent to ${orderDetails.extraEmail}`
+              //       );
+              //     close();
+              //   } else {
+              //     setIsSendingOrder(false);
+              //   }
+              // } catch (error) {
               //   setIsSendingOrder(false);
+              //   console.log(error);
               // }
-              toast.error("We are currently out of stock");
             }}
-            text={isSendingOrder ? "Loading" : "Confirm order"}
+            text={isSendingOrder ? "Loading" : "Confirm Request"}
             isPrimary={true}
             key={"confirm order button"}
           />
@@ -200,7 +207,7 @@ export function WholesalePortalPage() {
           <h3>Retail Orders</h3>
           <div className="flex flex-col md:flex-row justify-between">
             <p>
-              Branded Beautiful Pouches sold by the case.6 pouches to a case
+              Branded Beautiful Pouches sold by the case. 6 pouches to a case
             </p>
             <div
               onClick={handleRetailOnChange}
@@ -224,7 +231,7 @@ export function WholesalePortalPage() {
                     Quantity
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center">Unit Cost</div>
+                    <div className="flex items-center">Unit Cost (pouch)</div>
                   </th>
                   <th scope="col" className="px-6 py-3">
                     <div className="flex items-center">RRP</div>
@@ -277,7 +284,7 @@ export function WholesalePortalPage() {
                     </div>
                   </th>
                   <td className="px-6 py-4 w-2.50">
-                    <p>£21.25</p>
+                    <p>£25 x {retailQty * 6}</p>
                   </td>
                   <td className="px-6 py-4 w-2.50">
                     <p>£35</p>
@@ -290,7 +297,7 @@ export function WholesalePortalPage() {
                   </td>
                   <td className="px-6 py-4 w-2.50">
                     <p>
-                      $
+                      £
                       {`${(retailQty * 35 * 6 - retailQty * 21.25 * 6).toFixed(
                         2
                       )}`}
@@ -328,19 +335,17 @@ export function WholesalePortalPage() {
                     Quantity
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center">Unit Cost</div>
+                    <div className="flex items-center">Unit Cost (1kg)</div>
                   </th>
-                  <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center">RRP</div>
-                  </th>
+
                   <th scope="col" className="px-6 py-3">
                     <div className="flex items-center">Total</div>
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <div className="flex items-center">Margin</div>
+                    <div className="flex items-center">% Saved</div>
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    <span className="flex items-center">Profit</span>
+                    <span className="flex items-center">£ Saved</span>
                   </th>
                 </tr>
               </thead>
@@ -352,7 +357,7 @@ export function WholesalePortalPage() {
                   >
                     <div className="flex justify-between flex-row">
                       <p className="p-3 rounded-lg border shadow items-baseline">
-                        {bulkQty} Cases
+                        {bulkQty} kg
                       </p>
                       <div className="self-center">
                         <button
@@ -379,11 +384,9 @@ export function WholesalePortalPage() {
                     </div>
                   </th>
                   <td className="px-6 py-4 w-2.50">
-                    <p>£21.25</p>
+                    <p>£65</p>
                   </td>
-                  <td className="px-6 py-4 w-2.50">
-                    <p>£35</p>
-                  </td>
+
                   <td className="px-6 py-4 w-2.50 border-r">
                     <p>{`£${bulkCost.toFixed(2)}`}</p>
                   </td>
@@ -392,7 +395,7 @@ export function WholesalePortalPage() {
                   </td>
                   <td className="px-6 py-4 w-2.50">
                     <p>
-                      $
+                      £
                       {`${(bulkQty * 35 * 6 - bulkQty * 21.25 * 6).toFixed(2)}`}
                     </p>
                   </td>
@@ -442,35 +445,32 @@ export function WholesalePortalPage() {
           className={`${!hasBulk && !hasRetail && "opacity-10"} flex flex-col`}
         >
           <PrimaryButton
-            text="Place Order"
+            text="Request Invoice"
             onClicked={async () => {
-              toast.error("We are currently out of stock");
+              toast.error('out of stock');
               // if (hasBulk || hasRetail) open();
             }}
             isPrimary={true}
             key={"send invoice button "}
           />
+          <p className="text-center">OR</p>
           <PrimaryButton
-            text="Pay in 4 Installments"
-            className={`${totalCost >= 1000 && "opacity-20"}`}
+            text="Pay in Installments"
             onClicked={async () => {
-              // if ((hasBulk || hasRetail) && totalCost <= 1000) {
-              //   const url = await fetchGetJSON(
-              //     `${homeUrl}/api/stripe/checkout/wholesale_pay_in_4?bulkQty=${
-              //       hasBulk && bulkQty
-              //     }&retailQty=${hasRetail && retailQty}&customerId=${
-              //       user.customerId
-              //     }&shippingCost=${shippingCost}`
-              //   );
-              //   window.location.href = url.url;
-              // } else {
-              //   toast.error(
-              //     "You can only use installements for orders £1000 and under"
-              //   );
-              // }
-              toast.error("We are currently out of stock");
+              if (hasBulk || hasRetail) {
+                const url = await fetchGetJSON(
+                  `${homeUrl}/api/stripe/checkout/wholesale_pay_in_4?bulkQty=${hasBulk && bulkQty
+                  }&retailQty=${hasRetail && retailQty}&customerId=${user.customerId
+                  }&shippingCost=${shippingCost}`
+                );
+                window.location.href = url.url;
+              } else {
+                toast.error(
+                  "You can only use installements for orders £1000 and under"
+                );
+              }
             }}
-            isPrimary={totalCost <= 1000 ? true : false}
+            isPrimary
             key={"send pay in 4 button "}
           />
         </div>
@@ -481,12 +481,9 @@ export function WholesalePortalPage() {
   function calculateCacaoCost() {
     let total = 0;
     if (hasBulk) {
-      console.log("has bulk cacao cost");
-
       total = total + bulkCost;
     }
     if (hasRetail) {
-      console.log("has retail cacao cost");
       total = total + retailCost;
     }
     setCacaoCost(total);
@@ -494,11 +491,9 @@ export function WholesalePortalPage() {
   function calculateTotalCost() {
     let total = 0;
     if (hasBulk) {
-      console.log("has bulk total cost");
       total = total + bulkCost;
     }
     if (hasRetail) {
-      console.log("has retail total cost");
       total = total + retailCost;
     }
     total = total + shippingCost;
@@ -508,7 +503,6 @@ export function WholesalePortalPage() {
   function calculateShipping() {
     let bulkShipping = 0;
     if (hasBulk) {
-      console.log("has bulk shippping cost");
       if (bulkQty >= 5 && bulkQty <= 7) {
         bulkShipping = 35;
       } else if (bulkQty > 7 && bulkQty <= 10) {
@@ -517,15 +511,12 @@ export function WholesalePortalPage() {
         bulkShipping = 53;
       } else if (bulkQty > 15 && bulkQty <= 20) {
         bulkShipping = 100;
-      } else if (bulkQty > 20) {
-        bulkCost = 110;
       } else {
-        bulkShipping = 110;
+        bulkCost = 110;
       }
     }
     let retailShipping = 0;
     if (hasRetail) {
-      console.log("has retail shipping cost");
       if (retailQty >= 5 && retailQty <= 7) {
         retailShipping = 35;
       } else if (retailQty > 7 && retailQty <= 10) {
@@ -534,8 +525,6 @@ export function WholesalePortalPage() {
         retailShipping = 53;
       } else if (retailQty > 15 && retailQty <= 20) {
         retailShipping = 70;
-      } else if (retailQty > 20 && retailQty <= 25) {
-        retailShipping = 110;
       } else {
         retailShipping = 110;
       }
