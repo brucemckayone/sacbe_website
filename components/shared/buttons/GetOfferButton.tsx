@@ -64,12 +64,12 @@ export function RawUnlockOfferButton() {
           ref={buttonRef}
           className={`${show ? "animate-slide_in_left_fade" : "hidden"}`}
         >
-          <PrimaryButton
+          {/* <PrimaryButton
             onClicked={handleCicked}
             text={isLoading ? "Loading" : "15% Offer"}
             isPrimary
             className="self-center text-center ml-1 mt-1"
-          />
+          /> */}
         </div>
       );
     } else {
