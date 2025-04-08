@@ -113,19 +113,19 @@ const PurchaseOptionCard: React.FC<Props> = ({
           <SmallButton
             isPrimary={false}
             onClicked={async () => {
-              setIsShippingLoading(true);
-              await createCheckoutSession({
-                prices: [
-                  "price_1MpwvjG859ZdyFmp3xDUTY6Z",
-                  "price_1MqhygG859ZdyFmpZYxxL1aN",
-                ],
-                mode: "subscription",
-                qty: 1,
-                customerId: "",
-              });
-              setIsShippingLoading(false);
-              setIsLoading(false);
-              close();
+              // setIsShippingLoading(true);
+              // await createCheckoutSession({
+              //   prices: [
+              //     "price_1MpwvjG859ZdyFmp3xDUTY6Z",
+              //     "price_1MqhygG859ZdyFmpZYxxL1aN",
+              //   ],
+              //   mode: "subscription",
+              //   qty: 1,
+              //   customerId: "",
+              // });
+              // setIsShippingLoading(false);
+              // setIsLoading(false);
+              // close();
             }}
             text={isShippingLoading ? "Loading" : "2nd Class ($3.95)"}
           />

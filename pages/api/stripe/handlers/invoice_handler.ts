@@ -7,7 +7,7 @@ import stripe from "@/lib/stripe/init/stripe";
 import adminInit from "@/lib/firebase/admin_init";
 import emailSender from "@/lib/email/nodemailer";
 import getRawBody from "raw-body";
-import { orderStatusType, WooCreateOrderModel } from "@/types/typings";
+import { orderStatusType } from "@/types/typings";
 import {
   convertStripeInvoiceToWoocommerceOrder,
   createWoocommerceOrder,
@@ -66,22 +66,26 @@ export default async function handler(
           message
         ));
 
-        const order = await convertStripeInvoiceToWoocommerceOrder(invoicePaid);
+        // const order = await convertStripeInvoiceToWoocommerceOrder(invoicePaid);
 
         // const order = await convertStripeInvoiceToWoocommerceOrder(invoicePaid)
 
-        const response = await createWoocommerceOrder(order!);
+        // const response = await createWoocommerceOrder(order!);
 
         // const response = await createWoocommerceOrder(order);
 
-        //  new emailSender().send({
-        //   bodyMessage: `Invoice Has Been Paid: ${data.customer_name} ${data.customer_email} `,
-        //   htmlContent: `An Invoice has been paided ${invoicePaid.subscription? "for a subscription": " for a one time purchase"}`,
-        //   replayTo: "no-replay@sacbe-ceremonial-cacao.com",
-        //   sender: "no-replay@sacbe-ceremonial-cacao.com",
-        //   subject: `Payment failed for invoice email `,
-        //   to: "brucemckayone@gmail.com",
-        // });
+        new emailSender().send({
+          bodyMessage: `Invoice Has Been Paid: ${data.customer_name} ${data.customer_email} `,
+          htmlContent: `An Invoice has been paided ${
+            invoicePaid.subscription
+              ? "for a subscription"
+              : " for a one time purchase"
+          } ${JSON.stringify(data)}`,
+          replayTo: "no-replay@sacbe-ceremonial-cacao.com",
+          sender: "no-replay@sacbe-ceremonial-cacao.com",
+          subject: `Payment failed for invoice email `,
+          to: "brucemckayone@gmail.com",
+        });
 
         message =
           "invoice handled both woocommerce and sacbe order created and email sent";
@@ -171,8 +175,8 @@ async function handleInvoicePaid(
   messaging().send({
     topic: "all",
     notification: {
-      body: `Fuck Yes! Another sale worth £${
-        productList.reduce((total, a) => a.cost + total, 0) / 100 ?? "something"
+      body: `Woohoo! Another sale worth £${
+        productList.reduce((total, a) => a.cost + total, 0) / 100
       } Smackaroonies`,
       imageUrl:
         productList[0]?.image ??
