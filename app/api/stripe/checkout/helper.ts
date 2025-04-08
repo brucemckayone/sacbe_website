@@ -317,7 +317,7 @@ export default class StripeCheckoutApiHelper {
       custom_text: {
         submit: {
           message:
-            "Orders are pre-order, and will be shipped out on 25th of April",
+            "This is a pre-order, and will be shipped out on 25th of April",
         },
       },
 
