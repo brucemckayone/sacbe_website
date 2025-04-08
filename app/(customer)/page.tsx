@@ -61,6 +61,7 @@ export default function Home() {
         <AboutSacbe />
         <BecomeAPractioner />
         <Suspense fallback={<div>Loading...</div>}>
+          {/* @ts-expect-error */}
           <BlogAndRecipes />
         </Suspense>
         <NavMenuBottom />
