@@ -28,11 +28,11 @@ export default function Navbar() {
           </Link>
           <LoginButton />
         </header>
-        {/* <div className="w-full bg-recommendedGreen text-onError relative z-50">
+        <div className="w-full bg-error text-onError relative z-50">
           <p className="pl-2 text-black text-ellipsis text-xs md:text-lg  ">
-            Currently taking pre-orders for shipping: 25th of April.
+            Sacbe is not available for purchase at this time.
           </p>
-        </div> */}
+        </div>
       </div>
     </SessionProvider>
   );
