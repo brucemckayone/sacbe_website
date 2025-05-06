@@ -127,11 +127,12 @@ export const handleOneOfPurchase = async (
   user: userType
 ) => {
   // toast.error("Sacbe Is Out Of Stock");
-  if (affiliateLink) return push(affiliateLink);
-  await buyOneTimeCacao(user, oneoffQty);
-  logEvent(analytics, "one-off-purchase-checkout-started", {
-    quantity: oneoffQty,
-  });
+  // if (affiliateLink) return push(affiliateLink);
+  // await buyOneTimeCacao(user, oneoffQty);
+  // logEvent(analytics, "one-off-purchase-checkout-started", {
+  //   quantity: oneoffQty,
+  // });
+  toast.error("Sacbe is not available for purchase at this time.");
 };
 
 export function RiskAppealLogos() {
