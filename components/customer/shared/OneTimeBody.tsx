@@ -70,7 +70,8 @@ function PurchaseButton(props: {
     <div className="flex">
       <SmallButton
         onClicked={async () => {
-          await props.purchaseFunction();
+          // await props.purchaseFunction();
+          toast.error("Sacbe is not available for purchase at this time.");
         }}
         text={props.text}
         className="text-onPrimaryContainer border-onPrimaryContainer"

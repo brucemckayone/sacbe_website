@@ -44,10 +44,14 @@ export default function PurchaseOptions(props: props) {
   const [oneoffQty, setOneoffQty] = useState(1);
   const [subQty, setSubQty] = useState(1);
 
+  const handleIsOnOff = (isOnOff: boolean) => {
+    toast.error("Sacbe is not available for purchase at this time.");
+  };
+
   return (
     <div className="flex flex-col justify-center h-full drop-shadow-md">
       <div className="flex flex-col  rounded-md">
-        <PurchaseTypeTabs isOnOff={isOnOff} setIsOnOff={setIsOnOff} />
+        <PurchaseTypeTabs isOnOff={isOnOff} setIsOnOff={handleIsOnOff} />
         <div className="flex flex-col border-x-2 border-black bg-surface w-full">
           <div className={handleGeneralLayout()}>
             {isOnOff ? (
